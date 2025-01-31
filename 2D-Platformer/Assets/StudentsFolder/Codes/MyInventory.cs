@@ -59,18 +59,19 @@ public class MyInventory : MonoBehaviour
     {
         for (int i = 0; i < SlotImage.Length; i++)
         {
-            if (SlotName[i] == Name)
+            if (SlotFull[i] == true)
             {
-                int CheckAmount = SlotAmount[i] + 1;
-                if (CheckAmount > 64)
-                {
-                    AddingItem(Name, true);
-                    break;
-                }
-                else
+                if (SlotName[i] == Name && SlotAmount[i] != 64)
                 {
                     SlotAmount[i]++;
                     AmountText[i].text = SlotAmount[i].ToString();
+
+                    if (SlotAmount[i] > 64)
+                    {
+                        SlotAmount[i]--;
+                        AmountText[i].text = SlotAmount[i].ToString();
+                        AddingItem(Name, true);
+                    }
                     break;
                 }
             }
@@ -121,10 +122,13 @@ public class MyInventory : MonoBehaviour
             {
                 if (AmountText[i].gameObject.activeSelf)
                 {
-                    SlotAmount[i]--;
-                    AmountText[i].text = SlotAmount[i].ToString();
-
-                    if(SlotAmount[i] == 0)
+                    if (SlotAmount[i] > 0)
+                    {
+                        SlotAmount[i]--;
+                        AmountText[i].text = SlotAmount[i].ToString();
+                        break;
+                    }
+                    else
                     {
                         AmountText[i].gameObject.SetActive(false);
                         AmountText[i].text = "0";
@@ -205,6 +209,7 @@ public class MyInventory : MonoBehaviour
         SlotFull[Number] = false;
         SlotName[Number] = "Empty";
         SlotAvailable++;
+        SlotAmount[Number] = 0;
         AmountText[Number].gameObject.SetActive(false);
         AmountText[Number].text = "0";
     }
