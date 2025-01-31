@@ -16,6 +16,7 @@ public class MyItem : MonoBehaviour
     [Header("Interaction")]
     public GameObject Message;
     public string[] Item;
+    public bool[] Stackable;
     #endregion
 
     #region On Triggers
@@ -58,7 +59,7 @@ public class MyItem : MonoBehaviour
 
             for (int i = 0; i < Item.Length; i++)
             {
-                inventory.AddItem(Item[i]);
+                inventory.AddItem(Item[i], Stackable[i]);
             }
 
             if (Chest != null)
