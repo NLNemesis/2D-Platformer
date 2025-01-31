@@ -15,6 +15,7 @@ public class MyMerchant : MonoBehaviour
     [Header("Shop")]
     public string[] Item;
     public int[] Value;
+    public bool[] Stackable;
 
     [Header("For UI Assignment")]
     public TextMeshProUGUI[] BuyItemAmount;
@@ -107,7 +108,7 @@ public class MyMerchant : MonoBehaviour
         if (PM.Gold >= Value[Number])
         {
             PM.Gold -= Value[Number];
-            MI.AddItem(Item[Number]);
+            MI.AddItem(Item[Number], Stackable[Number]);
             FindItemsAmount();
         }
     }
@@ -165,7 +166,7 @@ public class MyMerchant : MonoBehaviour
         {
             for (int i = 0; i < Amount; i++)
             {
-                MI.AddItem(Item[Number]);
+                MI.AddItem(Item[Number], Stackable[Number]);
             }
             FindItemsAmount();
         }
@@ -186,4 +187,5 @@ public class MyMerchant : MonoBehaviour
         FindItemsAmount();
     }
     #endregion
+
 }
