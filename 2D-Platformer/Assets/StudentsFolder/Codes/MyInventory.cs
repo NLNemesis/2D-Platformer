@@ -86,7 +86,7 @@ public class MyInventory : MonoBehaviour
     {
         for (int i = 0; i < SlotImage.Length; i++) 
         {
-            if (!SlotFull[i])
+            if (SlotFull[i] == false)
             {
                 SlotFull[i] = true;
                 SlotName[i] = Name;
@@ -127,6 +127,7 @@ public class MyInventory : MonoBehaviour
                     if(SlotAmount[i] == 0)
                     {
                         AmountText[i].gameObject.SetActive(false);
+                        AmountText[i].text = "0";
                         RemovingItem(Name);
                         break;
                     }
@@ -150,6 +151,9 @@ public class MyInventory : MonoBehaviour
                 SlotFull[i] = false;
                 SlotName[i] = "Empty";
                 SlotAvailable++;
+                SlotAmount[i] = 0;
+                AmountText[i].gameObject.SetActive(false);
+                AmountText[i].text = "0";
                 break;
             }
         }
@@ -201,6 +205,8 @@ public class MyInventory : MonoBehaviour
         SlotFull[Number] = false;
         SlotName[Number] = "Empty";
         SlotAvailable++;
+        AmountText[Number].gameObject.SetActive(false);
+        AmountText[Number].text = "0";
     }
     #endregion
 }
