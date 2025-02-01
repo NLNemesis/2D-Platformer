@@ -146,46 +146,4 @@ public class MyMerchant : MonoBehaviour
         }
     }
     #endregion
-
-    #region Buy and Sell Amount
-    private int Amount;
-    public TextMeshProUGUI AmountText;
-    public void IncreaseOrDecreaseAmount(int Number)
-    {
-        Amount += Number;
-
-        if (Amount < 0)
-            Amount = 0;
-
-        AmountText.text = Amount.ToString();
-    }
-
-    public void BuyAmount(int Number)
-    {
-        if (MI.SlotAvailable >= Amount)
-        {
-            for (int i = 0; i < Amount; i++)
-            {
-                MI.AddItem(Item[Number], Stackable[Number]);
-            }
-            FindItemsAmount();
-        }
-    }
-
-    public void SellAmount(int Number)
-    {
-        for (int i = 0; i < Amount; i++)
-        {
-            if (MI.ItemExists == true)
-            {
-                MI.RemoveItem(Item[Number]);
-                PM.Gold += 200;
-            }
-            else
-                break;
-        }
-        FindItemsAmount();
-    }
-    #endregion
-
 }
