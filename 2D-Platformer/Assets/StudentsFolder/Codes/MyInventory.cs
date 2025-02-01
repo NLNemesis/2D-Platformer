@@ -16,7 +16,6 @@ public class MyInventory : MonoBehaviour
     public TextMeshProUGUI[] AmountText;
     [HideInInspector] public bool[] SlotFull;
     [HideInInspector] public string[] SlotName;
-    [HideInInspector] public int[] SlotAmount;
     public Sprite EmptySprite;
     [HideInInspector] public int SlotAvailable;
     [HideInInspector] public bool ItemExists;
@@ -33,7 +32,6 @@ public class MyInventory : MonoBehaviour
     {
         SlotFull = new bool[SlotImage.Length];
         SlotName = new string[SlotImage.Length];
-        SlotAmount = new int[SlotImage.Length];
         SlotAvailable = SlotImage.Length + 1;
     }
 
@@ -47,43 +45,7 @@ public class MyInventory : MonoBehaviour
     }
 
     #region Add Item
-    public void AddItem(string Name, bool Stackable)
-    {
-        if (Stackable)
-            AddingStackableItem(Name);     
-        else
-            AddingItem(Name, false);
-    }
-
-    void AddingStackableItem(string Name)
-    {
-        for (int i = 0; i < SlotImage.Length; i++)
-        {
-            if (SlotFull[i] == true)
-            {
-                if (SlotName[i] == Name && SlotAmount[i] != 64)
-                {
-                    SlotAmount[i]++;
-                    AmountText[i].text = SlotAmount[i].ToString();
-
-                    if (SlotAmount[i] > 64)
-                    {
-                        SlotAmount[i]--;
-                        AmountText[i].text = SlotAmount[i].ToString();
-                        AddingItem(Name, true);
-                    }
-                    break;
-                }
-            }
-            else
-            {
-                AddingItem(Name, true);
-                break;
-            }
-        }
-    }
-
-    void AddingItem(string Name, bool Stackable)
+    public void AddItem(string Name)
     {
         for (int i = 0; i < SlotImage.Length; i++) 
         {
@@ -100,16 +62,9 @@ public class MyInventory : MonoBehaviour
                         break;
                     }
                 }
-
-                if (Stackable)
-                {
-                    AmountText[i].gameObject.SetActive(true);
-                    AmountText[i].text = "1";
-                }
                 break;
             }
         }
-
     }
     #endregion
 
@@ -120,44 +75,10 @@ public class MyInventory : MonoBehaviour
         {
             if (SlotName[i] == Name)
             {
-                if (AmountText[i].gameObject.activeSelf)
-                {
-                    if (SlotAmount[i] > 0)
-                    {
-                        SlotAmount[i]--;
-                        AmountText[i].text = SlotAmount[i].ToString();
-                        break;
-                    }
-                    else
-                    {
-                        AmountText[i].gameObject.SetActive(false);
-                        AmountText[i].text = "0";
-                        RemovingItem(Name);
-                        break;
-                    }
-                }
-                else
-                {
-                    RemovingItem(Name);
-                    break;
-                }
-            }
-        }
-    }
-
-    void RemovingItem(string Name)
-    {
-        for (int i = 0; i < SlotImage.Length; i++)
-        {
-            if (SlotName[i] == Name)
-            {
                 SlotImage[i].sprite = EmptySprite;
                 SlotFull[i] = false;
                 SlotName[i] = "Empty";
                 SlotAvailable++;
-                SlotAmount[i] = 0;
-                AmountText[i].gameObject.SetActive(false);
-                AmountText[i].text = "0";
                 break;
             }
         }
@@ -209,9 +130,6 @@ public class MyInventory : MonoBehaviour
         SlotFull[Number] = false;
         SlotName[Number] = "Empty";
         SlotAvailable++;
-        SlotAmount[Number] = 0;
-        AmountText[Number].gameObject.SetActive(false);
-        AmountText[Number].text = "0";
     }
     #endregion
 }

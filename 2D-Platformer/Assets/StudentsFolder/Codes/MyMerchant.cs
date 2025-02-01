@@ -108,7 +108,7 @@ public class MyMerchant : MonoBehaviour
         if (PM.Gold >= Value[Number])
         {
             PM.Gold -= Value[Number];
-            MI.AddItem(Item[Number], Stackable[Number]);
+            MI.AddItem(Item[Number]);
             FindItemsAmount();
         }
     }
