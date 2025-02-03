@@ -128,6 +128,53 @@ public class MyBlacksmith : MonoBehaviour
     }
     #endregion
 
+    #region Crafting
+    [Header("Crafting")]
+    public string[] Ingr;
+    public string[] Ingr1;
+    public string[] Ingr2;
+    public string[] Ingr3;
+    public string[] CraftedItem;
+
+    public void CraftingItem(int Number)
+    {
+        bool Check,Check1,Check2,Check3;
+        
+        if (Ingr[Number] != null && Ingr[Number] != "Empty")
+        {
+            MI.CheckForItem(Ingr[Number]);
+            Check = MI.ItemExists;
+        }
+
+        if (Ingr1[Number] != null && Ingr1[Number] != "Empty")
+        {
+            MI.CheckForItem(Ingr1[Number]);
+            Check1 = MI.ItemExists;
+        }
+
+        if (Ingr2[Number] != null && Ingr2[Number] != "Empty")
+        {
+            MI.CheckForItem(Ingr2[Number]);
+            Check2 = MI.ItemExists;
+        }
+
+        if (Ingr3[Number] != null && Ingr3[Number] != "Empty")
+        {
+            MI.CheckForItem(Ingr3[Number]);
+            Check3 = MI.ItemExists;
+        }
+
+        if (Check && Check1 && Check2 && Check3)
+        {
+            MI.RemoveItem(Ingr[Number]);
+            MI.RemoveItem(Ingr1[Number]);
+            MI.RemoveItem(Ingr2[Number]);
+            MI.RemoveItem(Ingr3[Number]);
+            MI.AddItem(CraftedItem[Number]);
+        }
+    }
+    #endregion
+
     #region Find the amount of the items
     void FindItemsAmount()
     {
