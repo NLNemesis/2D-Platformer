@@ -128,6 +128,35 @@ public class MyBlacksmith : MonoBehaviour
     }
     #endregion
 
+    #region Crafting
+    public string[] Ingr;
+    public string[] Ingr1;
+    public string[] Ingr2;
+    public string[] CraftedItem;
+
+    public void Crafting(int Number)
+    {
+        bool Check = false;
+        bool Check1 = false;
+        bool Check2 = false;
+
+        MI.CheckForItem(Ingr[Number]);
+        Check = MI.ItemExists;
+        MI.CheckForItem(Ingr1[Number]);
+        Check1 = MI.ItemExists;
+        MI.CheckForItem(Ingr2[Number]);
+        Check2 = MI.ItemExists;
+
+        if (Check && Check1 && Check2)
+        {
+            MI.RemoveItem(Ingr[Number]);
+            MI.RemoveItem(Ingr1[Number]);
+            MI.RemoveItem(Ingr2[Number]);
+            MI.AddItem(CraftedItem[Number]);
+        }
+    }
+    #endregion
+
     #region Find the amount of the items
     void FindItemsAmount()
     {
