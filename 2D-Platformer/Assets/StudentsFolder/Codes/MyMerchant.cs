@@ -108,7 +108,7 @@ public class MyMerchant : MonoBehaviour
         if (PM.Gold >= Value[Number])
         {
             PM.Gold -= Value[Number];
-            MI.AddItem(Item[Number]);
+            MI.AddItem(Item[Number], Stackable[Number]);
             FindItemsAmount();
         }
     }
@@ -132,15 +132,16 @@ public class MyMerchant : MonoBehaviour
     void FindItemsAmount()
     {
         PlayerItemsAmount = new int[Item.Length];
-        for (int i = 0; i < MI.SlotImage.Length; i++)
+        for (int i = 0; i < Item.Length; i++)
         {
-            for (int j = 0; j < Item.Length; j++)
+            for (int j = 0; j < MI.SlotImage.Length; j++)
             {
-                if (MI.SlotName[i] == Item[j])
+                if (Item[i] == MI.SlotName[j])
                 {
-                    PlayerItemsAmount[j] += 1;
-                    Debug.Log(Item[j] + " " + PlayerItemsAmount[j]);
-                    break;
+                    if (MI.SlotAmount[j] == 0)
+                        PlayerItemsAmount[i] += 1;
+                    else
+                    PlayerItemsAmount[i] += MI.SlotAmount[j];
                 }
             }
         }
