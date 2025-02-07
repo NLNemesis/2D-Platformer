@@ -42,9 +42,7 @@ public class MyItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BC2D = GetComponent<BoxCollider2D>();
         inventory = GameObject.Find("/MaxPrefab/Player").GetComponent<MyInventory>();
-        Chest = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -54,15 +52,11 @@ public class MyItem : MonoBehaviour
         {
             InRange = false;
             Message.SetActive(false);
-            Opened = true;
-
             for (int i = 0; i < Item.Length; i++)
             {
                 inventory.AddItem(Item[i]);
             }
-
-            if (Chest != null)
-            Chest.SetTrigger("Open");
+            this.gameObject.SetActive(false);
         }
     }
     #endregion
