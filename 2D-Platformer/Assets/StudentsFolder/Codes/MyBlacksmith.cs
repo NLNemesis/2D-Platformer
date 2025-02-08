@@ -128,6 +128,68 @@ public class MyBlacksmith : MonoBehaviour
     }
     #endregion
 
+    #region Smelting
+    [Header("Smelting")]
+    public string[] RequiredOre;
+    public string[] SmeltedIngot;
+    public int Payment;
+
+    public void Smelting(int Number)
+    {
+        MI.CheckForItem(RequiredOre[Number]);
+
+        if(MI.ItemExists && PM.Gold >= Payment)
+        {
+            PM.Gold -= Payment;
+            MI.RemoveItem(RequiredOre[Number]);
+            MI.AddItem(SmeltedIngot[Number]);
+        }
+    }
+    #endregion
+
+    #region Crafting
+    [Header("Crafting")]
+    public string[] Ingr0;
+    public string[] Ingr1;
+    public string[] Ingr2;
+    public string[] CraftedItem;
+
+    public void Crafting(int Number)
+    {
+        bool Check0 = false;
+        bool Check1 = false;
+        bool Check2 = false;
+
+        MI.CheckForItem(Ingr0[Number]);
+        Check0 = MI.ItemExists;
+        MI.RemoveItem(Ingr0[Number]);
+        //////////////////////////////
+        MI.CheckForItem(Ingr1[Number]);
+        Check1 = MI.ItemExists;
+        MI.RemoveItem(Ingr1[Number]);
+        //////////////////////////////
+        MI.CheckForItem(Ingr2[Number]);
+        Check2 = MI.ItemExists;
+        MI.RemoveItem(Ingr2[Number]);
+        //////////////////////////////
+
+        if (Check0 && Check1 && Check2)
+            MI.AddItem(CraftedItem[Number]);
+        else
+        {
+            if(Check0)
+            MI.AddItem(Ingr0[Number]);
+            ////////////////////
+            if(Check1)
+            MI.AddItem(Ingr1[Number]);
+            ////////////////////
+            if(Check2)
+            MI.AddItem(Ingr2[Number]);
+            ////////////////////
+        }
+    }
+    #endregion
+
     #region Find the amount of the items
     void FindItemsAmount()
     {
