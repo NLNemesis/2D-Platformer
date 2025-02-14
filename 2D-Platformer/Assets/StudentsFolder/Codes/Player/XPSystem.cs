@@ -1,64 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
-using TMPro;
 
 public class XPSystem : MonoBehaviour
 {
     #region Variables
     [Header("XP")]
-    public int Scaling;
-    public int[] LevelScale;
-    public float StatsBonus; 
-
-    [Header("UI Assignment")]
-    public Slider XPSlider;
-    public TextMeshProUGUI XPLevel;
+    public int Scale;
+    public int MaxLevel;
+    public int[] LevelScaling;
 
     [Header("Player")]
+    public int CurrentXP;
     public int Level;
-    public int XPPoint;
-    private float CurrentXP;
+    public int SkillPoint;
     public PlayerMovement PM;
     #endregion
+    // Start is called before the first frame update
     void Awake()
     {
-        //Set the requirement xp for the levels
-        for (int i = 0; i < LevelScale.Length; i++)
-            LevelScale[i] = i * Scaling;
+        for (int i = 0; i < MaxLevel; i++)
+        {
+            LevelScaling[i] = Scale * i;
+        }
     }
 
+    // Update is called once per frame
     void Update()
     {
         
     }
 
-    #region Gain XP Function
-    public void GainXP(float Value)
+    #region Gain XP 
+    public void GainXP(int Value)
     {
         CurrentXP += Value;
-        if(CurrentXP > LevelScale[Level])
+
+        if (CurrentXP > LevelScaling[Level])
         {
-            CurrentXP -= LevelScale[Level];
+            CurrentXP -= LevelScaling[Level];
             Level += 1;
-            GainStatsBuff();
+            SkillPoint += 2;
+            GainBuff();
         }
     }
-    #endregion
-    
-    #region GainStatsBuff Function
-    public void GainStatsBuff()
+
+    public void GainBuff()
     {
-        XPPoint += 2;
-        PM.MaxHealth += StatsBonus;
-        PM.MaxMana += StatsBonus; 
-        PM.MaxStamina += StatsBonus;
-        PM.Damage += StatsBonus;
-        PM.SkillDamage += StatsBonus;
-        PM.Armor += StatsBonus;
-        PM.MagicResist += StatsBonus;
+        PM.MaxHealth += 10;
+        PM.MaxMana += 10;
+        PM.MaxStamina += 10;
+        PM.Damage += 2f;
+        PM.SkillDamage += 2f;
+        PM.Armor += 2f;
+        PM.MagicResist += 2f;
     }
     #endregion
 }
