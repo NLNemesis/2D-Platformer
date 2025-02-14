@@ -15,7 +15,6 @@ public class MyBlacksmith : MonoBehaviour
     [Header("Shop")]
     public string[] Item;
     public int[] Value;
-    public bool[] Stackable;
 
     [Header("For UI Assignment")]
     public TextMeshProUGUI[] BuyItemAmount;
@@ -62,9 +61,7 @@ public class MyBlacksmith : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && CanInteract)
-        {
-            OpenOrCloseShop();
-        }
+        OpenOrCloseShop();
 
         if (Input.GetKeyDown(KeyCode.Escape) && CanInteract && ThisCanvas.activeSelf == true)
             OpenOrCloseShop();
@@ -107,6 +104,7 @@ public class MyBlacksmith : MonoBehaviour
     public string[] PlayerItem; //Requested item from the player
     public int[] RequestAmount; //Requested the amount
     public string[] NPCItem;    //New player's item
+    public int[] NPCItemAmount; //Amount of the new item
 
     public void Trading(int Number)
     {
@@ -123,6 +121,7 @@ public class MyBlacksmith : MonoBehaviour
             for (int i = 0; i < RequestAmount[Number]; i++)
             MI.RemoveItem(PlayerItem[Number]);
 
+            for (int i = 0; i < NPCItemAmount[Number]; i++)
             MI.AddItem(NPCItem[Number]);
         }
     }
@@ -160,18 +159,33 @@ public class MyBlacksmith : MonoBehaviour
         bool Check1 = false;
         bool Check2 = false;
 
-        MI.CheckForItem(Ingr0[Number]);
-        Check0 = MI.ItemExists;
-        MI.RemoveItem(Ingr0[Number]);
-        //////////////////////////////
-        MI.CheckForItem(Ingr1[Number]);
-        Check1 = MI.ItemExists;
-        MI.RemoveItem(Ingr1[Number]);
-        //////////////////////////////
-        MI.CheckForItem(Ingr2[Number]);
-        Check2 = MI.ItemExists;
-        MI.RemoveItem(Ingr2[Number]);
-        //////////////////////////////
+        #region Check Ingredient 0
+        if (Ingr0[Number] != null && Ingr0[Number] != "None" && Ingr0[Number] != "Empty")
+        {
+            MI.CheckForItem(Ingr0[Number]);
+            Check0 = MI.ItemExists;
+            MI.RemoveItem(Ingr0[Number]);
+        }
+        else Check0 = true;
+        #endregion
+        #region Check Ingredient 1
+        if (Ingr1[Number] != null && Ingr1[Number] != "None" && Ingr1[Number] != "Empty")
+        {
+            MI.CheckForItem(Ingr1[Number]);
+            Check1 = MI.ItemExists;
+            MI.RemoveItem(Ingr1[Number]);
+        }
+        else Check1 = true;
+        #endregion
+        #region Check Ingredient 2
+        if (Ingr2[Number] != null && Ingr2[Number] != "None" && Ingr2[Number] != "Empty")
+        {
+            MI.CheckForItem(Ingr2[Number]);
+            Check2 = MI.ItemExists;
+            MI.RemoveItem(Ingr2[Number]);
+        }
+        else Check2 = true;
+        #endregion
 
         if (Check0 && Check1 && Check2)
             MI.AddItem(CraftedItem[Number]);
