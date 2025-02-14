@@ -27,6 +27,7 @@ public class XPSystem : MonoBehaviour
         {
             LevelScaling[i] = Scale * i;
         }
+        XPSlider.maxValue = LevelScaling[1];
     }
 
     // Update is called once per frame

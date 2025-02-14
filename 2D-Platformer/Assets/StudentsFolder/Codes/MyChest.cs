@@ -13,6 +13,7 @@ public class MyChest : MonoBehaviour
     private MyInventory inventory;
     private Animator Chest;
     private BoxCollider2D BC2D;
+    private XPSystem XPS;
 
     [Header("Interaction")]
     public GameObject Message;
@@ -45,6 +46,7 @@ public class MyChest : MonoBehaviour
     {
         BC2D = GetComponent<BoxCollider2D>();
         inventory = GameObject.Find("/MaxPrefab/Player").GetComponent<MyInventory>();
+        XPS = GameObject.Find("/MaxPrefab/Player").GetComponent<XPSystem>();
         Chest = GetComponent<Animator>();
     }
 
@@ -56,7 +58,7 @@ public class MyChest : MonoBehaviour
             InRange = false;
             Message.SetActive(false);
             Opened = true;
-
+            XPS.GainXP(20);
             for (int i = 0; i < Item.Length; i++)
             {
                 inventory.AddItem(Item[i]);
