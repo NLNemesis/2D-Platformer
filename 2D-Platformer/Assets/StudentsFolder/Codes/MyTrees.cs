@@ -13,6 +13,7 @@ public class MyTrees : MonoBehaviour
     [Header("Skill & Talent Tree")]
     public bool[] UnlockedAbility;
     public int[] AbilityRestriction;
+    public Image[] AbilityConnects;
     [Space(10)]
     public bool[] UnlockedTalent;
     public int[] TalentRestriction;
@@ -34,6 +35,12 @@ public class MyTrees : MonoBehaviour
         #region UI Assignment
         InfoText[0].text = XPS.TalentPoint.ToString();
         InfoText[1].text = XPS.AbilityPoint.ToString();
+
+        for (int i = 0; i < AbilityConnects.Length; i++)
+        {
+            if(XPS.Level >= AbilityRestriction[i])
+                AbilityConnects[i].color = new Color(0,100,0,255);
+        }
         #endregion
     }
 
