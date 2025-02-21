@@ -5,7 +5,7 @@ using UnityEngine;
 public class MyGameManager : MonoBehaviour
 {
     public int UIOpened;
-    public GameObject InventoryObject;
+    public GameObject CarryObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,16 +18,16 @@ public class MyGameManager : MonoBehaviour
         #region Inventory Handler
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (InventoryObject.activeSelf == false)
+            if (CarryObject.activeSelf == false)
             {
-                InventoryObject.SetActive(true);
+                CarryObject.SetActive(true);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 UIOpened = 2;
             }
             else
             {
-                InventoryObject.SetActive(false);
+                CarryObject.SetActive(false);
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 UIOpened = 0;
@@ -38,7 +38,7 @@ public class MyGameManager : MonoBehaviour
         #region Escape Button Handler
         if (Input.GetKeyDown(KeyCode.Escape) && UIOpened == 2)
         {
-            InventoryObject.SetActive(false);
+            CarryObject.SetActive(false);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             UIOpened = 0;
