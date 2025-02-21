@@ -23,11 +23,12 @@ public class Trees : MonoBehaviour
     public int[] TalentRestriction;
 
     [Header("References")]
+    private XPSystem XPS;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
-        
+        XPS = GetComponent<XPSystem>();
     }
 
     // Update is called once per frame
