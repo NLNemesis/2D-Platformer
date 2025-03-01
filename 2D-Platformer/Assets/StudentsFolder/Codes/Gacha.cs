@@ -1,69 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+using TMPro;
 
 public class Gacha : MonoBehaviour
 {
     #region Variables
     [Header("Items")]
-    public string MainFiveStarWeapon;
-    public string[] FiveStarWeapon;
-    public string[] FourStarWeapon;
-    public string[] ThreeStarWeapon;
+    public string MainFiveStar;
+    public string[] FiveStar;
+    public string[] FourStar;
+    public string[] ThreeStar;
 
-    [Header("Player")]
-    public int Pity;
-    public int CurrentPull;
+    [Header("Wishes")]
+    private int Pity;
+    private int CurrentPull;
+    private bool Guarantee;
 
     [Header("References")]
-    public MyInventory MI;
     public PlayerMovement PM;
+    public MyInventory MI;
     #endregion
 
     public void BuyWish()
     {
-        if (PM.Gold >= 1000)
+        if (PM.Gold >= 1000 && MI.SlotAvailable > 0)
         {
             PM.Gold -= 1000;
             MI.AddItem("Wish");
         }
     }
 
-    public void Wish()
+    public void UseWish()
     {
-        MI.CheckForItem("Wish");
-        if (MI.ItemExists)
+        if(MI.SlotAvailable > 0)
         {
-            MI.RemoveItem("Wish");
-            Pity++;
-            CurrentPull++;
-            int RandomInt = Random.Range(0, 91);
-            //Check if the player can pull a five star weapons
-            if (Pity >= RandomInt) //Player pulls a five star weapon
+            MI.CheckForItem("Wish");
+            if (MI.ItemExists == true)
             {
-                Pity = 0;
-                CurrentPull = 0;
-                RandomInt = Random.Range(0, 2);
-                if (RandomInt == 0) //Player takes the main five star weapon
+                MI.RemoveItem("Wish");
+                Pity += 1;
+                CurrentPull += 1;
+                //Try to pull the five star weapon
+                int Number = Random.Range(0, 91);
+                if (Pity >= Number) //Takes the five star weapon
                 {
-                    MI.AddItem(MainFiveStarWeapon);
+                    Pity = 0;
+                    if (Guarantee) //If the player has guarantee the banner's five star weapon
+                    {
+                        Guarantee = false;
+                        MI.AddItem(MainFiveStar);
+                    }
+                    else
+                    {
+                        Number = Random.Range(0, 2);
+                        if (Number == 0)
+                            MI.AddItem(MainFiveStar);
+                        else
+                        {
+                            Guarantee = true;
+                            Number = Random.Range(0, FiveStar.Length);
+                            MI.AddItem(FiveStar[Number]);
+                        }
+                    }
                 }
-                else //Player takes random five star weapon (not the main five star)
+                else if (CurrentPull == 10) //Takes the four star weapon
                 {
-                    RandomInt = Random.Range(0, FiveStarWeapon.Length);
-                    MI.AddItem(FiveStarWeapon[RandomInt]);
+
                 }
-            }
-            else if (CurrentPull == 10) //if the player wishes 10 times for a weapon
-            {
-                CurrentPull = 0;
-                RandomInt = Random.Range(0, FourStarWeapon.Length);
-                MI.AddItem(FourStarWeapon[RandomInt]);
-            }
-            else //Player takes a three star weapon
-            {
-                RandomInt = Random.Range(0, ThreeStarWeapon.Length);
-                MI.AddItem(ThreeStarWeapon[RandomInt]);
+                else //Takes the three star weapon
+                {
+
+                }
             }
         }
     }
