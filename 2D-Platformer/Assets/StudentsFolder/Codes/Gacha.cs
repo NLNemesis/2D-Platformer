@@ -66,13 +66,16 @@ public class Gacha : MonoBehaviour
                         }
                     }
                 }
-                else if (CurrentPull == 10) //Takes the four star weapon
+                else if (CurrentPull >= 10) //Takes the four star weapon
                 {
-
+                    CurrentPull = 0;
+                    Number = Random.Range(0, FourStar.Length);
+                    MI.AddItem(FourStar[Number]);
                 }
                 else //Takes the three star weapon
                 {
-
+                    Number = Random.Range(0, ThreeStar.Length);
+                    MI.AddItem(ThreeStar[Number]);
                 }
             }
         }
