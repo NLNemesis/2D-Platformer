@@ -13,7 +13,7 @@ public class MyInventory : MonoBehaviour
 
     [Header("Player Inventory")]
     public Image[] SlotImage;
-    public TextMeshProUGUI[] AmountText;
+    //public TextMeshProUGUI[] AmountText;
     [HideInInspector] public bool[] SlotFull;
     [HideInInspector] public string[] SlotName;
     public Sprite EmptySprite;
