@@ -21,6 +21,7 @@ public class Gacha : MonoBehaviour
     private bool Guarantee;
 
     [Header("References")]
+    public PlayerMovement PM;
     public MyInventory MI;
     public TextMeshProUGUI[] UIText;
 
@@ -47,9 +48,9 @@ public class Gacha : MonoBehaviour
     #region Wish System
     public void BuyWish()
     {
-        if (MI.SlotAvailable > 0 && MI.Gold >= WishCost)
+        if (MI.SlotAvailable > 0 && PM.Gold >= WishCost)
         {
-            MI.Gold -= WishCost;
+            PM.Gold -= WishCost;
             MI.AddItem("Wish");
         }
     }
