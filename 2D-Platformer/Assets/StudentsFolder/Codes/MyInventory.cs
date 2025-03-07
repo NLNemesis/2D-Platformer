@@ -40,6 +40,7 @@ public class MyInventory : MonoBehaviour
         #region Potion Handler
 
         #endregion
+        Gold = PM.Gold;
         GoldText.text = Gold.ToString();
     }
 
