@@ -121,7 +121,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Vagabond-Jump_Frame_0
     originalName: 
-    pivot: {x: 0.625, y: -0.90909094}
+    pivot: {x: 0.625, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -141,7 +141,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 37}
   - name: Vagabond-Jump_Frame_1
     originalName: 
-    pivot: {x: 0.5625, y: -1}
+    pivot: {x: 0.5625, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -161,7 +161,7 @@ ScriptedImporter:
     uvTransform: {x: 30, y: 4}
   - name: Vagabond-Jump_Frame_2
     originalName: 
-    pivot: {x: 0.6111111, y: -0.79999995}
+    pivot: {x: 0.6111111, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -192,7 +192,7 @@ ScriptedImporter:
       frameIndex: 0
       cellRect:
         x: 27
-        y: 20
+        y: 0
         width: 8
         height: 22
       spriteId: 021c4ed7da2c2714d8fdba23f2e7bd14
@@ -200,7 +200,7 @@ ScriptedImporter:
       frameIndex: 1
       cellRect:
         x: 23
-        y: 21
+        y: 0
         width: 16
         height: 21
       spriteId: 31d07e2240865184db47ac26965f316e
@@ -208,7 +208,7 @@ ScriptedImporter:
       frameIndex: 2
       cellRect:
         x: 21
-        y: 20
+        y: 0
         width: 18
         height: 25
       spriteId: 04e227416add2404f8b773027f6fa5e9
