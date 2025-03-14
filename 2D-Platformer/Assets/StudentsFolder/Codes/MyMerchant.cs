@@ -139,7 +139,6 @@ public class MyMerchant : MonoBehaviour
                 if (MI.SlotName[i] == Item[j])
                 {
                     PlayerItemsAmount[j] += 1;
-                    Debug.Log(Item[j] + " " + PlayerItemsAmount[j]);
                     break;
                 }
             }

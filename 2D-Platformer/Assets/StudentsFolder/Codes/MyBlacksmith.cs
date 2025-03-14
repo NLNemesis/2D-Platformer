@@ -61,19 +61,25 @@ public class MyBlacksmith : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && CanInteract)
-        OpenOrCloseShop();
+            OpenOrCloseShop();
 
         if (Input.GetKeyDown(KeyCode.Escape) && CanInteract && ThisCanvas.activeSelf == true)
             OpenOrCloseShop();
 
         #region Assign Player's Gold And Item's Amount In UI
-        if (ThisCanvas.activeSelf == true)
+        if (ThisCanvas.activeSelf == true) //If the shop is open
         {
-            GoldText.text = PM.Gold.ToString();
-            for (int i = 0; i < BuyItemAmount.Length; i++) 
+            GoldText.text = PM.Gold.ToString(); //Show the player's gold into a text
+            for (int i = 0; i < BuyItemAmount.Length; i++)
             {
-                BuyItemAmount[i].text = PlayerItemsAmount[i].ToString();
-                SellItemAmount[i].text = PlayerItemsAmount[i].ToString();
+                BuyItemAmount[i].text = PlayerItemsAmount[i].ToString(); //Show the amount (Buy UI)
+                SellItemAmount[i].text = PlayerItemsAmount[i].ToString();//Show the amount (Sell UI)
+            }
+
+            for (int i = 0; i < PI_Text.Length; i++)
+            {
+                PI_Text[i].text = PI_Amount[i].ToString(); //Show amount (Trading items)
+                NPCI_Text[i].text = NPCI_Amount[i].ToString();//Show amount (Traded items)
             }
         }
         #endregion
@@ -83,6 +89,7 @@ public class MyBlacksmith : MonoBehaviour
     #region Open Or Close Shop Function
     void OpenOrCloseShop()
     {
+        FindTradingAmount();
         if (ThisCanvas.activeSelf == false)
         {
             Cursor.visible = true;
@@ -124,6 +131,8 @@ public class MyBlacksmith : MonoBehaviour
             for (int i = 0; i < NPCItemAmount[Number]; i++)
             MI.AddItem(NPCItem[Number]);
         }
+
+        FindTradingAmount();
     }
     #endregion
 
@@ -215,11 +224,40 @@ public class MyBlacksmith : MonoBehaviour
                 if (MI.SlotName[i] == Item[j])
                 {
                     PlayerItemsAmount[j] += 1;
-                    Debug.Log(Item[j] + " " + PlayerItemsAmount[j]);
                     break;
                 }
             }
         }
+    }
+    #endregion
+
+    #region Find the trading amount
+    [Header("UI Trading")]
+    public TextMeshProUGUI[] PI_Text; //Player Item Text
+    public TextMeshProUGUI[] NPCI_Text; //NPC Item Text
+    private int[] PI_Amount; //Player Item Amount
+    private int[] NPCI_Amount; //NPC Item Amount
+
+    void FindTradingAmount() //Player's and NPC
+    {
+        PI_Amount = new int[PI_Text.Length]; //Create a new empty array with the amounts
+        for (int i = 0; i < MI.SlotImage.Length; i++) //Search the whole inventory one by one
+            for (int j = 0; j < PlayerItem.Length; j++)
+                if (MI.SlotName[i] == PlayerItem[j]) // Check if any item in the inventory matches an item in the other array
+                {
+                    PI_Amount[j] += 1;
+                    break;
+                }
+
+        NPCI_Amount = new int[NPCI_Text.Length];
+        for (int i = 0; i < MI.SlotImage.Length; i++)
+            for (int j = 0; j < NPCItem.Length; j++)
+                if (MI.SlotName[i] == NPCItem[j])
+                {
+                    NPCI_Amount[j] += 1;
+                    break;
+                }
+
     }
     #endregion
 }
