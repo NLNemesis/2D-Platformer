@@ -46,7 +46,7 @@ public class MyPlayerMovement : MonoBehaviour
     }
 
     #region Check if the player is grounded
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
