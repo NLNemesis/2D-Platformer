@@ -9,16 +9,22 @@ public class MyPlayerMovement : MonoBehaviour
     public float jumpingPower = 16f;
     private bool isFacingRight = true;
 
-    private bool canDash = true;
+    [HideInInspector] public bool canDash = true;
     private bool isDashing;
     public float dashingPower = 24f;
     public float dashingTime = 0.2f;
     public float dashingCooldown = 1f;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
+    private Rigidbody2D rb;
+    private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     #endregion
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        groundCheck = GameObject.Find("/Character Prefab/Character/Ground Check").GetComponent<Transform>();
+    }
 
     private void Update()
     {
@@ -66,7 +72,7 @@ public class MyPlayerMovement : MonoBehaviour
     #endregion
 
     #region Dash
-    private IEnumerator Dash()
+    public IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
