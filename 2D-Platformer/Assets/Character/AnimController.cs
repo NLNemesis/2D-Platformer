@@ -31,19 +31,22 @@ public class AnimController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PM.PlayerFreeze == false && PM.Health > 0 && PM.State == 0)
+        if (PM.Health > 0)
         {
-            #region Set Movement and Jumping Animations
-            if (Input.GetKey(IM.MoveLeft) || Input.GetKey(IM.MoveRight))
-                animator.SetFloat("State", Mathf.Abs(PM.horizontal));
-            else if (Input.GetKeyUp(IM.MoveLeft) || Input.GetKeyUp(IM.MoveRight))
-                animator.SetFloat("State", 0);
+            if (PM.PlayerFreeze == false && PM.State == 0)
+            {
+                #region Set Movement and Jumping Animations
+                if (Input.GetKey(IM.MoveLeft) || Input.GetKey(IM.MoveRight))
+                    animator.SetFloat("State", Mathf.Abs(PM.horizontal));
+                else if (Input.GetKeyUp(IM.MoveLeft) || Input.GetKeyUp(IM.MoveRight))
+                    animator.SetFloat("State", 0);
+                #endregion
+            }
 
             if (PM.IsGrounded())
                 animator.SetBool("InAir", false);
             else
                 animator.SetBool("InAir", true);
-            #endregion
         }
 
         #region Death Check
