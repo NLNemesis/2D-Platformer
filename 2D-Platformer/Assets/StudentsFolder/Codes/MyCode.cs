@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Events;
+using UnityEngine.UI;
+using TMPro;
 
 public class MyCode : MonoBehaviour
 {
@@ -282,7 +285,21 @@ public class MyCode : MonoBehaviour
     #endregion
 
     #region Unity Events
+    /*A UnityEvent is a list of function calls that can be easily assigned via the Inspector. 
+      UnityEvents help reduce the need for direct script references, 
+      making it easier to link different components and functions together.
+      We only need the (using UnityEngine.Events) to start using these events
+     */
 
+    //How to create an event
+    UnityEvent Event;
+
+    void TestEvents()
+    {
+
+        //How to call the event
+        Event.Invoke();
+    }
     #endregion
 
     #region Audio Sources

@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
                     #region Jumping
                     if (Input.GetKeyDown(IM.Jump) && Stamina >= 15 && IsGrounded())
                     {
-                        InAction = true;
+                        //InAction = true;
                         animController.animator.SetTrigger("Jump");
                         animController.animator.SetBool("InAir", true);
                         Jump = true;
@@ -225,7 +225,6 @@ public class PlayerMovement : MonoBehaviour
                 Stamina = MaxStamina;
             }
             #endregion
-
         }
 
         #region Assing UI
