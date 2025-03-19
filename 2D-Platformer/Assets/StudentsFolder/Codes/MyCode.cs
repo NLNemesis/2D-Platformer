@@ -34,16 +34,20 @@ public class MyCode : MonoBehaviour
     #endregion
 
     #region Arrays
-    public string[] Name;
+    // Array is a list of objects with the same data type (e.g., int, float, bool, or string)
+    // A game object or a reference to a script can also be assigned as an array
+    int[] intArray = {1, 2, 3, 4}; // Array of integers
+    float[] floatArray = {1.1f, 2.2f, 3.3f}; // Array of floats
+    bool[] boolArray = {true, false, true}; // Array of booleans
+    string[] stringArray = {"apple", "banana", "cherry"}; // Array of strings
+    GameObject[] Object;
+
     void TestArray()
     {
-        Name = new string[5];
-
-        Name[0] = "Haris";
-        Name[1] = "George";
-        Name[2] = "Marios";
-        Name[3] = "Marios";
-        Name[4] = "Stelios";
+        //Example
+        intArray[0] = 1;
+        intArray[1] = 16;
+        intArray[2] = 25;
     }
     #endregion
 
@@ -153,6 +157,10 @@ public class MyCode : MonoBehaviour
     }
     #endregion
 
+    #region For Each Loop
+
+    #endregion
+
     #region Switch
 
     #endregion
@@ -232,6 +240,7 @@ public class MyCode : MonoBehaviour
     GetComponent = Grab the reference from the specific object
     GetComponentInParent = Grab a reference from the object's parent
     GetComponentInChildren = Grab a reference from the object's children
+    GameObject.Find("Path") = Find an object in this path from hierarchy to this path
     */
 
     private InventoryController IC;

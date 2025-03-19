@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class MyAnimController : MonoBehaviour
 {
-    private Animator animator;
-    private MyPlayerMovement MPM;
+    public Animator animator;
+    public MyPlayerMovement MPM;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
-        MPM = GetComponent<MyPlayerMovement>();
+
     }
 
     // Update is called once per frame

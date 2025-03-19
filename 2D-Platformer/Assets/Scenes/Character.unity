@@ -207,6 +207,8 @@ MonoBehaviour:
   dashingPower: 24
   dashingTime: 0.2
   dashingCooldown: 1
+  rb: {fileID: 116680109}
+  groundCheck: {fileID: 183866600}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -267,6 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1502b16a1492b5b48997a232a2bb37cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 116680113}
+  MPM: {fileID: 116680110}
 --- !u!95 &116680113
 Animator:
   serializedVersion: 5

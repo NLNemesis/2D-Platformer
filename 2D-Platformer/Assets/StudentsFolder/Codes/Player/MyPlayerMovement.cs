@@ -15,15 +15,14 @@ public class MyPlayerMovement : MonoBehaviour
     public float dashingTime = 0.2f;
     public float dashingCooldown = 1f;
 
-    private Rigidbody2D rb;
-    private Transform groundCheck;
+    public Rigidbody2D rb;
+    public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     #endregion
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        groundCheck = GameObject.Find("/Character Prefab/Character/Ground Check").GetComponent<Transform>();
+
     }
 
     private void Update()
