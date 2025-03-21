@@ -51,9 +51,15 @@ public class MyAnimController : MonoBehaviour
             animator.SetTrigger("Jump");
 
         if (MPM.IsGrounded())
-            animator.ResetTrigger("Fall");
+        {
+            animator.ResetTrigger("Jump");
+            animator.SetBool("Fall", false);
+        }
         else
-            animator.SetTrigger("Fall");
+        {
+            animator.ResetTrigger("Jump");
+            animator.SetBool("Fall", true);
+        }
         #endregion
     }
 }
