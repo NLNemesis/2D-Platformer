@@ -4,17 +4,21 @@ using UnityEngine;
 public class MyPlayerMovement : MonoBehaviour
 {
     #region Variables
+    [Header("Controller")]
+    public bool Freezed;
+
     [Header("Movement")]
     public float speed = 8f;
     public float jumpingPower = 16f;
     private float horizontal;
     private bool isFacingRight = true;
 
-    [HideInInspector] public bool canDash = true;
-    private bool isDashing;
+    [Header("Dash Variables")]
     public float dashingPower = 24f;
     public float dashingTime = 0.2f;
     public float dashingCooldown = 1f;
+    private bool isDashing;
+    [HideInInspector] public bool canDash = true;
 
     public Rigidbody2D rb;
     public Transform groundCheck;
@@ -28,21 +32,23 @@ public class MyPlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (isDashing == false)
-        {
-            horizontal = Input.GetAxisRaw("Horizontal");
+        if (Freezed) return;
+        
+        if (isDashing) return;
 
-            if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        horizontal = Input.GetAxisRaw("Horizontal");
+
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
 
-            if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0f)
+        if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0f)
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
                 StartCoroutine(Dash());
 
-            Flip();
-        }
+        Flip();
+        IsGrounded();
     }
 
     private void FixedUpdate()
@@ -84,6 +90,18 @@ public class MyPlayerMovement : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+    #endregion
+
+    #region Freeze & Unfreeze the player
+    public void Freeze()
+    {
+        Freezed = true;
+    }
+
+    public void Unfreeze()
+    {
+        Freezed = false;
     }
     #endregion
 }

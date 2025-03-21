@@ -24,6 +24,8 @@ public class MyAnimController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (MPM.Freezed) return;
+
         #region Movement
         if (Input.GetButton("Move_Buttons") || Input.GetButton("Move_Arrows"))
             animator.SetFloat("Speed", 1);
@@ -49,9 +51,9 @@ public class MyAnimController : MonoBehaviour
             animator.SetTrigger("Jump");
 
         if (MPM.IsGrounded())
-            animator.SetBool("Fall", false);
+            animator.ResetTrigger("Fall");
         else
-            animator.SetBool("Fall", true);
+            animator.SetTrigger("Fall");
         #endregion
     }
 }
