@@ -335,36 +335,11 @@ public class MyCode : MonoBehaviour
     #endregion
 
     #region Functions
-    //How to call the functions
-    void CallFunctions()
-    {
-        Regeneration(40, 20);
-        Alive(25);
-    }
-    //A function that returns an integer
-    public int Regeneration(int CurrentHealth, int Value)
-    {
-        int NewHealth = CurrentHealth + Value;
-        return NewHealth;
-    }
-    //A function that returns a true or false
-    public bool Alive(int Health)
-    {
-        if (Health > 0)
-            return true;
-        else
-            return false;
-    }
+    
     #endregion
 
     #region IENumerators
-    private IEnumerator Delay()
-    {
-        //Wait here for 2 seconds
-        yield return new WaitForSeconds(2f);
-        //Return nothing and ends the code
-        yield return null;
-    }
+
     #endregion
 
     #region Vectors && Colors
