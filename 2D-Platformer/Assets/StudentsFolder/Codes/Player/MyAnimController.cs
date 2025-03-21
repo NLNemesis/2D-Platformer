@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class MyAnimController : MonoBehaviour
 {
-    public Animator animator;
-    public MyPlayerMovement MPM;
+    #region Variables
+    [Header("Controller")]
+    public bool HasDash;
+    public bool HasSlide;
+
+    [Header("References")]
+    private Animator animator;
+    private MyPlayerMovement MPM;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-
+        animator = GetComponent<Animator>();
+        MPM = GetComponent<MyPlayerMovement>();
     }
 
     // Update is called once per frame
@@ -25,13 +33,13 @@ public class MyAnimController : MonoBehaviour
         #endregion
 
         #region Actions
-        if (Input.GetButtonDown("Dash") && MPM.canDash)
+        if (Input.GetButtonDown("Dash") && MPM.canDash && HasDash)
         {
             animator.SetTrigger("Dash");
             StartCoroutine(MPM.Dash()); 
         }
 
-        if (Input.GetButtonDown("Slide") && MPM.canDash && MPM.IsGrounded())
+        if (Input.GetButtonDown("Slide") && MPM.canDash && MPM.IsGrounded() && HasSlide)
         {
             animator.SetTrigger("Slide");
             StartCoroutine(MPM.Dash()); 
