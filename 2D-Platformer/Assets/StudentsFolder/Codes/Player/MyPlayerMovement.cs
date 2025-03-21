@@ -4,9 +4,10 @@ using UnityEngine;
 public class MyPlayerMovement : MonoBehaviour
 {
     #region Variables
-    private float horizontal;
+    [Header("Movement")]
     public float speed = 8f;
     public float jumpingPower = 16f;
+    private float horizontal;
     private bool isFacingRight = true;
 
     [HideInInspector] public bool canDash = true;
