@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Slide
+  m_Name: Attack
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,15 +21,17 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: 285b477a8981503479f6940ceac8d073, type: 3}
+      value: {fileID: 21300000, guid: d8bd48ccf2767e048bf00b303d21374d, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 658fc50ce762b5645a0e271073efcbf1, type: 3}
+      value: {fileID: 21300000, guid: aaae0ff9963aea641a5936238e65f86f, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300000, guid: c6fb4d9d9878c384d90450a09ae41861, type: 3}
+      value: {fileID: 21300000, guid: 4e6ae8438bef62c4f9abd6230031b212, type: 3}
     - time: 0.5
-      value: {fileID: 21300000, guid: ea1a8444bab79ba468af79a1ec1a8003, type: 3}
+      value: {fileID: 21300000, guid: f3fd962614ae2e346a50074573398b9d, type: 3}
     - time: 0.6666667
-      value: {fileID: 21300000, guid: 037a0aaeb257cca4394a0b8118c9586f, type: 3}
+      value: {fileID: 21300000, guid: 9ee7351a4c5dec242b947f19a8096d37, type: 3}
+    - time: 0.8333333
+      value: {fileID: 21300000, guid: e3b7e4dfd2844f946be0c6c7a6ebbb34, type: 3}
     attribute: m_Sprite
     path: Model
     classID: 212
@@ -52,17 +54,18 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 285b477a8981503479f6940ceac8d073, type: 3}
-    - {fileID: 21300000, guid: 658fc50ce762b5645a0e271073efcbf1, type: 3}
-    - {fileID: 21300000, guid: c6fb4d9d9878c384d90450a09ae41861, type: 3}
-    - {fileID: 21300000, guid: ea1a8444bab79ba468af79a1ec1a8003, type: 3}
-    - {fileID: 21300000, guid: 037a0aaeb257cca4394a0b8118c9586f, type: 3}
+    - {fileID: 21300000, guid: d8bd48ccf2767e048bf00b303d21374d, type: 3}
+    - {fileID: 21300000, guid: aaae0ff9963aea641a5936238e65f86f, type: 3}
+    - {fileID: 21300000, guid: 4e6ae8438bef62c4f9abd6230031b212, type: 3}
+    - {fileID: 21300000, guid: f3fd962614ae2e346a50074573398b9d, type: 3}
+    - {fileID: 21300000, guid: 9ee7351a4c5dec242b947f19a8096d37, type: 3}
+    - {fileID: 21300000, guid: e3b7e4dfd2844f946be0c6c7a6ebbb34, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.68333334
+    m_StopTime: 0.84999996
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -89,7 +92,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
+  - time: 0.8333333
     functionName: Unfreeze
     data: 
     objectReferenceParameter: {fileID: 0}
