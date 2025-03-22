@@ -335,58 +335,11 @@ public class MyCode : MonoBehaviour
     #endregion
 
     #region Functions
-    //How to create a function
-    //private-public+void+Function Name+()+;
-    void FunctionCaller()
-    {
-        //Call the function
-        PlayerFunction();
-        DealDamage(100, 40);
-        if (PlayerHealth(40) < 0)
-            Debug.Log("The player is dead");
-    }
-
-    void PlayerFunction()
-    {
-
-    }
-
-    void DealDamage(int Health, int Damage)
-    {
-        Health -= Damage;
-    }
-
-    int PlayerHealth(int Value)
-    {
-        int Health = 100;
-        Health -= Value;
-        return Health;
-    }
-
-    bool Alive(int Health)
-    {
-        if (Health < 0)
-            return false;
-        else
-            return true;
-    }
+    
     #endregion
 
     #region IEnumerator
-    void Coroutines()
-    {
-        StartCoroutine(Delay());
-        StopCoroutine(Delay());
-        StopAllCoroutines();
-    } 
 
-    IEnumerator Delay()
-    {
-        //Wait
-        yield return new WaitForSeconds(2f); //Waits here for 2 seconds
-        //if i dont use any "yield returns"
-        yield return null;
-    }
     #endregion
 
     #region Vectors && Colors

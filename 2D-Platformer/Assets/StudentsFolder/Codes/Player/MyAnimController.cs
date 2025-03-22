@@ -9,11 +9,6 @@ public class MyAnimController : MonoBehaviour
     public bool HasDash;
     public bool HasSlide;
 
-    [Header("Attack Variables")]
-    public Transform AttackPoint;
-    public float AttackRange;
-    public LayerMask EnemyLayer;
-
     [Header("References")]
     private Animator animator;
     private MyPlayerMovement MPM;
@@ -66,11 +61,5 @@ public class MyAnimController : MonoBehaviour
             animator.SetBool("Fall", true);
         }
         #endregion
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (AttackPoint != null)
-        Gizmos.DrawWireSphere(AttackPoint.position, AttackRange);
     }
 }
