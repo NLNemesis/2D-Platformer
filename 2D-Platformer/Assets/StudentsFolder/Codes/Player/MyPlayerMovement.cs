@@ -13,13 +13,14 @@ public class MyPlayerMovement : MonoBehaviour
     private float horizontal;
     private bool isFacingRight = true;
 
-    [Header("Dash Variables")]
-    public float dashingPower = 24f;
-    public float dashingTime = 0.2f;
-    public float dashingCooldown = 1f;
-    private bool isDashing;
+    [Header("Slide Variables")]
+    public float slidingPower = 24f;
+    public float slidingTime = 0.2f;
+    public float slidingCooldown = 1f;
+    private bool isSliding;
     [HideInInspector] public bool canDash = true;
 
+    [Header("References")]
     public Rigidbody2D rb;
     public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -34,7 +35,7 @@ public class MyPlayerMovement : MonoBehaviour
     {
         if (Freezed) return;
         
-        if (isDashing) return;
+        if (isSliding) return;
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
@@ -53,7 +54,7 @@ public class MyPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDashing == false)
+        if (isSliding == false)
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
@@ -81,14 +82,14 @@ public class MyPlayerMovement : MonoBehaviour
     public IEnumerator Dash()
     {
         canDash = false;
-        isDashing = true;
+        isSliding = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        yield return new WaitForSeconds(dashingTime);
+        rb.velocity = new Vector2(transform.localScale.x * slidingPower, 0f);
+        yield return new WaitForSeconds(slidingTime);
         rb.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
+        isSliding = false;
+        yield return new WaitForSeconds(slidingCooldown);
         canDash = true;
     }
     #endregion
