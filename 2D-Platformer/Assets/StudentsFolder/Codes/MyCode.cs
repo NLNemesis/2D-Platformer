@@ -335,7 +335,18 @@ public class MyCode : MonoBehaviour
     #endregion
 
     #region Functions
-    
+    //How to call a function
+    void FunctionCaller()
+    {
+        PlayerFunction("Elf", 100, true);
+    }
+
+    //How to create a function
+    //private-public + void + Function Name + () + ;
+    private void PlayerFunction(string Name, int Health, bool Alive)
+    {
+
+    }
     #endregion
 
     #region IEnumerator
