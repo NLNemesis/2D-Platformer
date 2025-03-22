@@ -243,12 +243,12 @@ public class MyCode : MonoBehaviour
     GameObject.Find("Path") = Find an object in this path from hierarchy to this path
     */
 
-    private InventoryController IC;
+    private Inventory IC;
     private Animator _animator;
     private Canvas canvas;
     void GrabReference()
     {
-        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<InventoryController>();
+        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
         _animator = GameObject.Find("/MaxPrefab/Player").GetComponent<Animator>();
         canvas = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Canvas>();

@@ -26,7 +26,7 @@ public class Door : MonoBehaviour
     public UnityEvent OpenDoorEvent;
     private Animator animator;
     private GameObject Player;
-    private InventoryController IC;
+    private Inventory IC;
     private PlayerMovement PM;
     private InputManager IM;
     private Animator CanvasAnimator;
@@ -35,7 +35,7 @@ public class Door : MonoBehaviour
     void Start()
     {
         Player = GameObject.Find("/MaxPrefab/Player");
-        IC = Player.GetComponent<InventoryController>();
+        IC = Player.GetComponent<Inventory>();
         PM = Player.GetComponent<PlayerMovement>();
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
         IM = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<InputManager>();

@@ -21,7 +21,7 @@ public class Interaction : MonoBehaviour
     public string Key;
 
     [Header("References")]
-    private InventoryController IC;
+    private Inventory IC;
     private Animator animator;
     private Animator CanvasAnimator;
     private PlayerMovement PM;
@@ -30,7 +30,7 @@ public class Interaction : MonoBehaviour
 
     void Start()
     {
-        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<InventoryController>();
+        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
 

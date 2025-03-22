@@ -27,7 +27,7 @@ public class PickUpItem : MonoBehaviour
     [Header("References")]
     public UnityEvent Event;
     private Animator animator;
-    private InventoryController IC;
+    private Inventory IC;
     private PlayerMovement PM;
     private InputManager IM;
     private BoxCollider2D BC2D;
@@ -38,7 +38,7 @@ public class PickUpItem : MonoBehaviour
     void Start()
     {
         IM = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<InputManager>();
-        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<InventoryController>();
+        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
         BC2D = GetComponent<BoxCollider2D>();

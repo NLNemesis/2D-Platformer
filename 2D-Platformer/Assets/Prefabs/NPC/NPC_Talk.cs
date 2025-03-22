@@ -15,7 +15,7 @@ public class NPC_Talk : MonoBehaviour
 
     [Header("References")]
     private PlayerMovement PM;
-    private InventoryController IC;
+    private Inventory IC;
     private QuestSystem QS;
     private InputManager IM;
     private AIMove aiMove;
@@ -45,7 +45,7 @@ public class NPC_Talk : MonoBehaviour
     {
         aiMove = GetComponent<AIMove>();
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
-        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<InventoryController>();
+        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
         QS = GameObject.Find("/MaxPrefab/Player").GetComponent<QuestSystem>();
         IM = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<InputManager>();
         Messages = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<UIController>().UIMessages;

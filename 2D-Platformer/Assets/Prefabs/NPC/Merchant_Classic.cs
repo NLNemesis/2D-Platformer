@@ -20,7 +20,7 @@ public class Merchant_Classic : MonoBehaviour
 
     [Header("References")]
     private PlayerMovement PM;
-    private InventoryController IC;
+    private Inventory IC;
     private Animator PlayerCanvasAnimator;
 
     [Header("Events")]
@@ -32,7 +32,7 @@ public class Merchant_Classic : MonoBehaviour
     void Start()
     {
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
-        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<InventoryController>();
+        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
         PlayerCanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
     }
 

@@ -19,7 +19,7 @@ public class Gathering : MonoBehaviour
 
     [Header("References")]
     private PlayerMovement PM;
-    private InventoryController IC;
+    private Inventory IC;
     private InputManager IM;
     private Animator CanvasAnimator;
     #endregion
@@ -28,7 +28,7 @@ public class Gathering : MonoBehaviour
     void Start()
     {
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
-        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<InventoryController>();
+        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
         IM = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<InputManager>();
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
         Messages = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<UIController>().UIMessages;
