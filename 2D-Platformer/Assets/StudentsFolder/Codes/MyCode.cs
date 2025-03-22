@@ -343,14 +343,40 @@ public class MyCode : MonoBehaviour
 
     //How to create a function
     //private-public + void + Function Name + () + ;
-    private void PlayerFunction(string Name, int Health, bool Alive)
-    {
+    private void PlayerFunction(string Name, int Health, bool Alive){}
 
+    public int TakeDamage(int DamageTaken)
+    {
+        int Health = 100;
+        Health -= DamageTaken;
+        return Health;
+    }
+
+    public bool Alive(int Health)
+    {
+        if (Health > 0)
+            return true;
+        else
+            return false;
     }
     #endregion
 
     #region IEnumerator
+    //How to call the coroutines
+    void CoroutineCaller()
+    {
+        StartCoroutine(Delay());
+        StopCoroutine(Delay());
+        StopAllCoroutines();
+    }
 
+    public IEnumerator Delay()
+    {
+        //Wait
+        yield return new WaitForSeconds(2f); //Waits here for 2 seconds
+        //if i dont use any "yield returns" to avoid the errors
+        yield return null;
+    }
     #endregion
 
     #region Vectors && Colors
