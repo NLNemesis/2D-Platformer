@@ -204,9 +204,9 @@ MonoBehaviour:
   Freezed: 0
   speed: 8
   jumpingPower: 16
-  dashingPower: 60
-  dashingTime: 0.2
-  dashingCooldown: 1
+  slidingPower: 24
+  slidingTime: 0.2
+  slidingCooldown: 1
   canDash: 1
   rb: {fileID: 116680109}
   groundCheck: {fileID: 183866600}
