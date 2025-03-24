@@ -272,6 +272,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HasDash: 0
   HasSlide: 1
+  MaxAttack: 2
+  CurrentAttack: 0
 --- !u!95 &116680113
 Animator:
   serializedVersion: 5

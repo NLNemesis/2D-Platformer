@@ -12,8 +12,6 @@ public class MyAnimController : MonoBehaviour
 
     [Header("Attacks")]
     public int MaxAttack;
-    public bool CanCombo;
-    public bool Combo;
     public int CurrentAttack;
 
     [Header("References")]
@@ -72,55 +70,20 @@ public class MyAnimController : MonoBehaviour
         #region Attacks
         if (Input.GetMouseButtonDown(0) && CanAttack)
             Attack();
-
-        if (Input.GetMouseButtonDown(0) && CanCombo)
-            Combo = true;
         #endregion
     }
 
     #region Attacks Handler
     public void Attack()
     {
-        StopCoroutine(AttackReset());
-        Combo = false;
         CanAttack = false;
-        animator.SetFloat("Attack", CurrentAttack);
-        animator.SetTrigger("Attack Action");
-    }
-
-    public void ComboActivated() { CanCombo = true; }
-
-    public void ForceAttack()
-    {
-        if (Combo)
-        {
-            if (CurrentAttack <= MaxAttack)
-            {
-                CurrentAttack++;
-                Attack();
-            }
-            else
-            {
-                CurrentAttack = 0;
-                Attack();
-            }
-        }
-    }
-
-    IEnumerator AttackReset()
-    {
-        yield return new WaitForSeconds(2f);
-        CanCombo = false;
-        CanAttack = true;
-        CurrentAttack = 0;
+        animator.SetTrigger("Attack");
     }
     #endregion
 
     public void Reset()
     {
         MPM.Freezed = false;
-        CanCombo = false;
         CanAttack = true;
-        CurrentAttack = 0;
     }
 }
