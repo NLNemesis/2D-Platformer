@@ -45,13 +45,13 @@ public class MyAnimController : MonoBehaviour
         if (Input.GetButtonDown("Dash") && MPM.canDash && HasDash)
         {
             animator.SetTrigger("Dash");
-            StartCoroutine(MPM.Dash()); 
+            StartCoroutine(MPM.Slide()); 
         }
 
         if (Input.GetButtonDown("Slide") && MPM.canDash && MPM.IsGrounded() && HasSlide)
         {
             animator.SetTrigger("Slide");
-            StartCoroutine(MPM.Dash()); 
+            StartCoroutine(MPM.Slide()); 
         }
 
         if (Input.GetButton("Jump") && MPM.IsGrounded())
@@ -68,54 +68,5 @@ public class MyAnimController : MonoBehaviour
             animator.SetBool("Fall", true);
         }
         #endregion
-
-        #region Attacks
-        if (Input.GetMouseButtonDown(0))
-            if (CanAttack)
-                Attack();
-            else if (CanCombo)
-                ComboActivated = true;
-        #endregion
-    }
-
-    #region Attacks Handler
-    public void Attack()
-    {
-        CanAttack = false;
-        ComboActivated = false;
-        animator.SetFloat("CurrentAttackInt", CurrentAttackInt);
-        animator.SetTrigger("Attack");
-    }
-
-    public void ComboAccess()
-    {
-        CanCombo = true;
-    }
-
-    public void ComboCheck()
-    {
-        if (ComboActivated)
-        {
-            if (CurrentAttackInt < MaxAttackInt)
-                CurrentAttackInt++;
-            else
-                CurrentAttackInt = 0;
-            CanCombo = false;
-            ComboActivated = false;
-            Attack();
-        }
-        else
-        {
-            CurrentAttackInt = 0;
-            Reset();
-        }
-    }
-    #endregion
-
-    public void Reset()
-    {
-        MPM.Freezed = false;
-        CanAttack = true;
-        CanCombo = false;
     }
 }
