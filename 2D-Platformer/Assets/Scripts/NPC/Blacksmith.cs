@@ -75,12 +75,9 @@ public class Blacksmith : MonoBehaviour
                 BuyItemAmount[i].text = PlayerItemsAmount[i].ToString(); //Show the amount (Buy UI)
                 SellItemAmount[i].text = PlayerItemsAmount[i].ToString();//Show the amount (Sell UI)
             }
-
-            for (int i = 0; i < Trading_PI_Text.Length; i++)
-            {
-                Trading_PI_Text[i].text = Trading_PI_Amount[i].ToString(); //Show amount (Trading items)
-                Trading_NPCI_Text[i].text = Trading_NPCI_Amount[i].ToString();//Show amount (Traded items)
-            }
+            FindTradingAmount();
+            FindSmeltingAmount();
+            FindCraftingAmount();
         }
         #endregion
     }
@@ -89,13 +86,11 @@ public class Blacksmith : MonoBehaviour
     #region Open Or Close Shop Function
     void OpenOrCloseShop()
     {
-        FindTradingAmount();
         if (ThisCanvas.activeSelf == false)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             OpenShopEvent.Invoke();
-            FindItemsAmount();
         }
         else
         {
@@ -105,6 +100,24 @@ public class Blacksmith : MonoBehaviour
         }
     }
     #endregion
+
+    #region Find the amount of the items
+    void FindItemsAmount()
+    {
+        PlayerItemsAmount = new int[Item.Length];
+        for (int i = 0; i < MI.SlotImage.Length; i++)
+        {
+            for (int j = 0; j < Item.Length; j++)
+            {
+                if (MI.SlotName[i] == Item[j])
+                {
+                    PlayerItemsAmount[j] += 1;
+                    break;
+                }
+            }
+        }
+    }
+    #endregion\
 
     #region Trading
     [Header("Trading")]
@@ -131,8 +144,6 @@ public class Blacksmith : MonoBehaviour
             for (int i = 0; i < NPCItemAmount[Number]; i++)
             MI.AddItem(NPCItem[Number]);
         }
-
-        FindTradingAmount();
     }
     #endregion
 
@@ -163,6 +174,11 @@ public class Blacksmith : MonoBehaviour
                     break;
                 }
 
+        for (int i = 0; i < Trading_PI_Text.Length; i++)
+        {
+            Trading_PI_Text[i].text = Trading_PI_Amount[i].ToString(); //Show amount (Trading items)
+            Trading_NPCI_Text[i].text = Trading_NPCI_Amount[i].ToString();//Show amount (Traded items)
+        }
     }
     #endregion
 
@@ -196,8 +212,8 @@ public class Blacksmith : MonoBehaviour
     {
         Smelting_PI_Amount = new int[Smelting_PI_Text.Length]; //Create a new empty array with the amounts
         for (int i = 0; i < MI.SlotImage.Length; i++) //Search the whole inventory one by one
-            for (int j = 0; j < PlayerItem.Length; j++)
-                if (MI.SlotName[i] == PlayerItem[j]) // Check if any item in the inventory matches an item in the other array
+            for (int j = 0; j < RequiredOre.Length; j++)
+                if (MI.SlotName[i] == RequiredOre[j]) // Check if any item in the inventory matches an item in the other array
                 {
                     Smelting_PI_Amount[j] += 1;
                     break;
@@ -205,13 +221,18 @@ public class Blacksmith : MonoBehaviour
 
         Smelting_NPCI_Amount = new int[Smelting_NPCI_Text.Length];
         for (int i = 0; i < MI.SlotImage.Length; i++)
-            for (int j = 0; j < NPCItem.Length; j++)
-                if (MI.SlotName[i] == NPCItem[j])
+            for (int j = 0; j < SmeltedIngot.Length; j++)
+                if (MI.SlotName[i] == SmeltedIngot[j])
                 {
                     Smelting_NPCI_Amount[j] += 1;
                     break;
                 }
 
+        for (int i = 0; i < Smelting_PI_Text.Length; i++)
+        {
+            Smelting_PI_Text[i].text = Smelting_PI_Amount[i].ToString(); //Show amount (Trading items)
+            Smelting_NPCI_Text[i].text = Smelting_NPCI_Amount[i].ToString();//Show amount (Traded items)
+        }
     }
     #endregion
 
@@ -273,25 +294,67 @@ public class Blacksmith : MonoBehaviour
     }
     #endregion
 
-    #region Find the amount of the items
-    void FindItemsAmount()
+    #region Find the crafting amount
+    [Header("UI Smelting")]
+    public TextMeshProUGUI[] Crafting_PI_Text; //Player Item Text
+    public TextMeshProUGUI[] Crafting1_PI_Text; //Player Item Text
+    public TextMeshProUGUI[] Crafting2_PI_Text; //Player Item Text
+    public TextMeshProUGUI[] Crafting_NPCI_Text; //NPC Item Text
+    private int[] Crafting_PI_Amount; //Player Item Amount
+    private int[] Crafting1_PI_Amount; //Player Item Amount
+    private int[] Crafting2_PI_Amount; //Player Item Amount
+    private int[] Crafting_NPCI_Amount; //NPC Item Amount
+
+    void FindCraftingAmount() //Player's and NPC
     {
-        PlayerItemsAmount = new int[Item.Length];
-        for (int i = 0; i < MI.SlotImage.Length; i++)
-        {
-            for (int j = 0; j < Item.Length; j++)
-            {
-                if (MI.SlotName[i] == Item[j])
+        #region Check Ingredient 0
+        Crafting_PI_Amount = new int[Crafting_PI_Text.Length]; //Create a new empty array with the amounts
+        for (int i = 0; i < MI.SlotImage.Length; i++) //Search the whole inventory one by one
+            for (int j = 0; j < Ingr0.Length; j++)
+                if (MI.SlotName[i] == Ingr0[j]) // Check if any item in the inventory matches an item in the other array
                 {
-                    PlayerItemsAmount[j] += 1;
+                    Crafting_PI_Amount[j] += 1;
                     break;
                 }
-            }
+        #endregion
+        #region Check Ingredient 1
+        Crafting1_PI_Amount = new int[Crafting1_PI_Text.Length]; //Create a new empty array with the amounts
+        for (int i = 0; i < MI.SlotImage.Length; i++) //Search the whole inventory one by one
+            for (int j = 0; j < Ingr1.Length; j++)
+                if (MI.SlotName[i] == Ingr1[j]) // Check if any item in the inventory matches an item in the other array
+                {
+                    Crafting1_PI_Amount[j] += 1;
+                    break;
+                }
+        #endregion
+        #region Check Ingredient 2
+        Crafting2_PI_Amount = new int[Crafting2_PI_Text.Length]; //Create a new empty array with the amounts
+        for (int i = 0; i < MI.SlotImage.Length; i++) //Search the whole inventory one by one
+            for (int j = 0; j < Ingr2.Length; j++)
+                if (MI.SlotName[i] == Ingr2[j]) // Check if any item in the inventory matches an item in the other array
+                {
+                    Crafting2_PI_Amount[j] += 1;
+                    break;
+                }
+        #endregion
+        #region Check Crafted Item
+        Crafting_NPCI_Amount = new int[Crafting_NPCI_Text.Length]; //Create a new empty array with the amounts
+        for (int i = 0; i < MI.SlotImage.Length; i++) //Search the whole inventory one by one
+            for (int j = 0; j < CraftedItem.Length; j++)
+                if (MI.SlotName[i] == CraftedItem[j]) // Check if any item in the inventory matches an item in the other array
+                {
+                    Crafting_NPCI_Amount[j] += 1;
+                    break;
+                }
+        #endregion
+
+        for (int i = 0; i < Smelting_PI_Text.Length; i++)
+        {
+            Crafting_PI_Text[i].text = Crafting_PI_Amount[i].ToString(); //Show amount (Trading items)
+            Crafting1_PI_Text[i].text = Crafting1_PI_Amount[i].ToString();//Show amount (Traded items)
+            Crafting2_PI_Text[i].text = Crafting2_PI_Amount[i].ToString(); //Show amount (Trading items)
+            Crafting_NPCI_Text[i].text = Crafting_NPCI_Amount[i].ToString();//Show amount (Traded items)
         }
     }
-    #endregion\
-
-    #region Find the crafting amount
-
     #endregion
 }
