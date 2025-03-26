@@ -237,10 +237,17 @@ public class MyCode : MonoBehaviour
 
     #region References and Components
     /*
-    GetComponent = Grab the reference from the specific object
-    GetComponentInParent = Grab a reference from the object's parent
-    GetComponentInChildren = Grab a reference from the object's children
-    GameObject.Find("Path") = Find an object in this path from hierarchy to this path
+    We can use the GetComponent methods to simplify the script in the inspector window:
+
+    GetComponent: Used to grab a reference to the specific object the script is attached to.
+    GetComponentInParent: Used to grab a reference to the parent object that the script is attached to.
+    GetComponentInChildren: Used to grab a reference to a child object of the script's parent.
+
+
+    If the script is not attached to the object we want to reference, 
+    we can use GameObject.Find("Path") to search the hierarchy and find the object.
+
+    GameObject.Find("Path"): Finds an object by its path in the hierarchy.
     */
 
     private Inventory IC;

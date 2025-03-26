@@ -11,8 +11,10 @@ public class MyAnimController : MonoBehaviour
     private bool CanAttack = true;
 
     [Header("Attacks")]
-    public int MaxAttack;
-    public int CurrentAttack;
+    public int MaxAttackInt;
+    public int CurrentAttackInt;
+    public bool CanCombo;
+    public bool ComboActivated;
 
     [Header("References")]
     private Animator animator;
@@ -68,8 +70,11 @@ public class MyAnimController : MonoBehaviour
         #endregion
 
         #region Attacks
-        if (Input.GetMouseButtonDown(0) && CanAttack)
-            Attack();
+        if (Input.GetMouseButtonDown(0))
+            if (CanAttack)
+                Attack();
+            else if (CanCombo)
+                ComboActivated = true;
         #endregion
     }
 
@@ -77,7 +82,33 @@ public class MyAnimController : MonoBehaviour
     public void Attack()
     {
         CanAttack = false;
+        ComboActivated = false;
+        animator.SetFloat("CurrentAttackInt", CurrentAttackInt);
         animator.SetTrigger("Attack");
+    }
+
+    public void ComboAccess()
+    {
+        CanCombo = true;
+    }
+
+    public void ComboCheck()
+    {
+        if (ComboActivated)
+        {
+            if (CurrentAttackInt < MaxAttackInt)
+                CurrentAttackInt++;
+            else
+                CurrentAttackInt = 0;
+            CanCombo = false;
+            ComboActivated = false;
+            Attack();
+        }
+        else
+        {
+            CurrentAttackInt = 0;
+            Reset();
+        }
     }
     #endregion
 
@@ -85,5 +116,6 @@ public class MyAnimController : MonoBehaviour
     {
         MPM.Freezed = false;
         CanAttack = true;
+        CanCombo = false;
     }
 }
