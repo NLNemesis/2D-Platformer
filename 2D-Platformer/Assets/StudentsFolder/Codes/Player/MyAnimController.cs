@@ -10,12 +10,6 @@ public class MyAnimController : MonoBehaviour
     public bool HasSlide;
     private bool CanAttack = true;
 
-    [Header("Attacks")]
-    public int MaxAttack;
-    public int CurrentAttack;
-    public bool CanCombo;
-    public bool ComboActivated;
-
     [Header("References")]
     private Animator animator;
     private MyPlayerMovement MPM;
@@ -68,49 +62,5 @@ public class MyAnimController : MonoBehaviour
             animator.SetBool("Fall", true);
         }
         #endregion
-    
-        #region Attacks
-        if (Input.GetMouseButtonDown(0) && CanAttack)
-            Attack();
-
-        if (Input.GetMouseButtonDown(0) && CanCombo)
-            ComboActivated = true;
-        #endregion
-    }
-
-    #region Attack Handler
-    public void Attack()
-    {
-        CanAttack = false;
-        ComboActivated = false;
-        animator.SetFloat("CurrentAttack", CurrentAttack);
-        animator.SetTrigger("Attack");
-    }
-
-    public void ComboAccess()
-    {
-        CanCombo = true;
-    }
-
-    public void ComboCheck()
-    {
-        if (ComboActivated)
-        {
-            if (CurrentAttack < MaxAttack)
-                CurrentAttack++;
-            else
-                CurrentAttack = 0;
-            Attack();
-        }
-        else Reset();
-    }
-    #endregion
-
-    public void Reset()
-    {
-        MPM.Freezed = false;
-        CanAttack = true;
-        CanCombo = false;
-        CurrentAttack = 0;
     }
 }
