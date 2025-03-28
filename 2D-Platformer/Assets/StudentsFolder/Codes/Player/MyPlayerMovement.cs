@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MyPlayerMovement : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class MyPlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+
+    [Header("Unity Event")]
+    public UnityEvent IsGroundedEvent;
+    public UnityEvent NotIsGroundedEvent;
     #endregion
 
     void Start()
@@ -50,6 +55,13 @@ public class MyPlayerMovement : MonoBehaviour
 
         Flip();
         IsGrounded();
+
+        #region Box Collider Handler
+        if (IsGrounded())
+            IsGroundedEvent.Invoke();
+        else
+            NotIsGroundedEvent.Invoke();
+        #endregion
     }
 
     private void FixedUpdate()
