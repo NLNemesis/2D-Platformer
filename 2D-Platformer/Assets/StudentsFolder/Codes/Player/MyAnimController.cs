@@ -10,12 +10,6 @@ public class MyAnimController : MonoBehaviour
     public bool HasSlide;
     private bool CanAttack = true;
 
-    [Header("Attacks")]
-    public int MaxAttackInt;
-    public int CurrentAttackInt;
-    public bool CanCombo;
-    public bool ComboActivated;
-
     [Header("References")]
     private Animator animator;
     private MyPlayerMovement MPM;
