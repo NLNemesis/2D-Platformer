@@ -10,6 +10,7 @@ public class MyPlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     public float speed = 8f;
+    private float originalSpeed;
     public float jumpingPower = 16f;
     private float horizontal;
     private bool isFacingRight = true;
@@ -33,7 +34,7 @@ public class MyPlayerMovement : MonoBehaviour
 
     void Start()
     {
-
+        originalSpeed = speed;
     }
 
     private void Update()
@@ -109,11 +110,13 @@ public class MyPlayerMovement : MonoBehaviour
     #region Freeze & Unfreeze the player
     public void Freeze()
     {
+        speed = 0;
         Freezed = true;
     }
 
     public void Unfreeze()
     {
+        speed = originalSpeed;
         Freezed = false;
     }
     #endregion
