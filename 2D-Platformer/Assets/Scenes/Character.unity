@@ -205,9 +205,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Freezed: 0
   speed: 8
+  originalSpeed: 0
   jumpingPower: 16
-  slidingPower: 24
-  slidingTime: 0.2
+  slidingPower: 20
+  slidingTime: 0.15
   slidingCooldown: 1
   canDash: 1
   rb: {fileID: 116680109}
@@ -276,7 +277,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116680107}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: e098d3bb95f73e94cb84051a7f3963a9, type: 2}
   m_IncludeLayers:
@@ -334,7 +335,7 @@ MonoBehaviour:
   Range: 1.5
   EnemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!95 &116680113
 Animator:
   serializedVersion: 5

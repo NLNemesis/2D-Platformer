@@ -10,7 +10,7 @@ public class MyPlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     public float speed = 8f;
-    private float originalSpeed;
+    [HideInInspector] public float originalSpeed;
     public float jumpingPower = 16f;
     private float horizontal;
     private bool isFacingRight = true;
@@ -32,7 +32,7 @@ public class MyPlayerMovement : MonoBehaviour
     public UnityEvent NotIsGroundedEvent;
     #endregion
 
-    void Start()
+    void Awake()
     {
         originalSpeed = speed;
     }
@@ -67,7 +67,9 @@ public class MyPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isSliding == false)
+        if (Freezed) return;
+
+        if (!isSliding)
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
@@ -102,6 +104,7 @@ public class MyPlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(slidingTime);
         rb.gravityScale = originalGravity;
         isSliding = false;
+        Unfreeze();
         yield return new WaitForSeconds(slidingCooldown);
         canDash = true;
     }

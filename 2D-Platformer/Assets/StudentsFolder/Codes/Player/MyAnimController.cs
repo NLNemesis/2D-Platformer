@@ -118,6 +118,7 @@ public class MyAnimController : MonoBehaviour
 
     public void Reset()
     {
+        MPM.Unfreeze();
         CanAttack = true;
         CanCombo = false;
         ComboActivated = false;
