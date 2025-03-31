@@ -22,6 +22,10 @@ public class MyPlayerMovement : MonoBehaviour
     private bool isSliding;
     [HideInInspector] public bool canDash = true;
 
+    [Header("Stats")]
+    public float Health;
+    public float Damage;
+
     [Header("References")]
     public Rigidbody2D rb;
     public Transform groundCheck;

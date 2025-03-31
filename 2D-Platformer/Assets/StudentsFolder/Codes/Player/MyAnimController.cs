@@ -109,6 +109,23 @@ public class MyAnimController : MonoBehaviour
     }
 
     //Attack point
+    public void DealDamage(float Multiply)
+    {
+        Collider2D[] HitEnemy = Physics2D.OverlapCircleAll(AttackPoint.position, Range, EnemyLayer);
+        bool[] GaveDamage = new bool[HitEnemy.Length];
+        int Number = 0;
+        foreach (Collider2D hit in HitEnemy)
+        {
+            Enemy enemy = hit.GetComponent<Enemy>();
+            if (enemy != null && !GaveDamage[Number])
+            {
+                GaveDamage[Number] = true;
+                enemy.TakeDamage(MPM.Damage * Multiply);
+                Number++;
+                Debug.Log("I gave damage to the enemy named " + enemy.gameObject.name + "With damage " + MPM.Damage * Multiply);
+            }
+        }
+    }
     void OnDrawGizmosSelected()
     {
         if (AttackPoint != null)
