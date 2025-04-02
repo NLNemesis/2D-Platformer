@@ -112,6 +112,23 @@ public class MyAnimController : MonoBehaviour
     }
     #endregion
 
+    #region Deal Damage
+    public void DealDamage(float Multiply)
+    {
+        Collider2D[] hit = Physics2D.OverlapCircleAll(AttackPoint.position, Range, EnemyLayer);
+        bool[] GaveDamage = new bool[hit.Length];
+        for (int i = 0; i < hit.Length; i++)
+        {
+            Enemy enemy = hit[i].GetComponent<Enemy>();
+            if (enemy != null && GaveDamage[i] == false)
+            {
+                GaveDamage[i] = true;
+                enemy.TakeDamage(-MPM.Damage * Multiply);
+            }
+        }
+    }
+    #endregion
+
     public void Reset()
     {
         MPM.Unfreeze();
