@@ -88,8 +88,12 @@ public class MyAnimController : MonoBehaviour
     {
         CanAttack = false;
         ComboActivated = false;
-        animator.SetFloat("CurrentAttack", CurrentAttack);
+        animator.SetInteger("CurrentAttack", CurrentAttack);
         animator.SetTrigger("Attack");
+        if (CurrentAttack == MaxAttack)
+            CurrentAttack = 0;
+        else
+            CurrentAttack++;
     }
 
     public void ComboAccess() { CanCombo = true; }
@@ -97,34 +101,9 @@ public class MyAnimController : MonoBehaviour
     public void ComboCheck()
     {
         if (ComboActivated)
-        {
-            if (CurrentAttack < MaxAttack)
-                CurrentAttack++;
-            else
-                CurrentAttack = 0;
             Attack();
-        }
         else
             Reset();
-    }
-
-    //Attack point
-    public void DealDamage(float Multiply)
-    {
-        Collider2D[] HitEnemy = Physics2D.OverlapCircleAll(AttackPoint.position, Range, EnemyLayer);
-        bool[] GaveDamage = new bool[HitEnemy.Length];
-        int Number = 0;
-        foreach (Collider2D hit in HitEnemy)
-        {
-            Enemy enemy = hit.GetComponent<Enemy>();
-            if (enemy != null && !GaveDamage[Number])
-            {
-                GaveDamage[Number] = true;
-                enemy.TakeDamage(MPM.Damage * Multiply);
-                Number++;
-                Debug.Log("I gave damage to the enemy named " + enemy.gameObject.name + "With damage " + MPM.Damage * Multiply);
-            }
-        }
     }
     void OnDrawGizmosSelected()
     {
