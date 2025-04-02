@@ -21,6 +21,7 @@ public class MyPlayerMovement : MonoBehaviour
     public float slidingCooldown = 1f;
     private bool isSliding;
     [HideInInspector] public bool canDash = true;
+    [HideInInspector] public bool canSlide = true;
 
     [Header("References")]
     public Rigidbody2D rb;
@@ -50,9 +51,6 @@ public class MyPlayerMovement : MonoBehaviour
 
         if (!Input.GetKey(KeyCode.Space) && rb.velocity.y > 0f)
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-                StartCoroutine(Slide());
 
         Flip();
         IsGrounded();

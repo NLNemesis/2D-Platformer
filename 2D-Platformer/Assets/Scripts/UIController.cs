@@ -16,6 +16,7 @@ public class UIController : MonoBehaviour
 
     [Header("Reference")]
     private PlayerMovement PM;
+    private AnimController AC;
     private Animator CanvasAnimator;
     private InputManager IM;
 
@@ -33,6 +34,7 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
+        AC = GameObject.Find("/MaxPrefab/Player").GetComponent<AnimController>();
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
         IM = GetComponent<InputManager>();
     }
@@ -73,7 +75,7 @@ public class UIController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             CanvasAnimator.SetTrigger("Inventory");
             InUI = true;
-            PM.CanAttack = false;
+            AC.CanAttack = false;
         }
         else
         {
@@ -81,7 +83,7 @@ public class UIController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             CanvasAnimator.SetTrigger("Inventory");
             InUI = false;
-            PM.CanAttack = true;
+            AC.CanAttack = false;
         }
     }
     #endregion

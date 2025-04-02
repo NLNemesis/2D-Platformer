@@ -295,7 +295,6 @@ public class MyCode : MonoBehaviour
     void Access()
     {
         float HP = PM.Health;
-        bool Action = PM.CanAttack;
         float Number = PM.Stamina;
     }
     #endregion

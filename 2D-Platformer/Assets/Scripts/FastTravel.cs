@@ -32,7 +32,7 @@ public class FastTravel : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             CanvasAnimator.SetTrigger("FastTravel");
             PM.PlayerFreeze = true;
-            PM.animController.animator.SetFloat("State", 0);
+            PM.AC.animator.SetFloat("State", 0);
         }
         else
         {

@@ -1728,29 +1728,27 @@ MonoBehaviour:
   DashPower: 2.5
   DashTimer: 0.6
   DashCooldown: 1
-  CanSlide: 1
+  canSlide: 0
   SlideStaminaRequirment: 45
   SlidePower: 2
   SlideTimer: 0.6
   SlideCooldown: 1
-  HasWeapon: 0
-  CanAttack: 0
   Damage: 30
   SkillDamage: 0
   Armor: 0
   MagicResist: 0
-  Attack: 0
   AxeTier: 0
   PickaxeTier: 0
   KnifeTier: 0
-  animController: {fileID: 1446274996837956393}
+  AC: {fileID: 0}
   GroundCheck: {fileID: 8842266243988926905}
   GroundLayer:
     serializedVersion: 2
     m_Bits: 9
-  HealthSlider: {fileID: 7138548883140253467}
-  ManaSlider: {fileID: 4531995288817211172}
-  StaminaSlider: {fileID: 259738273510267512}
+  Slider:
+  - {fileID: 7138548883140253467}
+  - {fileID: 4531995288817211172}
+  - {fileID: 259738273510267512}
   UIText:
   - {fileID: 1978624771983722419}
   - {fileID: 4459686751005309438}
@@ -1864,6 +1862,18 @@ MonoBehaviour:
   Event:
   - m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 3672156145453013359}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2196289110087302200}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
@@ -1878,6 +1888,18 @@ MonoBehaviour:
         m_CallState: 2
   - m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 3672156145453013359}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 2196289110087302200}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
@@ -1892,6 +1914,8 @@ MonoBehaviour:
         m_CallState: 2
   SelfTalkObject: {fileID: 2301652286054496341}
   TWE: {fileID: 2219972189289341448}
+  Duration: 0
+  Increaser: 0
 --- !u!114 &1446274996837956393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1904,13 +1928,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf8afbbd980b83408dc9b4751abbd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  Clip: []
+  CanAttack: 0
+  Attacks: 0
+  CanCombo: 0
+  ComboActivated: 0
   AttackPoint: {fileID: 1056690443165609455}
   AttackRange: 1.4
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  animator: {fileID: 0}
+  Clip: []
   ThrowablePrefab: {fileID: 0}
   ThrowableStartPoint: {fileID: 0}
 --- !u!114 &556684345522754478

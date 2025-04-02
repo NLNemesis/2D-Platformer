@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     public float DashCooldown = 1f;
 
     [Header("Slide")]
-    public bool CanSlide;
+    public bool canSlide;
     public float SlideStaminaRequirment;
     private bool IsSliding;
     public float SlidePower = 24;
@@ -63,13 +63,10 @@ public class PlayerMovement : MonoBehaviour
     public float SlideCooldown = 1f;
 
     [Header("Stats")]
-    public bool HasWeapon;
-    [HideInInspector] public bool CanAttack;
     public float Damage;
     public float SkillDamage;
     public float Armor;
     public float MagicResist;
-    [HideInInspector] public float Attack;
 
     [Header("Gathering Tier")]
     public int AxeTier;
@@ -80,14 +77,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private InputManager IM;
     private UIController UIC;
-    [HideInInspector] public AnimController animController;
+    [HideInInspector] public AnimController AC;
     public Transform GroundCheck;
     public LayerMask GroundLayer;
 
     [Header("UI")]
-    public Slider HealthSlider;
-    public Slider ManaSlider;
-    public Slider StaminaSlider;
+    public Slider[] Slider; //0 HP Slider, 1 Mana Slider, 2 Stamina Slider
     public TextMeshProUGUI[] UIText;
 
     [Header("Experience Points")]
@@ -112,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
         IM = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<InputManager>();
         UIC = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<UIController>();
         rb = GetComponent<Rigidbody2D>();
-        CanAttack = true;
+        AC = GetComponent<AnimController>();
         OriginalSpeed = Speed;
         #region Assign XP Scale
         float Value = 0;
@@ -127,40 +122,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerFreeze == false && Health > 0 && State == 0)
+        if (!PlayerFreeze && Health > 0 && State == 0)
         {
             #region Player Inputs
-            if (PlayerFreeze == false)
+            if (!PlayerFreeze)
             {
                 horizontal = Input.GetAxisRaw("Horizontal");
                 vertical = Input.GetAxisRaw("Vertical");
 
-                if (InAction == false)
+                if (!InAction)
                 {
                     #region Jumping
                     if (Input.GetKeyDown(IM.Jump) && Stamina >= 15 && IsGrounded())
                     {
                         //InAction = true;
-                        animController.animator.SetTrigger("Jump");
-                        animController.animator.SetBool("InAir", true);
+                        AC.animator.SetTrigger("Jump");
+                        AC.animator.SetBool("InAir", true);
                         Jump = true;
                         Stamina -= 15f;
                         rb.velocity = new Vector2(rb.velocity.x, JumpingPower);
                     }
 
                     if (Input.GetKeyUp(IM.Jump) && rb.velocity.y > 0f)
-                    {
                         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-                    }
-
-                    if (rb.velocity.y == 0)
-                    {
-                        Event[1].Invoke();
-                    }
-                    else
-                    {
-                        Event[0].Invoke();
-                    }
                     #endregion
 
                     #region Dash
@@ -172,26 +156,10 @@ public class PlayerMovement : MonoBehaviour
                     #endregion
 
                     #region Slide
-                    if (Input.GetKeyDown(IM.Slide) && Stamina >= 15 && CanSlide == true)
+                    if (Input.GetKeyDown(IM.Slide) && Stamina >= 15 && canSlide == true)
                     {
                         Stamina -= SlideStaminaRequirment;
                         StartCoroutine(Slide());
-                    }
-                    #endregion
-
-                    #region Light and Heavy Attack
-                    if (Input.GetMouseButtonDown(0) && Stamina >= 30 && UIC.InUI == false)
-                    {
-                        Stamina -= 30f;
-                        animController.animator.SetTrigger("Light Attack");
-                        FreezePlayer();
-                    }
-
-                    if (Input.GetMouseButtonDown(1) && Stamina >= 30 && UIC.InUI == false)
-                    {
-                        Stamina -= 30f;
-                        animController.animator.SetTrigger("Heavy Attack");
-                        FreezePlayer();
                     }
                     #endregion
                 }
@@ -209,57 +177,55 @@ public class PlayerMovement : MonoBehaviour
 
             #region Stamina System
             if (InAction == false)
-            {
                 if (Stamina < MaxStamina && CanIncrease == true)
-                {
                     StartCoroutine(StaminaIncrease());
-                }
-            }
-            else
-            {
+                else
                 StopCoroutine(StaminaIncrease());
-            }
 
             if (Stamina > MaxStamina)
-            {
                 Stamina = MaxStamina;
-            }
             #endregion
         }
 
         #region Assing UI
-        HealthSlider.maxValue = MaxHealth;
-        HealthSlider.value = Health;
-        ManaSlider.maxValue = MaxMana;
-        ManaSlider.value = Mana;
-        StaminaSlider.maxValue = MaxStamina;
-        StaminaSlider.value = Stamina;
+        Slider[0].maxValue = MaxHealth;
+        Slider[0].value = Health;
+        Slider[1].maxValue = MaxMana;
+        Slider[1].value = Mana;
+        Slider[2].maxValue = MaxStamina;
+        Slider[2].value = Stamina;
         XPSlider.value = CurrentXP;
         LevelText.text = Level.ToString();
         UIText[3].text = Gold.ToString();
+        #endregion
+
+        #region Ground Handler
+        if (IsGrounded())
+            Event[1].Invoke();
+        else
+            Event[0].Invoke();
         #endregion
     }
 
     #region Move The Player
     private void FixedUpdate()
     {
-        if (State == 0)
-        {
-            //Move the player
-            if (PlayerFreeze == false)
-            {
-                rb.velocity = new Vector2(horizontal * Speed, rb.velocity.y);
-            }
+        if (State == 1) return;
 
-            if (IsClimbing == true)
-            {
-                rb.gravityScale = 1f;
-                rb.velocity = new Vector2(rb.velocity.x, vertical * ClimbingSpeed);
-            }
-            else
-            {
-                rb.gravityScale = 6f;
-            }
+        //Move the player
+        if (PlayerFreeze == false)
+        {
+            rb.velocity = new Vector2(horizontal * Speed, rb.velocity.y);
+        }
+
+        if (IsClimbing == true)
+        {
+            rb.gravityScale = 1f;
+            rb.velocity = new Vector2(rb.velocity.x, vertical * ClimbingSpeed);
+        }
+        else
+        {
+            rb.gravityScale = 6f;
         }
     }
     #endregion
@@ -290,7 +256,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerFreeze = true;
         CanIncrease = false;
         InAction = true;
-        animController.animator.SetTrigger("Dash");
+        AC.animator.SetTrigger("Dash");
         CanDash = false;
         IsDashing = true;
         float OriginalGravity = rb.gravityScale;
@@ -311,8 +277,8 @@ public class PlayerMovement : MonoBehaviour
         PlayerFreeze = true;
         CanIncrease = false;
         InAction = true;
-        animController.animator.SetTrigger("Slide");
-        CanSlide = false;
+        AC.animator.SetTrigger("Slide");
+        canSlide = false;
         IsSliding = true;
         float OriginalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
@@ -322,44 +288,45 @@ public class PlayerMovement : MonoBehaviour
         IsSliding = false;
         MovementReset();
         yield return new WaitForSeconds(SlideCooldown);
-        CanSlide = true;
+        canSlide = true;
     }
     #endregion
 
     #region Resets
-    public void FreezePlayer()
+    public void Freeze()
     {
-        CanAttack = false;
         PlayerFreeze = true;
         InAction = true;
         Speed = 0;
     }
 
-    public void UnFreezePlayer()
+    public void UnFreeze()
     {
-        CanAttack = true;
         PlayerFreeze = false;
         InAction = false;
         Speed = OriginalSpeed;
+        AC.CanAttack = true;
+        StartCoroutine(StaminaIncrease());
     }
 
     public void MovementReset()
     {
-        CanIncrease = true;
-        animController.animator.SetFloat("State", 0);
         Speed = OriginalSpeed;
         InAction = false;
         PlayerFreeze = false;
-        CanAttack = true;
+        State = 0;
+        Speed = OriginalSpeed;
+        StartCoroutine(StaminaIncrease());
     }
 
+    //I use the player state to block the players movement
+    //When he opens a shop or interacts with the environment
     public void PlayerState()
     {
         if (State == 0)
         {
             State = 1;
             Speed = 0;
-            animController.animator.SetFloat("State", 0);
         }
         else
         {
@@ -434,8 +401,8 @@ public class PlayerMovement : MonoBehaviour
     #region Take Damage
     public void TakeDamage(float Value, bool PhysicalDamage)
     {
-        FreezePlayer();
-        animController.animator.SetTrigger("Hit");
+        Freeze();
+        AC.animator.SetTrigger("Hit");
 
         if (PhysicalDamage == false)
         {
@@ -459,7 +426,7 @@ public class PlayerMovement : MonoBehaviour
             State = 1;
             Death = true;
             PlayerFreeze = true;
-            animController.animator.SetTrigger("Death");
+            AC.animator.SetTrigger("Death");
             Speed = 0;
         }
     }
@@ -469,17 +436,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
-        {
             InLadder = true;
-        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
-        {
             InLadder = true;
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -496,7 +459,7 @@ public class PlayerMovement : MonoBehaviour
     public void JumpCheckFunction()
     {
         Jump = false;
-        animController.animator.SetBool("InAir", false);
+        AC.animator.SetBool("InAir", false);
         MovementReset();
     }
     #endregion
@@ -548,7 +511,8 @@ public class PlayerMovement : MonoBehaviour
         SelfTalkObject.SetActive(true);
         TWE.fulltext = Text;
         TWE.gameObject.SetActive(true);
-        FreezePlayer();
+        AC.animator.SetFloat("State", 0);
+        Freeze();
     }
     #endregion
 

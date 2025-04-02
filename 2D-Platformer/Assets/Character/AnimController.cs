@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Animations;
 
 public class AnimController : MonoBehaviour
 {
     #region Variables
-    private bool CanTakeDamage = true;
-    private bool HitEnemy;
+    [Header("Attack Variables")]
+    public bool CanAttack;
+    public int Attacks;
+    private int CurrentAttack;
+    public bool CanCombo;
+    public bool ComboActivated;
+    public Transform AttackPoint;
+    public float AttackRange;
+    public LayerMask EnemyLayer;
 
     [Header("References")]
     private PlayerMovement PM;
@@ -33,7 +42,7 @@ public class AnimController : MonoBehaviour
     {
         if (PM.Health <= 0) return;
 
-        if (PM.PlayerFreeze == false && PM.State == 0)
+        if (PM.PlayerFreeze == false)
         {
             #region Set Movement and Jumping Animations
             if (Input.GetKey(IM.MoveLeft) || Input.GetKey(IM.MoveRight))
@@ -43,6 +52,25 @@ public class AnimController : MonoBehaviour
             #endregion
         }
 
+        #region Attacks
+        if (Input.GetMouseButtonDown(0) && !UIC.InUI && PM.Stamina >= 30)
+        {
+            if (CanAttack)
+            {
+                CanAttack = false;
+                Attack();
+                Debug.Log("Check");
+            }
+
+            if (CanCombo == true)
+            {
+                CanCombo = false;
+                ComboActivated = true;
+            }
+        }
+        #endregion
+
+        #region Ground Check
         if (PM.IsGrounded())
         {
             animator.ResetTrigger("Jump");
@@ -53,6 +81,7 @@ public class AnimController : MonoBehaviour
             animator.ResetTrigger("Jump");
             animator.SetBool("InAir", true);
         }
+        #endregion
 
         #region Death Check
         if (PM.Death == false && PM.Health <= 0)
@@ -64,26 +93,57 @@ public class AnimController : MonoBehaviour
         #endregion
     }
 
-    #region Attack Code
-    [Header("Attack Variables")]
-    public Transform AttackPoint;
-    public float AttackRange;
-    public LayerMask EnemyLayer;
-
+    #region Attack Handler
     public void Attack()
     {
-        HitEnemy = false;
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayer); //Check for the enemies
-        foreach (Collider2D enemy in hitEnemies) //if we hit enemies
+        PM.Stamina -= 30;
+        CanAttack = false;
+        CanCombo = false;
+        ComboActivated = false;
+        animator.SetFloat("CurrentAttack", CurrentAttack);
+        animator.SetTrigger("Attack");
+        if (CurrentAttack > Attacks) CurrentAttack = 0;
+        else CurrentAttack++;
+    }
+
+    public void ComboAccess() { CanCombo = true; }
+
+    public void ComboCheck()
+    {
+        if (ComboActivated)
+            Attack();
+        else
+            AttackReset();
+    }
+
+    public void AttackReset()
+    {
+        animator.SetFloat("State", 0);
+        CanAttack = true;
+        CurrentAttack = 0;
+        CanCombo = false;
+        ComboActivated = false;
+        PM.UnFreeze();
+    }
+    #endregion
+
+    #region Deal Damage
+    public void DealDamage(float Multiply)
+    {
+        Collider2D[] hit = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayer); //Check for the enemies
+        bool[] hitEnemy = new bool[hit.Length];
+        int Number = 0;
+        foreach (Collider2D enemy in hit) //if we hit enemies
         {
             Debug.Log("We hit" + enemy.name);
             //enemy.GetComponent<AIMove>().TakeDamage(AttackDamage[1])
             AIMove Enemy = enemy.GetComponent<AIMove>();
 
-            if (Enemy != null && HitEnemy == false)
+            if (Enemy != null && hitEnemy[Number] == false)
             {
-                HitEnemy = true;
-                Enemy.TakeDamage(PM.Damage, true);
+                hitEnemy[Number] = true;
+                Enemy.TakeDamage(PM.Damage * Multiply, true);
+                Number++;
                 Debug.Log("I gave damage");
             }
         }
@@ -116,9 +176,4 @@ public class AnimController : MonoBehaviour
         Instantiate(ThrowablePrefab, new Vector2(ThrowableStartPoint.position.x, ThrowableStartPoint.position.y), Quaternion.identity);
     }
     #endregion
-
-    public void MovementReset()
-    {
-        PM.MovementReset();
-    }
 }
