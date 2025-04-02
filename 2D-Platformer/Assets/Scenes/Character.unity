@@ -213,7 +213,7 @@ MonoBehaviour:
   canDash: 1
   canSlide: 1
   Health: 0
-  Damage: 15
+  Damage: 20
   rb: {fileID: 116680109}
   groundCheck: {fileID: 183866600}
   groundLayer:
@@ -335,7 +335,7 @@ MonoBehaviour:
   MaxAttack: 2
   CurrentAttack: 0
   AttackPoint: {fileID: 399250108}
-  Range: 1.5
+  Range: 1.52
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 128
