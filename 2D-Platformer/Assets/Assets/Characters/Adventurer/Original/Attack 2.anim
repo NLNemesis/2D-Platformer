@@ -17,21 +17,55 @@ AnimationClip:
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
-  m_PPtrCurves: []
+  m_PPtrCurves:
+  - serializedVersion: 2
+    curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 6711bf5f490f6a6448b32e7e3d1ba403, type: 3}
+    - time: 0.16666667
+      value: {fileID: 21300000, guid: acdf209f9ccd11649a14138bfada64fe, type: 3}
+    - time: 0.33333334
+      value: {fileID: 21300000, guid: 392af5a00468ef74bb1f4beda69c64e4, type: 3}
+    - time: 0.5
+      value: {fileID: 21300000, guid: daf4f9f36102d9c4ebc8706739ef2210, type: 3}
+    - time: 0.5833333
+      value: {fileID: 21300000, guid: 27ae3058f66b96c498730b0096b293fc, type: 3}
+    - time: 0.6666667
+      value: {fileID: 21300000, guid: 2b6d830a417705f4eaa0d294fad4adaa, type: 3}
+    attribute: m_Sprite
+    path: Model
+    classID: 212
+    script: {fileID: 0}
+    flags: 2
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings: []
-    pptrCurveMapping: []
+    genericBindings:
+    - serializedVersion: 2
+      path: 374627805
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+    pptrCurveMapping:
+    - {fileID: 21300000, guid: 6711bf5f490f6a6448b32e7e3d1ba403, type: 3}
+    - {fileID: 21300000, guid: acdf209f9ccd11649a14138bfada64fe, type: 3}
+    - {fileID: 21300000, guid: 392af5a00468ef74bb1f4beda69c64e4, type: 3}
+    - {fileID: 21300000, guid: daf4f9f36102d9c4ebc8706739ef2210, type: 3}
+    - {fileID: 21300000, guid: 27ae3058f66b96c498730b0096b293fc, type: 3}
+    - {fileID: 21300000, guid: 2b6d830a417705f4eaa0d294fad4adaa, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 0.68333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -50,4 +84,25 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: Freeze
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.33333334
+    functionName: DealDamage
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 2
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6666667
+    functionName: ComboCheck
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
