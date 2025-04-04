@@ -9,11 +9,14 @@ public class Enemy : MonoBehaviour
     public float Health;
     public float Armor;
     public float MagicResist;
+
+    [Header("References")]
+    private Animator animator;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -24,6 +27,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float Value, bool Magic)
     {
+        animator.SetTrigger("Hit");
         float Damage = 0;
         if (Magic)
             Damage = Value - MagicResist;
