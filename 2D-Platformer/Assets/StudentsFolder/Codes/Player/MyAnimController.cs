@@ -112,6 +112,13 @@ public class MyAnimController : MonoBehaviour
     }
     #endregion
 
+    #region Attack Function
+    public void DealDamage()
+    {
+
+    }
+    #endregion
+
     #region Reset
     public void Reset()
     {
