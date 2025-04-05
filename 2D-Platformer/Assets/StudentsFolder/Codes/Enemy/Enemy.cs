@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     public float Health;
     public float Armor;
     public float MagicResist;
+
+    public Animator animator;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float Value, bool Magic)
     {
+        animator.SetTrigger("Hit");
         float Damage = 0;
 
         if (Magic == true)
@@ -34,7 +37,7 @@ public class Enemy : MonoBehaviour
         if (Damage > 0)
             Health -= Damage;
 
-        if (Health < 0)
+        if (Health <= 0)
             this.gameObject.SetActive(false);
     }
 }
