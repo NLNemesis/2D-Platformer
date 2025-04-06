@@ -40,7 +40,7 @@ public class AnimController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PM.Health <= 0) return;
+        if (PM.Health <= 0 || PM.State == 1) return;
 
         if (PM.PlayerFreeze == false)
         {
@@ -132,19 +132,26 @@ public class AnimController : MonoBehaviour
     {
         Collider2D[] hit = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayer); //Check for the enemies
         bool[] hitEnemy = new bool[hit.Length];
-        int Number = 0;
-        foreach (Collider2D enemy in hit) //if we hit enemies
+        for (int i = 0; i < hit.Length; i++)
         {
-            Debug.Log("We hit" + enemy.name);
-            //enemy.GetComponent<AIMove>().TakeDamage(AttackDamage[1])
-            AIMove Enemy = enemy.GetComponent<AIMove>();
-
-            if (Enemy != null && hitEnemy[Number] == false)
+            AIMove aiMove = hit[i].GetComponent<AIMove>();
+            if (aiMove != null) 
             {
-                hitEnemy[Number] = true;
-                Enemy.TakeDamage(PM.Damage * Multiply, true);
-                Number++;
-                Debug.Log("I gave damage");
+                aiMove.TakeDamage(PM.Damage, false);
+            }
+        }
+    }
+
+    public void SpellDamage(float Multiply)
+    {
+        Collider2D[] hit = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayer); //Check for the enemies
+        bool[] hitEnemy = new bool[hit.Length];
+        for (int i = 0; i < hit.Length; i++)
+        {
+            AIMove aiMove = hit[i].GetComponent<AIMove>();
+            if (aiMove != null)
+            {
+                aiMove.TakeDamage(PM.Damage, true);
             }
         }
     }

@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class MyCode : MonoBehaviour
 {
@@ -157,8 +158,82 @@ public class MyCode : MonoBehaviour
     }
     #endregion
 
-    #region For Each Loop
+    #region List
+    //How to create a list
+    List<int> NumberList = new List<int>();
+    List<GameObject> GO = new List<GameObject>();
 
+    public void TestList()
+    {
+        //Add an element
+        List<string> Name = new List<string>();
+
+        //Add a new name into the list
+        Name.Add("Sylvana");
+
+        //Add a new name into the list
+        Name.Add("Thrall");
+
+        ///////////////////////////////////////////////////////////////////////////////     
+        // Insert an element
+        List<string> languages = new List<string>() { "Python", "Java", "C" };
+
+        // insert "JavaScript" at index 2
+        languages.Insert(2, "JavaScript");
+
+        // insert "C#" at index 1
+        languages.Insert(1, "C#");
+
+        ///////////////////////////////////////////////////////////////////////////////
+        //Remove an element
+        List<string> car = new List<string>() { "BMW", "Tesla", "Suzuki", "Tesla" };
+
+        // remove the first occurence of "Tesla" from the list
+        car.Remove("Tesla");
+
+        // remove the first occurrence of "Suzuki" 
+        car.Remove("Suzuki");
+    }
+    #endregion
+
+    #region For Each Loop
+    string[] Car = { "Volvo", "BMW", "Ford", "Mazda" };
+
+    void ForEachLoop()
+    {
+        //How to create a for each loop
+        foreach(string Name in Car)
+        {
+            Console.WriteLine(Name);
+        }
+    }
+    #endregion
+
+    #region Functions
+    //How to call a function
+    void FunctionCaller()
+    {
+        PlayerFunction("Elf", 100, true);
+    }
+
+    //How to create a function
+    //private-public + void + Function Name + () + ;
+    private void PlayerFunction(string Name, int Health, bool Alive) { }
+
+    public int TakeDamage(int DamageTaken)
+    {
+        int Health = 100;
+        Health -= DamageTaken;
+        return Health;
+    }
+
+    public bool Alive(int Health)
+    {
+        if (Health > 0)
+            return true;
+        else
+            return false;
+    }
     #endregion
 
     #region Switch
@@ -337,33 +412,6 @@ public class MyCode : MonoBehaviour
 
         //Loop
         AS.loop = true;
-    }
-    #endregion
-
-    #region Functions
-    //How to call a function
-    void FunctionCaller()
-    {
-        PlayerFunction("Elf", 100, true);
-    }
-
-    //How to create a function
-    //private-public + void + Function Name + () + ;
-    private void PlayerFunction(string Name, int Health, bool Alive){}
-
-    public int TakeDamage(int DamageTaken)
-    {
-        int Health = 100;
-        Health -= DamageTaken;
-        return Health;
-    }
-
-    public bool Alive(int Health)
-    {
-        if (Health > 0)
-            return true;
-        else
-            return false;
     }
     #endregion
 
