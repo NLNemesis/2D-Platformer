@@ -112,6 +112,20 @@ public class MyAnimController : MonoBehaviour
     }
     #endregion
 
+    #region Attack Function
+    public void DealDamage(float Multiply)
+    {
+        Collider2D[] hit = Physics2D.OverlapCircleAll(AttackPoint.position, Range, EnemyLayer);
+        for (int i = 0; i < hit.Length; i++)
+        {
+            Enemy enemy = hit[i].GetComponent<Enemy>();
+            if (enemy != null)
+                enemy.TakeDamage(MPM.Damage * Multiply, false);
+        }
+    }
+    #endregion
+
+    #region Reset
     public void Reset()
     {
         MPM.Unfreeze();
@@ -120,4 +134,5 @@ public class MyAnimController : MonoBehaviour
         ComboActivated = false;
         CurrentAttack = 0;
     }
+    #endregion
 }
