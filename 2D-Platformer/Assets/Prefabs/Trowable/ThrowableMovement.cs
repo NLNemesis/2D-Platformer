@@ -8,17 +8,20 @@ public class ThrowableMovement : MonoBehaviour
     private Vector2 NewPlace;
     private bool IsFacingRight;
     public float Speed;
+    public bool MagicDamage;
 
     private bool Called;
     [Space(10)]
     public float DestroyTime;
 
     PlayerMovement PM;
+    Animator animator;
     #endregion
 
     private void Start()
     {
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
+        animator = GetComponent<Animator>();
         IsFacingRight = PM.isFacingRight;
         if (PM.isFacingRight)
         {
@@ -36,7 +39,7 @@ public class ThrowableMovement : MonoBehaviour
 
     void Update()
     {
-        //Moves the arrow
+        //Moves the Throwable
         if (IsFacingRight)
             NewPlace = new Vector2(this.transform.position.x + 2, this.transform.position.y);
         else
@@ -44,19 +47,21 @@ public class ThrowableMovement : MonoBehaviour
         this.transform.position = Vector2.MoveTowards(this.transform.position, NewPlace, Time.deltaTime * Speed);
 
         //Starts a Coroutine
-        StartCoroutine(Destroy());
+        StartCoroutine(Duration());
         Hit();
 
         if (Check())
             Destroy(this.gameObject);
     }
 
-    IEnumerator Destroy()
+    //Duration of the throwable object
+    IEnumerator Duration()
     {
         yield return new WaitForSeconds(DestroyTime);
         Destroy(this.gameObject);
     }
 
+    //Checks if the throwable hits an enemy
     public LayerMask CheckLayer;
     bool Check()
     {
@@ -64,32 +69,47 @@ public class ThrowableMovement : MonoBehaviour
     }
 
     #region Attack Code
+    //Damage Variables
     [Header("Attack Variables")]
     public Transform AttackPoint;
     public float AttackRange;
     public LayerMask EnemyLayer;
-    bool HitEnemy;
 
     public void Hit()
     {
-        HitEnemy = false;
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayer); //Check for the enemies
-        foreach (Collider2D enemy in hitEnemies) //if we hit enemies
+        Collider2D[] hit = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayer); //Check for the enemies
+        for (int i = 0; i < hit.Length; i++) 
         {
-            Debug.Log("We hit" + enemy.name);
-            //enemy.GetComponent<AIMove>().TakeDamage(AttackDamage[1])
-            AIMove Enemy = enemy.GetComponent<AIMove>();
-
-            if (Enemy != null && HitEnemy == false)
+            AIMove aiMove = hit[i].GetComponent<AIMove>();
+            Enemy enemy = hit[i].GetComponent<Enemy>();
+            if (aiMove != null)
             {
-                HitEnemy = true;
-                Enemy.TakeDamage(PM.Damage, true);
-                Debug.Log("I gave damage");
-                Destroy(this.gameObject);
+                aiMove.TakeDamage(PM.Damage, MagicDamage);
+                StartCoroutine(HitEnemy());
+            }
+            else if (enemy != null)
+            {
+                enemy.TakeDamage(PM.Damage, MagicDamage);
+                StartCoroutine(HitEnemy());
             }
         }
     }
 
+    //Destroy the throwable object
+    IEnumerator HitEnemy()
+    {
+        Speed = 0;
+        if (animator != null)
+        {
+            animator.SetTrigger("Hit");
+            yield return new WaitForSeconds(0.3f);
+            Destroy(this.gameObject);
+        }
+        else
+            Destroy(this.gameObject);
+    }
+
+    //Draw the hitbox gizmos
     private void OnDrawGizmosSelected()
     {
         if (AttackPoint == null) return;

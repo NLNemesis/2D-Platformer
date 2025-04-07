@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool isFacingRight = true;
     private float OriginalSpeed;
     public int Gold;
-    [HideInInspector] public bool PlayerFreeze;
+    [HideInInspector] public bool Freezed;
     [HideInInspector] public bool CanJump;
     [HideInInspector] public bool Jump;
     [HideInInspector] public bool Crouch;
@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
     public int KnifeTier;
 
     [Header("References")]
-    private Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
     private InputManager IM;
     private UIController UIC;
     [HideInInspector] public AnimController AC;
@@ -109,12 +109,10 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         AC = GetComponent<AnimController>();
         OriginalSpeed = Speed;
-        #region Assign XP Scale
-        float Value = 0;
+        #region Assign XP Scale 
         for (int i = 0; i < XPScale.Length; i++)
         {
-            Value += 250;
-            XPScale[i] = Value;
+            XPScale[i] = 250 * i;
         }
         XPSlider.maxValue = XPScale[0];
         #endregion
@@ -122,10 +120,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!PlayerFreeze && Health > 0 && State == 0)
+        if (Health > 0 && State == 0)
         {
             #region Player Inputs
-            if (!PlayerFreeze)
+            if (!Freezed)
             {
                 horizontal = Input.GetAxisRaw("Horizontal");
                 vertical = Input.GetAxisRaw("Vertical");
@@ -210,13 +208,9 @@ public class PlayerMovement : MonoBehaviour
     #region Move The Player
     private void FixedUpdate()
     {
-        if (State == 1) return;
-
         //Move the player
-        if (PlayerFreeze == false)
-        {
+        if (Freezed == false)
             rb.velocity = new Vector2(horizontal * Speed, rb.velocity.y);
-        }
 
         if (IsClimbing == true)
         {
@@ -253,7 +247,7 @@ public class PlayerMovement : MonoBehaviour
     #region Dash
     IEnumerator Dash()
     {
-        PlayerFreeze = true;
+        Freezed = true;
         CanIncrease = false;
         InAction = true;
         AC.animator.SetTrigger("Dash");
@@ -274,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
     #region Slide
     IEnumerator Slide()
     {
-        PlayerFreeze = true;
+        Freezed = true;
         CanIncrease = false;
         InAction = true;
         AC.animator.SetTrigger("Slide");
@@ -295,14 +289,14 @@ public class PlayerMovement : MonoBehaviour
     #region Resets
     public void Freeze()
     {
-        PlayerFreeze = true;
+        Freezed = true;
         InAction = true;
         Speed = 0;
     }
 
     public void UnFreeze()
     {
-        PlayerFreeze = false;
+        Freezed = false;
         InAction = false;
         Speed = OriginalSpeed;
         AC.CanAttack = true;
@@ -313,7 +307,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Speed = OriginalSpeed;
         InAction = false;
-        PlayerFreeze = false;
+        Freezed = false;
         State = 0;
         Speed = OriginalSpeed;
         StartCoroutine(StaminaIncrease());
@@ -362,7 +356,7 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 
-    #region HealAndManaRegend
+    #region Heal And ManaRegend
     public IEnumerator StatsRegend(int Amount, bool Heal)
     {
         float Duration = 0.3f;
@@ -425,7 +419,7 @@ public class PlayerMovement : MonoBehaviour
         {
             State = 1;
             Death = true;
-            PlayerFreeze = true;
+            Freezed = true;
             AC.animator.SetTrigger("Death");
             Speed = 0;
         }

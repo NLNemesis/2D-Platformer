@@ -10,7 +10,7 @@ public class Gathering : MonoBehaviour
     public int Tier;
     public enum GatheringItemType {Wood,Ore,Hunting}
     public GatheringItemType ItemType;
-    public float XP;
+    public float XPValue;
     public string ItemName;
 
     [Header("Messages")]
@@ -78,9 +78,7 @@ public class Gathering : MonoBehaviour
         if (collision.tag == "Player")
         {
             for (int i = 0; i < Messages.Length; i++)
-            {
                 Messages[i].SetActive(false);
-            }
             CanInteract = false;
         }
     }
@@ -94,13 +92,9 @@ public class Gathering : MonoBehaviour
             if (Input.GetKeyDown(IM.Interaction))
             {
                 if (IC.SlotAvailable > 0)
-                {
                     GatherItem();
-                }
                 else
-                {
                     CanvasAnimator.SetTrigger("InventoryFull");
-                }
             }
         }
     }
@@ -108,34 +102,24 @@ public class Gathering : MonoBehaviour
     #region Gather Item
     void GatherItem()
     {
-        if (ItemType == GatheringItemType.Wood && PM.AxeTier >= Tier) 
-        {
+        if (ItemType == GatheringItemType.Wood && PM.AxeTier >= Tier)
             AddItem();
-        }
         else if (ItemType == GatheringItemType.Ore && PM.PickaxeTier >= Tier)
-        {
             AddItem();
-        }
         else if (ItemType == GatheringItemType.Hunting && PM.KnifeTier >= Tier)
-        {
             AddItem();
-        }
         else
-        {
             CanvasAnimator.SetTrigger("HigherTier");
-        }
     }
     #endregion
 
     #region Add Item
     void AddItem()
     {
-        StartCoroutine(PM.GainXP(XP));
+        StartCoroutine(PM.GainXP(XPValue));
         IC.AddItem(ItemName);
         for (int i = 0; i < Messages.Length; i++)
-        {
             Messages[i].SetActive(false);
-        }
         CanInteract = false;
         this.gameObject.SetActive(false);
     }

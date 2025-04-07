@@ -24,7 +24,8 @@ public class AIMove : MonoBehaviour
     public float Damage;
     public float Armor;
     public float MagicResist;
-    public float XP;
+    public float XPValue;
+    public int Gold;
     [HideInInspector] public float CurrentSpeed;
     [HideInInspector] public bool Dead;
 
@@ -102,9 +103,7 @@ public class AIMove : MonoBehaviour
         animator.SetFloat("Movement", 0);
         CurrentPatrol += 1;
         if (CurrentPatrol > PatrolPlaces.Length - 1)
-        {
             CurrentPatrol = 0;
-        }
         yield return new WaitForSeconds(WaitForPatrol);
         CanMove = true;
         animator.SetFloat("Movement", 1);
@@ -142,34 +141,27 @@ public class AIMove : MonoBehaviour
             {
                 float NewValue = Value - Armor;
                 if (NewValue > 0)
-                {
                     Health -= NewValue;
-                }
             }
             else
             {
                 float NewValue = Value - MagicResist;
                 if (NewValue > 0)
-                {
                     Health -= NewValue;
-                }
             }
 
             if (Health <= 0)
-            {
                 Death();
-            }
             else
-            {
                 animator.SetTrigger("Hit");
-            }
         }
     }
     #endregion
 
     public void Death()
     {
-        StartCoroutine(PM.GainXP(XP));
+        StartCoroutine(PM.GainXP(XPValue));
+        PM.Gold += Gold;
         Dead = true;
         AIFreeze = true;
         animator.SetTrigger("Dead");

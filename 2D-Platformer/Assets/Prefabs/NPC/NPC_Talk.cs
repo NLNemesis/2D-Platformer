@@ -105,7 +105,7 @@ public class NPC_Talk : MonoBehaviour
         Messages[8].SetActive(false);
         ChattingCanvas.SetActive(true);
         Talking = true;
-        PM.PlayerFreeze = true;
+        PM.Freezed = true;
         PM.InInteaction = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -119,7 +119,7 @@ public class NPC_Talk : MonoBehaviour
     public void CloseChat()
     {
         Talking = false;
-        PM.PlayerFreeze = false;
+        PM.Freezed = false;
         PM.InInteaction = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

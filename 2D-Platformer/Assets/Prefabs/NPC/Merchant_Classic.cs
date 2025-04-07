@@ -90,7 +90,7 @@ public class Merchant_Classic : MonoBehaviour
         {
             PlayerHUB.SetActive(false);
             ThisCanvas.SetActive(true);
-            PM.PlayerFreeze = true;
+            PM.Freezed = true;
             //UIM.HaveAccess = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -100,7 +100,7 @@ public class Merchant_Classic : MonoBehaviour
         {
             PlayerHUB.SetActive(true);
             ThisCanvas.SetActive(false);
-            PM.PlayerFreeze = false;
+            PM.Freezed = false;
             //UIM.HaveAccess = true;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;

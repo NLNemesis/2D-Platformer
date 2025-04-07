@@ -21,11 +21,11 @@ public class OutOfBounds : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            PM.PlayerFreeze = true;
+            PM.Freezed = true;
             PM.Health -= 50;
             PM.gameObject.transform.position = NewLocation.position;
             PM.gameObject.transform.rotation = NewLocation.rotation;
-            PM.PlayerFreeze = false;
+            PM.Freezed = false;
         }
     }
 }

@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -40,9 +38,9 @@ public class AnimController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PM.Health <= 0 || PM.State == 1) return;
+        if (PM.Health <= 0) return;
 
-        if (PM.PlayerFreeze == false)
+        if (PM.Freezed == false)
         {
             #region Set Movement and Jumping Animations
             if (Input.GetKey(IM.MoveLeft) || Input.GetKey(IM.MoveRight))
@@ -86,7 +84,7 @@ public class AnimController : MonoBehaviour
         #region Death Check
         if (PM.Death == false && PM.Health <= 0)
         {
-            PM.PlayerFreeze = true;
+            PM.Freezed = true;
             PM.Death = true;
             animator.SetTrigger("Death");
         }
@@ -100,7 +98,7 @@ public class AnimController : MonoBehaviour
         CanAttack = false;
         CanCombo = false;
         ComboActivated = false;
-        animator.SetFloat("CurrentAttack", CurrentAttack);
+        animator.SetInteger("CurrentAttack", CurrentAttack);
         animator.SetTrigger("Attack");
         if (CurrentAttack > Attacks) CurrentAttack = 0;
         else CurrentAttack++;
@@ -131,28 +129,28 @@ public class AnimController : MonoBehaviour
     public void DealDamage(float Multiply)
     {
         Collider2D[] hit = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayer); //Check for the enemies
-        bool[] hitEnemy = new bool[hit.Length];
         for (int i = 0; i < hit.Length; i++)
         {
             AIMove aiMove = hit[i].GetComponent<AIMove>();
-            if (aiMove != null) 
-            {
-                aiMove.TakeDamage(PM.Damage, false);
-            }
+            Enemy enemy = hit[i].GetComponent<Enemy>();
+            if (aiMove != null)
+                aiMove.TakeDamage(PM.Damage * Multiply, false);
+            else if (enemy != null)
+                enemy.TakeDamage(PM.Damage * Multiply, false);
         }
     }
 
-    public void SpellDamage(float Multiply)
+    public void SpellDamage()
     {
         Collider2D[] hit = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayer); //Check for the enemies
-        bool[] hitEnemy = new bool[hit.Length];
         for (int i = 0; i < hit.Length; i++)
         {
             AIMove aiMove = hit[i].GetComponent<AIMove>();
+            Enemy enemy = hit[i].GetComponent<Enemy>();
             if (aiMove != null)
-            {
                 aiMove.TakeDamage(PM.Damage, true);
-            }
+            else if (enemy != null)
+                enemy.TakeDamage(PM.Damage, true);
         }
     }
 

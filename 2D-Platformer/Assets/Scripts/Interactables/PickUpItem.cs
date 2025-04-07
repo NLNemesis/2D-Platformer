@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +7,8 @@ public class PickUpItem : MonoBehaviour
     private bool CanInteract;
     public enum ItemType {Chest,Item}
     public ItemType Type;
+    public float XPValue;
+    public int Gold;
 
     [Header("Chest")]
     public float Tier;
@@ -27,7 +26,7 @@ public class PickUpItem : MonoBehaviour
     [Header("References")]
     public UnityEvent Event;
     private Animator animator;
-    private Inventory IC;
+    private Inventory inventory;
     private PlayerMovement PM;
     private InputManager IM;
     private BoxCollider2D BC2D;
@@ -38,7 +37,7 @@ public class PickUpItem : MonoBehaviour
     void Start()
     {
         IM = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<InputManager>();
-        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
+        inventory = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
         BC2D = GetComponent<BoxCollider2D>();
@@ -91,31 +90,27 @@ public class PickUpItem : MonoBehaviour
         {
             if (Input.GetKeyDown(IM.Interaction) && Type == ItemType.Item)
             {
-                if (IC.SlotAvailable > 0)
-                {
+                if (inventory.SlotAvailable > ItemName.Length)
                     TakeItem();
-                }
                 else
-                {
                     CanvasAnimator.SetTrigger("InventoryFull");
-                }
             }
             else if (Input.GetKeyDown(IM.Interaction) && Type == ItemType.Chest && Locked == true)
-            {
                 UnlockChest();
-            }
             else if (Input.GetKeyDown(IM.Interaction) && Type == ItemType.Chest && Locked == false)
-            {
-                LootChest();
-            }
+                if (inventory.SlotAvailable > ItemName.Length)
+                    LootChest();
+                else
+                    CanvasAnimator.SetTrigger("InventoryFull");
         }
     }
 
     void TakeItem()
     {
+        PM.GainXP(XPValue);
         for (int i = 0; i < ItemName.Length; i++) 
         {
-            IC.AddItem(ItemName[i]);
+            inventory.AddItem(ItemName[i]);
         }
         PM.UIText[2].text = "lots of loot";
         CanvasAnimator.SetTrigger("Took");
@@ -125,11 +120,10 @@ public class PickUpItem : MonoBehaviour
 
     void UnlockChest()
     {
-        IC.CheckForItem(RequiredItem);
-        
-        if(IC.Check == true)
+        inventory.CheckForItem(RequiredItem);
+        if(inventory.Check == true)
         {
-            IC.RemoveItem(RequiredItem);
+            inventory.RemoveItem(RequiredItem);
             CanvasAnimator.SetTrigger("Used");
             PM.UIText[1].text = RequiredItem;
             Locked = false;
@@ -144,16 +138,18 @@ public class PickUpItem : MonoBehaviour
 
     void LootChest()
     {
+        PM.GainXP(XPValue);
+        PM.Gold += Gold;
         animator.SetTrigger("Open");
         for (int i = 0; i < ItemName.Length; i++)
         {
             if (ItemName[i] == "Gold" || ItemName[i] == "Coins")
             {
-                IC.Gold += GoldAmount;
+                inventory.Gold += GoldAmount;
             }
             else
             {
-                IC.AddItem(ItemName[i]);
+                inventory.AddItem(ItemName[i]);
             }
         }
         PM.UIText[2].text = "lots of loot";

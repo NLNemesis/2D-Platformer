@@ -175,12 +175,12 @@ public class Door : MonoBehaviour
     #region Travel the player
     IEnumerator Traveling()
     {
-        PM.PlayerFreeze = true;
+        PM.Freezed = true;
         CanvasAnimator.SetTrigger("FadeInOut");
         yield return new WaitForSeconds(1f);
         Player.transform.position = NewPlace.position;
         yield return new WaitForSeconds(1f);
-        PM.PlayerFreeze = false;
+        PM.Freezed = false;
     }
     #endregion
 }

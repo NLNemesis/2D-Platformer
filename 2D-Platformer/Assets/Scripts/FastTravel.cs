@@ -31,7 +31,7 @@ public class FastTravel : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             CanvasAnimator.SetTrigger("FastTravel");
-            PM.PlayerFreeze = true;
+            PM.Freezed = true;
             PM.AC.animator.SetFloat("State", 0);
         }
         else
@@ -43,7 +43,7 @@ public class FastTravel : MonoBehaviour
 
     public void Cancel()
     {
-        PM.PlayerFreeze = false;
+        PM.Freezed = false;
         CanvasAnimator.SetTrigger("ResetTravel");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
