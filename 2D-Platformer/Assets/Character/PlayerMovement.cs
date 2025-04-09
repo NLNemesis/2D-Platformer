@@ -125,6 +125,13 @@ public class PlayerMovement : MonoBehaviour
             #region Player Inputs
             if (!Freezed)
             {
+                #region Speed controller with InAction variable
+                if (InAction)
+                    Speed = 0;
+                else
+                    Speed = OriginalSpeed;
+                #endregion
+
                 horizontal = Input.GetAxisRaw("Horizontal");
                 vertical = Input.GetAxisRaw("Vertical");
 
@@ -147,10 +154,7 @@ public class PlayerMovement : MonoBehaviour
 
                     #region Dash
                     if (Input.GetKeyDown(IM.Dash) && Stamina >= 15 && CanDash == true)
-                    {
-                        Stamina -= DashStaminaRequirment;
-                        StartCoroutine(Dash());
-                    }
+                        StartCoroutine(Dash(1));
                     #endregion
 
                     #region Slide
@@ -178,6 +182,8 @@ public class PlayerMovement : MonoBehaviour
                 if (Stamina < MaxStamina && CanIncrease == true)
                     StartCoroutine(StaminaIncrease());
                 else
+                    StopCoroutine(StaminaIncrease());
+            else
                 StopCoroutine(StaminaIncrease());
 
             if (Stamina > MaxStamina)
@@ -245,12 +251,17 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region Dash
-    IEnumerator Dash()
+    public IEnumerator Dash(int Animation)
     {
         Freezed = true;
         CanIncrease = false;
         InAction = true;
-        AC.animator.SetTrigger("Dash");
+        if (Animation > 0)
+        {
+            StopCoroutine(StaminaIncrease());
+            Stamina -= DashStaminaRequirment;
+            AC.animator.SetTrigger("Dash");
+        }
         CanDash = false;
         IsDashing = true;
         float OriginalGravity = rb.gravityScale;
@@ -291,25 +302,22 @@ public class PlayerMovement : MonoBehaviour
     {
         Freezed = true;
         InAction = true;
-        Speed = 0;
+        AC.CanAttack = false;
     }
 
     public void UnFreeze()
     {
         Freezed = false;
         InAction = false;
-        Speed = OriginalSpeed;
         AC.CanAttack = true;
         StartCoroutine(StaminaIncrease());
     }
 
     public void MovementReset()
     {
-        Speed = OriginalSpeed;
         InAction = false;
         Freezed = false;
         State = 0;
-        Speed = OriginalSpeed;
         StartCoroutine(StaminaIncrease());
     }
 
@@ -331,7 +339,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region Stamina Lerp
-    IEnumerator StaminaIncrease()
+    public IEnumerator StaminaIncrease()
     {
         CanIncrease = false;
         float Timer = 0f;

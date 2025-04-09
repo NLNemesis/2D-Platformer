@@ -15,14 +15,6 @@ public class MyPlayerMovement : MonoBehaviour
     private float horizontal;
     private bool isFacingRight = true;
 
-    [Header("Slide Variables")]
-    public float slidingPower = 24f;
-    public float slidingTime = 0.2f;
-    public float slidingCooldown = 1f;
-    private bool isSliding;
-    [HideInInspector] public bool canDash = true;
-    [HideInInspector] public bool canSlide = true;
-
     [Header("Stats")]
     public float Health;
     public float Damage;
@@ -46,7 +38,7 @@ public class MyPlayerMovement : MonoBehaviour
     {
         if (Freezed) return;
         
-        if (isSliding) return;
+        if (isSliding || isDashing) return;
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
@@ -71,7 +63,7 @@ public class MyPlayerMovement : MonoBehaviour
     {
         if (Freezed) return;
 
-        if (!isSliding)
+        if (!isSliding && !isDashing)
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
@@ -96,9 +88,40 @@ public class MyPlayerMovement : MonoBehaviour
     #endregion
 
     #region Dash
-    public IEnumerator Slide()
+    [Header("Dash Controller")]
+    public float dashingPower = 24f;
+    public float dashingTime = 0.2f;
+    public float dashingCooldown = 1f;
+    private bool isDashing;
+    [HideInInspector] public bool canDash = true;
+
+    public IEnumerator Dash()
     {
         canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        yield return new WaitForSeconds(dashingTime);
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        Unfreeze();
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+    #endregion
+
+    #region Slide
+    [Header("Slide Controller")]
+    public float slidingPower = 24f;
+    public float slidingTime = 0.2f;
+    public float slidingCooldown = 1f;
+    private bool isSliding;
+    [HideInInspector] public bool canSlide = true;
+
+    public IEnumerator Slide()
+    {
+        canSlide = false;
         isSliding = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
@@ -108,7 +131,7 @@ public class MyPlayerMovement : MonoBehaviour
         isSliding = false;
         Unfreeze();
         yield return new WaitForSeconds(slidingCooldown);
-        canDash = true;
+        canSlide = true;
     }
     #endregion
 

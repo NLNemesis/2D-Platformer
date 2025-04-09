@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class SpearWomanSkills : MonoBehaviour
 {
     #region Variables
+    private bool CanUseSpell = true;
     [Header("Transformation")]
     public float ManaReductionDuration;
     public Image TransformationImage;
@@ -44,6 +45,8 @@ public class SpearWomanSkills : MonoBehaviour
 
     private void Update()
     {
+        if (!CanUseSpell) return;
+
         #region Transformation
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -73,9 +76,14 @@ public class SpearWomanSkills : MonoBehaviour
             StartCoroutine(LightingBall());
         #endregion
 
-        #region Lighting Spear
+        #region Multy Spear
         if (Input.GetKeyDown(KeyCode.Alpha3) && PM.Mana >= RequiredMana[2] && SpellActive[2])
             StartCoroutine(MultySpear());
+        #endregion
+
+        #region Dash Spear;
+        if (Input.GetKeyDown(KeyCode.Alpha4) && PM.Mana >= RequiredMana[3] && SpellActive[3])
+            StartCoroutine(DashSpear());
         #endregion
 
         #region Lighting Strike
@@ -123,6 +131,18 @@ public class SpearWomanSkills : MonoBehaviour
         CDRAnimator[2].SetTrigger("CDR");
         yield return new WaitForSeconds(CDR[2]);
         SpellActive[2] = true;
+    }
+    #endregion
+
+    #region Dash Spear
+    IEnumerator DashSpear()
+    {
+        PM.Mana -= RequiredMana[3];
+        SpellActive[3] = false;
+        AC.animator.SetTrigger("DashSpear");
+        CDRAnimator[3].SetTrigger("CDR");
+        yield return new WaitForSeconds(CDR[3]);
+        SpellActive[3] = true;
     }
     #endregion
 

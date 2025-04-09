@@ -1063,6 +1063,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1829065420971960993, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
+      propertyPath: DashPower
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829065420971960993, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
+      propertyPath: DashTimer
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829065420971960993, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
+      propertyPath: DashStaminaRequirment
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829065420971960993, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
+      propertyPath: SlideStaminaRequirment
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3789559113749170892, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1083,6 +1099,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaxPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 6066616326281110093, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
+      propertyPath: StaminaRequired
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7838294556547828657, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
       propertyPath: AttackPoint
       value: 
@@ -1092,8 +1112,12 @@ PrefabInstance:
       value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 7838294556547828657, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
+      propertyPath: CDR.Array.data[3]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838294556547828657, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
       propertyPath: CDR.Array.data[4]
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7838294556547828657, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
       propertyPath: SpellActive.Array.data[4]

@@ -8,6 +8,7 @@ public class AnimController : MonoBehaviour
 {
     #region Variables
     [Header("Attack Variables")]
+    public float StaminaRequired;
     public bool CanAttack;
     public int Attacks;
     private int CurrentAttack;
@@ -94,7 +95,9 @@ public class AnimController : MonoBehaviour
     #region Attack Handler
     public void Attack()
     {
-        PM.Stamina -= 30;
+        StopCoroutine(PM.StaminaIncrease());
+        PM.Stamina -= StaminaRequired;
+        PM.InAction = true;
         CanAttack = false;
         CanCombo = false;
         ComboActivated = false;
@@ -121,6 +124,7 @@ public class AnimController : MonoBehaviour
         CurrentAttack = 0;
         CanCombo = false;
         ComboActivated = false;
+        PM.InAction = false;
         PM.UnFreeze();
     }
     #endregion
