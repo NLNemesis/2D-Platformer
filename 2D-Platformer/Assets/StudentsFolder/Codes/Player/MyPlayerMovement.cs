@@ -23,6 +23,7 @@ public class MyPlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    private MyAnimController MAC;
 
     [Header("Unity Event")]
     public UnityEvent IsGroundedEvent;
@@ -32,6 +33,7 @@ public class MyPlayerMovement : MonoBehaviour
     void Awake()
     {
         originalSpeed = speed;
+        MAC = gameObject.GetComponent<MyAnimController>();
     }
 
     private void Update()
@@ -146,6 +148,19 @@ public class MyPlayerMovement : MonoBehaviour
     {
         speed = originalSpeed;
         Freezed = false;
+    }
+    #endregion
+
+    #region Take Damage
+    public void TakeDamage(float Value)
+    {
+        if (Health > 0)
+        {
+            Health -= Value;
+
+            if (Health < 0)
+                MAC.animator.SetTrigger("Death");
+        }
     }
     #endregion
 }

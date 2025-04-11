@@ -22,7 +22,7 @@ public class MyAnimController : MonoBehaviour
     public LayerMask EnemyLayer;
 
     [Header("References")]
-    private Animator animator;
+    [HideInInspector] public Animator animator;
     private MyPlayerMovement MPM;
     #endregion
 
