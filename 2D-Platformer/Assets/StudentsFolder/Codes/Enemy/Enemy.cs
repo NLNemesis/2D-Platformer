@@ -5,6 +5,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     #region Variables
+    public enum EnemyType {Dummy,Classic,Boss};
+    public EnemyType Type;
+
+    [Header("Controller")]
+    public Transform[] Point;
+    public float Speed;
+    private bool CanMove = true;
+    private int Direction;
+    private float Distance;
+
     [Header("Stats")]
     public float Health;
     public float Armor;
