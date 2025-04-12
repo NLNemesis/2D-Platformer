@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
     #region Variables
-    public enum EnemyType {Dummy,Classic,Boss};
+    public enum EnemyType{Dummy,Classic,Boss};
     public EnemyType Type;
 
     [Header("Controller")]
@@ -28,12 +29,26 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        animator.SetFloat("State", 1);
+        this.transform.localScale = Point[0].localScale;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (CanMove && Type == EnemyType.Classic)
+        {
+            #region Distance
+            Distance = (this.transform.position - Point[Direction].position).magnitude;
+            #endregion
 
+            #region Movement
+            this.transform.position = Vector2.MoveTowards(this.transform.position,Point[Direction].position, Speed);
+            #endregion
+
+            if (Distance == 0)
+                StartCoroutine(ChangeDirection());
+        }
     }
 
     #region Take Damage
@@ -54,4 +69,23 @@ public class Enemy : MonoBehaviour
             animator.SetTrigger("Death");
     }
     #endregion
+
+    IEnumerator ChangeDirection()
+    {
+        CanMove = false;
+        animator.SetFloat("State", 0);
+        yield return new WaitForSeconds(3f);
+        if (Direction == 0)
+        {
+            Direction = 1;
+            this.transform.localScale = Point[1].localScale;
+        }
+        else
+        {
+            Direction = 0;
+            this.transform.localScale = Point[0].localScale;
+        }
+        animator.SetFloat("State", 1);
+        CanMove = true;
+    }
 }
