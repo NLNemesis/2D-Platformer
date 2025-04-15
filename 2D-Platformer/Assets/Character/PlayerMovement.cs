@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
 using System.Threading;
+using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -141,6 +142,7 @@ public class PlayerMovement : MonoBehaviour
                     if (Input.GetKeyDown(IM.Jump) && Stamina >= 15 && IsGrounded())
                     {
                         //InAction = true;
+                        StopCoroutine(StaminaIncrease());
                         AC.animator.SetTrigger("Jump");
                         AC.animator.SetBool("InAir", true);
                         Jump = true;
@@ -152,18 +154,16 @@ public class PlayerMovement : MonoBehaviour
                         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
                     #endregion
 
-                    #region Dash
+                    //Dashing
                     if (Input.GetKeyDown(IM.Dash) && Stamina >= 15 && CanDash == true)
                         StartCoroutine(Dash(1));
-                    #endregion
 
-                    #region Slide
+                    //Sliding
                     if (Input.GetKeyDown(IM.Slide) && Stamina >= 15 && canSlide == true)
                     {
                         Stamina -= SlideStaminaRequirment;
                         StartCoroutine(Slide());
                     }
-                    #endregion
                 }
 
                 #region Ladder
@@ -251,6 +251,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region Dash
+    //If the Animation is one that means it does the dash function with animation
     public IEnumerator Dash(int Animation)
     {
         Freezed = true;
@@ -258,6 +259,7 @@ public class PlayerMovement : MonoBehaviour
         InAction = true;
         if (Animation > 0)
         {
+            CanIncrease = false;
             StopCoroutine(StaminaIncrease());
             Stamina -= DashStaminaRequirment;
             AC.animator.SetTrigger("Dash");

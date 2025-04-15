@@ -14580,7 +14580,7 @@ Transform:
   m_GameObject: {fileID: 3497077608815192865}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -65.49, y: -1.83, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14628,12 +14628,12 @@ MonoBehaviour:
   StaminaRegent: 1
   IncreaseDuration: 0.1
   CanDash: 1
-  DashStaminaRequirment: 30
-  DashPower: 2
-  DashTimer: 0.4
+  DashStaminaRequirment: 10
+  DashPower: 5
+  DashTimer: 0.2
   DashCooldown: 5
   canSlide: 1
-  SlideStaminaRequirment: 30
+  SlideStaminaRequirment: 10
   SlidePower: 3
   SlideTimer: 0.2
   SlideCooldown: 5
@@ -14833,6 +14833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf8afbbd980b83408dc9b4751abbd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StaminaRequired: 25
   CanAttack: 1
   Attacks: 2
   CanCombo: 0
@@ -15235,25 +15236,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ManaReductionDuration: 0.1
   TransformationImage: {fileID: 8993149000711689762}
-  SpellActive: 0101010100
+  SpellActive: 0101010101
   RequiredMana:
   - 0.1
   - 25
   - 25
   - 20
-  - 0
+  - 40
   CDR:
   - 0
   - 15
   - 10
+  - 20
   - 30
-  - 0
   CDRAnimator:
   - {fileID: 3907355784677489591}
   - {fileID: 908425849088949369}
   - {fileID: 8730832765520677056}
   - {fileID: 4654074579414669740}
   - {fileID: 1261316273245429345}
+  AttackPoint: {fileID: 2426271238129999279}
+  AttackRange: 3.5
   ThrowablePrefab: {fileID: 8255839251267934629, guid: 88d9fb409c06eeb40993868287e2da70, type: 3}
   ThrowableStartPoint: {fileID: 5500300908912062850}
 --- !u!1 &3507266759158597470

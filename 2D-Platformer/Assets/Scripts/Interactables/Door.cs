@@ -9,6 +9,7 @@ public class Door : MonoBehaviour
     private bool CanInteract;
     public enum DoorType {Classic, Travel}
     public DoorType Type;
+    private bool Traveling;
 
     [Header("Door")]
     public bool Locked;
@@ -31,6 +32,7 @@ public class Door : MonoBehaviour
     private InputManager IM;
     private Animator CanvasAnimator;
     #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,38 +45,11 @@ public class Door : MonoBehaviour
     }
 
     #region On Triggers
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        #region Show Messages
-        if (collision.tag == "Player" && Locked == true)
-        {
-            Messages[4].SetActive(true);
-            CanInteract = true;
-        }
-        else if (collision.tag == "Player" && Type == DoorType.Classic)
-        {
-            if (Opened == false)
-            {
-                Messages[5].SetActive(true);
-                CanInteract = true;
-            }
-            else
-            {
-                Messages[6].SetActive(true);
-                CanInteract = true;
-            }
-        }
-        else if (collision.tag == "Player" && Type == DoorType.Travel)
-        {
-            Messages[7].SetActive(true);
-            CanInteract = true;
-        }
-        #endregion
-    }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         #region Show Messages
+        if (Traveling) return;
+
         if (collision.tag == "Player" && Locked == true)
         {
             Messages[4].SetActive(true);
@@ -132,7 +107,7 @@ public class Door : MonoBehaviour
             {
                 CanInteract = false;
                 Messages[7].SetActive(false);
-                StartCoroutine(Traveling());
+                StartCoroutine(TraveToNewPlace());
             }
         }
     }
@@ -173,14 +148,16 @@ public class Door : MonoBehaviour
     #endregion
 
     #region Travel the player
-    IEnumerator Traveling()
+    IEnumerator TraveToNewPlace()
     {
+        Traveling = true;
         PM.Freezed = true;
         CanvasAnimator.SetTrigger("FadeInOut");
         yield return new WaitForSeconds(1f);
         Player.transform.position = NewPlace.position;
         yield return new WaitForSeconds(1f);
         PM.Freezed = false;
+        Traveling = false;
     }
     #endregion
 }

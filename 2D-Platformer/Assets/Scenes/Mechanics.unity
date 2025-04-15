@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &165661197 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2426271238129999279, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-  m_PrefabInstance: {fileID: 1994085414}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &187277919
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1063,22 +1058,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1829065420971960993, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: DashPower
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829065420971960993, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: DashTimer
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829065420971960993, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: DashStaminaRequirment
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829065420971960993, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: SlideStaminaRequirment
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 3789559113749170892, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1087,45 +1066,9 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5500300908912062850, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5500300908912062850, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5523245341163222704, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
       propertyPath: m_Name
       value: MaxPrefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 6066616326281110093, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: StaminaRequired
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7838294556547828657, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: AttackPoint
-      value: 
-      objectReference: {fileID: 165661197}
-    - target: {fileID: 7838294556547828657, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: AttackRange
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7838294556547828657, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: CDR.Array.data[3]
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7838294556547828657, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: CDR.Array.data[4]
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 7838294556547828657, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: SpellActive.Array.data[4]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7838294556547828657, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
-      propertyPath: RequiredMana.Array.data[4]
-      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8822265563723672358, guid: 7c8d3446a6d8d2544b5de447d523f0b7, type: 3}
       propertyPath: m_LocalPosition.x

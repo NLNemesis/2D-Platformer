@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     [Header("Controller")]
     public Transform[] Point;
     public float Speed;
-    private bool CanMove = true;
+    [HideInInspector] public bool CanMove = true;
     private int Direction;
     private float Distance;
 
@@ -20,9 +20,13 @@ public class Enemy : MonoBehaviour
     public float Health;
     public float Armor;
     public float MagicResist;
+    public float Power;
+    [HideInInspector] public bool DealDamage;
+
 
     [Header("References")]
-    private Animator animator;
+    [HideInInspector] public MyPlayerMovement MPM;
+    [HideInInspector] public Animator animator;
     #endregion
         
     // Start is called before the first frame update
@@ -31,6 +35,7 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetFloat("State", 1);
         this.transform.localScale = Point[0].localScale;
+        MPM = GameObject.Find("/Character Prefab/Character").GetComponent<MyPlayerMovement>();
     }
 
     // Update is called once per frame
@@ -54,22 +59,26 @@ public class Enemy : MonoBehaviour
     #region Take Damage
     public void TakeDamage(float Value, bool Magic)
     {
-        animator.SetTrigger("Hit");
-        float Damage = 0;
+        if (Health > 0)
+        {
+            animator.SetTrigger("Hit");
 
-        if (Magic) 
-            Damage = Value - MagicResist;
-        else 
-            Damage = Value - Armor;
+            float Damage = 0;
+            if (Magic) Damage = Value - MagicResist;
+            else Damage = Value - Armor;
 
-        if (Damage > 0) 
-            Health -= Damage;
+            if (Damage > 0) Health -= Damage;
 
-        if (Health <= 0)
-            animator.SetTrigger("Death");
+            if (Health <= 0)
+            {
+                animator.SetBool("Death", true);
+                CanMove = false;
+            }
+        }
     }
     #endregion
 
+    #region Change Direction
     IEnumerator ChangeDirection()
     {
         CanMove = false;
@@ -88,4 +97,15 @@ public class Enemy : MonoBehaviour
         animator.SetFloat("State", 1);
         CanMove = true;
     }
+    #endregion
+
+    #region Attack Functions
+    public void StartDealingDamage() { DealDamage = true; }
+    public void StopDealingDamage() { DealDamage = false; }
+    public void AttackReset()
+    {
+        DealDamage = false;
+        CanMove = true;
+    }
+    #endregion
 }

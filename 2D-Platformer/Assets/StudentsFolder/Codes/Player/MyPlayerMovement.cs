@@ -156,6 +156,7 @@ public class MyPlayerMovement : MonoBehaviour
     {
         if (Health > 0)
         {
+            MAC.animator.SetTrigger("Hit");
             Health -= Value;
 
             if (Health < 0)
