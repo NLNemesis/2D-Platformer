@@ -41,20 +41,25 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ClassicMovement();
+    }
+
+    #region Classic Movement
+    void ClassicMovement()
+    {
         if (CanMove && Type == EnemyType.Classic)
         {
-            #region Distance
+            //Distance
             Distance = (this.transform.position - Point[Direction].position).magnitude;
-            #endregion
 
-            #region Movement
-            this.transform.position = Vector2.MoveTowards(this.transform.position,Point[Direction].position, Speed);
-            #endregion
+            //Movement
+            this.transform.position = Vector2.MoveTowards(this.transform.position, Point[Direction].position, Speed);
 
             if (Distance == 0)
                 StartCoroutine(ChangeDirection());
         }
     }
+    #endregion
 
     #region Take Damage
     public void TakeDamage(float Value, bool Magic)
