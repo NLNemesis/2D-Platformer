@@ -8,7 +8,7 @@ public class MyAnimController : MonoBehaviour
     [Header("Controller")]
     public bool HasDash;
     public bool HasSlide;
-    private bool CanAttack = true;
+    private bool CanAttack;
 
     [Header("Attack Controller")]
     public int MaxAttack;
@@ -36,6 +36,8 @@ public class MyAnimController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CanAttack = !MPM.Freezed;
+
         #region Movement
         if (Input.GetButton("Move_Buttons") || Input.GetButton("Move_Arrows"))
             animator.SetFloat("Speed", 1);
