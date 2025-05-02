@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEditor;
 
 public class Enemy : MonoBehaviour
 {
@@ -46,7 +47,10 @@ public class Enemy : MonoBehaviour
     
         if (Type == EnemyType.Boss)
         {
-            
+            CanMove = false;
+            animator.SetFloat("State", 0);
+            HealthBar.maxValue = Health;
+            HealthBar.value = Health;
         }
     }
 
@@ -54,6 +58,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         ClassicMovement();
+        BossMovement();
     }
 
     #region Classic Movement
@@ -70,6 +75,31 @@ public class Enemy : MonoBehaviour
             if (Distance == 0)
                 StartCoroutine(ChangeDirection());
         }
+    }
+    #endregion
+
+    #region Boss Movement
+    public void TriggerBossFight()
+    {
+        CanMove = true;
+        animator.SetFloat("State", 1);
+        OnSeen.Invoke();
+    }
+
+    void BossMovement()
+    {
+        if (CanMove == true && Type == EnemyType.Boss)
+        {
+            Vector2 NewPoint = new Vector2(Point[0].position.x, this.transform.position.y);
+            this.transform.position = Vector2.MoveTowards(this.transform.position, NewPoint, Speed);
+
+            if (this.transform.position.x > Point[0].position.x)
+                this.transform.localScale = new Vector3(-1, 1, 1);
+            else
+                this.transform.localScale = new Vector3(1, 1, 1);
+        }
+
+        HealthBar.value = Health;
     }
     #endregion
 
@@ -90,6 +120,7 @@ public class Enemy : MonoBehaviour
             {
                 animator.SetBool("Death", true);
                 CanMove = false;
+                OnDeath.Invoke();
             }
         }
     }
