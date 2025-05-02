@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -23,10 +24,16 @@ public class Enemy : MonoBehaviour
     public float Power;
     [HideInInspector] public bool DealDamage;
 
-
     [Header("References")]
     [HideInInspector] public MyPlayerMovement MPM;
     [HideInInspector] public Animator animator;
+
+    [Header("Events")]
+    public UnityEvent OnSeen;
+    public UnityEvent OnDeath;
+
+    [Header("UI")]
+    public Slider HealthBar;
     #endregion
         
     // Start is called before the first frame update
@@ -36,6 +43,11 @@ public class Enemy : MonoBehaviour
         animator.SetFloat("State", 1);
         this.transform.localScale = Point[0].localScale;
         MPM = GameObject.Find("/Character Prefab/Character").GetComponent<MyPlayerMovement>();
+    
+        if (Type == EnemyType.Boss)
+        {
+            
+        }
     }
 
     // Update is called once per frame
