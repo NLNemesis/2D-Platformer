@@ -13,7 +13,7 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D Object)
     {
-        if (Object.name == "Player")
+        if (Object.name == "Player" || Object.name == "Character")
         {
             Event.Invoke();
 
