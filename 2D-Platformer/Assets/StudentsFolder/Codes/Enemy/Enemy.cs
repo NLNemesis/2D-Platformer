@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -27,6 +28,13 @@ public class Enemy : MonoBehaviour
     [Header("References")]
     [HideInInspector] public MyPlayerMovement MPM;
     [HideInInspector] public Animator animator;
+
+    [Header("Events")]
+    public UnityEvent OnSeen;
+    public UnityEvent OnDeath;
+
+    [Header("UI")]
+    public Slider HealthBar;
     #endregion
         
     // Start is called before the first frame update
@@ -36,6 +44,14 @@ public class Enemy : MonoBehaviour
         animator.SetFloat("State", 1);
         this.transform.localScale = Point[0].localScale;
         MPM = GameObject.Find("/Character Prefab/Character").GetComponent<MyPlayerMovement>();
+
+        if (Type == EnemyType.Boss)
+        {
+            CanMove = false;
+            animator.SetFloat("State", 0);
+            HealthBar.maxValue = Health;
+            HealthBar.value = Health;
+        }
     }
 
     // Update is called once per frame
@@ -43,6 +59,9 @@ public class Enemy : MonoBehaviour
     {
         if (Type == EnemyType.Classic)
             ClassicMovement();
+
+        if (Type == EnemyType.Boss)
+            BossMovement();
     }
 
     #region Classic Movement
@@ -58,6 +77,30 @@ public class Enemy : MonoBehaviour
 
             if (Distance == 0)
                 StartCoroutine(ChangeDirection());
+        }
+    }
+    #endregion
+
+    #region Boss Movement
+    public void TriggerBossFight()
+    {
+        CanMove = true;
+        animator.SetFloat("State", 1);
+        OnSeen.Invoke();
+    }
+
+    void BossMovement()
+    {
+        HealthBar.value = Health;
+        if (CanMove == true)
+        {
+            Vector2 NewPoint = new Vector2(Point[0].position.x, this.transform.position.y);
+            this.transform.position = Vector2.MoveTowards(this.transform.position, NewPoint, Speed);
+
+            if (this.transform.position.x > Point[0].position.x)
+                this.transform.localScale = new Vector3(-1, 1, 1); //Enemy turns to left
+            else
+                this.transform.localScale = new Vector3(1, 1, 1); //Enemy turns to right
         }
     }
     #endregion
@@ -83,6 +126,7 @@ public class Enemy : MonoBehaviour
             {
                 animator.SetBool("Death", true);
                 CanMove = false;
+                OnDeath.Invoke();
             }
         }
     }
