@@ -38,6 +38,8 @@ public class MyPlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0) return;
+
         if (Freezed) return;
         
         if (isSliding || isDashing) return;
