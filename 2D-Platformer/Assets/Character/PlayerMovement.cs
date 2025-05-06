@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.Events;
 using System.Threading;
 using Unity.VisualScripting;
+using UnityEditor;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -80,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
     private UIController UIC;
     [HideInInspector] public AnimController AC;
     public Transform GroundCheck;
+    public Transform HighGroundCheck;
     public LayerMask GroundLayer;
 
     [Header("UI")]
@@ -139,14 +141,11 @@ public class PlayerMovement : MonoBehaviour
                 if (!InAction)
                 {
                     #region Jumping
-                    if (Input.GetKeyDown(IM.Jump) && Stamina >= 15 && IsGrounded())
+                    if (Input.GetKeyDown(IM.Jump) && IsGrounded())
                     {
                         //InAction = true;
-                        StopCoroutine(StaminaIncrease());
                         AC.animator.SetTrigger("Jump");
-                        AC.animator.SetBool("InAir", true);
                         Jump = true;
-                        Stamina -= 15f;
                         rb.velocity = new Vector2(rb.velocity.x, JumpingPower);
                     }
 
@@ -159,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
                         StartCoroutine(Dash(1));
 
                     //Sliding
-                    if (Input.GetKeyDown(IM.Slide) && Stamina >= 15 && canSlide == true)
+                    if (Input.GetKeyDown(IM.Slide) && Stamina >= 15 && canSlide == true && IsGrounded())
                     {
                         Stamina -= SlideStaminaRequirment;
                         StartCoroutine(Slide());
@@ -233,7 +232,12 @@ public class PlayerMovement : MonoBehaviour
     #region Ground Check
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(GroundCheck.position, 0.2f, GroundLayer);
+        return Physics2D.OverlapCircle(GroundCheck.position, 0.1f, GroundLayer);
+    }
+
+    public bool HighGrounded()
+    {
+        return Physics2D.OverlapCircle(HighGroundCheck.position, 0.1f, GroundLayer);
     }
     #endregion
 

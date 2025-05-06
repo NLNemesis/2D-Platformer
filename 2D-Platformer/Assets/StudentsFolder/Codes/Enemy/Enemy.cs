@@ -41,11 +41,14 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        animator.SetFloat("State", 1);
-        this.transform.localScale = Point[0].localScale;
         MPM = GameObject.Find("/Character Prefab/Character").GetComponent<MyPlayerMovement>();
 
-        if (Type == EnemyType.Boss)
+        if(Type == EnemyType.Classic)
+        {
+            animator.SetFloat("State", 1);
+            this.transform.localScale = Point[0].localScale;
+        }
+        else if (Type == EnemyType.Boss)
         {
             CanMove = false;
             animator.SetFloat("State", 0);
