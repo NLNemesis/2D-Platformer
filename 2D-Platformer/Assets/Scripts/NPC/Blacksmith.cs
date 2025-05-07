@@ -24,7 +24,7 @@ public class Blacksmith : MonoBehaviour
 
     [Header("References")]
     public PlayerMovement PM;
-    public MyInventory MI;
+    public Inventory inventory;
 
     [Header("Events")]
     public UnityEvent OpenShopEvent;
@@ -105,11 +105,11 @@ public class Blacksmith : MonoBehaviour
     void FindItemsAmount()
     {
         PlayerItemsAmount = new int[Item.Length];
-        for (int i = 0; i < MI.SlotImage.Length; i++)
+        for (int i = 0; i < inventory.SlotImage.Length; i++)
         {
             for (int j = 0; j < Item.Length; j++)
             {
-                if (MI.SlotName[i] == Item[j])
+                if (inventory.SlotName[i] == Item[j])
                 {
                     PlayerItemsAmount[j] += 1;
                     break;
@@ -130,19 +130,19 @@ public class Blacksmith : MonoBehaviour
     {
         int Amount = 0;
 
-        for (int i = 0; i < MI.SlotImage.Length; i++)
+        for (int i = 0; i < inventory.SlotImage.Length; i++)
         {
-            if (MI.SlotName[i] == PlayerItem[Number])
+            if (inventory.SlotName[i] == PlayerItem[Number])
             Amount += 1;
         }  
 
         if (Amount >= RequestAmount[Number])
         {
             for (int i = 0; i < RequestAmount[Number]; i++)
-            MI.RemoveItem(PlayerItem[Number]);
+            inventory.RemoveItem(PlayerItem[Number]);
 
             for (int i = 0; i < NPCItemAmount[Number]; i++)
-            MI.AddItem(NPCItem[Number]);
+            inventory.AddItem(NPCItem[Number]);
         }
     }
     #endregion
@@ -157,18 +157,18 @@ public class Blacksmith : MonoBehaviour
     void FindTradingAmount() //Player's and NPC
     {
         Trading_PI_Amount = new int[Trading_PI_Text.Length]; //Create a new empty array with the amounts
-        for (int i = 0; i < MI.SlotImage.Length; i++) //Search the whole inventory one by one
+        for (int i = 0; i < inventory.SlotImage.Length; i++) //Search the whole inventory one by one
             for (int j = 0; j < PlayerItem.Length; j++)
-                if (MI.SlotName[i] == PlayerItem[j]) // Check if any item in the inventory matches an item in the other array
+                if (inventory.SlotName[i] == PlayerItem[j]) // Check if any item in the inventory matches an item in the other array
                 {
                     Trading_PI_Amount[j] += 1;
                     break;
                 }
 
         Trading_NPCI_Amount = new int[Trading_NPCI_Text.Length];
-        for (int i = 0; i < MI.SlotImage.Length; i++)
+        for (int i = 0; i < inventory.SlotImage.Length; i++)
             for (int j = 0; j < NPCItem.Length; j++)
-                if (MI.SlotName[i] == NPCItem[j])
+                if (inventory.SlotName[i] == NPCItem[j])
                 {
                     Trading_NPCI_Amount[j] += 1;
                     break;
@@ -190,13 +190,11 @@ public class Blacksmith : MonoBehaviour
 
     public void Smelting(int Number)
     {
-        MI.CheckForItem(RequiredOre[Number]);
-
-        if(MI.ItemExists && PM.Gold >= Payment)
+        if(inventory.CheckForItem(RequiredOre[Number]) && PM.Gold >= Payment)
         {
             PM.Gold -= Payment;
-            MI.RemoveItem(RequiredOre[Number]);
-            MI.AddItem(SmeltedIngot[Number]);
+            inventory.RemoveItem(RequiredOre[Number]);
+            inventory.AddItem(SmeltedIngot[Number]);
         }
     }
     #endregion
@@ -211,18 +209,18 @@ public class Blacksmith : MonoBehaviour
     void FindSmeltingAmount() //Player's and NPC
     {
         Smelting_PI_Amount = new int[Smelting_PI_Text.Length]; //Create a new empty array with the amounts
-        for (int i = 0; i < MI.SlotImage.Length; i++) //Search the whole inventory one by one
+        for (int i = 0; i < inventory.SlotImage.Length; i++) //Search the whole inventory one by one
             for (int j = 0; j < RequiredOre.Length; j++)
-                if (MI.SlotName[i] == RequiredOre[j]) // Check if any item in the inventory matches an item in the other array
+                if (inventory.SlotName[i] == RequiredOre[j]) // Check if any item in the inventory matches an item in the other array
                 {
                     Smelting_PI_Amount[j] += 1;
                     break;
                 }
 
         Smelting_NPCI_Amount = new int[Smelting_NPCI_Text.Length];
-        for (int i = 0; i < MI.SlotImage.Length; i++)
+        for (int i = 0; i < inventory.SlotImage.Length; i++)
             for (int j = 0; j < SmeltedIngot.Length; j++)
-                if (MI.SlotName[i] == SmeltedIngot[j])
+                if (inventory.SlotName[i] == SmeltedIngot[j])
                 {
                     Smelting_NPCI_Amount[j] += 1;
                     break;
@@ -252,43 +250,43 @@ public class Blacksmith : MonoBehaviour
         #region Check Ingredient 0
         if (Ingr0[Number] != null && Ingr0[Number] != "None" && Ingr0[Number] != "Empty")
         {
-            MI.CheckForItem(Ingr0[Number]);
-            Check0 = MI.ItemExists;
-            MI.RemoveItem(Ingr0[Number]);
+            inventory.CheckForItem(Ingr0[Number]);
+            Check0 = inventory.CheckForItem(Ingr0[Number]);
+            inventory.RemoveItem(Ingr0[Number]);
         }
         else Check0 = true;
         #endregion
         #region Check Ingredient 1
         if (Ingr1[Number] != null && Ingr1[Number] != "None" && Ingr1[Number] != "Empty")
         {
-            MI.CheckForItem(Ingr1[Number]);
-            Check1 = MI.ItemExists;
-            MI.RemoveItem(Ingr1[Number]);
+            inventory.CheckForItem(Ingr1[Number]);
+            Check1 = inventory.CheckForItem(Ingr1[Number]);
+            inventory.RemoveItem(Ingr1[Number]);
         }
         else Check1 = true;
         #endregion
         #region Check Ingredient 2
         if (Ingr2[Number] != null && Ingr2[Number] != "None" && Ingr2[Number] != "Empty")
         {
-            MI.CheckForItem(Ingr2[Number]);
-            Check2 = MI.ItemExists;
-            MI.RemoveItem(Ingr2[Number]);
+            inventory.CheckForItem(Ingr2[Number]);
+            Check2 = inventory.CheckForItem(Ingr2[Number]);
+            inventory.RemoveItem(Ingr2[Number]);
         }
         else Check2 = true;
         #endregion
 
         if (Check0 && Check1 && Check2)
-            MI.AddItem(CraftedItem[Number]);
+            inventory.AddItem(CraftedItem[Number]);
         else
         {
             if(Check0)
-            MI.AddItem(Ingr0[Number]);
+            inventory.AddItem(Ingr0[Number]);
             ////////////////////
             if(Check1)
-            MI.AddItem(Ingr1[Number]);
+            inventory.AddItem(Ingr1[Number]);
             ////////////////////
             if(Check2)
-            MI.AddItem(Ingr2[Number]);
+            inventory.AddItem(Ingr2[Number]);
             ////////////////////
         }
     }
@@ -309,9 +307,9 @@ public class Blacksmith : MonoBehaviour
     {
         #region Check Ingredient 0
         Crafting_PI_Amount = new int[Crafting_PI_Text.Length]; //Create a new empty array with the amounts
-        for (int i = 0; i < MI.SlotImage.Length; i++) //Search the whole inventory one by one
+        for (int i = 0; i < inventory.SlotImage.Length; i++) //Search the whole inventory one by one
             for (int j = 0; j < Ingr0.Length; j++)
-                if (MI.SlotName[i] == Ingr0[j]) // Check if any item in the inventory matches an item in the other array
+                if (inventory.SlotName[i] == Ingr0[j]) // Check if any item in the inventory matches an item in the other array
                 {
                     Crafting_PI_Amount[j] += 1;
                     break;
@@ -319,9 +317,9 @@ public class Blacksmith : MonoBehaviour
         #endregion
         #region Check Ingredient 1
         Crafting1_PI_Amount = new int[Crafting1_PI_Text.Length]; //Create a new empty array with the amounts
-        for (int i = 0; i < MI.SlotImage.Length; i++) //Search the whole inventory one by one
+        for (int i = 0; i < inventory.SlotImage.Length; i++) //Search the whole inventory one by one
             for (int j = 0; j < Ingr1.Length; j++)
-                if (MI.SlotName[i] == Ingr1[j]) // Check if any item in the inventory matches an item in the other array
+                if (inventory.SlotName[i] == Ingr1[j]) // Check if any item in the inventory matches an item in the other array
                 {
                     Crafting1_PI_Amount[j] += 1;
                     break;
@@ -329,9 +327,9 @@ public class Blacksmith : MonoBehaviour
         #endregion
         #region Check Ingredient 2
         Crafting2_PI_Amount = new int[Crafting2_PI_Text.Length]; //Create a new empty array with the amounts
-        for (int i = 0; i < MI.SlotImage.Length; i++) //Search the whole inventory one by one
+        for (int i = 0; i < inventory.SlotImage.Length; i++) //Search the whole inventory one by one
             for (int j = 0; j < Ingr2.Length; j++)
-                if (MI.SlotName[i] == Ingr2[j]) // Check if any item in the inventory matches an item in the other array
+                if (inventory.SlotName[i] == Ingr2[j]) // Check if any item in the inventory matches an item in the other array
                 {
                     Crafting2_PI_Amount[j] += 1;
                     break;
@@ -339,9 +337,9 @@ public class Blacksmith : MonoBehaviour
         #endregion
         #region Check Crafted Item
         Crafting_NPCI_Amount = new int[Crafting_NPCI_Text.Length]; //Create a new empty array with the amounts
-        for (int i = 0; i < MI.SlotImage.Length; i++) //Search the whole inventory one by one
+        for (int i = 0; i < inventory.SlotImage.Length; i++) //Search the whole inventory one by one
             for (int j = 0; j < CraftedItem.Length; j++)
-                if (MI.SlotName[i] == CraftedItem[j]) // Check if any item in the inventory matches an item in the other array
+                if (inventory.SlotName[i] == CraftedItem[j]) // Check if any item in the inventory matches an item in the other array
                 {
                     Crafting_NPCI_Amount[j] += 1;
                     break;

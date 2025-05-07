@@ -11,8 +11,8 @@ public class Inventory : MonoBehaviour
     [Header("Inventory Variables")]
     public int Gold;
     public Image[] SlotImage;
-    private string[] SlotName;
-    private bool[] SlotFull;
+    [HideInInspector] public string[] SlotName;
+    [HideInInspector] public bool[] SlotFull;
     [HideInInspector] public int SlotAvailable;
     public Sprite EmptySprite;
 
@@ -144,7 +144,7 @@ public class Inventory : MonoBehaviour
     #endregion
 
     #region Check For Item
-    public void CheckForItem(string Name)
+    public bool CheckForItem(string Name)
     {
         Check = true;
         for (int i = 0; i < SlotName.Length; i++) 
@@ -159,6 +159,7 @@ public class Inventory : MonoBehaviour
                 Check = false;
             }
         }
+        return Check;
     }
     #endregion
 }

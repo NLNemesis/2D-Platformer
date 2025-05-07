@@ -9,7 +9,7 @@ public class MyItem : MonoBehaviour
     private bool Opened;
 
     [Header("References")]
-    private MyInventory inventory;
+    private Inventory inventory;
     private Animator Chest;
     private BoxCollider2D BC2D;
 
@@ -42,7 +42,7 @@ public class MyItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inventory = GameObject.Find("/MaxPrefab/Player").GetComponent<MyInventory>();
+        inventory = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
     }
 
     // Update is called once per frame

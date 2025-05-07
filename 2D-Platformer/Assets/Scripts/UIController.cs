@@ -48,6 +48,8 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
+        if (PM.State == 1) return;
+
         if (Input.GetKeyDown(IM.InventoryKey) && OpenedUI == 0)
             OpenCloseInventory();
         if (Input.GetKeyDown(KeyCode.Escape) && OpenedUI == 2)

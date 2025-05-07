@@ -10,7 +10,7 @@ public class MyChest : MonoBehaviour
     private bool Opened;
 
     [Header("References")]
-    private MyInventory inventory;
+    private Inventory inventory;
     private Animator Chest;
     private BoxCollider2D BC2D;
 
@@ -44,7 +44,7 @@ public class MyChest : MonoBehaviour
     void Start()
     {
         BC2D = GetComponent<BoxCollider2D>();
-        inventory = GameObject.Find("/MaxPrefab/Player").GetComponent<MyInventory>();
+        inventory = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
         Chest = GetComponent<Animator>();
     }
 

@@ -15,7 +15,7 @@ public class MyDoor : MonoBehaviour
 
     [Header("Reference")]
     public GameObject[] Message;
-    public MyInventory inventory;
+    public Inventory inventory;
     public UnityEvent OpenedEvent;
     #endregion
 
@@ -62,7 +62,7 @@ public class MyDoor : MonoBehaviour
             if (Locked == true)
             {
                 inventory.CheckForItem(Key);
-                if (inventory.ItemExists == true)
+                if (inventory.CheckForItem(Key))
                 {
                     inventory.RemoveItem(Key);
                     Locked = false;

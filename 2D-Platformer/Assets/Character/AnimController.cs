@@ -41,7 +41,7 @@ public class AnimController : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
 
-        if (PM.Health <= 0 || PM.State == 0) return;
+        if (PM.Health <= 0 || PM.State != 0) return;
 
         if (PM.Freezed == false)
         {

@@ -24,7 +24,7 @@ public class Merchant : MonoBehaviour
 
     [Header("References")]
     public PlayerMovement PM;
-    public MyInventory MI;
+    public Inventory inventory;
 
     [Header("Events")]
     public UnityEvent OpenShopEvent;
@@ -107,7 +107,7 @@ public class Merchant : MonoBehaviour
         if (PM.Gold >= Value[Number])
         {
             PM.Gold -= Value[Number];
-            MI.AddItem(Item[Number]);
+            inventory.AddItem(Item[Number]);
             FindItemsAmount();
         }
     }
@@ -116,11 +116,9 @@ public class Merchant : MonoBehaviour
     #region Sell Item
     public void SellItem(int Number)
     {
-        MI.CheckForItem(Item[Number]);
-
-        if (MI.ItemExists == true)
+        if (inventory.CheckForItem(Item[Number]) == true)
         {
-            MI.RemoveItem(Item[Number]);
+            inventory.RemoveItem(Item[Number]);
             PM.Gold += 200;
             FindItemsAmount();
         }
@@ -131,11 +129,11 @@ public class Merchant : MonoBehaviour
     void FindItemsAmount()
     {
         PlayerItemsAmount = new int[Item.Length];
-        for (int i = 0; i < MI.SlotImage.Length; i++)
+        for (int i = 0; i < inventory.SlotImage.Length; i++)
         {
             for (int j = 0; j < Item.Length; j++)
             {
-                if (MI.SlotName[i] == Item[j])
+                if (inventory.SlotName[i] == Item[j])
                 {
                     PlayerItemsAmount[j] += 1;
                     break;
