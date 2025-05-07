@@ -37,6 +37,7 @@ public class AIMove : MonoBehaviour
     private AIDetect aiDetect;
     private Vector2 NewTarget;
     #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,52 +52,38 @@ public class AIMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0) return;
+
         if (AIFreeze == false)
         {
             #region Movement
             if (enemyType == EnemyType.Classic)
             {
-                #region Classic Enemy Movement
-                if (CanMove == true)
-                {
-                    Distance = (this.transform.position - PatrolPlaces[CurrentPatrol].position).magnitude;
-                    NewTarget = new Vector2(PatrolPlaces[CurrentPatrol].position.x, this.transform.position.y);
-                    this.transform.position = Vector2.MoveTowards(this.transform.position, NewTarget, Speed);
-                    this.transform.localScale = PatrolPlaces[CurrentPatrol].localScale;
-
-                    if (Distance <= 1f)
-                    {
-                        StartCoroutine(NewPatrol());
-                    }
-                }
-                #endregion
+                ClassicMovement();
             }
             else if (enemyType != EnemyType.Classic)
             {
-                #region Boss Enemy Movement
-                animator.SetFloat("Movement", 1);
-                Distance = (this.transform.position - PatrolPlaces[CurrentPatrol].position).magnitude;
-                NewTarget = new Vector2(PatrolPlaces[CurrentPatrol].position.x, this.transform.position.y);
-                this.transform.position = Vector2.MoveTowards(this.transform.position, NewTarget, Speed);
-
-                //Look at the left
-                if (this.transform.position.x > NewTarget.x)
-                {
-                    this.transform.localScale = new Vector3(1, 1, 1);
-                }
-
-                //Look at the right
-                if (this.transform.position.x < NewTarget.x)
-                {
-                    this.transform.localScale = new Vector3(-1, 1, 1);
-                }
-                #endregion
+                BossMovement();
             }
             #endregion
         }
     }
 
-    #region New Patrol
+    #region Classic Movement
+    void ClassicMovement()
+    {
+        if (CanMove == true)
+        {
+            Distance = (this.transform.position - PatrolPlaces[CurrentPatrol].position).magnitude;
+            NewTarget = new Vector2(PatrolPlaces[CurrentPatrol].position.x, this.transform.position.y);
+            this.transform.position = Vector2.MoveTowards(this.transform.position, NewTarget, Speed);
+            this.transform.localScale = PatrolPlaces[CurrentPatrol].localScale;
+
+            if (Distance <= 1f)
+                StartCoroutine(NewPatrol());
+        }
+    }
+
     IEnumerator NewPatrol()
     {
         CanMove = false;
@@ -107,6 +94,23 @@ public class AIMove : MonoBehaviour
         yield return new WaitForSeconds(WaitForPatrol);
         CanMove = true;
         animator.SetFloat("Movement", 1);
+    }
+    #endregion
+
+
+    #region Boss Movement
+    void BossMovement()
+    {
+        animator.SetFloat("Movement", 1);
+        Distance = (this.transform.position - PatrolPlaces[CurrentPatrol].position).magnitude;
+        NewTarget = new Vector2(PatrolPlaces[CurrentPatrol].position.x, this.transform.position.y);
+        this.transform.position = Vector2.MoveTowards(this.transform.position, NewTarget, Speed);
+
+        //Look at the left
+        if (this.transform.position.x > NewTarget.x)
+            this.transform.localScale = new Vector3(1, 1, 1);
+        else
+            this.transform.localScale = new Vector3(-1, 1, 1);
     }
     #endregion
 

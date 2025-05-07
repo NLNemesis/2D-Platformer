@@ -39,7 +39,9 @@ public class AnimController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PM.Health <= 0) return;
+        if (Time.timeScale == 0) return;
+
+        if (PM.Health <= 0 || PM.State == 0) return;
 
         if (PM.Freezed == false)
         {
@@ -52,7 +54,7 @@ public class AnimController : MonoBehaviour
         }
 
         #region Attacks
-        if (Input.GetMouseButtonDown(0) && !UIC.InUI && PM.Stamina >= 30)
+        if (Input.GetMouseButtonDown(0) && UIC.OpenedUI == 0 && PM.Stamina >= 30)
         {
             if (CanAttack)
             {
