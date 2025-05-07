@@ -60,8 +60,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale == 0) return;
-
         if (Type == EnemyType.Classic)
             ClassicMovement();
 
