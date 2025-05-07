@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     public float MagicResist;
     public float Power;
     [HideInInspector] public bool DealDamage;
-    private bool HitAnimation;
+    private bool HitAnimation = true;
 
     [Header("References")]
     [HideInInspector] public MyPlayerMovement MPM;
@@ -161,9 +161,12 @@ public class Enemy : MonoBehaviour
     public void StopDealingDamage() { DealDamage = false; }
     public void AttackReset()
     {
-        DealDamage = false;
-        CanMove = true;
-        HitAnimation = true;
+        if (Health > 0)
+        {
+            DealDamage = false;
+            CanMove = true;
+            HitAnimation = true;
+        }
     }
     #endregion
 }
