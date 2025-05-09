@@ -9,18 +9,12 @@ public class MyGameManager : MonoBehaviour
     #region Variables
     public int UIOpened;
     public GameObject InventoryObject;
-
-    [Header("Pause Menu")]
-    public UnityEvent OnPause;
-    public UnityEvent OnResume;
-    public GameObject[] UIObject;
-    private bool[] ObjectActivity;
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        ObjectActivity = new bool[UIObject.Length];
+
     }
 
     // Update is called once per frame
@@ -28,9 +22,6 @@ public class MyGameManager : MonoBehaviour
     {
         if (UIOpened == 0 || UIOpened == 2)
             InventoryController();
-
-        if (UIOpened == 0 || UIOpened == 1)
-            PauseMenu();
     }
 
     void InventoryController()
@@ -64,46 +55,5 @@ public class MyGameManager : MonoBehaviour
             UIOpened = 0;
         }
         #endregion
-    }
-
-    #region Pause Menu
-    void PauseMenu()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (UIOpened == 0)
-            {
-                OnPause.Invoke();
-                UIOpened = 1;
-                for (int i = 0; i < UIObject.Length; i++)
-                {
-                    ObjectActivity[i] = UIObject[i].activeSelf;
-                    UIObject[i].SetActive(false);
-                }
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                Time.timeScale = 0;
-            }
-            else
-                Resume();
-        }
-    }
-
-    public void Resume()
-    {
-        OnResume.Invoke();
-        UIOpened = 0;
-        for (int i = 0; i < UIObject.Length; i++)
-            UIObject[i].SetActive(ObjectActivity[i]);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1;
-    }
-    #endregion
-
-    public void ChangeLevel(int Number)
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(Number);
     }
 }

@@ -42,7 +42,6 @@ public class MainMenu : MonoBehaviour
     #region Start Button
     public void StartButton()
     {
-        animator.SetTrigger("Return");
         StartCoroutine(StartEventTrigger());
     }
 
@@ -58,7 +57,6 @@ public class MainMenu : MonoBehaviour
     #region Quit Button
     public void QuitButton() 
     {
-        animator.SetTrigger("Return");
         StartCoroutine(QuitEventTrigger());
     }
 
