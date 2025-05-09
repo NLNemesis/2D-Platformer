@@ -103,6 +103,7 @@ public class MyGameManager : MonoBehaviour
 
     public void ChangeLevel(int Number)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(Number);
     }
 }
