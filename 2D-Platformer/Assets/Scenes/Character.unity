@@ -2564,6 +2564,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIOpened: 0
   InventoryObject: {fileID: 516552805403202418}
+  OnPause:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResume:
+    m_PersistentCalls:
+      m_Calls: []
+  DisableObject: []
 --- !u!1 &1510500519
 GameObject:
   m_ObjectHideFlags: 0
