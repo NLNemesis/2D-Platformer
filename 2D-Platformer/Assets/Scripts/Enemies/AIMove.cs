@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using TMPro;
 
 public class AIMove : MonoBehaviour
 {
     #region Variables
     public enum EnemyType{Classic, MiniBoss, Boss}
-    public EnemyType enemyType;
+    public EnemyType Type;
 
     [Header("Movement")]
     public float Speed;
@@ -26,16 +28,22 @@ public class AIMove : MonoBehaviour
     public float MagicResist;
     public float XPValue;
     public int Gold;
+    private bool HitAnimation = true;
     [HideInInspector] public float CurrentSpeed;
     [HideInInspector] public bool Dead;
 
     [Header("References")]
-    public UnityEvent DeathEvent;
+    public UnityEvent OnSeen;
+    public UnityEvent OnDeath;
     [HideInInspector] public GameObject Player;
     [HideInInspector] public PlayerMovement PM;
     [HideInInspector] public Animator animator;
     private AIDetect aiDetect;
     private Vector2 NewTarget;
+
+    [Header("Boss Variables")]
+    public TextMeshProUGUI EnemyName;
+    public Slider HealthSlider;
     #endregion
 
     // Start is called before the first frame update
@@ -43,10 +51,20 @@ public class AIMove : MonoBehaviour
     {
         Player = GameObject.Find("/MaxPrefab/Player");
         PM = Player.GetComponent<PlayerMovement>();
-        animator = GetComponent<Animator>();
-        if (AIFreeze != true) animator.SetFloat("Movement", 1);
         aiDetect = GetComponentInChildren<AIDetect>();
         CurrentSpeed = Speed;
+
+        animator = GetComponent<Animator>();
+        if (AIFreeze != true) animator.SetFloat("Movement", 1);
+
+        if (Type == EnemyType.Boss)
+        {
+            EnemyName.text = this.gameObject.name;
+            AIFreeze = true;
+            animator.SetFloat("Movement", 0);
+            HealthSlider.maxValue = Health;
+            HealthSlider.value = Health;
+        }
     }
 
     // Update is called once per frame
@@ -54,24 +72,23 @@ public class AIMove : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
 
-        if (AIFreeze == false)
+        #region Movement
+        if (Type == EnemyType.Classic)
         {
-            #region Movement
-            if (enemyType == EnemyType.Classic)
-            {
-                ClassicMovement();
-            }
-            else if (enemyType != EnemyType.Classic)
-            {
-                BossMovement();
-            }
-            #endregion
+            ClassicMovement();
         }
+        else if (Type != EnemyType.Classic)
+        {
+            BossMovement();
+        }
+        #endregion
     }
 
     #region Classic Movement
     void ClassicMovement()
     {
+        if (AIFreeze) return;
+
         if (CanMove == true)
         {
             Distance = (this.transform.position - PatrolPlaces[CurrentPatrol].position).magnitude;
@@ -97,11 +114,22 @@ public class AIMove : MonoBehaviour
     }
     #endregion
 
-
     #region Boss Movement
+    public void TriggerMovement()
+    {
+        OnSeen.Invoke();
+        AIFreeze = false;
+        animator.SetFloat("Movement", 1);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     void BossMovement()
     {
-        animator.SetFloat("Movement", 1);
+        HealthSlider.value = Health;
+
+        if (AIFreeze) return;
+
         Distance = (this.transform.position - PatrolPlaces[CurrentPatrol].position).magnitude;
         NewTarget = new Vector2(PatrolPlaces[CurrentPatrol].position.x, this.transform.position.y);
         this.transform.position = Vector2.MoveTowards(this.transform.position, NewTarget, Speed);
@@ -133,32 +161,37 @@ public class AIMove : MonoBehaviour
         AIFreeze = false;
         animator.ResetTrigger("Attack");
         Speed = CurrentSpeed;
+        HitAnimation = true;
     }
     #endregion
 
     #region Take Damage
     public void TakeDamage(float Value, bool PhysicalDamage)
     {
-        if (Health > 0 && Dead == false)
-        {
-            if (PhysicalDamage == false)
-            {
-                float NewValue = Value - Armor;
-                if (NewValue > 0)
-                    Health -= NewValue;
-            }
-            else
-            {
-                float NewValue = Value - MagicResist;
-                if (NewValue > 0)
-                    Health -= NewValue;
-            }
+        if (Health <= 0 && Dead) return;
 
-            if (Health <= 0)
-                Death();
-            else
-                animator.SetTrigger("Hit");
+        if (PhysicalDamage == false)
+        {
+            float NewValue = Value - Armor;
+            if (NewValue > 0)
+                Health -= NewValue;
         }
+        else
+        {
+            float NewValue = Value - MagicResist;
+            if (NewValue > 0)
+                Health -= NewValue;
+        }
+
+        if (Health > 0)
+        {
+            if (HitAnimation)
+            {
+                HitAnimation = false;
+                animator.SetTrigger("Hit");
+            }
+        }
+        else Death();
     }
     #endregion
 
@@ -171,6 +204,6 @@ public class AIMove : MonoBehaviour
         animator.SetTrigger("Dead");
         BoxCollider2D BC = GetComponent<BoxCollider2D>();
         BC.enabled = false;
-        DeathEvent.Invoke();
+        OnDeath.Invoke();
     }
 }

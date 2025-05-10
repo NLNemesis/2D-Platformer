@@ -12,6 +12,7 @@ public class SpearWomanSkills : MonoBehaviour
     [Header("Transformation")]
     public float ManaReductionDuration;
     public Image TransformationImage;
+    public float IncreasedStats;
 
     [Header("Requirments")]
     public bool[] SpellActive;
@@ -26,12 +27,25 @@ public class SpearWomanSkills : MonoBehaviour
     [Header("References")]
     private PlayerMovement PM;
     private AnimController AC;
+
+    [Header("SavedVariables")]
+    private float OriginalDamage;
+    private float OriginalSkillDamage;
+    private float OriginalArmor;
+    private float OriginalMagicResist;
     #endregion
 
     private void Start()
     {
         PM = GetComponent<PlayerMovement>();
         AC = GetComponent<AnimController>();
+
+        #region Set Saved Stats
+        OriginalDamage = PM.Damage + IncreasedStats;
+        OriginalSkillDamage = PM.SkillDamage + IncreasedStats;
+        OriginalArmor = PM.Armor + IncreasedStats;
+        OriginalMagicResist = PM.MagicResist + IncreasedStats;
+        #endregion
 
         #region Set Animator's speed
         for (int i = 0; i < CDR.Length; i++)
@@ -89,6 +103,23 @@ public class SpearWomanSkills : MonoBehaviour
         #region Lighting Strike
         if (Input.GetKeyDown(KeyCode.Alpha5) && PM.Mana >= RequiredMana[4] && SpellActive[4])
             StartCoroutine(LightingStrike());
+        #endregion
+
+        #region Increase Stats
+        if (AC.animator.GetBool("Transformation_Activity"))
+        {
+            PM.Damage = OriginalDamage + IncreasedStats;
+            PM.SkillDamage = OriginalSkillDamage + IncreasedStats;
+            PM.Armor = OriginalArmor + IncreasedStats;
+            PM.MagicResist = OriginalMagicResist + IncreasedStats;
+        }
+        else
+        {
+            PM.Damage = OriginalDamage - IncreasedStats;
+            PM.SkillDamage = OriginalSkillDamage - IncreasedStats;
+            PM.Armor = OriginalArmor - IncreasedStats;
+            PM.MagicResist = OriginalMagicResist - IncreasedStats;
+        }
         #endregion
     }
 

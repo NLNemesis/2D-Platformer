@@ -335,6 +335,7 @@ public class PlayerMovement : MonoBehaviour
         {
             State = 1;
             Speed = 0;
+            AC.animator.SetFloat("State", 0);
         }
         else
         {

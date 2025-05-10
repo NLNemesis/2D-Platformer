@@ -84,7 +84,10 @@ public class ThrowableMovement : MonoBehaviour
             Enemy enemy = hit[i].GetComponent<Enemy>();
             if (aiMove != null)
             {
-                aiMove.TakeDamage(PM.Damage, MagicDamage);
+                if (MagicDamage)
+                    aiMove.TakeDamage(PM.SkillDamage, true);
+                else
+                    aiMove.TakeDamage(PM.Damage, false);
                 StartCoroutine(HitEnemy());
             }
             else if (enemy != null)
