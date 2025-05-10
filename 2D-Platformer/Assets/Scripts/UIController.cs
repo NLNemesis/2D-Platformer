@@ -52,10 +52,10 @@ public class UIController : MonoBehaviour
 
         if (Input.GetKeyDown(IM.InventoryKey) && OpenedUI == 0)
             OpenCloseInventory();
-        if (Input.GetKeyDown(KeyCode.Escape) && OpenedUI == 2)
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(IM.InventoryKey)) && OpenedUI == 2)
             OpenCloseInventory();
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && (OpenedUI == 0 || OpenedUI == 1))
             PauseMenu();
 
         AssignStats();

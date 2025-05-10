@@ -68,4 +68,9 @@ public class MainMenu : MonoBehaviour
 
     public void CloseTheApplication() { Application.Quit(); }
     #endregion
+
+    public void OpenApplicationLink(string path)
+    {
+        Application.OpenURL(path);
+    }
 }
