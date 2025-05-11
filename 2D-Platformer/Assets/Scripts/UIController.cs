@@ -112,9 +112,9 @@ public class UIController : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void ToMainMenu()
+    public void ChangeLevel(int Number)
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(Number);
     }
     #endregion
 
