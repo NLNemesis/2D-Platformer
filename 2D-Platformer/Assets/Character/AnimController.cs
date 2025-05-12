@@ -72,7 +72,7 @@ public class AnimController : MonoBehaviour
         #endregion
 
         #region Ground Check
-        if (PM.HighGrounded())
+        if (PM.IsGrounded())
         {
             animator.ResetTrigger("Jump");
             animator.SetBool("InAir", false);

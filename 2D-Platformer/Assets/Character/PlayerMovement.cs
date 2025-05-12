@@ -81,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
     private UIController UIC;
     [HideInInspector] public AnimController AC;
     public Transform GroundCheck;
-    public Transform HighGroundCheck;
     public LayerMask GroundLayer;
 
     [Header("UI")]
@@ -232,12 +231,8 @@ public class PlayerMovement : MonoBehaviour
     #region Ground Check
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(GroundCheck.position, 0.1f, GroundLayer);
-    }
-
-    public bool HighGrounded()
-    {
-        return Physics2D.OverlapCircle(HighGroundCheck.position, 0.1f, GroundLayer);
+        Debug.DrawRay(GroundCheck.position, Vector2.down * 1.5f, Color.red);
+        return Physics2D.Raycast(GroundCheck.position, Vector2.down, 1.5f, GroundLayer);
     }
     #endregion
 
