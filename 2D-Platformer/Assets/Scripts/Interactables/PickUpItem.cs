@@ -5,7 +5,7 @@ public class PickUpItem : MonoBehaviour
 {
     #region Variables
     private bool CanInteract;
-    public enum ItemType {Chest,Item}
+    public enum ItemType {Chest,Item,Look}
     public ItemType Type;
     public float XPValue;
     public int Gold;
@@ -102,6 +102,8 @@ public class PickUpItem : MonoBehaviour
                     LootChest();
                 else
                     CanvasAnimator.SetTrigger("InventoryFull");
+            else if (Input.GetKeyDown(IM.Interaction) && Type == ItemType.Look)
+                Event.Invoke();
         }
     }
 

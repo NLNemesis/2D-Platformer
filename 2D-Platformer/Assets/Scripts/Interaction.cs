@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Interaction : MonoBehaviour
 {
     #region Variables
-    public enum InteractionType {Item,Chest,Door,Gather}
+    public enum InteractionType {Item,Chest,Door,Gather,Look}
     public InteractionType Type;
 
     [Header("Interaction")]
@@ -26,6 +26,7 @@ public class Interaction : MonoBehaviour
     private Animator CanvasAnimator;
     private PlayerMovement PM;
     public UnityEvent UnlockEvent;
+    public UnityEvent InteractionEvent;
     #endregion
 
     void Start()
@@ -49,6 +50,8 @@ public class Interaction : MonoBehaviour
                 Message[0].SetActive(true);
             else if (Type == InteractionType.Gather)
                 Message[1].SetActive(true);
+            else if (Type == InteractionType.Look)
+                Message[0].SetActive(true);
 
             if (Locked == true)
                 Message[0].SetActive(true);
@@ -81,10 +84,12 @@ public class Interaction : MonoBehaviour
                 AddItemsToThePlayer();
                 this.gameObject.SetActive(false);
             }
-            else
+            else if (Type == InteractionType.Chest)
             {
                 ChestOrDoor();
             }
+            else if(Type == InteractionType.Look)
+                InteractionEvent.Invoke();
         }
     }
 
