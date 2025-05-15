@@ -49,14 +49,17 @@ public class Interaction : MonoBehaviour
             if (Type == InteractionType.Item)
                 Message[0].SetActive(true);
             else if (Type == InteractionType.Gather)
-                Message[1].SetActive(true);
+                Message[1].SetActive(true); 
             else if (Type == InteractionType.Look)
                 Message[0].SetActive(true);
 
-            if (Locked == true)
-                Message[0].SetActive(true);
-            else if (Locked == false)
-                Message[1].SetActive(true);
+            if (Type == InteractionType.Door || Type == InteractionType.Chest)
+            {
+                if (Locked == true)
+                    Message[0].SetActive(true);
+                else if (Locked == false)
+                    Message[1].SetActive(true);
+            }
         }
     }
 
@@ -84,7 +87,7 @@ public class Interaction : MonoBehaviour
                 AddItemsToThePlayer();
                 this.gameObject.SetActive(false);
             }
-            else if (Type == InteractionType.Chest)
+            else if (Type == InteractionType.Door || Type == InteractionType.Chest)
             {
                 ChestOrDoor();
             }

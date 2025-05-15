@@ -22,6 +22,7 @@ public class AIMove : MonoBehaviour
     [Header("Stats")]
     public bool AIFreeze;
     public float Health;
+    private float MaxHealth;
     public bool PhysicalDamage;
     public float Damage;
     public float Armor;
@@ -40,10 +41,16 @@ public class AIMove : MonoBehaviour
     [HideInInspector] public Animator animator;
     private AIDetect aiDetect;
     private Vector2 NewTarget;
+    public GameObject FadeTextObject;
+    private TextMeshPro FadeText;
+    private Animator FadeTextAnimator;
 
     [Header("Boss Variables")]
     public TextMeshProUGUI EnemyName;
     public Slider HealthSlider;
+    public bool CanHeal;
+    public float HealTimer;
+    private bool Healed;
     #endregion
 
     // Start is called before the first frame update
@@ -53,6 +60,7 @@ public class AIMove : MonoBehaviour
         PM = Player.GetComponent<PlayerMovement>();
         aiDetect = GetComponentInChildren<AIDetect>();
         CurrentSpeed = Speed;
+        MaxHealth = Health;
 
         animator = GetComponent<Animator>();
         if (AIFreeze != true) animator.SetFloat("Movement", 1);
@@ -95,6 +103,7 @@ public class AIMove : MonoBehaviour
             NewTarget = new Vector2(PatrolPlaces[CurrentPatrol].position.x, this.transform.position.y);
             this.transform.position = Vector2.MoveTowards(this.transform.position, NewTarget, Speed);
             this.transform.localScale = PatrolPlaces[CurrentPatrol].localScale;
+            FadeTextObject.transform.localScale = transform.localScale;
 
             if (Distance <= 1f)
                 StartCoroutine(NewPatrol());
@@ -136,9 +145,33 @@ public class AIMove : MonoBehaviour
 
         //Look at the left
         if (this.transform.position.x > NewTarget.x)
+        {
             this.transform.localScale = new Vector3(1, 1, 1);
+            FadeTextObject.transform.localScale = transform.localScale;
+        }
         else
+        {
             this.transform.localScale = new Vector3(-1, 1, 1);
+            FadeTextObject.transform.localScale = transform.localScale;
+        }
+
+        float PercentageHeal = (Health / MaxHealth) * 100;
+        if (CanHeal && !Healed && PercentageHeal <= 40)
+            StartCoroutine(EnemyHeal());
+    }
+
+    IEnumerator EnemyHeal()
+    {
+        HitAnimation = false;
+        AIFreeze = true;
+        Speed = 0;
+        animator.SetTrigger("Heal");
+        animator.ResetTrigger("Attack");
+        Health += 200;
+        if (Health > MaxHealth)
+            Health = MaxHealth;
+        yield return new WaitForSeconds(HealTimer);
+        Healed = false;
     }
     #endregion
 
@@ -168,21 +201,32 @@ public class AIMove : MonoBehaviour
     #region Take Damage
     public void TakeDamage(float Value, bool PhysicalDamage)
     {
+        //Checks before run the function
         if (Health <= 0 && Dead) return;
 
+        FadeTextAnimator = FadeTextObject.GetComponent<Animator>();
+        FadeText = FadeTextObject.GetComponentInChildren<TextMeshPro>();
+
+        //Plays an animation that has a text and a number in it (FadeIn-->Out)
+        FadeTextAnimator.SetTrigger("Fade");
+
+        //Checks if the damage that he took is physical or magical
         if (PhysicalDamage == false)
         {
             float NewValue = Value - Armor;
             if (NewValue > 0)
                 Health -= NewValue;
+            FadeText.text = NewValue.ToString();
         }
         else
         {
             float NewValue = Value - MagicResist;
             if (NewValue > 0)
                 Health -= NewValue;
+            FadeText.text = NewValue.ToString();
         }
 
+        //Checks if the Enemy is dead or makes the hit animation
         if (Health > 0)
         {
             if (HitAnimation)
@@ -195,15 +239,19 @@ public class AIMove : MonoBehaviour
     }
     #endregion
 
+    #region Death
     public void Death()
     {
         StartCoroutine(PM.GainXP(XPValue));
         PM.Gold += Gold;
         Dead = true;
         AIFreeze = true;
+        animator.ResetTrigger("Attack");
+        animator.ResetTrigger("Hit");
         animator.SetTrigger("Dead");
         BoxCollider2D BC = GetComponent<BoxCollider2D>();
         BC.enabled = false;
         OnDeath.Invoke();
     }
+    #endregion
 }
