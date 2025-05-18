@@ -212,7 +212,7 @@ public class AIMove : MonoBehaviour
         //Plays an animation that has a text and a number in it (FadeIn-->Out)
         FadeTextAnimator.SetTrigger("Fade");
 
-        //Checks if the damage that he took is physical or magical
+        #region Checks if the damage that he took is physical or magical
         if (PhysicalDamage == false)
         {
             float NewValue = Value - Armor;
@@ -227,8 +227,9 @@ public class AIMove : MonoBehaviour
                 Health -= NewValue;
             FadeText.text = NewValue.ToString();
         }
+        #endregion
 
-        //Checks if the Enemy is dead or makes the hit animation
+        #region Checks if the Enemy is dead or makes the hit animation
         if (Health > 0)
         {
             if (HitAnimation)
@@ -238,6 +239,7 @@ public class AIMove : MonoBehaviour
             }
         }
         else Death();
+        #endregion
     }
     #endregion
 
