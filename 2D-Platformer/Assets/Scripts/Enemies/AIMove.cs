@@ -67,6 +67,8 @@ public class AIMove : MonoBehaviour
 
         if (Type == EnemyType.Boss)
         {
+            PatrolPlaces = new Transform[1];
+            PatrolPlaces[0] = Player.transform;
             EnemyName.text = this.gameObject.name;
             AIFreeze = true;
             animator.SetFloat("Movement", 0);

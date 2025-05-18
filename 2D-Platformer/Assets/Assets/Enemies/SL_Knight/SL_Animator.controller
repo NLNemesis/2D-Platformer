@@ -23,7 +23,7 @@ AnimatorStateMachine:
     m_Position: {x: 270, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3285980402509330355}
-    m_Position: {x: 130, y: 70, z: 0}
+    m_Position: {x: 140, y: 70, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 1861431526244201461}
@@ -224,7 +224,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Attack
-  m_Speed: 1
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2364965592020169180}
@@ -282,31 +282,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Dead
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Hit
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Heal
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
