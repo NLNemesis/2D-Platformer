@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -108,6 +108,7 @@ public class Interaction : MonoBehaviour
             AddItemsToThePlayer();
 
             UnlockEvent.Invoke();
+            InteractionEvent.Invoke();
         }
         else
         {
@@ -117,7 +118,7 @@ public class Interaction : MonoBehaviour
                 IC.RemoveItem(Key);
                 PM.UIText[1].text = Key;
                 CanvasAnimator.SetTrigger("Used");
-                Locked = false; 
+                Locked = false;
             }
             else
             {
