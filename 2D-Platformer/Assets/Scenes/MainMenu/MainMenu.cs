@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
@@ -17,6 +18,9 @@ public class MainMenu : MonoBehaviour
     public UnityEvent IntroductionEvent;
     public UnityEvent StartEvent;
     public UnityEvent QuitEvent;
+
+    [Header("Options")]
+    public AudioMixer AudioManager;
     #endregion
 
     #region When the game loads
@@ -52,6 +56,21 @@ public class MainMenu : MonoBehaviour
     }
 
     public void ToNewLevel() { SceneManager.LoadScene(1); }
+    #endregion
+
+    #region Change Audio (Options)
+    public void ChangeMasterVolume(float Number)
+    {
+        AudioManager.SetFloat("Master", Number);
+    }
+    public void ChangeSFXVolume(float Number)
+    {
+        AudioManager.SetFloat("SFX", Number);
+    }
+    public void ChangeAmbientVolume(float Number)
+    {
+        AudioManager.SetFloat("Ambient", Number);
+    }
     #endregion
 
     #region Quit Button
