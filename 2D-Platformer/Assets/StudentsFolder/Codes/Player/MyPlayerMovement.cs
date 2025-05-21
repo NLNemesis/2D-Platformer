@@ -1,12 +1,15 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class MyPlayerMovement : MonoBehaviour
 {
     #region Variables
     [Header("Controller")]
     public bool Freezed;
+    [HideInInspector] public bool InLadder;
+    [HideInInspector] public bool IsClimbing;
 
     [Header("Movement")]
     public float speed = 8f;
@@ -14,6 +17,8 @@ public class MyPlayerMovement : MonoBehaviour
     public float jumpingPower = 16f;
     private float horizontal;
     private bool isFacingRight = true;
+    public float vertical;
+    public float ClimbingSpeed;
 
     [Header("Stats")]
     public float Health;
@@ -69,6 +74,16 @@ public class MyPlayerMovement : MonoBehaviour
 
         if (!isSliding && !isDashing)
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+
+        if (IsClimbing == true)
+        {
+            rb.gravityScale = 1f;
+            rb.velocity = new Vector2(rb.velocity.x, vertical * ClimbingSpeed);
+        }
+        else
+        {
+            rb.gravityScale = 6f;
+        }
     }
 
     #region Check if the player is grounded
@@ -150,6 +165,29 @@ public class MyPlayerMovement : MonoBehaviour
     {
         speed = originalSpeed;
         Freezed = false;
+    }
+    #endregion
+
+    #region Ladder Controller
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+            InLadder = true;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+            InLadder = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+        {
+            InLadder = false;
+            IsClimbing = false;
+        }
     }
     #endregion
 
