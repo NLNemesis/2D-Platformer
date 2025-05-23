@@ -102,7 +102,7 @@ public class Inventory : MonoBehaviour
         }
         else if (SlotName[Number] == "Big Health Potion" && PM.Health < PM.MaxHealth)
         {
-            StartCoroutine(PM.StatsRegend(75, true));
+            StartCoroutine(PM.StatsRegend(100, true));
             #region Remove this item
             SlotAvailable += 1;
             SlotFull[Number] = false;
@@ -132,7 +132,7 @@ public class Inventory : MonoBehaviour
         }
         else if (SlotName[Number] == "Big Mana Potion" && PM.Mana < PM.MaxMana)
         {
-            StartCoroutine(PM.StatsRegend(75, false));
+            StartCoroutine(PM.StatsRegend(100, false));
             #region Remove this item
             SlotAvailable += 1;
             SlotFull[Number] = false;
