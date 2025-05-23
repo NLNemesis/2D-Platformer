@@ -6,7 +6,6 @@ public class MyTrap : MonoBehaviour
 {
     #region Variables
     [Header("Damage")]
-    public bool MagicDamage;
     public float DamageValue;
 
     private BoxCollider2D BC2D;
@@ -19,9 +18,19 @@ public class MyTrap : MonoBehaviour
         BC2D = GetComponent<BoxCollider2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        
+        if (collision.name == "Player" ||  collision.name == "Character")
+        {
+            BC2D.enabled = false;
+            MPM.TakeDamage(DamageValue);
+            StartCoroutine(CollisionReset());
+        }
+    }
+
+    IEnumerator CollisionReset()
+    {
+        yield return new WaitForSeconds(3f);
+        BC2D.enabled = true;
     }
 }
