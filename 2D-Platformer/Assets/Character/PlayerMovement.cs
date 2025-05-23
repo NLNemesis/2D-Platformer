@@ -403,6 +403,8 @@ public class PlayerMovement : MonoBehaviour
     #region Take Damage
     public void TakeDamage(float Value, bool PhysicalDamage)
     {
+        if (Health <= 0) return;
+
         Freeze();
         AC.animator.SetTrigger("Hit");
 
