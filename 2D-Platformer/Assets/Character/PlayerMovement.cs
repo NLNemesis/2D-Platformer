@@ -229,8 +229,8 @@ public class PlayerMovement : MonoBehaviour
     #region Ground Check
     public bool IsGrounded()
     {
-        Debug.DrawRay(GroundCheck.position, Vector2.down * 1.5f, Color.red);
-        return Physics2D.Raycast(GroundCheck.position, Vector2.down, 1.5f, GroundLayer);
+        Debug.DrawRay(GroundCheck.position, Vector2.down * 1f, Color.red);
+        return Physics2D.Raycast(GroundCheck.position, Vector2.down, 1f, GroundLayer);
     }
     #endregion
 
