@@ -33,7 +33,10 @@ public class Enemy_Detect : MonoBehaviour
         {
             enemy.DealDamage = false;
             enemy.CanMove = false;
-            enemy.MPM.TakeDamage(enemy.Power);
+            if (enemy.MAC.animator.GetBool("Parry"))
+                enemy.MAC.animator.SetTrigger("ParryAttack");
+            else
+                enemy.MPM.TakeDamage(enemy.Power);
         }
     }
 
@@ -43,7 +46,10 @@ public class Enemy_Detect : MonoBehaviour
         {
             enemy.DealDamage = false;
             enemy.CanMove = false;
-            enemy.MPM.TakeDamage(enemy.Power);
+            if (enemy.MAC.animator.GetBool("Parry"))
+                enemy.MAC.animator.SetTrigger("ParryAttack");
+            else
+                enemy.MPM.TakeDamage(enemy.Power);
         }
     }
 }

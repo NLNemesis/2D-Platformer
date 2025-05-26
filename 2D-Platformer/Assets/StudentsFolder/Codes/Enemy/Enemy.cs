@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
 
     [Header("References")]
     [HideInInspector] public MyPlayerMovement MPM;
+    [HideInInspector] public MyAnimController MAC;
     [HideInInspector] public Animator animator;
 
     [Header("Events")]
@@ -42,6 +43,7 @@ public class Enemy : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         MPM = GameObject.Find("/Character Prefab/Character").GetComponent<MyPlayerMovement>();
+        MAC = GameObject.Find("/Character Prefab/Character").GetComponent<MyAnimController>();
 
         if(Type == EnemyType.Classic)
         {

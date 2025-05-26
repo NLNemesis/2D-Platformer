@@ -419,9 +419,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Freezed: 0
+  InLadder: 0
+  IsClimbing: 0
   speed: 8
   originalSpeed: 0
   jumpingPower: 16
+  vertical: 0
+  ClimbingSpeed: 0
   Health: 100
   Damage: 20
   rb: {fileID: 116680109}
@@ -883,6 +887,7 @@ MonoBehaviour:
   Power: 0
   DealDamage: 0
   MPM: {fileID: 0}
+  MAC: {fileID: 0}
   animator: {fileID: 0}
   OnSeen:
     m_PersistentCalls:
@@ -4416,6 +4421,7 @@ MonoBehaviour:
   Power: 0
   DealDamage: 0
   MPM: {fileID: 0}
+  MAC: {fileID: 0}
   animator: {fileID: 0}
   OnSeen:
     m_PersistentCalls:
@@ -21376,6 +21382,7 @@ MonoBehaviour:
   Power: 0
   DealDamage: 0
   MPM: {fileID: 0}
+  MAC: {fileID: 0}
   animator: {fileID: 0}
   OnSeen:
     m_PersistentCalls:
