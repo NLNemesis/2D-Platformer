@@ -24,6 +24,7 @@ public class TypeWritingEffect : MonoBehaviour
     public bool loop = false;
 
     [Header("Events")]
+    public UnityEvent StartTyping;
     public UnityEvent OnTextShown;
 
     private bool TextShown;
@@ -32,6 +33,8 @@ public class TypeWritingEffect : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
+        TextShown = false;
+        StartTyping.Invoke();
         testText = GetComponent<TextMeshProUGUI>();
         if (myRoutine != null)
         {
