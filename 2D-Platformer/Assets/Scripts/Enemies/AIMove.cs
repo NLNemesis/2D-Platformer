@@ -61,8 +61,8 @@ public class AIMove : MonoBehaviour
         aiDetect = GetComponentInChildren<AIDetect>();
         CurrentSpeed = Speed;
         MaxHealth = Health;
-
         animator = GetComponent<Animator>();
+
         if (AIFreeze != true) animator.SetFloat("Movement", 1);
 
         if (Type == EnemyType.Boss)
