@@ -412,17 +412,13 @@ public class PlayerMovement : MonoBehaviour
         {
             float NewValue = Value - Armor;
             if (NewValue > 0)
-            {
                 Health -= NewValue;
-            }
         }
         else
         {
             float NewValue = Value - MagicResist;
             if (NewValue > 0)
-            {
                 Health -= NewValue;
-            }
         }
 
         if (Health <= 0)
@@ -432,6 +428,7 @@ public class PlayerMovement : MonoBehaviour
             Freezed = true;
             AC.animator.SetTrigger("Death");
             Speed = 0;
+            Event[2].Invoke();
         }
     }
     #endregion
