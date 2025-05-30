@@ -70,6 +70,9 @@ public class MyAnimController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && CanCombo)
             ComboActivated = true;
+
+        if (Input.GetMouseButtonDown(1) && CanAttack)
+            StartCoroutine(ParryActivated());
         #endregion
     }
 
@@ -103,6 +106,17 @@ public class MyAnimController : MonoBehaviour
     {
         if (AttackPoint != null)
             Gizmos.DrawWireSphere(AttackPoint.position, Range);
+    }
+    #endregion
+
+    #region Parry Handler
+    public IEnumerator ParryActivated()
+    {
+        animator.SetBool("Parry", true);
+        MPM.Freeze();
+        yield return new WaitForSeconds(1f);
+        animator.SetBool("Parry", false);
+        Reset();
     }
     #endregion
 
