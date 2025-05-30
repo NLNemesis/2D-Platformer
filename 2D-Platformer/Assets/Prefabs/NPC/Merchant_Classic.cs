@@ -17,10 +17,11 @@ public class Merchant_Classic : MonoBehaviour
     public TextMeshProUGUI GoldText;
     public string[] ItemName;
     public int[] Value;
+    public int SellValue;
 
     [Header("References")]
     private PlayerMovement PM;
-    private Inventory IC;
+    private Inventory inventory;
     private Animator PlayerCanvasAnimator;
 
     [Header("Events")]
@@ -32,14 +33,14 @@ public class Merchant_Classic : MonoBehaviour
     void Start()
     {
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
-        IC = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
+        inventory = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
         PlayerCanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
     }
 
     #region OnTriggers
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && !ThisCanvas.activeSelf)
         {
             CanInteract = true;
             Message.SetActive(true);
@@ -48,7 +49,7 @@ public class Merchant_Classic : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "Player" && ThisCanvas.activeSelf == false)
+        if (other.tag == "Player" && !ThisCanvas.activeSelf)
         {
             CanInteract = true;
             Message.SetActive(true);
@@ -68,17 +69,11 @@ public class Merchant_Classic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && CanInteract == true)
-        {
-            CanInteract = false;
-            Message.SetActive(false);
+        if (Input.GetKeyDown(KeyCode.E) && CanInteract)
             OpenCloseShop();
-        }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && ThisCanvas.activeSelf == true)
-        {
+        if (Input.GetKeyDown(KeyCode.Escape) && ThisCanvas.activeSelf)
             OpenCloseShop();
-        }
 
         GoldText.text = PM.Gold.ToString();
     }
@@ -114,15 +109,27 @@ public class Merchant_Classic : MonoBehaviour
     {
         if (PM.Gold >= Value[Number])
         {
-            if (IC.SlotAvailable > 0)
+            if (inventory.SlotAvailable > 0)
             {
                 PM.Gold -= Value[Number];
-                IC.AddItem(ItemName[Number]);
+                inventory.AddItem(ItemName[Number]);
             }
             else
             {
                 PlayerCanvasAnimator.SetTrigger("Full");
             }
+        }
+    }
+    #endregion
+
+    #region Sell Item
+    public void SellItem(int Number)
+    {
+        inventory.CheckForItem(ItemName[Number]);
+        if (inventory.Check)
+        {
+            inventory.RemoveItem(ItemName[Number]);
+            PM.Gold += SellValue;
         }
     }
     #endregion

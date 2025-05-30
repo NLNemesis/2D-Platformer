@@ -44,6 +44,7 @@ public class UIController : MonoBehaviour
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
         IM = GetComponent<InputManager>();
         ObjectActivity = new bool[DisableObject.Length];
+        StartEvent.Invoke();
     }
 
     private void Update()
@@ -114,6 +115,7 @@ public class UIController : MonoBehaviour
 
     public void ChangeLevel(int Number)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(Number);
     }
     #endregion

@@ -161,21 +161,21 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.6666667
-    functionName: StartDealingDamage
+    functionName: DealingDamageOn
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.0833334
-    functionName: StopDealingDamage
+    functionName: DealingDamageOff
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.1666666
-    functionName: AttackReset
+    functionName: MovementReset
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

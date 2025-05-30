@@ -152,11 +152,14 @@ public class Door : MonoBehaviour
     {
         Traveling = true;
         PM.Freezed = true;
-        CanvasAnimator.SetTrigger("FadeInOut");
+        PM.PlayerState();
+        CanvasAnimator.SetTrigger("FadeIn");
         yield return new WaitForSeconds(1f);
         Player.transform.position = NewPlace.position;
         yield return new WaitForSeconds(1f);
+        CanvasAnimator.SetTrigger("FadeOut");
         PM.Freezed = false;
+        PM.PlayerState();
         Traveling = false;
     }
     #endregion
