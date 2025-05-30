@@ -302,6 +302,7 @@ public class PlayerMovement : MonoBehaviour
         Freezed = true;
         InAction = true;
         AC.CanAttack = false;
+        AC.HitAnimation = false;
     }
 
     public void UnFreeze()
@@ -309,6 +310,7 @@ public class PlayerMovement : MonoBehaviour
         Freezed = false;
         InAction = false;
         AC.CanAttack = true;
+        AC.HitAnimation = true;
         StartCoroutine(StaminaIncrease());
     }
 
@@ -405,8 +407,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Health <= 0) return;
 
-        Freeze();
-        AC.animator.SetTrigger("Hit");
+        if (AC.HitAnimation)
+        {
+            Freeze();
+            AC.animator.SetTrigger("Hit");
+        }
 
         if (PhysicalDamage == false)
         {

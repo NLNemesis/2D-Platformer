@@ -7,6 +7,8 @@ using UnityEngine.Animations;
 public class AnimController : MonoBehaviour
 {
     #region Variables
+    [HideInInspector] public bool HitAnimation = true;
+
     [Header("Attack Variables")]
     public float StaminaRequired;
     public bool CanAttack;
