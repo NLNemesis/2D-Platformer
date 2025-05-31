@@ -195,17 +195,12 @@ public class MyPlayerMovement : MonoBehaviour
     {
         if (Health > 0)
         {
-            if (MAC.animator.GetBool("Parry"))
+            if (MAC.HitAnimation)
             {
-                MAC.StopAllCoroutines();
-                MAC.animator.SetTrigger("ParryAttack");
-                MAC.animator.SetBool("Parry", false);
-            }
-            else
-            {
+                MAC.HitAnimation = false;
                 MAC.animator.SetTrigger("Hit");
-                Health -= Value;
             }
+            Health -= Value;
 
             if (Health < 0)
                 MAC.animator.SetTrigger("Death");
