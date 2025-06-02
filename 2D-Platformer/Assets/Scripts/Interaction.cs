@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static Door;
 
 public class Interaction : MonoBehaviour
 {
     #region Variables
-    public enum InteractionType {Item,Chest,Door,Gather,Look}
+    public enum InteractionType {Item,Chest,Door,Travel,Gather,Look}
     public InteractionType Type;
 
     [Header("Interaction")]
@@ -20,17 +21,23 @@ public class Interaction : MonoBehaviour
     public bool Locked;
     public string Key;
 
+    [Header("Travel")]
+    public Transform NewPlace;
+    private bool Traveling;
+
     [Header("References")]
     private Inventory IC;
     private Animator animator;
     private Animator CanvasAnimator;
     private PlayerMovement PM;
+    private GameObject Player;
     public UnityEvent UnlockEvent;
     public UnityEvent InteractionEvent;
     #endregion
 
     void Start()
     {
+        Player = GameObject.Find("/MaxPrefab/Player");
         IC = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
@@ -91,6 +98,12 @@ public class Interaction : MonoBehaviour
             {
                 ChestOrDoor();
             }
+            else if (Locked == false && Type == InteractionType.Travel)
+            {
+                CanInteract = false;
+                Message[3].SetActive(false);
+                StartCoroutine(TraveToNewPlace());
+            }
             else if(Type == InteractionType.Look)
                 InteractionEvent.Invoke();
         }
@@ -137,6 +150,23 @@ public class Interaction : MonoBehaviour
         }
         PM.UIText[2].text = "Lot's of loot";
         CanvasAnimator.SetTrigger("Took");
+    }
+    #endregion
+
+    #region Travel the player
+    IEnumerator TraveToNewPlace()
+    {
+        Traveling = true;
+        PM.Freezed = true;
+        PM.PlayerState();
+        CanvasAnimator.SetTrigger("FadeIn");
+        yield return new WaitForSeconds(1f);
+        Player.transform.position = NewPlace.position;
+        yield return new WaitForSeconds(1f);
+        CanvasAnimator.SetTrigger("FadeOut");
+        PM.Freezed = false;
+        PM.PlayerState();
+        Traveling = false;
     }
     #endregion
 }
