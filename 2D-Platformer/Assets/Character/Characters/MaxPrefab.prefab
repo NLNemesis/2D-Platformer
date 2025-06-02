@@ -11801,6 +11801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf8afbbd980b83408dc9b4751abbd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HitAnimation: 1
   StaminaRequired: 25
   CanAttack: 1
   Attacks: 2
@@ -11856,15 +11857,14 @@ MonoBehaviour:
   EmptySprite: {fileID: 21300000, guid: 4d039114017f7a64984bcf1ecf1f8a0e, type: 3}
   ItemImage:
   - {fileID: -7191656500115543240, guid: 1b024ca793634f541b8fa2498c62efa6, type: 3}
-  - {fileID: 93726712210109201, guid: 1b024ca793634f541b8fa2498c62efa6, type: 3}
+  - {fileID: -2921171881012110528, guid: 1b024ca793634f541b8fa2498c62efa6, type: 3}
   - {fileID: 9184573195003629514, guid: 1b024ca793634f541b8fa2498c62efa6, type: 3}
   - {fileID: 3670767097431890792, guid: 84f5d586479e99a4d8e3dd4822848edf, type: 3}
-  - {fileID: -299861996715226795, guid: 84f5d586479e99a4d8e3dd4822848edf, type: 3}
+  - {fileID: 258142317531596840, guid: 84f5d586479e99a4d8e3dd4822848edf, type: 3}
   - {fileID: -5279002320262568365, guid: 84f5d586479e99a4d8e3dd4822848edf, type: 3}
-  - {fileID: 21300000, guid: c7f2a59dae2889941bc0fd9d101c0cb7, type: 3}
-  - {fileID: 21300000, guid: a4b14932161136b4989f45c4ca17f15f, type: 3}
-  - {fileID: 21300000, guid: 1bddd4bcff16c5e4f99ec243bacad1b0, type: 3}
-  - {fileID: 21300000, guid: 54663b220818d3e46b532480d0b47d28, type: 3}
+  - {fileID: 21300000, guid: e30e7f1121c83ed469e6242c11d18e05, type: 3}
+  - {fileID: 21300000, guid: 17c2d0550f9d2f9418f458279eb57c65, type: 3}
+  - {fileID: 21300000, guid: a6c10312421cb5e438d8b9edaad2db28, type: 3}
   - {fileID: 21300000, guid: ebffab9d8e3844f089df91f790184f81, type: 3}
   - {fileID: 21300000, guid: 1cafe3b92468c46cca28e6fdc360f8af, type: 3}
   - {fileID: 21300000, guid: b25f87142874845d5bf539d5f4238565, type: 3}
@@ -11873,6 +11873,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cd13aaa12631b4b81851fe3a99488753, type: 3}
   - {fileID: 21300000, guid: 3edd13f59849e40659b2df931d713fc2, type: 3}
   - {fileID: 21300000, guid: 8e4ebe8389e2144a88b53ddf0ed289b3, type: 3}
+  - {fileID: 21300000, guid: 7972dd97521bb1c44ba8e3774391b996, type: 3}
+  - {fileID: 21300000, guid: 1c82fa18a9230df4f9a0aa981fe3a341, type: 3}
+  - {fileID: 21300000, guid: 6b22156af64babe4f9bff6441c5b942f, type: 3}
+  - {fileID: 21300000, guid: b9a847102a75c8c429a8f749008df6c2, type: 3}
+  - {fileID: 21300000, guid: 4b61215c56174cb489119b1357a5b77c, type: 3}
+  - {fileID: 21300000, guid: ea55e0ae186d59d41a0b270559045dd7, type: 3}
+  - {fileID: 21300000, guid: d1b0810a7bee633469a729543f4e6659, type: 3}
+  - {fileID: 21300000, guid: e577f30c6bd976a429addedf4c4ad662, type: 3}
+  - {fileID: 21300000, guid: c0e7217a07e49364db48c62cc2e2b376, type: 3}
+  - {fileID: 21300000, guid: 615ecf391b0ba0b40a9c3882ac5e6afc, type: 3}
+  - {fileID: 21300000, guid: 3281101b955224c4f9bfd58e8ab4c342, type: 3}
+  - {fileID: 21300000, guid: 90192622496cded43ac060f5e25e20e8, type: 3}
+  - {fileID: 21300000, guid: 0e1ccb64303778e4081913a6d9cca677, type: 3}
+  - {fileID: 21300000, guid: f8a9cfc721a20ce409c3d743e9b251bc, type: 3}
+  - {fileID: 21300000, guid: 046f821c76a004e4c91b9f27ee906194, type: 3}
   ItemName:
   - Small Mana Potion
   - Medium Mana Potion
@@ -11880,18 +11895,33 @@ MonoBehaviour:
   - Small Health Potion
   - Medium Health Potion
   - Big Health Potion
-  - Bronze Key
-  - Grey Key
+  - Iron Key
   - Silver Key
-  - Gold Key
+  - Golden Key
   - Blood Ember
   - Wood
   - Crystal
   - Elixir
-  - SkeletonCore
+  - Skeleton Core
   - Skull
-  - BoneRing
+  - Bone Ring
   - Bone
+  - Book
+  - Book1
+  - Book2
+  - Rune Stone
+  - Scroll
+  - Wine
+  - Wine1
+  - Fabric
+  - Leather
+  - Paper
+  - Rope
+  - String
+  - Wooden Log
+  - Wooden Plank
+  - Wool
+  - Skull
 --- !u!114 &3991454104071807671
 MonoBehaviour:
   m_ObjectHideFlags: 0
