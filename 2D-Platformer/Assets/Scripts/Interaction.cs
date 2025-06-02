@@ -106,8 +106,6 @@ public class Interaction : MonoBehaviour
 
             if (Type == InteractionType.Chest)
             AddItemsToThePlayer();
-
-            UnlockEvent.Invoke();
             InteractionEvent.Invoke();
         }
         else
@@ -119,6 +117,7 @@ public class Interaction : MonoBehaviour
                 PM.UIText[1].text = Key;
                 CanvasAnimator.SetTrigger("Used");
                 Locked = false;
+                UnlockEvent.Invoke();
             }
             else
             {
