@@ -67,6 +67,8 @@ public class Interaction : MonoBehaviour
                 else if (Locked == false)
                     Message[1].SetActive(true);
             }
+            else if (Type == InteractionType.Travel)
+                Message[2].SetActive(true);
         }
     }
 
@@ -101,7 +103,7 @@ public class Interaction : MonoBehaviour
             else if (Locked == false && Type == InteractionType.Travel)
             {
                 CanInteract = false;
-                Message[3].SetActive(false);
+                Message[2].SetActive(true);
                 StartCoroutine(TraveToNewPlace());
             }
             else if(Type == InteractionType.Look)
@@ -156,6 +158,7 @@ public class Interaction : MonoBehaviour
     #region Travel the player
     IEnumerator TraveToNewPlace()
     {
+        Message[2].SetActive(false);
         Traveling = true;
         PM.Freezed = true;
         PM.PlayerState();
