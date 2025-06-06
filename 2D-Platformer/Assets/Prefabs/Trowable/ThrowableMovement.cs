@@ -88,24 +88,23 @@ public class ThrowableMovement : MonoBehaviour
                     aiMove.TakeDamage(PM.SkillDamage, true);
                 else
                     aiMove.TakeDamage(PM.Damage, false);
-                StartCoroutine(HitEnemy());
+                HitEnemy();
             }
             else if (enemy != null)
             {
                 enemy.TakeDamage(PM.Damage, MagicDamage);
-                StartCoroutine(HitEnemy());
+                HitEnemy();
             }
         }
     }
 
     //Destroy the throwable object
-    IEnumerator HitEnemy()
+    void HitEnemy()
     {
         Speed = 0;
         if (animator != null)
         {
             animator.SetTrigger("Hit");
-            yield return new WaitForSeconds(0.3f);
             Destroy(this.gameObject);
         }
         else

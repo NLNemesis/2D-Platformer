@@ -164,6 +164,7 @@ public class AIMove : MonoBehaviour
 
     IEnumerator EnemyHeal()
     {
+        CanHeal = false;
         HitAnimation = false;
         AIFreeze = true;
         Speed = 0;
@@ -174,6 +175,7 @@ public class AIMove : MonoBehaviour
             Health = MaxHealth;
         yield return new WaitForSeconds(HealTimer);
         Healed = false;
+        CanHeal = true;
     }
     #endregion
 
@@ -217,15 +219,21 @@ public class AIMove : MonoBehaviour
         {
             float NewValue = Value - Armor;
             if (NewValue > 0)
+            {
                 Health -= NewValue;
-            FadeText.text = NewValue.ToString();
+                FadeText.text = NewValue.ToString();
+            }
+            else FadeText.text = "0";
         }
         else
         {
             float NewValue = Value - MagicResist;
             if (NewValue > 0)
+            {
                 Health -= NewValue;
-            FadeText.text = NewValue.ToString();
+                FadeText.text = NewValue.ToString();
+            }
+            else FadeText.text = "0";
         }
         #endregion
 
@@ -238,7 +246,11 @@ public class AIMove : MonoBehaviour
                 animator.SetTrigger("Hit");
             }
         }
-        else Death();
+        else
+        {
+            AIFreeze = true;
+            Death();
+        }
         #endregion
     }
     #endregion
@@ -246,6 +258,7 @@ public class AIMove : MonoBehaviour
     #region Death
     public void Death()
     {
+        StopAllCoroutines();
         StartCoroutine(PM.GainXP(XPValue));
         PM.Gold += Gold;
         Dead = true;

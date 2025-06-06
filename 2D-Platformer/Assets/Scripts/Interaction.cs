@@ -54,21 +54,21 @@ public class Interaction : MonoBehaviour
             CanInteract = true;
 
             if (Type == InteractionType.Item)
-                Message[0].SetActive(true);
+                Message[0].SetActive(true); //Interact to take
             else if (Type == InteractionType.Gather)
-                Message[1].SetActive(true); 
+                Message[1].SetActive(true); //Interact to gather
             else if (Type == InteractionType.Look)
-                Message[0].SetActive(true);
+                Message[0].SetActive(true); //Interact to examine
 
             if (Type == InteractionType.Door || Type == InteractionType.Chest)
             {
                 if (Locked == true)
-                    Message[0].SetActive(true);
-                else if (Locked == false)
+                    Message[0].SetActive(true); //Interact to unlock
+                else if (Locked == false) //Interact to open
                     Message[1].SetActive(true);
             }
             else if (Type == InteractionType.Travel)
-                Message[2].SetActive(true);
+                Message[2].SetActive(true); //Interact to travel
         }
     }
 
@@ -97,13 +97,10 @@ public class Interaction : MonoBehaviour
                 this.gameObject.SetActive(false);
             }
             else if (Type == InteractionType.Door || Type == InteractionType.Chest)
-            {
                 ChestOrDoor();
-            }
             else if (Locked == false && Type == InteractionType.Travel)
             {
                 CanInteract = false;
-                Message[2].SetActive(true);
                 StartCoroutine(TraveToNewPlace());
             }
             else if(Type == InteractionType.Look)
@@ -146,12 +143,16 @@ public class Interaction : MonoBehaviour
     #region Add the items to player's inventory
     void AddItemsToThePlayer()
     {
-        for (int i = 0; i < Item.Length; i++)
+        if (IC.SlotAvailable > 0)
         {
-            IC.AddItem(Item[i]);
+            for (int i = 0; i < Item.Length; i++)
+                IC.AddItem(Item[i]);
+
+            PM.UIText[2].text = "Lot's of loot";
+            CanvasAnimator.SetTrigger("Took");
         }
-        PM.UIText[2].text = "Lot's of loot";
-        CanvasAnimator.SetTrigger("Took");
+        else
+            CanvasAnimator.SetTrigger("InventoryFull");
     }
     #endregion
 
