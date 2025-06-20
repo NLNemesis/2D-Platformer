@@ -25,16 +25,16 @@ public class Inventory : MonoBehaviour
     public string[] ItemName;
     #endregion
 
+    #region Start & Update
     private void Start()
     {
         PM = GetComponent<PlayerMovement>();
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
-
         SlotName = new string[SlotImage.Length];
         SlotFull = new bool[SlotImage.Length];
         SlotAvailable = SlotImage.Length;
-        AddItem("Blood Ember");
     }
+    #endregion
 
     #region Add Item
     public void AddItem(string Name)
