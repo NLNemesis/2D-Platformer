@@ -53,6 +53,7 @@ public class UIController : MonoBehaviour
 
         if (Input.GetKeyDown(IM.InventoryKey) && OpenedUI == 0)
             OpenCloseInventory();
+
         if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(IM.InventoryKey)) && OpenedUI == 2)
             OpenCloseInventory();
 
@@ -79,7 +80,7 @@ public class UIController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             CanvasAnimator.SetTrigger("Inventory");
             OpenedUI = 0;
-            AC.CanAttack = false;
+            AC.CanAttack = true;
         }
     }
     #endregion
@@ -98,6 +99,7 @@ public class UIController : MonoBehaviour
                 DisableObject[i].SetActive(false);
             }
             Time.timeScale = 0;
+            OpenedUI = 1;
         }
         else 
             Resume();
@@ -111,6 +113,7 @@ public class UIController : MonoBehaviour
         for (int i = 0; i < DisableObject.Length; i++)
             DisableObject[i].SetActive(ObjectActivity[i]);
         Time.timeScale = 1;
+        OpenedUI = 0;
     }
 
     public void ChangeLevel(int Number)

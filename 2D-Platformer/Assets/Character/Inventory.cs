@@ -7,22 +7,33 @@ public class Inventory : MonoBehaviour
 {
     #region Variables
     [HideInInspector] public bool Check;
-
-    [Header("Inventory Variables")]
     public int Gold;
+
+    [Header("Inventory")]
     public Image[] SlotImage;
     [HideInInspector] public string[] SlotName;
     [HideInInspector] public bool[] SlotFull;
     [HideInInspector] public int SlotAvailable;
     public Sprite EmptySprite;
 
-    [Header("References")]
-    private PlayerMovement PM;
-    private Animator CanvasAnimator;
-
     [Header("Game Items")]
     public Sprite[] ItemImage;
     public string[] ItemName;
+
+    [Header("Equipment Inventory")]
+    public Image[] EquipmentSlotImage;
+    [HideInInspector] public string[] EquipmentSlotName;
+    [HideInInspector] public bool[] EquipmentSlotFull;
+    [HideInInspector] public int EquipmentSlotAvailable;
+    public Sprite EquipmentEmptySprite;
+
+    [Header("Game Equipments")]
+    public Sprite[] EquipmentItemImage;
+    public string[] EquipmentItemName;
+
+    [Header("References")]
+    private PlayerMovement PM;
+    private Animator CanvasAnimator;
     #endregion
 
     #region Start & Update
@@ -155,9 +166,66 @@ public class Inventory : MonoBehaviour
                 break;
             }
             else
-            {
                 Check = false;
+        }
+        return Check;
+    }
+    #endregion
+
+    #region Add Equipment Item
+    public void AddEquipmentItem(string Name)
+    {
+        for (int i = 0; i < EquipmentSlotFull.Length; i++)
+        {
+            if (EquipmentSlotFull[i] == false)
+            {
+                for (int j = 0; j < EquipmentItemImage.Length; j++)
+                {
+                    if (EquipmentItemName[j] == Name)
+                    {
+                        SlotAvailable -= 1;
+                        SlotFull[i] = true;
+                        SlotName[i] = Name;
+                        SlotImage[i].sprite = ItemImage[j];
+                        break;
+                    }
+                }
+                break;
             }
+        }
+    }
+    #endregion
+
+    #region Remove Equipment Item
+    public void RemoveEquipmentItem(string Name)
+    {
+        for (int i = 0; i < EquipmentSlotName.Length; i++)
+        {
+            if (EquipmentSlotName[i] == Name && EquipmentSlotFull[i] == true)
+            {
+                EquipmentSlotAvailable += 1;
+                EquipmentSlotFull[i] = false;
+                EquipmentSlotName[i] = "Empty";
+                EquipmentSlotImage[i].sprite = EmptySprite;
+                break;
+            }
+        }
+    }
+    #endregion
+
+    #region Check For Equipment Item
+    public bool CheckForEquipmentItem(string Name)
+    {
+        Check = true;
+        for (int i = 0; i < EquipmentSlotName.Length; i++)
+        {
+            if (EquipmentSlotName[i] == Name)
+            {
+                Check = true;
+                break;
+            }
+            else
+                Check = false;
         }
         return Check;
     }

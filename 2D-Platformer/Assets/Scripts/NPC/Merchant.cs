@@ -23,8 +23,9 @@ public class Merchant : MonoBehaviour
     private int[] PlayerItemsAmount;
 
     [Header("References")]
-    public PlayerMovement PM;
-    public Inventory inventory;
+    private PlayerMovement PM;
+    private Inventory inventory;
+    private UIController UIC;
 
     [Header("Events")]
     public UnityEvent OpenShopEvent;
@@ -38,6 +39,7 @@ public class Merchant : MonoBehaviour
         {
             CanInteract = true;
             Message.SetActive(true);
+            UIC.OpenedUI = 3;
         }
     }
 
@@ -47,6 +49,7 @@ public class Merchant : MonoBehaviour
         {
             CanInteract = false;
             Message.SetActive(false);
+            UIC.OpenedUI = 0;
         }
     }
     #endregion
@@ -55,7 +58,9 @@ public class Merchant : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
+        inventory = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
+        UIC = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<UIController>();
     }
 
     void Update()

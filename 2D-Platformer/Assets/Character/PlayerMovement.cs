@@ -156,10 +156,7 @@ public class PlayerMovement : MonoBehaviour
 
                     //Sliding
                     if (Input.GetKeyDown(IM.Slide) && Stamina >= 15 && canSlide == true && IsGrounded())
-                    {
-                        Stamina -= SlideStaminaRequirment;
                         StartCoroutine(Slide());
-                    }
                 }
 
                 #region Ladder
@@ -258,7 +255,6 @@ public class PlayerMovement : MonoBehaviour
         {
             CanIncrease = false;
             StopCoroutine(StaminaIncrease());
-            Stamina -= DashStaminaRequirment;
             AC.animator.SetTrigger("Dash");
         }
         CanDash = false;
