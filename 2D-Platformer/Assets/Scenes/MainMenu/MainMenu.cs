@@ -55,7 +55,12 @@ public class MainMenu : MonoBehaviour
         StartEvent.Invoke();
     }
 
-    public void ToNewLevel() { SceneManager.LoadScene(1); }
+    public void ToNewLevel() 
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        SceneManager.LoadScene(1); 
+    }
     #endregion
 
     #region Change Audio (Options)

@@ -12,7 +12,7 @@ public class Merchant : MonoBehaviour
     public GameObject ThisCanvas;
     private bool CanInteract;
 
-    [Header("Shop")]
+    [Header("General Shop")]
     public string[] Item;
     public int[] Value;
 
@@ -22,10 +22,16 @@ public class Merchant : MonoBehaviour
     public TextMeshProUGUI GoldText;
     private int[] PlayerItemsAmount;
 
+    [Space(10)]
+    [Header("Equipment Shop")]
+    public string[] Equipment_Item;
+    public int[] Equipment_Value;
+
+    [Space(10)]
     [Header("References")]
     private PlayerMovement PM;
     private Inventory inventory;
-    private UIController UIC;
+    private GameController GC;
 
     [Header("Events")]
     public UnityEvent OpenShopEvent;
@@ -39,7 +45,6 @@ public class Merchant : MonoBehaviour
         {
             CanInteract = true;
             Message.SetActive(true);
-            UIC.OpenedUI = 3;
         }
     }
 
@@ -49,7 +54,6 @@ public class Merchant : MonoBehaviour
         {
             CanInteract = false;
             Message.SetActive(false);
-            UIC.OpenedUI = 0;
         }
     }
     #endregion
@@ -60,7 +64,7 @@ public class Merchant : MonoBehaviour
     {
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
         inventory = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
-        UIC = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<UIController>();
+        GC = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<GameController>();
     }
 
     void Update()
@@ -109,7 +113,7 @@ public class Merchant : MonoBehaviour
     #region Buy Item
     public void BuyItem(int Number)
     {
-        if (PM.Gold >= Value[Number])
+        if (PM.Gold >= Value[Number] && inventory.SlotAvailable > 0)
         {
             PM.Gold -= Value[Number];
             inventory.AddItem(Item[Number]);
@@ -144,6 +148,28 @@ public class Merchant : MonoBehaviour
                     break;
                 }
             }
+        }
+    }
+    #endregion
+
+    #region Buy Item Equipment
+    public void BuyItem_Equipment(int Number)
+    {
+        if (PM.Gold >= Value[Number] && inventory.Equipment_SlotAvailable > 0)
+        {
+            PM.Gold -= Equipment_Value[Number];
+            inventory.AddEquipmentItem(Equipment_Item[Number]);
+        }
+    }
+    #endregion
+
+    #region Sell Item Equipment
+    public void SellItem_Equipment(int Number)
+    {
+        if (inventory.CheckForEquipmentItem(Equipment_Item[Number]) == true)
+        {
+            inventory.RemoveEquipmentItem(Equipment_Item[Number]);
+            PM.Gold += 200;
         }
     }
     #endregion

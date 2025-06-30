@@ -41,7 +41,7 @@ public class PickUpItem : MonoBehaviour
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
         BC2D = GetComponent<BoxCollider2D>();
-        Messages = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<UIController>().UIMessages;
+        Messages = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<GameController>().UIMessages;
 
         if (Type == ItemType.Chest) 
         { 

@@ -48,7 +48,7 @@ public class NPC_Talk : MonoBehaviour
         IC = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
         QS = GameObject.Find("/MaxPrefab/Player").GetComponent<QuestSystem>();
         IM = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<InputManager>();
-        Messages = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<UIController>().UIMessages;
+        Messages = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<GameController>().UIMessages;
         NPCFrame.sprite = NPCIcon;
         PlayerFrame.sprite = PM.PlayerIcon;
     }

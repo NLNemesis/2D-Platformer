@@ -31,7 +31,7 @@ public class Gathering : MonoBehaviour
         IC = GameObject.Find("/MaxPrefab/Player").GetComponent<Inventory>();
         IM = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<InputManager>();
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
-        Messages = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<UIController>().UIMessages;
+        Messages = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<GameController>().UIMessages;
     }
 
     #region On Triggers

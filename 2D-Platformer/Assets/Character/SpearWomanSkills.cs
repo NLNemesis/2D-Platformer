@@ -46,15 +46,6 @@ public class SpearWomanSkills : MonoBehaviour
         OriginalArmor = PM.Armor + IncreasedStats;
         OriginalMagicResist = PM.MagicResist + IncreasedStats;
         #endregion
-
-        #region Set Animator's speed
-        for (int i = 0; i < CDR.Length; i++)
-        {
-            CDRAnimator[i].speed = 1 / CDR[i];
-            if (SpellActive[i])
-                CDRAnimator[i].SetTrigger("InstantCDR");
-        }
-        #endregion
     }
 
     private void Update()
@@ -95,7 +86,7 @@ public class SpearWomanSkills : MonoBehaviour
             StartCoroutine(MultySpear());
         #endregion
 
-        #region Dash Spear;
+        #region Dash Spear
         if (Input.GetKeyDown(KeyCode.Alpha4) && PM.Mana >= RequiredMana[3] && SpellActive[3])
             StartCoroutine(DashSpear());
         #endregion
@@ -144,10 +135,10 @@ public class SpearWomanSkills : MonoBehaviour
     #region Lighint Ball
     IEnumerator LightingBall()
     {
+        ChangeAnimatorUISpeed(1);
         PM.Mana -= RequiredMana[1];
         SpellActive[1] = false;
         AC.animator.SetTrigger("LightingBall");
-        CDRAnimator[1].SetTrigger("CDR");
         yield return new WaitForSeconds(CDR[1]);
         SpellActive[1] = true;
     }
@@ -156,10 +147,10 @@ public class SpearWomanSkills : MonoBehaviour
     #region MultySpear Spell
     IEnumerator MultySpear()
     {
+        ChangeAnimatorUISpeed(2);
         PM.Mana -= RequiredMana[2];
         SpellActive[2] = false;
         AC.animator.SetTrigger("MultySpear");
-        CDRAnimator[2].SetTrigger("CDR");
         yield return new WaitForSeconds(CDR[2]);
         SpellActive[2] = true;
     }
@@ -168,10 +159,10 @@ public class SpearWomanSkills : MonoBehaviour
     #region Dash Spear
     IEnumerator DashSpear()
     {
+        ChangeAnimatorUISpeed(3);
         PM.Mana -= RequiredMana[3];
         SpellActive[3] = false;
         AC.animator.SetTrigger("DashSpear");
-        CDRAnimator[3].SetTrigger("CDR");
         yield return new WaitForSeconds(CDR[3]);
         SpellActive[3] = true;
     }
@@ -180,10 +171,10 @@ public class SpearWomanSkills : MonoBehaviour
     #region Lighting Strike
     IEnumerator LightingStrike()
     {
+        ChangeAnimatorUISpeed(4);
         PM.Mana -= RequiredMana[4];
         SpellActive[4] = false;
         AC.animator.SetTrigger("LightingStrike");
-        CDRAnimator[4].SetTrigger("CDR");
         yield return new WaitForSeconds(CDR[4]);
         SpellActive[4] = true;
     }
@@ -215,6 +206,13 @@ public class SpearWomanSkills : MonoBehaviour
         }
     }
     #endregion
+
+    void ChangeAnimatorUISpeed(int Number)
+    {
+        CDRAnimator[Number].speed = 1;
+        CDRAnimator[Number].SetTrigger("CDR");
+        CDRAnimator[Number].speed = 1 / CDR[Number];
+    }
 
     #region On Draw Gizmos
     private void OnDrawGizmosSelected()

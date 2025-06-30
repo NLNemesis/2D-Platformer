@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     [HideInInspector] public Rigidbody2D rb;
     private InputManager IM;
-    private UIController UIC;
+    private GameController GC;
     [HideInInspector] public AnimController AC;
     public Transform GroundCheck;
     public LayerMask GroundLayer;
@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         IM = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<InputManager>();
-        UIC = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<UIController>();
+        GC = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<GameController>();
         rb = GetComponent<Rigidbody2D>();
         AC = GetComponent<AnimController>();
         OriginalSpeed = Speed;

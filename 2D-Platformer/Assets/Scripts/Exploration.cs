@@ -12,14 +12,14 @@ public class Exploration : MonoBehaviour
     public UnityEvent Event;
 
     [Header("References")]
-    private UIController UIC;
+    private GameController GC;
     private Animator CanvasAnimator;
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        UIC = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<UIController>();
+        GC = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<GameController>();
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
     }
 
@@ -27,7 +27,7 @@ public class Exploration : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            UIC.NewAreaText.text = AreaName;
+            GC.NewAreaText.text = AreaName;
             CanvasAnimator.SetTrigger("NewArea");
             Event.Invoke();
             this.gameObject.SetActive(false);

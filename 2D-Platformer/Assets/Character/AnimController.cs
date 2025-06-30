@@ -23,7 +23,7 @@ public class AnimController : MonoBehaviour
     [Header("References")]
     private PlayerMovement PM;
     private InputManager IM;
-    private UIController UIC;
+    private GameController GC;
     [HideInInspector] public Animator animator;
     private AudioSource Audio;
     public AudioClip[] Clip;
@@ -34,7 +34,7 @@ public class AnimController : MonoBehaviour
         PM = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
         IM = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<InputManager>();
-        UIC = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<UIController>();
+        GC = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<GameController>();
         Audio = GetComponent<AudioSource>();
     }
 
@@ -56,7 +56,7 @@ public class AnimController : MonoBehaviour
         }
 
         #region Attacks
-        if (Input.GetMouseButtonDown(0) && UIC.OpenedUI == 0 && PM.Stamina >= 30)
+        if (Input.GetMouseButtonDown(0) && GC.OpenedUI == 0 && PM.Stamina >= 30)
         {
             if (CanAttack)
             {

@@ -41,7 +41,7 @@ public class Door : MonoBehaviour
         PM = Player.GetComponent<PlayerMovement>();
         CanvasAnimator = GameObject.Find("/MaxPrefab/Canvas").GetComponent<Animator>();
         IM = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<InputManager>();
-        Messages = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<UIController>().UIMessages;
+        Messages = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<GameController>().UIMessages;
     }
 
     #region On Triggers
