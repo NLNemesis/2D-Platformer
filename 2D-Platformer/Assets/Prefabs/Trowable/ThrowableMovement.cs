@@ -14,13 +14,16 @@ public class ThrowableMovement : MonoBehaviour
     [Space(10)]
     public float DestroyTime;
 
+    [Header("References")]
     PlayerMovement PM;
+    SpearWomanSkills SWS;
     Animator animator;
     #endregion
 
     private void Start()
     {
         PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
+        SWS = GameObject.Find("/MaxPrefab/Player").GetComponent<SpearWomanSkills>();
         animator = GetComponent<Animator>();
         IsFacingRight = PM.isFacingRight;
         if (PM.isFacingRight)
@@ -84,10 +87,20 @@ public class ThrowableMovement : MonoBehaviour
             Enemy enemy = hit[i].GetComponent<Enemy>();
             if (aiMove != null)
             {
-                if (MagicDamage)
-                    aiMove.TakeDamage(PM.SkillDamage, true);
+                if (SWS != null && SWS.SkillBuff[1]) // If the player upgraded the Lighting Breath
+                {
+                    if (MagicDamage)
+                        aiMove.TakeDamage(PM.SkillDamage * 2, true);
+                    else
+                        aiMove.TakeDamage(PM.Damage * 2, false);
+                }
                 else
-                    aiMove.TakeDamage(PM.Damage, false);
+                {
+                    if (MagicDamage)
+                        aiMove.TakeDamage(PM.SkillDamage, true);
+                    else
+                        aiMove.TakeDamage(PM.Damage, false);
+                }
                 HitEnemy();
             }
             else if (enemy != null)

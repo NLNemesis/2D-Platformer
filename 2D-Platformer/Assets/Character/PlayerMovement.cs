@@ -86,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     public TextMeshProUGUI[] UIText;
 
     [Header("Experience Points")]
+    public float Scale;
     public float[] XPScale;
     public Slider XPSlider;
     public TextMeshProUGUI LevelText;
@@ -112,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
         #region Assign XP Scale 
         for (int i = 0; i < XPScale.Length; i++)
         {
-            XPScale[i] = 250 * i;
+            XPScale[i] = Scale * i;
         }
         XPSlider.maxValue = XPScale[0];
         #endregion
@@ -467,6 +468,11 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region XP System
+    public void GainXPEvent(float Value)
+    {
+        StartCoroutine(GainXP(Value));
+    }
+
     public IEnumerator GainXP(float Value)
     {
         if (Level < XPScale.Length) //If the player's level is less than the max level
@@ -474,12 +480,11 @@ public class PlayerMovement : MonoBehaviour
             float Timer = 0f;
             float Duration = 1f;
             float NewXP = CurrentXP + Value;
-
             while (Timer < Duration)
             {
                 Timer += Time.fixedDeltaTime;
                 float Step = Timer / Duration;
-                CurrentXP = Mathf.Lerp(CurrentXP, NewXP, Step);    
+                CurrentXP = Mathf.Lerp(CurrentXP, NewXP, Step);
                 yield return null;
             }
 

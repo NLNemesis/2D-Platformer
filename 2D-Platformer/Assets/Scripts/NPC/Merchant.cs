@@ -23,11 +23,6 @@ public class Merchant : MonoBehaviour
     private int[] PlayerItemsAmount;
 
     [Space(10)]
-    [Header("Equipment Shop")]
-    public string[] Equipment_Item;
-    public int[] Equipment_Value;
-
-    [Space(10)]
     [Header("References")]
     private PlayerMovement PM;
     private Inventory inventory;
@@ -152,25 +147,32 @@ public class Merchant : MonoBehaviour
     }
     #endregion
 
-    #region Buy Item Equipment
-    public void BuyItem_Equipment(int Number)
-    {
-        if (PM.Gold >= Value[Number] && inventory.Equipment_SlotAvailable > 0)
-        {
-            PM.Gold -= Equipment_Value[Number];
-            inventory.AddEquipmentItem(Equipment_Item[Number]);
-        }
-    }
-    #endregion
+    #region Equipment Controller
+    //[Space(10)]
+    //[Header("Equipment Shop")]
+    //public string[] Equipment_Item;
+    //public int[] Equipment_Value;
 
-    #region Sell Item Equipment
-    public void SellItem_Equipment(int Number)
-    {
-        if (inventory.CheckForEquipmentItem(Equipment_Item[Number]) == true)
-        {
-            inventory.RemoveEquipmentItem(Equipment_Item[Number]);
-            PM.Gold += 200;
-        }
-    }
+    //#region Buy Item Equipment
+    //public void BuyItem_Equipment(int Number)
+    //{
+    //    if (PM.Gold >= Value[Number] && inventory.Equipment_SlotAvailable > 0)
+    //    {
+    //        PM.Gold -= Equipment_Value[Number];
+    //        inventory.AddEquipmentItem(Equipment_Item[Number]);
+    //    }
+    //}
+    //#endregion
+
+    //#region Sell Item Equipment
+    //public void SellItem_Equipment(int Number)
+    //{
+    //    if (inventory.CheckForEquipmentItem(Equipment_Item[Number]) == true)
+    //    {
+    //        inventory.RemoveEquipmentItem(Equipment_Item[Number]);
+    //        PM.Gold += 200;
+    //    }
+    //}
+    //#endregion
     #endregion
 }

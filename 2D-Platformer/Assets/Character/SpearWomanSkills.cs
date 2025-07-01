@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.U2D.IK;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class SpearWomanSkills : MonoBehaviour
 {
@@ -23,6 +23,10 @@ public class SpearWomanSkills : MonoBehaviour
     [Header("Jump electric shock")]
     public Transform AttackPoint;
     public float AttackRange;
+
+    [Header("UI")]
+    public int[] LevelRequirment;
+    public Image[] SkilLTreePath;
 
     [Header("References")]
     private PlayerMovement PM;
@@ -99,17 +103,47 @@ public class SpearWomanSkills : MonoBehaviour
         #region Increase Stats
         if (AC.animator.GetBool("Transformation_Activity"))
         {
-            PM.Damage = OriginalDamage + IncreasedStats;
-            PM.SkillDamage = OriginalSkillDamage + IncreasedStats;
-            PM.Armor = OriginalArmor + IncreasedStats;
-            PM.MagicResist = OriginalMagicResist + IncreasedStats;
+            float TransformationBuff = (10 / IncreasedStats) * 100;
+            if (SkillBuff[0]) // if The player upgraded the first Skill "Transformation"
+            {
+                PM.Damage = OriginalDamage + IncreasedStats + TransformationBuff;
+                PM.SkillDamage = OriginalSkillDamage + IncreasedStats + TransformationBuff;
+                PM.Armor = OriginalArmor + IncreasedStats + TransformationBuff;
+                PM.MagicResist = OriginalMagicResist + IncreasedStats + TransformationBuff;
+            }
+            else
+            {
+                PM.Damage = OriginalDamage + IncreasedStats;
+                PM.SkillDamage = OriginalSkillDamage + IncreasedStats;
+                PM.Armor = OriginalArmor + IncreasedStats;
+                PM.MagicResist = OriginalMagicResist + IncreasedStats;
+            }
         }
         else
         {
-            PM.Damage = OriginalDamage - IncreasedStats;
-            PM.SkillDamage = OriginalSkillDamage - IncreasedStats;
-            PM.Armor = OriginalArmor - IncreasedStats;
-            PM.MagicResist = OriginalMagicResist - IncreasedStats;
+            float TransformationBuff = (10 / IncreasedStats) * 100;
+            if (SkillBuff[0])
+            {
+                PM.Damage = OriginalDamage - IncreasedStats - TransformationBuff;
+                PM.SkillDamage = OriginalSkillDamage - IncreasedStats - TransformationBuff;
+                PM.Armor = OriginalArmor - IncreasedStats + TransformationBuff;
+                PM.MagicResist = OriginalMagicResist - IncreasedStats - TransformationBuff;
+            }
+            else
+            {
+                PM.Damage = OriginalDamage - IncreasedStats;
+                PM.SkillDamage = OriginalSkillDamage - IncreasedStats;
+                PM.Armor = OriginalArmor - IncreasedStats;
+                PM.MagicResist = OriginalMagicResist - IncreasedStats;
+            }
+        }
+        #endregion
+
+        #region Change Color Skill Tree Lines
+        for (int i = 0; i < LevelRequirment.Length; i++)
+        {
+            if (PM.Level >= LevelRequirment[i])
+                SkilLTreePath[i].color = Color.green;
         }
         #endregion
     }
@@ -207,12 +241,14 @@ public class SpearWomanSkills : MonoBehaviour
     }
     #endregion
 
+    #region CDR-UI-Speed
     void ChangeAnimatorUISpeed(int Number)
     {
         CDRAnimator[Number].speed = 1;
         CDRAnimator[Number].SetTrigger("CDR");
         CDRAnimator[Number].speed = 1 / CDR[Number];
     }
+    #endregion
 
     #region On Draw Gizmos
     private void OnDrawGizmosSelected()
@@ -221,4 +257,15 @@ public class SpearWomanSkills : MonoBehaviour
             Gizmos.DrawWireSphere(AttackPoint.position, AttackRange);
     }
     #endregion
+
+    //----------------------------BUFFS-----------------------------//
+    #region Variables
+    [Space(10)]
+    public bool[] SkillBuff;
+    #endregion
+
+    public void UpgradeSkills(int Number)
+    {
+        SkillBuff[Number] = true;
+    }
 }

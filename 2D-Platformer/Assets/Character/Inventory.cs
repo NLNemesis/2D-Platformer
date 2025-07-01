@@ -23,9 +23,6 @@ public class Inventory : MonoBehaviour
         SlotName = new string[SlotImage.Length];
         SlotFull = new bool[SlotImage.Length];
         SlotAvailable = SlotImage.Length;
-        Equipment_SlotName = new string[Equipment_SlotImage.Length];
-        Equipment_SlotFull = new bool[Equipment_SlotImage.Length];
-        Equipment_SlotAvailable = Equipment_SlotImage.Length;
     }
     #endregion
     //--------------------------------INVENTORY SYSTEM--------------------------------------------//
@@ -165,77 +162,86 @@ public class Inventory : MonoBehaviour
         return Check;
     }
     #endregion
-    //--------------------------------EQUIPMENT INVENTORY--------------------------------------------//
-    #region Variables
-    [Space(20)]
-    [Header("Equipment Inventory")]
-    public Image[] Equipment_SlotImage;
-    [HideInInspector] public string[] Equipment_SlotName;
-    [HideInInspector] public bool[] Equipment_SlotFull;
-    [HideInInspector] public int Equipment_SlotAvailable;
 
-    [Header("Game Equipments")]
-    public Sprite[] Equipment_ItemImage;
-    public string[] Equipment_ItemName;
-    #endregion
+    #region Equipment Controller
+    //For Start Method
+    //Equipment_SlotName = new string[Equipment_SlotImage.Length];
+    //Equipment_SlotFull = new bool[Equipment_SlotImage.Length];
+    //Equipment_SlotAvailable = Equipment_SlotImage.Length;
 
-    #region Add Equipment Item
-    public void AddEquipmentItem(string Name)
-    {
-        for (int i = 0; i < Equipment_SlotFull.Length; i++)
-        {
-            if (Equipment_SlotFull[i] == false)
-            {
-                for (int j = 0; j < Equipment_ItemImage.Length; j++)
-                {
-                    if (Equipment_ItemName[j] == Name)
-                    {
-                        Equipment_SlotAvailable -= 1;
-                        Equipment_SlotFull[i] = true;
-                        Equipment_SlotName[i] = Name;
-                        Equipment_SlotImage[i].sprite = Equipment_ItemImage[j];
-                        break;
-                    }
-                }
-                break;
-            }
-        }
-    }
-    #endregion
+    ////--------------------------------EQUIPMENT INVENTORY--------------------------------------------//
+    //#region Variables
+    //[Space(20)]
+    //[Header("Equipment Inventory")]
+    //public Image[] Equipment_SlotImage;
+    //[HideInInspector] public string[] Equipment_SlotName;
+    //[HideInInspector] public bool[] Equipment_SlotFull;
+    //[HideInInspector] public int Equipment_SlotAvailable;
 
-    #region Remove Equipment Item
-    public void RemoveEquipmentItem(string Name)
-    {
-        for (int i = 0; i < Equipment_SlotName.Length; i++)
-        {
-            if (Equipment_SlotName[i] == Name && Equipment_SlotFull[i] == true)
-            {
-                Equipment_SlotAvailable += 1;
-                Equipment_SlotFull[i] = false;
-                Equipment_SlotName[i] = "Empty";
-                Equipment_SlotImage[i].sprite = EmptySprite;
-                break;
-            }
-        }
-    }
-    #endregion
+    //[Header("Game Equipments")]
+    //public Sprite[] Equipment_ItemImage;
+    //public string[] Equipment_ItemName;
+    //#endregion
 
-    #region Check For Equipment Item
-    public bool CheckForEquipmentItem(string Name)
-    {
-        Check = true;
-        for (int i = 0; i < Equipment_SlotName.Length; i++)
-        {
-            if (Equipment_SlotName[i] == Name)
-            {
-                Check = true;
-                break;
-            }
-            else
-                Check = false;
-        }
-        return Check;
-    }
+    //#region Add Equipment Item
+    //public void AddEquipmentItem(string Name)
+    //{
+    //    for (int i = 0; i < Equipment_SlotFull.Length; i++)
+    //    {
+    //        if (Equipment_SlotFull[i] == false)
+    //        {
+    //            for (int j = 0; j < Equipment_ItemImage.Length; j++)
+    //            {
+    //                if (Equipment_ItemName[j] == Name)
+    //                {
+    //                    Equipment_SlotAvailable -= 1;
+    //                    Equipment_SlotFull[i] = true;
+    //                    Equipment_SlotName[i] = Name;
+    //                    Equipment_SlotImage[i].sprite = Equipment_ItemImage[j];
+    //                    break;
+    //                }
+    //            }
+    //            break;
+    //        }
+    //    }
+    //}
+    //#endregion
+
+    //#region Remove Equipment Item
+    //public void RemoveEquipmentItem(string Name)
+    //{
+    //    for (int i = 0; i < Equipment_SlotName.Length; i++)
+    //    {
+    //        if (Equipment_SlotName[i] == Name && Equipment_SlotFull[i] == true)
+    //        {
+    //            Equipment_SlotAvailable += 1;
+    //            Equipment_SlotFull[i] = false;
+    //            Equipment_SlotName[i] = "Empty";
+    //            Equipment_SlotImage[i].sprite = EmptySprite;
+    //            break;
+    //        }
+    //    }
+    //}
+    //#endregion
+
+    //#region Check For Equipment Item
+    //public bool CheckForEquipmentItem(string Name)
+    //{
+    //    Check = true;
+    //    for (int i = 0; i < Equipment_SlotName.Length; i++)
+    //    {
+    //        if (Equipment_SlotName[i] == Name)
+    //        {
+    //            Check = true;
+    //            break;
+    //        }
+    //        else
+    //            Check = false;
+    //    }
+    //    return Check;
+    //}
+    //#endregion
+    ////--------------------------------EQUIPMENT SYSTEM--------------------------------------------//
+    ///
     #endregion
-    //--------------------------------EQUIPMENT SYSTEM--------------------------------------------//
 }
