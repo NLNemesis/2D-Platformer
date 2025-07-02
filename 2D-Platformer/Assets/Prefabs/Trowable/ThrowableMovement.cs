@@ -88,19 +88,13 @@ public class ThrowableMovement : MonoBehaviour
             if (aiMove != null)
             {
                 if (SWS != null && SWS.SkillBuff[1]) // If the player upgraded the Lighting Breath
-                {
-                    if (MagicDamage)
-                        aiMove.TakeDamage(PM.SkillDamage * 2, true);
+                    if (SWS.SkillBuff[10])
+                        aiMove.TakeDamage(PM.SkillDamage * 2, MagicDamage);
                     else
-                        aiMove.TakeDamage(PM.Damage * 2, false);
-                }
+                        aiMove.TakeDamage(PM.SkillDamage * 6, MagicDamage);
                 else
-                {
-                    if (MagicDamage)
-                        aiMove.TakeDamage(PM.SkillDamage, true);
-                    else
-                        aiMove.TakeDamage(PM.Damage, false);
-                }
+                        aiMove.TakeDamage(PM.SkillDamage, MagicDamage);
+
                 HitEnemy();
             }
             else if (enemy != null)

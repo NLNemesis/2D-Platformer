@@ -27,6 +27,7 @@ public class AnimController : MonoBehaviour
     [HideInInspector] public Animator animator;
     private AudioSource Audio;
     public AudioClip[] Clip;
+    private SpearWomanSkills SWS;
     #endregion
 
     private void Start()
@@ -35,6 +36,7 @@ public class AnimController : MonoBehaviour
         animator = GetComponent<Animator>();
         IM = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<InputManager>();
         GC = GameObject.Find("/MaxPrefab/GameScripts").GetComponent<GameController>();
+        SWS = GameObject.Find("/MaxPrefab/Player").GetComponent<SpearWomanSkills>();
         Audio = GetComponent<AudioSource>();
     }
 
@@ -155,10 +157,16 @@ public class AnimController : MonoBehaviour
         {
             AIMove aiMove = hit[i].GetComponent<AIMove>();
             Enemy enemy = hit[i].GetComponent<Enemy>();
-            if (aiMove != null)
-                aiMove.TakeDamage(PM.Damage, true);
-            else if (enemy != null)
-                enemy.TakeDamage(PM.Damage, true);
+            if (aiMove != null) //If player finds a target
+                if (SWS.SkillBuff[4])
+                    aiMove.TakeDamage(PM.SkillDamage + 40, true);
+                else
+                    enemy.TakeDamage(PM.SkillDamage, true);
+            else if (enemy != null) //If player finds a target
+                if (SWS.SkillBuff[4])
+                    aiMove.TakeDamage(PM.SkillDamage + 40, true);
+                else
+                    enemy.TakeDamage(PM.SkillDamage, true);
         }
     }
 

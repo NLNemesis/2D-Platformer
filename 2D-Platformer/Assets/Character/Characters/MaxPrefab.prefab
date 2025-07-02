@@ -987,7 +987,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: -297.1}
+  m_AnchoredPosition: {x: -13, y: -302.4}
   m_SizeDelta: {x: 548.54, y: 635.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1770652969724742767
@@ -1646,7 +1646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -38}
+  m_AnchoredPosition: {x: 0, y: -53.6}
   m_SizeDelta: {x: 548.54, y: 635.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4415017327479907367
@@ -4299,7 +4299,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: After sylvane casts transformation, her stats will increase by 10%
+  m_text: Transformation buff is increased by 50%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4397,29 +4397,29 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4483932884682184052}
+  - {fileID: 620930087675712566}
   - {fileID: 7763710998029421869}
   - {fileID: 3306442870008512842}
-  - {fileID: 3950406123156792869}
-  - {fileID: 620930087675712566}
   - {fileID: 2675758010720234102}
   - {fileID: 2593270195913872898}
   - {fileID: 6484504303734913495}
-  - {fileID: 2859830750659840164}
   - {fileID: 6042823230389363074}
+  - {fileID: 2859830750659840164}
   - {fileID: 1368631928785600044}
   - {fileID: 6418909663459003903}
+  - {fileID: 3950406123156792869}
   - {fileID: 2503470015122189490}
   - {fileID: 6709152558987714620}
   - {fileID: 6782798302679586271}
-  - {fileID: 3424063793854894138}
   - {fileID: 4728733434742074211}
   - {fileID: 7006861884233585813}
   - {fileID: 2464061547857169023}
   - {fileID: 3364125707461986170}
-  - {fileID: 8098655077170794610}
   - {fileID: 9077198256319509119}
+  - {fileID: 8098655077170794610}
   - {fileID: 2204655077333574280}
   - {fileID: 3840406394824839375}
+  - {fileID: 3424063793854894138}
   m_Father: {fileID: 4242324159376177567}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5315,7 +5315,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: After sylvane casts transformation, her damage and skill damage will increase
-    by 25% also she loses 20% of her current armor and magic resist
+    by 25% also she loses 25% of her current armor and magic resist
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6210,7 +6210,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lighting strike increase sylvane's hp by 25%
+  m_text: Lighting strike increase sylvane's hp by 50
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6962,7 +6962,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.3, y: 100}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 548.54, y: 635.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6402226032032033477
@@ -7789,7 +7789,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 129.4}
+  m_AnchoredPosition: {x: 0, y: 99}
   m_SizeDelta: {x: 548.54, y: 635.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7081418917498886275
@@ -11014,7 +11014,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9180111387208478027}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7838294556547828657}
+        m_TargetAssemblyTypeName: SpearWomanSkills, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7959700333028102135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12560,7 +12572,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: After sylvane casts transformation, her stats increased by 50% also she
+  m_text: After sylvane casts transformation, her stats increased by 100% also she
     can't cast any other spells while she uses transformation
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13184,7 +13196,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 309419907469726811}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7838294556547828657}
+        m_TargetAssemblyTypeName: SpearWomanSkills, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1377304266811948250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13769,7 +13793,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5487605998503237332}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7838294556547828657}
+        m_TargetAssemblyTypeName: SpearWomanSkills, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4010801422478981811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15196,57 +15232,8 @@ MonoBehaviour:
   - {fileID: 4932478678157950716}
   - {fileID: 3782568265029596393}
   - {fileID: 8661133907442253778}
+  Scale: 150
   XPScale:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
   - 0
   - 0
   - 0
@@ -15827,8 +15814,20 @@ MonoBehaviour:
   - {fileID: 1261316273245429345}
   AttackPoint: {fileID: 2426271238129999279}
   AttackRange: 3.5
+  LevelRequirment: 050000000a000000140000001e0000002800000023000000230000002d00000032000000
+  SkilLTreePath:
+  - {fileID: 8228546918672383647}
+  - {fileID: 6388655859486465928}
+  - {fileID: 4453465605537303466}
+  - {fileID: 6474065140824647612}
+  - {fileID: 3337237440035223781}
+  - {fileID: 1257081199608575839}
+  - {fileID: 21981212562516176}
+  - {fileID: 317645878014352181}
+  - {fileID: 9096153881100301529}
   ThrowablePrefab: {fileID: 8255839251267934629, guid: 88d9fb409c06eeb40993868287e2da70, type: 3}
   ThrowableStartPoint: {fileID: 5500300908912062850}
+  SkillBuff: 010101010101000000000000
 --- !u!114 &3023812115958438472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15855,7 +15854,7 @@ MonoBehaviour:
   - {x: 0.082812786, y: -0.20978248, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1350
+  m_InstanceId: 64092
   m_LocalBounds:
     m_Center: {x: 0.00000023841858, y: -0.038868442, z: 0}
     m_Extent: {x: 0.08281255, y: 0.17091404, z: 0}
@@ -18993,7 +18992,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 227.1, y: -301.7}
+  m_AnchoredPosition: {x: 228.8, y: -301.7}
   m_SizeDelta: {x: 548.54, y: 635.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8652448359062508275
@@ -19155,7 +19154,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2108279520942730468}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7838294556547828657}
+        m_TargetAssemblyTypeName: SpearWomanSkills, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 187286771330943485}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &713897560329861465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20417,7 +20440,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lighting strike increase sylvane's hp by 25%
+  m_text: Lighting strike increase sylvane's hp by 50
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -22108,7 +22131,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.2, y: 99.3}
+  m_AnchoredPosition: {x: 0, y: 99.3}
   m_SizeDelta: {x: 548.54, y: 635.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4429190886095150987
@@ -26328,7 +26351,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3676697333625171309}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7838294556547828657}
+        m_TargetAssemblyTypeName: SpearWomanSkills, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5225293142547371477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28695,7 +28730,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4521629460369606683}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7838294556547828657}
+        m_TargetAssemblyTypeName: SpearWomanSkills, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &277115673764615692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28806,8 +28853,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: After sylvane casts transformation, her armor andmagic resist will increase
-    by 25%, also she loses 10% of her current damage and skill damage
+  m_text: After sylvane casts transformation, her armor and magic resist will increase
+    by 25%, also she loses 25% of her current damage and skill damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -30895,7 +30942,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 388963447744226895}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7838294556547828657}
+        m_TargetAssemblyTypeName: SpearWomanSkills, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1001104796782854114}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1828591048342879523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31269,7 +31340,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6865350509746351792}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7838294556547828657}
+        m_TargetAssemblyTypeName: SpearWomanSkills, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 9
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9104028939068861568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31629,7 +31712,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1584059692957178934}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7838294556547828657}
+        m_TargetAssemblyTypeName: SpearWomanSkills, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2605381774700105716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34275,7 +34370,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3486178413129787599}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7838294556547828657}
+        m_TargetAssemblyTypeName: SpearWomanSkills, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1081453717157886339}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4018552218223362004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34614,7 +34733,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4429697638110123324}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7838294556547828657}
+        m_TargetAssemblyTypeName: SpearWomanSkills, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1956445693254069441}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9141096007977779633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35956,7 +36099,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6376107770899513816}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7838294556547828657}
+        m_TargetAssemblyTypeName: SpearWomanSkills, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 11
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1331258016246107018
 MonoBehaviour:
   m_ObjectHideFlags: 0

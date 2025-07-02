@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using Unity.VisualScripting;
 
 public class SpearWomanSkills : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class SpearWomanSkills : MonoBehaviour
     [Header("Transformation")]
     public float ManaReductionDuration;
     public Image TransformationImage;
-    public float IncreasedStats;
+    public float IncreasedStats;     
 
     [Header("Requirments")]
     public bool[] SpellActive;
@@ -45,10 +46,10 @@ public class SpearWomanSkills : MonoBehaviour
         AC = GetComponent<AnimController>();
 
         #region Set Saved Stats
-        OriginalDamage = PM.Damage + IncreasedStats;
-        OriginalSkillDamage = PM.SkillDamage + IncreasedStats;
-        OriginalArmor = PM.Armor + IncreasedStats;
-        OriginalMagicResist = PM.MagicResist + IncreasedStats;
+        OriginalDamage = PM.Damage;
+        OriginalSkillDamage = PM.SkillDamage;
+        OriginalArmor = PM.Armor;
+        OriginalMagicResist = PM.MagicResist;
         #endregion
     }
 
@@ -80,63 +81,39 @@ public class SpearWomanSkills : MonoBehaviour
             StartCoroutine(Transformed());
         #endregion
 
+        //If the player upgrades Sylvane to her last form he can't uses the other spells
+        if (SkillBuff[11]) return;
+
         #region Lighting Ball
-        if (Input.GetKeyDown(KeyCode.Alpha2) && PM.Mana >= RequiredMana[1] && SpellActive[1])
-            StartCoroutine(LightingBall());
+        if (Input.GetKeyDown(KeyCode.Alpha2) && SpellActive[1])
+            if (SkillBuff[10] && PM.Mana >= RequiredMana[1] * 2)
+                StartCoroutine(LightingBall());
+            else if (!SkillBuff[10] && PM.Mana >= RequiredMana[1])
+                StartCoroutine(LightingBall());
         #endregion
 
         #region Multy Spear
-        if (Input.GetKeyDown(KeyCode.Alpha3) && PM.Mana >= RequiredMana[2] && SpellActive[2])
-            StartCoroutine(MultySpear());
+        if (Input.GetKeyDown(KeyCode.Alpha3) && SpellActive[2])
+                if (SkillBuff[9])
+                    StartCoroutine(MultySpear());
+                else if (PM.Mana >= RequiredMana[2])
+                    StartCoroutine(MultySpear());
         #endregion
 
-        #region Dash Spear
-        if (Input.GetKeyDown(KeyCode.Alpha4) && PM.Mana >= RequiredMana[3] && SpellActive[3])
-            StartCoroutine(DashSpear());
+        #region Lighting Dash
+        if (Input.GetKeyDown(KeyCode.Alpha4) && SpellActive[3])
+                if (SkillBuff[7])
+                    StartCoroutine(DashSpear());
+                else if (PM.Mana >= RequiredMana[3])
+                    StartCoroutine(DashSpear());
         #endregion
 
         #region Lighting Strike
-        if (Input.GetKeyDown(KeyCode.Alpha5) && PM.Mana >= RequiredMana[4] && SpellActive[4])
-            StartCoroutine(LightingStrike());
-        #endregion
-
-        #region Increase Stats
-        if (AC.animator.GetBool("Transformation_Activity"))
-        {
-            float TransformationBuff = (10 / IncreasedStats) * 100;
-            if (SkillBuff[0]) // if The player upgraded the first Skill "Transformation"
-            {
-                PM.Damage = OriginalDamage + IncreasedStats + TransformationBuff;
-                PM.SkillDamage = OriginalSkillDamage + IncreasedStats + TransformationBuff;
-                PM.Armor = OriginalArmor + IncreasedStats + TransformationBuff;
-                PM.MagicResist = OriginalMagicResist + IncreasedStats + TransformationBuff;
-            }
-            else
-            {
-                PM.Damage = OriginalDamage + IncreasedStats;
-                PM.SkillDamage = OriginalSkillDamage + IncreasedStats;
-                PM.Armor = OriginalArmor + IncreasedStats;
-                PM.MagicResist = OriginalMagicResist + IncreasedStats;
-            }
-        }
-        else
-        {
-            float TransformationBuff = (10 / IncreasedStats) * 100;
-            if (SkillBuff[0])
-            {
-                PM.Damage = OriginalDamage - IncreasedStats - TransformationBuff;
-                PM.SkillDamage = OriginalSkillDamage - IncreasedStats - TransformationBuff;
-                PM.Armor = OriginalArmor - IncreasedStats + TransformationBuff;
-                PM.MagicResist = OriginalMagicResist - IncreasedStats - TransformationBuff;
-            }
-            else
-            {
-                PM.Damage = OriginalDamage - IncreasedStats;
-                PM.SkillDamage = OriginalSkillDamage - IncreasedStats;
-                PM.Armor = OriginalArmor - IncreasedStats;
-                PM.MagicResist = OriginalMagicResist - IncreasedStats;
-            }
-        }
+        if (Input.GetKeyDown(KeyCode.Alpha5) && SpellActive[4])
+                if (SkillBuff[8])
+                    StartCoroutine(LightingStrike());
+                else if (PM.Mana >= RequiredMana[4])
+                    StartCoroutine(LightingStrike());
         #endregion
 
         #region Change Color Skill Tree Lines
@@ -166,6 +143,93 @@ public class SpearWomanSkills : MonoBehaviour
     }
     #endregion
 
+    #region Transformation Increase & Dicrease
+    public void IncreaseTransformationStats()
+    {
+        if (SkillBuff[0]) // if The player upgraded the first Skill "Transformation"
+        {
+            float TransformationBuff = 10 + IncreasedStats;
+            Debug.Log(TransformationBuff);
+            PM.Damage += TransformationBuff;
+            PM.SkillDamage += TransformationBuff;
+            PM.Armor += TransformationBuff;
+            PM.MagicResist += TransformationBuff;
+        }
+        else
+        {
+            PM.Damage += IncreasedStats;
+            PM.SkillDamage +=IncreasedStats;
+            PM.Armor += IncreasedStats;
+            PM.MagicResist += IncreasedStats;
+        }
+
+        if (SkillBuff[2])
+        {
+            PM.SkillDamage += 5;
+            PM.Armor -= 5;
+            PM.MagicResist -= 5;
+        }
+
+        if (SkillBuff[3])
+        {
+            PM.Damage -= 5;
+            PM.SkillDamage -= 5;
+            PM.Armor += 5;
+            PM.MagicResist += 5;
+        }
+
+        if (SkillBuff[11])
+        {
+            PM.Damage += IncreasedStats;
+            PM.SkillDamage += IncreasedStats;
+            PM.Armor += IncreasedStats;
+            PM.MagicResist += IncreasedStats;
+        }
+    }
+
+    public void DecreaseTransformationStats()
+    {
+        if (SkillBuff[0])
+        {
+            float TransformationBuff = 10 + IncreasedStats;
+            PM.Damage -= TransformationBuff;
+            PM.SkillDamage -= TransformationBuff;
+            PM.Armor -= TransformationBuff;
+            PM.MagicResist -= TransformationBuff;
+        }
+        else
+        {
+            PM.Damage -= IncreasedStats;
+            PM.SkillDamage -= IncreasedStats;
+            PM.Armor -= IncreasedStats;
+            PM.MagicResist -= IncreasedStats;
+        }
+
+        if (SkillBuff[2])
+        {
+            PM.SkillDamage -= 5;
+            PM.Armor += 5;
+            PM.MagicResist += 5;
+        }
+
+        if (SkillBuff[3])
+        {
+            PM.Damage += 5;
+            PM.SkillDamage += 5;
+            PM.Armor -= 5;
+            PM.MagicResist -= 5;
+        }
+
+        if (SkillBuff[11])
+        {
+            PM.Damage -= IncreasedStats;
+            PM.SkillDamage -= IncreasedStats;
+            PM.Armor -= IncreasedStats;
+            PM.MagicResist -= IncreasedStats;
+        }
+    }
+    #endregion
+
     #region Lighint Ball
     IEnumerator LightingBall()
     {
@@ -182,7 +246,8 @@ public class SpearWomanSkills : MonoBehaviour
     IEnumerator MultySpear()
     {
         ChangeAnimatorUISpeed(2);
-        PM.Mana -= RequiredMana[2];
+        if (!SkillBuff[9])
+            PM.Mana -= RequiredMana[2];
         SpellActive[2] = false;
         AC.animator.SetTrigger("MultySpear");
         yield return new WaitForSeconds(CDR[2]);
@@ -194,9 +259,17 @@ public class SpearWomanSkills : MonoBehaviour
     IEnumerator DashSpear()
     {
         ChangeAnimatorUISpeed(3);
-        PM.Mana -= RequiredMana[3];
+        if (!SkillBuff[7])
+            PM.Mana -= RequiredMana[3];
         SpellActive[3] = false;
         AC.animator.SetTrigger("DashSpear");
+        //Buff
+        if (SkillBuff[6])
+        {
+            PM.Health += 50;
+            if (PM.Health > PM.MaxHealth)
+                PM.Health = PM.MaxHealth;
+        }
         yield return new WaitForSeconds(CDR[3]);
         SpellActive[3] = true;
     }
@@ -206,9 +279,17 @@ public class SpearWomanSkills : MonoBehaviour
     IEnumerator LightingStrike()
     {
         ChangeAnimatorUISpeed(4);
-        PM.Mana -= RequiredMana[4];
+        if (!SkillBuff[8])
+            PM.Mana -= RequiredMana[4];
         SpellActive[4] = false;
         AC.animator.SetTrigger("LightingStrike");
+        //Buff
+        if (SkillBuff[5])
+        {
+            PM.Health += 50;
+            if (PM.Health > PM.MaxHealth)
+                PM.Health = PM.MaxHealth;
+        }
         yield return new WaitForSeconds(CDR[4]);
         SpellActive[4] = true;
     }
@@ -266,6 +347,7 @@ public class SpearWomanSkills : MonoBehaviour
 
     public void UpgradeSkills(int Number)
     {
+        if (PM.Level >= LevelRequirment[Number])
         SkillBuff[Number] = true;
     }
 }
