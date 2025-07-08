@@ -15770,8 +15770,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -661.37, y: 461.36}
-  m_SizeDelta: {x: 597.56, y: 143.28}
+  m_AnchoredPosition: {x: -661.37, y: 464.86}
+  m_SizeDelta: {x: 597.56, y: 150.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &499875270475729591
 CanvasRenderer:
@@ -47863,6 +47863,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3690090689061108820}
     m_Modifications:
+    - target: {fileID: 8880890977855780327, guid: b18dcd3ee86986b469e9cfc64055704c, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880890977855780344, guid: b18dcd3ee86986b469e9cfc64055704c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880890978261839356, guid: b18dcd3ee86986b469e9cfc64055704c, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880890978261839357, guid: b18dcd3ee86986b469e9cfc64055704c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9899999
+      objectReference: {fileID: 0}
     - target: {fileID: 8880890979157700241, guid: b18dcd3ee86986b469e9cfc64055704c, type: 3}
       propertyPath: m_Name
       value: PF Village Props - Stall (2)
