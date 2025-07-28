@@ -1,104 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MyGameManager : MonoBehaviour
 {
     #region Variables
-    public int UIOpened;
-    public GameObject InventoryObject;
+    [Header("UI Controller")]
+    public int UIOpened; //0 = clear, 1 = Pause Menu, 2 = Inventory....
+    public GameObject Inventory;
 
-    [Header("Pause Menu")]
-    public UnityEvent OnPause;
-    public UnityEvent OnResume;
-    public GameObject[] DisableObject;
-    private bool[] ObjectActivity;
+    [Header("UI Variables")]
+    public Slider HealthSlider;
+
+    [Header("References")]
+    public GameObject Character;
+    private MyPlayerMovement MPM;
     #endregion
 
+    // Start is called before the first frame update
     void Start()
     {
-        ObjectActivity = new bool[DisableObject.Length];
+        MPM = Character.GetComponent<MyPlayerMovement>();
+        HealthSlider.maxValue = MPM.Health;
+        HealthSlider.value = MPM.Health;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (UIOpened == 0 || UIOpened == 2)
-            InventoryController();
+        HealthSlider.value = MPM.Health;
 
-        if (UIOpened == 0 || UIOpened == 1)
-            PauseMenu();
+        if (Input.GetKeyDown(KeyCode.Tab) && UIOpened != 1)
+            OpenAndCloseInventory();
+
+        if (Input.GetKeyDown(KeyCode.Escape) && UIOpened == 2)
+            OpenAndCloseInventory();
     }
 
-    void InventoryController()
+    public void OpenAndCloseInventory()
     {
-        #region Inventory handler
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (!Inventory.activeSelf)
         {
-            if (!InventoryObject.activeSelf)
-            {
-                InventoryObject.SetActive(true);
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                UIOpened = 2;
-            }
-            else
-            {
-                InventoryObject.SetActive(false);
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-                UIOpened = 0;
-            }
+            Inventory.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            UIOpened = 2;
         }
-        #endregion
-
-        #region Escape button Handler
-        if (Input.GetKeyDown(KeyCode.Space) && UIOpened == 2)
+        else
         {
-            InventoryObject.SetActive(false);
+            Inventory.SetActive(false);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             UIOpened = 0;
         }
-        #endregion
     }
-
-    #region Pause Menu Controller
-    public void PauseMenu()
-    { 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (UIOpened == 0)
-            {
-                OnPause.Invoke();
-                UIOpened = 1;
-                for (int i = 0; i < DisableObject.Length; i++)
-                {
-                    ObjectActivity[i] = DisableObject[i].activeSelf;
-                    DisableObject[i].SetActive(false);
-                }
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                Time.timeScale = 0;
-            }
-            else
-                Resume();
-        }
-    }
-
-    public void Resume()
-    {
-        OnResume.Invoke();
-        UIOpened = 0;
-        for (int i = 0; i < DisableObject.Length; i++)
-            DisableObject[i].SetActive(ObjectActivity[i]);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1;
-    }
-    #endregion
 
     public void ChangeLevel(int Number)
     {

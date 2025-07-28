@@ -9,7 +9,7 @@ public class MyAnimController : MonoBehaviour
     public bool HasDash;
     public bool HasSlide;
     private bool CanAttack;
-    [HideInInspector] public bool HitAnimation = true;
+    [HideInInspector] public bool ReactionAnimation;
 
     [Header("Attack Controller")]
     public int MaxAttack;
@@ -32,12 +32,14 @@ public class MyAnimController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         MPM = GetComponent<MyPlayerMovement>();
+        ReactionAnimation = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Time.timeScale == 0) return;
+        if (MPM.Freezed) return;
 
         CanAttack = !MPM.Freezed;
 
@@ -128,7 +130,6 @@ public class MyAnimController : MonoBehaviour
         ComboActivated = false;
         CurrentAttack = 0;
         MPM.Unfreeze();
-        HitAnimation = false;
     }
     #endregion
 }

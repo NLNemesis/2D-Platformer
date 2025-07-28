@@ -32,12 +32,13 @@ public class MyPlayerMovement : MonoBehaviour
     [Header("Unity Event")]
     public UnityEvent IsGroundedEvent;
     public UnityEvent NotIsGroundedEvent;
+    public UnityEvent DeathEvent;
     #endregion
 
     void Awake()
     {
         originalSpeed = speed;
-        MAC = gameObject.GetComponent<MyAnimController>();
+        MAC = GetComponent<MyAnimController>();
     }
 
     private void Update()
@@ -164,6 +165,7 @@ public class MyPlayerMovement : MonoBehaviour
     {
         speed = originalSpeed;
         Freezed = false;
+        MAC.ReactionAnimation = true;
     }
     #endregion
 
@@ -195,16 +197,31 @@ public class MyPlayerMovement : MonoBehaviour
     {
         if (Health > 0)
         {
-            if (MAC.HitAnimation)
-            {
-                MAC.HitAnimation = false;
-                MAC.animator.SetTrigger("Hit");
-            }
             Health -= Value;
 
-            if (Health < 0)
-                MAC.animator.SetTrigger("Death");
+            if (MAC.ReactionAnimation)
+            {
+                MAC.ReactionAnimation = false;
+                MAC.animator.SetTrigger("Reaction");
+                Freezed = true;
+            }
+
+            if (Health <= 0)
+            {
+                MAC.animator.SetBool("Death", true);
+                Freezed = true;
+                StartCoroutine(DeathSceenDelay());
+            }
         }
+    }
+
+    IEnumerator DeathSceenDelay()
+    {
+        yield return new WaitForSeconds(1.3f);
+        DeathEvent.Invoke();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
     }
     #endregion
 }
