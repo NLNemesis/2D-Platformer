@@ -142,11 +142,8 @@ public class AnimController : MonoBehaviour
         for (int i = 0; i < hit.Length; i++)
         {
             AIMove aiMove = hit[i].GetComponent<AIMove>();
-            Enemy enemy = hit[i].GetComponent<Enemy>();
             if (aiMove != null)
                 aiMove.TakeDamage(PM.Damage * Multiply, false);
-            else if (enemy != null)
-                enemy.TakeDamage(PM.Damage * Multiply, false);
         }
     }
 
@@ -156,17 +153,9 @@ public class AnimController : MonoBehaviour
         for (int i = 0; i < hit.Length; i++)
         {
             AIMove aiMove = hit[i].GetComponent<AIMove>();
-            Enemy enemy = hit[i].GetComponent<Enemy>();
             if (aiMove != null) //If player finds a target
                 if (SWS.SkillBuff[4])
                     aiMove.TakeDamage(PM.SkillDamage + 40, true);
-                else
-                    enemy.TakeDamage(PM.SkillDamage, true);
-            else if (enemy != null) //If player finds a target
-                if (SWS.SkillBuff[4])
-                    aiMove.TakeDamage(PM.SkillDamage + 40, true);
-                else
-                    enemy.TakeDamage(PM.SkillDamage, true);
         }
     }
 

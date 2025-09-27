@@ -313,11 +313,8 @@ public class SpearWomanSkills : MonoBehaviour
         for (int i = 0; i < hit.Length; i++)
         {
             AIMove aiMove = hit[i].GetComponent<AIMove>();
-            Enemy enemy = hit[i].GetComponent<Enemy>();
             if (aiMove != null)
                 aiMove.TakeDamage(PM.Damage, true);
-            else if (enemy != null)
-                enemy.TakeDamage(PM.Damage, true);
         }
     }
     #endregion

@@ -11,7 +11,6 @@ public class AIDetect : MonoBehaviour
     [Header("References")]
     [HideInInspector] public BoxCollider2D HitBox;
     private AIMove aiMove;
-    private MyPlayerMovement MPM;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -66,8 +65,6 @@ public class AIDetect : MonoBehaviour
             {
                 DealingDamage = false;
                 aiMove.PM.TakeDamage(aiMove.Damage, aiMove.PhysicalDamage);
-                MPM = collision.GetComponent<MyPlayerMovement>();
-                MPM.TakeDamage(aiMove.Damage);
             }
         }
     }
