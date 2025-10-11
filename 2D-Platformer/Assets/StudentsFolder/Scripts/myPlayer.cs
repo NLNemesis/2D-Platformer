@@ -13,16 +13,12 @@ public class myPlayer : MonoBehaviour
 
     [Header("Movement")]
     public float speed = 8f;
+    public float ClimbingSpeed;
     [HideInInspector] public float originalSpeed;
     public float jumpingPower = 16f;
-    private float horizontal;
     private bool isFacingRight = true;
-    public float vertical;
-    public float ClimbingSpeed;
-
-    [Header("Stats")]
-    public float Health;
-    public float Damage;
+    private float horizontal;
+    private float vertical;
 
     [Header("References")]
     public Rigidbody2D rb;
@@ -32,7 +28,6 @@ public class myPlayer : MonoBehaviour
     [Header("Unity Event")]
     public UnityEvent IsGroundedEvent;
     public UnityEvent NotIsGroundedEvent;
-    public UnityEvent DeathEvent;
     #endregion
 
     void Awake()
