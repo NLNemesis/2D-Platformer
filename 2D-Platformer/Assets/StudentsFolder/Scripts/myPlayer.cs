@@ -8,8 +8,9 @@ public class myPlayer : MonoBehaviour
     #region Variables
     [Header("Controller")]
     public bool Freezed;
-    [HideInInspector] public bool InLadder;
-    [HideInInspector] public bool IsClimbing;
+    [HideInInspector] public bool inLadder;
+    [HideInInspector] public bool isClimbing;
+    [HideInInspector] public bool inAir;
 
     [Header("Movement")]
     public float speed = 8f;
@@ -65,7 +66,7 @@ public class myPlayer : MonoBehaviour
         if (!isSliding && !isDashing)
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 
-        if (IsClimbing == true)
+        if (isClimbing == true)
         {
             rb.gravityScale = 1f;
             rb.velocity = new Vector2(rb.velocity.x, vertical * ClimbingSpeed);
@@ -162,21 +163,21 @@ public class myPlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
-            InLadder = true;
+            inLadder = true;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
-            InLadder = true;
+            inLadder = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
         {
-            InLadder = false;
-            IsClimbing = false;
+            inLadder = false;
+            isClimbing = false;
         }
     }
     #endregion
