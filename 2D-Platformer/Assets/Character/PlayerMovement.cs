@@ -199,9 +199,9 @@ public class PlayerMovement : MonoBehaviour
 
         #region Ground Handler
         if (IsGrounded())
-            Event[1].Invoke();
-        else
             Event[0].Invoke();
+        else
+            Event[1].Invoke();
         #endregion
     }
 

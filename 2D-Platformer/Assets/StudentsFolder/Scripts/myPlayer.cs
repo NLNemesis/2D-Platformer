@@ -7,7 +7,7 @@ public class myPlayer : MonoBehaviour
 {
     #region Variables
     [Header("Controller")]
-    public bool Freezed;
+    public bool frozen;
     [HideInInspector] public bool inLadder;
     [HideInInspector] public bool isClimbing;
     [HideInInspector] public bool inAir;
@@ -25,6 +25,7 @@ public class myPlayer : MonoBehaviour
     public Rigidbody2D rb;
     public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    private Animator animator;
 
     [Header("Unity Event")]
     public UnityEvent IsGroundedEvent;
@@ -34,20 +35,16 @@ public class myPlayer : MonoBehaviour
     void Awake()
     {
         originalSpeed = speed;
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         if (Time.timeScale == 0) return;
-        if (Freezed) return;
+        if (frozen) return;
         if (isSliding || isDashing) return;
 
-        horizontal = Input.GetAxisRaw("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-        if (!Input.GetKey(KeyCode.Space) && rb.velocity.y > 0f)
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-
+        HandlePlayerInput();
         Flip();
         IsGrounded();
 
@@ -61,7 +58,7 @@ public class myPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Freezed) return;
+        if (frozen) return;
 
         if (!isSliding && !isDashing)
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
@@ -77,10 +74,40 @@ public class myPlayer : MonoBehaviour
         }
     }
 
+    #region Handle Player Input
+    void HandlePlayerInput()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal");
+
+        if (horizontal != 0 && IsGrounded() && !Input.GetKey(KeyCode.Space))
+            animator.Play("Walk");
+        else if (horizontal == 0 && IsGrounded() && !Input.GetKey(KeyCode.Space))
+            animator.Play("Idle");
+
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            animator.SetTrigger("Jump");
+        }
+        if (!Input.GetKey(KeyCode.Space) && rb.velocity.y > 0f)
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+    }
+    #endregion
+
     #region Check if the player is grounded
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
+
+    public void Grounded()
+    {
+        Debug.Log("Grounded");
+    }
+    
+    public void NotGrounded()
+    {
+        Debug.Log("Not Grounded");
     }
     #endregion
 
@@ -149,13 +176,13 @@ public class myPlayer : MonoBehaviour
     public void Freeze()
     {
         speed = 0;
-        Freezed = true;
+        frozen = true;
     }
 
     public void Unfreeze()
     {
         speed = originalSpeed;
-        Freezed = false;
+        frozen = false;
     }
     #endregion
 
