@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 public class Chest : MonoBehaviour
 {
-    public bool isClose;
+    private bool isClose;
+    public GameObject Message;
     public UnityEvent OpenEvent;
 
     private void OnTriggerEnter2D(Collider2D Object)
@@ -13,6 +14,7 @@ public class Chest : MonoBehaviour
         if (Object.name == "Player")
         {
             isClose = true;
+            Message.SetActive(true);
         }
     }
 
@@ -21,6 +23,7 @@ public class Chest : MonoBehaviour
         if (Object.name == "Player")
         {
             isClose = false;
+            Message.SetActive(false);
         }
     }
 
