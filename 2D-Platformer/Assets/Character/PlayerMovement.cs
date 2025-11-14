@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool Crouch;
     [HideInInspector] public bool Invisible;
     [HideInInspector] public bool Death;
+    [HideInInspector] public float GroundRange;
 
     [Header("Health")]
     public float Health;
@@ -199,9 +200,15 @@ public class PlayerMovement : MonoBehaviour
 
         #region Ground Handler
         if (IsGrounded())
+        {
             Event[0].Invoke();
+            GroundRange = 1;
+        }
         else
+        {
             Event[1].Invoke();
+            GroundRange = 0.2f;
+        }
         #endregion
     }
 
@@ -227,8 +234,8 @@ public class PlayerMovement : MonoBehaviour
     #region Ground Check
     public bool IsGrounded()
     {
-        Debug.DrawRay(GroundCheck.position, Vector2.down * 2f, Color.red);
-        return Physics2D.Raycast(GroundCheck.position, Vector2.down, 2f, GroundLayer);
+        Debug.DrawRay(GroundCheck.position, Vector2.down * GroundRange, Color.red);
+        return Physics2D.Raycast(GroundCheck.position, Vector2.down, GroundRange, GroundLayer);
     }
     #endregion
 
