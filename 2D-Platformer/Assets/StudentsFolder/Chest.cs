@@ -9,6 +9,10 @@ public class Chest : MonoBehaviour
     public GameObject Message;
     public UnityEvent OpenEvent;
 
+    public string[] itemName;
+    public Sprite[] itemIcon;
+    public myInventory myinventory;
+
     private void OnTriggerEnter2D(Collider2D Object)
     {
         if (Object.name == "Player")
