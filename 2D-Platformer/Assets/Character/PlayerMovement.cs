@@ -202,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded())
         {
             Event[0].Invoke();
-            GroundRange = 1;
+            GroundRange = 2f;
         }
         else
         {
