@@ -15,20 +15,32 @@ public class myGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && !inventory.activeSelf)
+        #region Toggle Inventory
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            inventory.SetActive(true);
-            UI = 1;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            if (!inventory.activeSelf)
+            {
+                inventory.SetActive(true);
+                UI = 1;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                inventory.SetActive(false);
+                UI = 0;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab) && inventory.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Escape) && UI == 1)
         {
             inventory.SetActive(false);
             UI = 0;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
+        #endregion
     }
 }
