@@ -38,4 +38,28 @@ public class myInventory : MonoBehaviour
         }
     }
     #endregion
+
+    #region Use Item
+    public void UseSlot(int id)
+    {
+        if (slotName[id] == "Small Health Potion")
+        {
+            //Heal Player
+            slotName[id] = "Empty";
+            slotImage[id].sprite = emptySprite;
+        }
+        else if (slotName[id] == "Medium Health Potion")
+        {
+            //Heal Player
+            slotName[id] = "Empty";
+            slotImage[id].sprite = emptySprite;
+        }
+        else if (slotName[id] == "Large Health Potion")
+        {
+            //Heal Player
+            slotName[id] = "Empty";
+            slotImage[id].sprite = emptySprite;
+        }
+    }
+    #endregion
 }
