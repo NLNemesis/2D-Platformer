@@ -44,6 +44,8 @@ public class myChest : MonoBehaviour
         {
             isClose = false;
             OpenEvent.Invoke();
+            for (int i = 0; i < itemName.Length; i++)
+                myinventory.AddItem(itemIcon[i], itemName[i]);
         }
     }
 }
