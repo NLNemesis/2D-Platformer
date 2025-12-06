@@ -225,5 +225,25 @@ public class myPlayer : MonoBehaviour
         for (int i = 0; i < HP; i++)
             Hearts[i].SetActive(true);
     }
+
+    public void LoseHP(int hp)
+    {
+        HP -= hp;
+
+        if (HP > 0)
+        {
+            for (int i = 0; i < Hearts.Length; i++)
+                Hearts[i].SetActive(false);
+
+            for (int i = 0; i < HP; i++)
+                Hearts[i].SetActive(true);
+        }
+        else
+        {
+            for (int i = 0; i < Hearts.Length; i++)
+                Hearts[i].SetActive(false);
+            //Player's Death
+        }
+    }
     #endregion
 }
