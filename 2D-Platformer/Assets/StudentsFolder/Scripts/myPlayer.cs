@@ -208,4 +208,22 @@ public class myPlayer : MonoBehaviour
         }
     }
     #endregion
+
+    #region HP
+    public GameObject[] Hearts;
+    private int HP = 7;
+
+    public void GainHP(int hp)
+    {
+        HP += hp;
+        if (HP > 7)
+            HP = 7;
+
+        for (int i = 0; i < Hearts.Length; i++)
+            Hearts[i].SetActive(false);
+
+        for (int i = 0; i < HP; i++)
+            Hearts[i].SetActive(true);
+    }
+    #endregion
 }
