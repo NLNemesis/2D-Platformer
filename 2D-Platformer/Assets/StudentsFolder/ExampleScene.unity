@@ -6048,6 +6048,7 @@ MonoBehaviour:
   slidingTime: 0.2
   slidingCooldown: 1
   canSlide: 1
+  Hearts: []
 --- !u!70 &1687618744
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -6163,8 +6164,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f96d5d0e017f3439fac23f07ca0f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotName: []
-  slotImage: []
+  slotName:
+  - Empty
+  - Empty
+  - Empty
+  - Empty
+  - Empty
+  - Empty
+  - Empty
+  - Empty
+  - Empty
+  - Empty
+  - Empty
+  - Empty
+  - Empty
+  - Empty
+  - Empty
+  slotImage:
+  - {fileID: 1293623268}
+  - {fileID: 96722824}
+  - {fileID: 1301210533}
+  - {fileID: 588742249}
+  - {fileID: 1144144121}
+  - {fileID: 2142236891}
+  - {fileID: 1913481046}
+  - {fileID: 325646157}
+  - {fileID: 196297465}
+  - {fileID: 553011941}
+  - {fileID: 455028136}
+  - {fileID: 82369079}
+  - {fileID: 217060631}
+  - {fileID: 1293551730}
+  - {fileID: 944975548}
   emptySprite: {fileID: 21300000, guid: 4d039114017f7a64984bcf1ecf1f8a0e, type: 3}
 --- !u!1 &1739407038
 GameObject:
