@@ -36,7 +36,10 @@ public class myAnimator : MonoBehaviour
         Collider2D[] hit;
         hit = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         for (int i = 0; i < hit.Length; i++)
-            Debug.Log(hit);
+        {
+            myEnemy enemy = hit[i].GetComponent<myEnemy>();
+            enemy.TakeDamage();
+        }
     }
     #endregion
 
