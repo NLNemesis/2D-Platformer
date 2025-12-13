@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class myAnimator : MonoBehaviour
 {
+    public Transform attackPoint;
+    public float attackRange;
+    public LayerMask enemyLayer;
+
     private Animator animator;
     private myPlayer player;
     // Start is called before the first frame update
@@ -22,8 +26,23 @@ public class myAnimator : MonoBehaviour
             {
                 animator.Play("Attack");
                 player.Freeze();
-
             }
         }
+    }
+
+    #region Attack Handler
+    public void DealDamage()
+    {
+        Collider2D[] hit;
+        hit = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+        for (int i = 0; i < hit.Length; i++)
+            Debug.Log(hit);
+    }
+    #endregion
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint != null)
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
