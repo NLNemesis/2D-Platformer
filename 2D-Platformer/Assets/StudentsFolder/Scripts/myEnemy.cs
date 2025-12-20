@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class myEnemy : MonoBehaviour
 {
+    public int health;
+    private bool freeze;
+
     private Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -17,9 +20,23 @@ public class myEnemy : MonoBehaviour
         
     }
 
-    public void TakeDamage()
+    #region Take Damage
+    public void TakeDamage(int value)
     {
-        animator.Play("Hit");
-        Debug.Log(this.name);
+        health -= value;
+        AIFreeze();
+        if (health > 0)
+        {
+            animator.Play("Hit");
+        }
+        else
+        {
+            animator.Play("Death");
+        }
     }
+    #endregion
+
+    #region Freeze/Unfreeze
+
+    #endregion
 }
