@@ -10,6 +10,7 @@ public class EnemyDetect : MonoBehaviour
     public int damage;
     public myPlayer player;
     public myEnemy enemy;
+    public Animator animator;
 
     private bool dealt;
     #endregion
@@ -18,6 +19,7 @@ public class EnemyDetect : MonoBehaviour
         if (Object.name == "Player" && !enemy.freeze && detection)
         {
             enemy.freeze = true;
+            animator.Play("Attack");
         }
 
         if (Object.name == "Player" && !dealt && !detection)
