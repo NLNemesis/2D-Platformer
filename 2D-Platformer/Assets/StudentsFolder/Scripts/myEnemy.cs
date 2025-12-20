@@ -5,7 +5,7 @@ using UnityEngine;
 public class myEnemy : MonoBehaviour
 {
     public int health;
-    private bool freeze;
+    public bool freeze;
 
     private Animator animator;
     // Start is called before the first frame update
@@ -37,6 +37,14 @@ public class myEnemy : MonoBehaviour
     #endregion
 
     #region Freeze/Unfreeze
+    public void AIFreeze()
+    {
+        freeze = true;
+    }
 
+    public void AIUnfreeze()
+    {
+        freeze = false;
+    }
     #endregion
 }

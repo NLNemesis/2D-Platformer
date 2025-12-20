@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyDetect : MonoBehaviour
 {
     #region Variables
+    public bool detection;
+
     public int damage;
     public myPlayer player;
     public myEnemy enemy;
@@ -13,7 +15,12 @@ public class EnemyDetect : MonoBehaviour
     #endregion
     private void OnTriggerStay2D(Collider2D Object)
     {
-        if (Object.name == "Player" && !dealt)
+        if (Object.name == "Player" && !enemy.freeze && detection)
+        {
+            enemy.freeze = true;
+        }
+
+        if (Object.name == "Player" && !dealt && !detection)
         {
             dealt = true;
             player.LoseHP(damage);
