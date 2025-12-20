@@ -6080,7 +6080,14 @@ MonoBehaviour:
   slidingTime: 0.2
   slidingCooldown: 1
   canSlide: 1
-  Hearts: []
+  Hearts:
+  - {fileID: 1739407038}
+  - {fileID: 87609330}
+  - {fileID: 1948092505}
+  - {fileID: 371776702}
+  - {fileID: 1157951085}
+  - {fileID: 486389045}
+  - {fileID: 312351011}
 --- !u!70 &1687618744
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
