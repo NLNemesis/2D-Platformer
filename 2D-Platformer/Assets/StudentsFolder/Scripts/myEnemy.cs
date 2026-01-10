@@ -31,7 +31,7 @@ public class myEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!freeze)
+        if (!freeze && health > 0)
             Move();
     }
 
