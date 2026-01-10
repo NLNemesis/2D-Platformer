@@ -92,12 +92,14 @@ public class myEnemy : MonoBehaviour
         if (direction == 1)
         {
             this.transform.position = Vector2.MoveTowards(this.transform.position, rightPosition.position, Speed);
-            this.transform.localScale = new Vector3(1, 1, 1);
+            animator.SetFloat("Movement", 1);
+            this.transform.localScale = rightPosition.localScale;
         }
         else if (direction == -1)
         {
             this.transform.position = Vector2.MoveTowards(this.transform.position, leftPosition.position, Speed);
-            this.transform.localScale = new Vector3(-1, 1, 1);
+            animator.SetFloat("Movement", 1);
+            this.transform.localScale = leftPosition.localScale;
         }
     }
     #endregion
