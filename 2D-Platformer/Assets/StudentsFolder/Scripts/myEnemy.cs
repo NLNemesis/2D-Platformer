@@ -76,4 +76,22 @@ public class myEnemy : MonoBehaviour
         DealDamage = false;
     }
     #endregion
+
+    #region Movement
+    public void Move()
+    {
+        float leftDistance = (leftPosition.position - this.transform.position).magnitude;
+        float rightDistance = (rightPosition.position - this.transform.position).magnitude;
+
+        if (leftDistance == 0 && direction == -1)
+            direction = 1;
+        else if (rightDistance == 0 && direction == 1)
+            direction = -1;
+
+        if (direction == 1)
+        {
+            this.transform.position = Vector2.MoveTowards(this.transform.position, rightPosition.position, Speed);
+        }
+    }
+    #endregion
 }
