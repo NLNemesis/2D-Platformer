@@ -19,7 +19,8 @@ public class myEnemy : MonoBehaviour
 
     public Transform leftPosition;
     public Transform rightPosition;
-    private int direction;
+    private int direction = 1;
+    public float Speed;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -91,6 +92,12 @@ public class myEnemy : MonoBehaviour
         if (direction == 1)
         {
             this.transform.position = Vector2.MoveTowards(this.transform.position, rightPosition.position, Speed);
+            this.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (direction == -1)
+        {
+            this.transform.position = Vector2.MoveTowards(this.transform.position, leftPosition.position, Speed);
+            this.transform.localScale = new Vector3(-1, 1, 1);
         }
     }
     #endregion
