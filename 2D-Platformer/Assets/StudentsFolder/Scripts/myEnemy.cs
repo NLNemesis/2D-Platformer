@@ -16,6 +16,10 @@ public class myEnemy : MonoBehaviour
 
     [Header("References")]
     private Animator animator;
+
+    public Transform leftPosition;
+    public Transform rightPosition;
+    private int direction;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -26,7 +30,8 @@ public class myEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!freeze)
+            Move();
     }
 
     #region Take Damage
