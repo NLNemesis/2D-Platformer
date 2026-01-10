@@ -80,9 +80,10 @@ public class myPlayer : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if (horizontal != 0 && IsGrounded() && !Input.GetKey(KeyCode.Space))
-            animator.Play("Walk");
+            animator.SetBool("Walk", true);
         else if (horizontal == 0 && IsGrounded() && !Input.GetKey(KeyCode.Space))
-            animator.Play("Idle");
+            animator.SetBool("Walk", false);
+
 
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
