@@ -108,4 +108,22 @@ public class myEnemy : MonoBehaviour
         }
     }
     #endregion
+
+    #region Boss Movement
+    public Transform player;
+    public Vector3 rightScale;
+    public Vector3 leftScale;
+    public void Move_Boss()
+    {
+        float distance = player.transform.position.x - this.transform.position.x;
+
+        if (distance > 0)
+            this.transform.localScale = rightScale;
+        else
+            this.transform.localScale = leftScale;
+
+        Vector2 newPlace = new Vector2(player.transform.position.x, 0);
+        this.transform.position = Vector2.MoveTowards(this.transform.position, newPlace, Speed);
+    }
+    #endregion
 }
