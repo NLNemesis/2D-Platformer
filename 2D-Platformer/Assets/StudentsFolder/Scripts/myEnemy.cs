@@ -124,6 +124,7 @@ public class myEnemy : MonoBehaviour
 
         Vector2 newPlace = new Vector2(player.transform.position.x, 0);
         this.transform.position = Vector2.MoveTowards(this.transform.position, newPlace, Speed);
+        animator.SetFloat("Movement", 1);
     }
     #endregion
 }
