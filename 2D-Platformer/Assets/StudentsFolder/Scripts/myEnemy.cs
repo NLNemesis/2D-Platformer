@@ -5,6 +5,8 @@ using UnityEngine;
 public class myEnemy : MonoBehaviour
 {
     #region Variables
+    public string category; //classic-follow-boss
+
     [Header("Controller")]
     public bool freeze;
     [HideInInspector] public bool detection;
@@ -31,8 +33,11 @@ public class myEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!freeze && health > 0)
+        if (!freeze && health > 0 && category == "classic")
             Move();
+
+        if (!freeze && health > 0 && category == "boss")
+            Move_Boss();
     }
 
     #region Take Damage
