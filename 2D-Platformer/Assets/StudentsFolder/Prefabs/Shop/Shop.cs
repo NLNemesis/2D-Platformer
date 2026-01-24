@@ -34,7 +34,7 @@ public class Shop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && close)
         {
             openShopEvent.Invoke();
             Cursor.visible = true;
