@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class myEnemy : MonoBehaviour
 {
@@ -23,27 +24,35 @@ public class myEnemy : MonoBehaviour
     public Transform rightPosition;
     private int direction = 1;
     public float Speed;
+
+    [Header("Events")]
+    public UnityEvent deathEvent;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+
+        if (category == "Boss")
+            freeze = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!freeze && health > 0 && category == "classic")
+        if (!freeze && health > 0 && category == "Classic")
             Move();
 
-        if (!freeze && health > 0 && category == "boss")
+        if (!freeze && health > 0 && category == "Boss")
             Move_Boss();
     }
 
     #region Take Damage
     public void TakeDamage(int value)
     {
-        health -= value;
+        if (category != "Dummy")
+            health -= value;
+
         AIFreeze();
         if (health > 0)
         {
@@ -53,6 +62,7 @@ public class myEnemy : MonoBehaviour
         {
             health = 0;
             animator.Play("Death");
+            deathEvent.Invoke();
         }
     }
     #endregion
