@@ -9,6 +9,7 @@ public class myInventory : MonoBehaviour
     public string[] slotName;
     public Image[] slotImage;
     public Sprite emptySprite;
+    public myPlayer player;
     #endregion
 
     #region Add/Remove Item
@@ -44,19 +45,19 @@ public class myInventory : MonoBehaviour
     {
         if (slotName[id] == "Small Health Potion")
         {
-            //Heal Player
+            player.GainHP(3);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
         }
         else if (slotName[id] == "Medium Health Potion")
         {
-            //Heal Player
+            player.GainHP(5);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
         }
         else if (slotName[id] == "Large Health Potion")
         {
-            //Heal Player
+            player.GainHP(7);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
         }
