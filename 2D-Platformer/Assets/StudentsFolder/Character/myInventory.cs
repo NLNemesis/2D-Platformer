@@ -10,6 +10,9 @@ public class myInventory : MonoBehaviour
     public Image[] slotImage;
     public Sprite emptySprite;
     public myPlayer player;
+
+    [Header("Counter")]
+    public int coins;
     #endregion
 
     #region Add/Remove Item
@@ -21,6 +24,8 @@ public class myInventory : MonoBehaviour
             {
                 slotName[i] = name;
                 slotImage[i].sprite = icon;
+                if (name == "Coin") 
+                    coins++;
                 break;
             }
         }
@@ -34,6 +39,8 @@ public class myInventory : MonoBehaviour
             {
                 slotName[i] = "Empty";
                 slotImage[i].sprite = emptySprite;
+                if (name == "Coin")
+                    coins--;
                 break;
             }
         }
