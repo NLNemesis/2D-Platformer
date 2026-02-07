@@ -50,19 +50,19 @@ public class myInventory : MonoBehaviour
     #region Use Item
     public void UseSlot(int id)
     {
-        if (slotName[id] == "Small Health Potion")
+        if (slotName[id] == "Small_Health_Potion")
         {
             player.GainHP(3);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
         }
-        else if (slotName[id] == "Medium Health Potion")
+        else if (slotName[id] == "Medium_Health_Potion")
         {
             player.GainHP(5);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
         }
-        else if (slotName[id] == "Large Health Potion")
+        else if (slotName[id] == "Large_Health_Potion")
         {
             player.GainHP(7);
             slotName[id] = "Empty";

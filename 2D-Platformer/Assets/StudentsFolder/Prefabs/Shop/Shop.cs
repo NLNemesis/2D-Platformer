@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
@@ -15,6 +14,7 @@ public class Shop : MonoBehaviour
     public UnityEvent closeShopEvent;
 
     [Header("References")]
+    public GameObject shopUI;
     public myInventory inventory;
     public TextMeshProUGUI coinsText;
     #endregion
@@ -42,20 +42,36 @@ public class Shop : MonoBehaviour
     {
         coinsText.text = inventory.coins.ToString();
 
-        if (Input.GetKeyDown(KeyCode.E) && close)
+        Handle_Open_Close_Shop();
+    }
+
+    #region Handle Open/Close Shop
+    void Handle_Open_Close_Shop()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            openShopEvent.Invoke();
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            if (close)
+            {
+                openShopEvent.Invoke();
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else if (shopUI.activeSelf)
+            {
+                closeShopEvent.Invoke();
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && shopUI.activeSelf)
         {
             closeShopEvent.Invoke();
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
+    #endregion
 
     #region Buy Item
     public string[] itemName;
