@@ -85,6 +85,7 @@ public class Shop : MonoBehaviour
             for (int i = 0; i < itemCost[id]; i++)
                 inventory.RemoveItem("Coin");
             inventory.AddItem(itemIcon[id], itemName[id]);
+            inventory.coins -= itemCost[id];
         }
     }
     #endregion
