@@ -40,11 +40,12 @@ public class myPlayer : MonoBehaviour
 
     private void Update()
     {
+        HandlePlayerInput();
+
         if (Time.timeScale == 0) return;
         if (frozen) return;
         if (isSliding || isDashing) return;
 
-        HandlePlayerInput();
         Flip();
         IsGrounded();
 
@@ -84,6 +85,9 @@ public class myPlayer : MonoBehaviour
         else if (horizontal == 0 && IsGrounded() && !Input.GetKey(KeyCode.Space))
             animator.SetBool("Walk", false);
 
+        if (Time.timeScale == 0) return;
+        if (frozen) return;
+        if (isSliding || isDashing) return;
 
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {

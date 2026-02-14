@@ -10,16 +10,20 @@ public class myAnimator : MonoBehaviour
 
     private Animator animator;
     private myPlayer player;
+    private myGameManager myGM;
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<myPlayer>();
         animator = GetComponent<Animator>();
+        myGM = FindObjectOfType<myGameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (myGM.UI != 0) return;
+
         if (!player.frozen)
         {
             if (Input.GetMouseButtonDown(0))
