@@ -51,9 +51,15 @@ public class myPlayer : MonoBehaviour
 
         #region Box Collider Handler
         if (IsGrounded())
+        {
             IsGroundedEvent.Invoke();
+            animator.SetBool("Falling", false);
+        }
         else
+        {
             NotIsGroundedEvent.Invoke();
+            animator.SetBool("Falling", true);
+        }
         #endregion
     }
 
