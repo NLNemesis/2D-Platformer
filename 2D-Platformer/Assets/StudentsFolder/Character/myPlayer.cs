@@ -53,12 +53,10 @@ public class myPlayer : MonoBehaviour
         if (IsGrounded())
         {
             IsGroundedEvent.Invoke();
-            animator.SetBool("Falling", false);
         }
         else
         {
             NotIsGroundedEvent.Invoke();
-            animator.SetBool("Falling", true);
         }
         #endregion
     }

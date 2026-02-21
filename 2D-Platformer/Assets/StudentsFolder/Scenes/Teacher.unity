@@ -44380,38 +44380,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7097309553785229106, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: IsGroundedEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7097309553785229106, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: IsGroundedEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7097309553785229106, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: IsGroundedEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Target
-      value: 
-      objectReference: {fileID: 2095538368}
-    - target: {fileID: 7097309553785229106, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: IsGroundedEvent.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7097309553785229106, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: IsGroundedEvent.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
-      value: SetTrigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 7097309553785229106, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: IsGroundedEvent.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
-      value: UnityEngine.Animator, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7097309553785229106, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: IsGroundedEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_StringArgument
-      value: Landed
-      objectReference: {fileID: 0}
-    - target: {fileID: 7097309553785229106, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: IsGroundedEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -44420,11 +44388,6 @@ PrefabInstance:
       addedObject: {fileID: 1808662163}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
---- !u!95 &2095538368 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7189071833676675271, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-  m_PrefabInstance: {fileID: 1994178159}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2142949622
 GameObject:
   m_ObjectHideFlags: 0
