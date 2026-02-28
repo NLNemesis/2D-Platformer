@@ -23,6 +23,7 @@ public class myPlayer : MonoBehaviour
 
     [Header("References")]
     public Rigidbody2D rb;
+    public float groundRange;
     public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     private Animator animator;
@@ -53,10 +54,12 @@ public class myPlayer : MonoBehaviour
         if (IsGrounded())
         {
             IsGroundedEvent.Invoke();
+            animator.SetBool("Falling", false);
         }
         else
         {
             NotIsGroundedEvent.Invoke();
+            animator.SetBool("Falling", true);
         }
         #endregion
     }
@@ -106,7 +109,7 @@ public class myPlayer : MonoBehaviour
     #region Check if the player is grounded
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, groundRange, groundLayer);
     }
 
     public void Grounded()
@@ -258,4 +261,10 @@ public class myPlayer : MonoBehaviour
         }
     }
     #endregion
+
+    private void OnDrawGizmosSelected()
+    {
+        if (groundCheck != null)
+            Gizmos.DrawWireSphere(groundCheck.position, groundRange);
+    }
 }

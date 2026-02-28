@@ -23,6 +23,7 @@ public class myAnimator : MonoBehaviour
     void Update()
     {
         if (myGM.UI != 0) return;
+        if (!player.IsGrounded()) return;
 
         if (!player.frozen)
         {
