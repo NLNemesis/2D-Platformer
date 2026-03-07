@@ -71,6 +71,13 @@ public class Shop : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
+
+    public void CloseShop()
+    {
+        closeShopEvent.Invoke();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     #endregion
 
     #region Buy Item
