@@ -46,6 +46,7 @@ public class myPlayer : MonoBehaviour
         if (Time.timeScale == 0) return;
         if (frozen) return;
         if (isSliding || isDashing) return;
+        if (HP < 1) return;
 
         Flip();
         IsGrounded();
