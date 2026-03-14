@@ -7,6 +7,7 @@ public class myPlatform : MonoBehaviour
     #region Variables
     private int direction = 1;
     public Transform[] position;
+    public float Speed;
     #endregion
 
     // Update is called once per frame
@@ -20,5 +21,16 @@ public class myPlatform : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, 
                 position[0].position, Speed);
         }
+
+        if (direction == -1)
+        {
+            transform.position = Vector2.MoveTowards(transform.position,
+                position[1].position, Speed);
+        }
+
+        if (distance == 0 && direction == 1)
+            direction = -1;
+        else if (distance1 == 0 && direction == -1)
+            direction = 1;
     }
 }
