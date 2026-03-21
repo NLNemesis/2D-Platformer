@@ -9,6 +9,12 @@ public class Trigger : MonoBehaviour
     public bool DisableAfter;
     public bool CursorEnable;
     [Space(10)]
+    public bool CinematicTrigger;
+    [Space(10)]
+    public bool TeleportPlayer;
+    public GameObject Player;
+    public Transform Teleport;
+    [Space(10)]
     public UnityEvent Event;
 
     private void OnTriggerEnter2D(Collider2D Object)
@@ -25,6 +31,19 @@ public class Trigger : MonoBehaviour
 
             if (DisableAfter)
                 this.gameObject.SetActive(false);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K) && CinematicTrigger)
+        {
+            if (TeleportPlayer)
+            {
+                Player.transform.position = Teleport.position;
+                Player.transform.localScale = Teleport.localScale;
+            }    
+            Event.Invoke();
         }
     }
 }
