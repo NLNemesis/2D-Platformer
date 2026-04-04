@@ -17,7 +17,7 @@ public class MainMenuController : MonoBehaviour
     IEnumerator StartGame()
     {
         animator.Play("Buttons_Reverse");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2.3f);
         SceneManager.LoadScene(1);
     }
     #endregion
@@ -31,7 +31,7 @@ public class MainMenuController : MonoBehaviour
     IEnumerator QuitGame()
     {
         animator.Play("Buttons_Reverse");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2.3f);
         Application.Quit();
     }
     #endregion
