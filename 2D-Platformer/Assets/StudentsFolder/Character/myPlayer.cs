@@ -41,7 +41,8 @@ public class myPlayer : MonoBehaviour
 
     private void Update()
     {
-        HandlePlayerInput();
+        if (!frozen && HP > 0)
+            HandlePlayerInput();
 
         if (Time.timeScale == 0) return;
         if (frozen) return;
@@ -239,7 +240,7 @@ public class myPlayer : MonoBehaviour
             Hearts[i].SetActive(true);
     }
 
-    public void LoseHP(int hp)
+    public void LoseHP(int hp, bool hitAnim)
     {
         frozen = true;
         HP -= hp;
@@ -252,13 +253,15 @@ public class myPlayer : MonoBehaviour
             for (int i = 0; i < HP; i++)
                 Hearts[i].SetActive(true);
 
-            animator.Play("Hit");
+            if (hitAnim)
+                animator.Play("Hit");
         }
         else
         {
             for (int i = 0; i < Hearts.Length; i++)
                 Hearts[i].SetActive(false);
             animator.Play("Death");
+            Freeze();
         }
     }
     #endregion

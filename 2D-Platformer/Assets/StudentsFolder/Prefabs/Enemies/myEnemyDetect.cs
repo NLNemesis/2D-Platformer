@@ -22,7 +22,7 @@ public class myEnemyDetect : MonoBehaviour
 
         if (enemy.freeze && enemy.DealDamage)
         {
-            player.LoseHP(damage);
+            player.LoseHP(damage, true);
             enemy.DealDamage = false;
             this.gameObject.SetActive(false);
         }

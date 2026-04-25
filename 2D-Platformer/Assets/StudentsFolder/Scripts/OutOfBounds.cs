@@ -21,12 +21,12 @@ public class OutOfBounds : MonoBehaviour
     }
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(0.45f);
+        yield return new WaitForSeconds(1f);
         player.gameObject.SetActive(false);
         player.transform.position = newTransform.position;
         player.transform.rotation = newTransform.rotation;
         player.gameObject.SetActive(true);
-        player.LoseHP(2);
+        player.LoseHP(2, false);
         yield return new WaitForSeconds(0.3f);
         player.Unfreeze();
     }
