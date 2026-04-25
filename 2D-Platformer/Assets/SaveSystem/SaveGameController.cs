@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class SaveGameController : MonoBehaviour
 {
-
+    public bool InMenu;
+    public MainMenuController mmc;
 }

@@ -1340,8 +1340,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1192889124}
-        m_TargetAssemblyTypeName: SettingsController, Assembly-CSharp
+      - m_Target: {fileID: 1192889123}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: Set_Master_Volume
         m_Mode: 0
         m_Arguments:
@@ -2018,8 +2018,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1192889124}
-        m_TargetAssemblyTypeName: SettingsController, Assembly-CSharp
+      - m_Target: {fileID: 1192889123}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: Set_Ambient_Volume
         m_Mode: 0
         m_Arguments:
@@ -3205,7 +3205,6 @@ GameObject:
   - component: {fileID: 1192889118}
   - component: {fileID: 1192889122}
   - component: {fileID: 1192889123}
-  - component: {fileID: 1192889124}
   - component: {fileID: 1192889125}
   m_Layer: 5
   m_Name: Canvas
@@ -3333,19 +3332,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1192889122}
---- !u!114 &1192889124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1192889117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540ca8e21b5d3144bac8d20907d1c6eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 4fd271585d1288b44b8aef201cb7d15b, type: 2}
+  master: 0
+  masterSlider: {fileID: 0}
+  sfx: 0
+  sfxSlider: {fileID: 0}
+  ambient: 0
+  ambientSlider: {fileID: 0}
 --- !u!82 &1192889125
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6198,8 +6191,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1192889124}
-        m_TargetAssemblyTypeName: SettingsController, Assembly-CSharp
+      - m_Target: {fileID: 1192889123}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: Set_Sfx_Volume
         m_Mode: 0
         m_Arguments:
