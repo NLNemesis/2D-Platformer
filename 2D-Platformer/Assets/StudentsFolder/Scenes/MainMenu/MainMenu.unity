@@ -1333,7 +1333,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 847080570}
   m_HandleRect: {fileID: 2099451519}
   m_Direction: 0
-  m_MinValue: -20
+  m_MinValue: -55
   m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 0
@@ -2011,7 +2011,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1337443330}
   m_HandleRect: {fileID: 287734879}
   m_Direction: 0
-  m_MinValue: -20
+  m_MinValue: -55
   m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 0
@@ -3206,6 +3206,7 @@ GameObject:
   - component: {fileID: 1192889122}
   - component: {fileID: 1192889123}
   - component: {fileID: 1192889125}
+  - component: {fileID: 1192889126}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3332,13 +3333,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1192889122}
+  SGC: {fileID: 1192889126}
   mixer: {fileID: 24100000, guid: 4fd271585d1288b44b8aef201cb7d15b, type: 2}
   master: 0
-  masterSlider: {fileID: 0}
+  masterSlider: {fileID: 444806029}
   sfx: 0
-  sfxSlider: {fileID: 0}
+  sfxSlider: {fileID: 2137159000}
   ambient: 0
-  ambientSlider: {fileID: 0}
+  ambientSlider: {fileID: 578091860}
 --- !u!82 &1192889125
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3435,6 +3437,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1192889126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192889117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c051832bab84cb14c9f2127652224d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InMenu: 1
+  mmc: {fileID: 1192889123}
 --- !u!1 &1255963721
 GameObject:
   m_ObjectHideFlags: 0
@@ -5239,6 +5255,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1192889126}
+        m_TargetAssemblyTypeName: SaveGameController, Assembly-CSharp
+        m_MethodName: SaveSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1788072033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6184,7 +6212,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1128365493}
   m_HandleRect: {fileID: 1402119378}
   m_Direction: 0
-  m_MinValue: -20
+  m_MinValue: -55
   m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 0

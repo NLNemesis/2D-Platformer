@@ -43,6 +43,7 @@ public class MainMenuController : MonoBehaviour
 
     IEnumerator StartGame()
     {
+        SGC.SaveSettings();
         animator.Play("Buttons_Reverse");
         yield return new WaitForSeconds(2.3f);
         SceneManager.LoadScene(1);
@@ -50,6 +51,9 @@ public class MainMenuController : MonoBehaviour
     #endregion
 
     #region Settings Menu
+    [Header("References")]
+    public SaveGameController SGC;
+    [Header("Audio")]
     public AudioMixer mixer;
     public float master;
     public Slider masterSlider;
@@ -86,6 +90,7 @@ public class MainMenuController : MonoBehaviour
 
     IEnumerator QuitGame()
     {
+        SGC.SaveSettings();
         animator.Play("Buttons_Reverse");
         yield return new WaitForSeconds(2.3f);
         Application.Quit();

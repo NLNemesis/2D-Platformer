@@ -10,7 +10,7 @@ public static class SaveSystem
     {
         Debug.Log("I saved Player's Settings");
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/LOAD_Settings.exe";
+        string path = Application.persistentDataPath + "/Settings.exe";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         Settings data = new Settings(SGC);
@@ -22,7 +22,7 @@ public static class SaveSystem
     //Load Settings File
     public static Settings LoadSettings()
     {
-        string path = Application.persistentDataPath + "/LOAD_Settings.exe";
+        string path = Application.persistentDataPath + "/Settings.exe";
         if (File.Exists(path))
         {
             Debug.Log("I loaded settings from " + path);
@@ -45,7 +45,7 @@ public static class SaveSystem
     //Delete Settings File
     public static void DeleteSettings()
     {
-        string path = Application.persistentDataPath + "/LOAD_Settings.exe";
+        string path = Application.persistentDataPath + "/Settings.exe";
 
         if (File.Exists(path))
         {
@@ -65,7 +65,7 @@ public static class SaveSystem
     {
         Debug.Log("I saved Player's Progress");
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/LOAD_Progress.exe";
+        string path = Application.persistentDataPath + "/Progress.exe";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         Progress data = new Progress(SGC);
@@ -76,7 +76,7 @@ public static class SaveSystem
     //Load Progress File
     public static Progress LoadProgress()
     {
-        string path = Application.persistentDataPath + "/LOAD_Progress.exe";
+        string path = Application.persistentDataPath + "/Progress.exe";
         if (File.Exists(path))
         {
             Debug.Log("I loaded progress from " + path);
@@ -99,7 +99,7 @@ public static class SaveSystem
     //Delete Progress File
     public static void DeleteProgress()
     {
-        string path = Application.persistentDataPath + "/LOAD_Progress.exe";
+        string path = Application.persistentDataPath + "/Progress.exe";
 
         if (File.Exists(path))
         {
