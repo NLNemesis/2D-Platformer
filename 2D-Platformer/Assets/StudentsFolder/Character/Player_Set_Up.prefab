@@ -569,7 +569,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.06, y: -0.9158082}
-  m_Size: {x: 0.98, y: 2.4760761}
+  m_Size: {x: 0.9, y: 2.4760761}
   m_Direction: 0
 --- !u!70 &1938847023120953026
 CapsuleCollider2D:
@@ -578,7 +578,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441722637649710104}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 27611c93b1cd77e40ade105e06a32c4f, type: 2}
   m_IncludeLayers:
@@ -604,7 +604,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.06, y: -0.9158082}
-  m_Size: {x: 1.28, y: 2.81}
+  m_Size: {x: 1.1, y: 2.81}
   m_Direction: 0
 --- !u!114 &1069003032677934694
 MonoBehaviour:
