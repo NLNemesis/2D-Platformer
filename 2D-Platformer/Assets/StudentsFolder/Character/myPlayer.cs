@@ -27,6 +27,7 @@ public class myPlayer : MonoBehaviour
     public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     private Animator animator;
+    private Animator canvasAnimator;
 
     [Header("Unity Event")]
     public UnityEvent IsGroundedEvent;
@@ -37,6 +38,8 @@ public class myPlayer : MonoBehaviour
     {
         originalSpeed = speed;
         animator = GetComponent<Animator>();
+        Canvas canvas = this.transform.root.GetComponentInChildren<Canvas>();
+        canvasAnimator = canvas.GetComponent<Animator>();
     }
 
     private void Update()
@@ -111,14 +114,14 @@ public class myPlayer : MonoBehaviour
     #region Check if the player is grounded
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, groundRange, groundLayer);
+        return Physics2D.OverlapBox(groundCheck.position, new Vector2(groundRange, groundRange), 0f, groundLayer);
     }
 
     public void Grounded()
     {
         Debug.Log("Grounded");
     }
-    
+
     public void NotGrounded()
     {
         Debug.Log("Not Grounded");
@@ -261,6 +264,7 @@ public class myPlayer : MonoBehaviour
             for (int i = 0; i < Hearts.Length; i++)
                 Hearts[i].SetActive(false);
             animator.Play("Death");
+            canvasAnimator.Play("Death_Screen");
             Freeze();
         }
     }
@@ -269,6 +273,6 @@ public class myPlayer : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         if (groundCheck != null)
-            Gizmos.DrawWireSphere(groundCheck.position, groundRange);
+            Gizmos.DrawWireCube(groundCheck.position, new Vector3(groundRange, groundRange, 0f));
     }
 }
