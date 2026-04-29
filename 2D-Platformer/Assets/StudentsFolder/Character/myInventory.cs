@@ -70,4 +70,22 @@ public class myInventory : MonoBehaviour
         }
     }
     #endregion
+
+    #region Check For Item
+    public bool CheckForItem(string Name)
+    {
+        bool Check = true;
+        for (int i = 0; i < slotName.Length; i++)
+        {
+            if (slotName[i] == Name)
+            {
+                Check = true;
+                break;
+            }
+            else
+                Check = false;
+        }
+        return Check;
+    }
+    #endregion
 }

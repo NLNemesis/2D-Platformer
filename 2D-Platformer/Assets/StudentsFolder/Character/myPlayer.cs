@@ -8,9 +8,9 @@ public class myPlayer : MonoBehaviour
     #region Variables
     [Header("Controller")]
     public bool frozen;
-    [HideInInspector] public bool inLadder;
-    [HideInInspector] public bool isClimbing;
-    [HideInInspector] public bool inAir;
+    public bool inLadder;
+    public bool isClimbing;
+    public bool inAir;
 
     [Header("Movement")]
     public float speed = 8f;
@@ -91,22 +91,45 @@ public class myPlayer : MonoBehaviour
     void HandlePlayerInput()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
 
-        if (horizontal != 0 && IsGrounded() && !Input.GetKey(KeyCode.Space))
-            animator.SetBool("Walk", true);
-        else if (horizontal == 0 && IsGrounded() && !Input.GetKey(KeyCode.Space))
-            animator.SetBool("Walk", false);
+        // --- Climbing ---
+        if (inLadder && vertical != 0)
+            isClimbing = true;
+
+        if (!inLadder)
+            isClimbing = false;
+
+        // --- Walk animation ---
+        if (!isClimbing)
+        {
+            if (horizontal != 0 && IsGrounded() && !Input.GetKey(KeyCode.Space))
+                animator.SetBool("Walk", true);
+            else if (horizontal == 0 && IsGrounded() && !Input.GetKey(KeyCode.Space))
+                animator.SetBool("Walk", false);
+        }
+        else
+        {
+            if ((vertical != 0 || horizontal != 0) && !Input.GetKey(KeyCode.Space))
+            {
+                animator.SetBool("Climb", true);
+                animator.SetBool("Climbing", true);
+            }
+            else if (vertical == 0 && horizontal == 0 && !Input.GetKey(KeyCode.Space))
+                animator.SetBool("Climbing", false);
+        }
 
         if (Time.timeScale == 0) return;
         if (frozen) return;
         if (isSliding || isDashing) return;
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        // --- Jump (disabled while climbing) ---
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && !isClimbing)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             animator.SetTrigger("Jump");
         }
-        if (!Input.GetKey(KeyCode.Space) && rb.velocity.y > 0f)
+        if (!Input.GetKey(KeyCode.Space) && rb.velocity.y > 0f && !isClimbing)
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
     }
     #endregion
@@ -114,6 +137,7 @@ public class myPlayer : MonoBehaviour
     #region Check if the player is grounded
     public bool IsGrounded()
     {
+        if (isClimbing) return false;
         return Physics2D.OverlapBox(groundCheck.position, new Vector2(groundRange, groundRange), 0f, groundLayer);
     }
 
@@ -206,13 +230,13 @@ public class myPlayer : MonoBehaviour
     #region Ladder Controller
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ladder"))
+        if (collision.CompareTag("Ladder") && !isClimbing)
             inLadder = true;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ladder"))
+        if (collision.CompareTag("Ladder") && !isClimbing)
             inLadder = true;
     }
 
@@ -222,6 +246,8 @@ public class myPlayer : MonoBehaviour
         {
             inLadder = false;
             isClimbing = false;
+            animator.SetBool("Climb", false);
+            animator.SetBool("Climbing", false);
         }
     }
     #endregion

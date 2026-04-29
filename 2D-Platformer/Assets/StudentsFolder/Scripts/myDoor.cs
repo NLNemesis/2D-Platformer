@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,12 +10,20 @@ public class myDoor : MonoBehaviour
     private bool isClose;
     public GameObject interaction_Indicator;
 
-    [Space(10)]
+    [Header("Locked")]
+    public bool locked;
+    public string key;
+    public string needText;
+    public string useText;
+
+    [Header("Telepoort")]
     public bool Teleport;
     public Transform NewTransform;
 
     [Header("References")]
     public myPlayer player;
+    public myInventory inventory;
+    public TextMeshProUGUI playerInfoText;
     public Animator canvas_Animator;
 
     [Header("Events")]
@@ -46,13 +55,46 @@ public class myDoor : MonoBehaviour
             isClose = false;
             interaction_Indicator.SetActive(false);
 
-            if (Teleport)
+            if (locked)
+            {
+                bool hasItem = inventory.CheckForItem(key);
+                if (hasItem)
+                {
+                    locked = false;
+                    playerInfoText.text = useText;
+                    canvas_Animator.SetTrigger("ShowInfo");
+                    Event.Invoke();
+                }
+                else
+                {
+                    playerInfoText.text = needText;
+                    canvas_Animator.SetTrigger("ShowInfo");
+                }
+            }
+            else if (Teleport && locked)
+            {
+                bool hasItem = inventory.CheckForItem(key);
+                if (hasItem)
+                {
+                    locked = false;
+                    playerInfoText.text = useText;
+                    canvas_Animator.SetTrigger("ShowInfo");
+                    StartCoroutine(SmoothTeleport());
+                }
+                else
+                {
+                    playerInfoText.text = needText;
+                    canvas_Animator.SetTrigger("ShowInfo");
+                }
+            }
+            else if (Teleport && !locked)
                 StartCoroutine(SmoothTeleport());
             else
                 Event.Invoke();
         }
     }
 
+    #region Smooth Teleport
     IEnumerator SmoothTeleport()
     {
         isClose = false;
@@ -66,4 +108,5 @@ public class myDoor : MonoBehaviour
         yield return new WaitForSeconds(0.45f);
         player.Unfreeze();
     }
+    #endregion
 }
