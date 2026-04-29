@@ -7,42 +7,40 @@ public class myEnemy : MonoBehaviour
 {
     #region Variables
     public string category; //classic-follow-boss
-
     [Header("Controller")]
     public bool freeze;
     [HideInInspector] public bool detection;
     public BoxCollider2D HitBox;
-
     [Header("Stats")]
     public int health;
     [HideInInspector] public bool DealDamage;
-
     [Header("References")]
     private Animator animator;
 
-    public Transform leftPosition;
-    public Transform rightPosition;
-    private int direction = 1;
-    public float Speed;
+    // OLD: public Transform leftPosition;
+    // OLD: public Transform rightPosition;
+    // OLD: private int direction = 1;
 
+    [Header("Classic Waypoints")]
+    public Transform[] waypoints;       // Assign in Inspector
+    private int currentWaypointIndex = 0;
+
+    public float Speed;
     [Header("Events")]
     public UnityEvent deathEvent;
     #endregion
-    // Start is called before the first frame update
+
     void Start()
     {
         animator = GetComponent<Animator>();
-
         if (category == "Boss")
             freeze = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!freeze && health > 0 && category == "Classic")
             Move();
-
         if (!freeze && health > 0 && category == "Boss")
             Move_Boss();
     }
@@ -52,7 +50,6 @@ public class myEnemy : MonoBehaviour
     {
         if (category != "Dummy")
             health -= value;
-
         AIFreeze();
         if (health > 0)
         {
@@ -72,7 +69,6 @@ public class myEnemy : MonoBehaviour
     {
         freeze = true;
     }
-
     public void AIUnfreeze()
     {
         freeze = false;
@@ -86,7 +82,6 @@ public class myEnemy : MonoBehaviour
     {
         DealDamage = true;
     }
-
     public void DealDamageOff()
     {
         DealDamage = false;
@@ -96,25 +91,26 @@ public class myEnemy : MonoBehaviour
     #region Movement
     public void Move()
     {
-        float leftDistance = (leftPosition.position - this.transform.position).magnitude;
-        float rightDistance = (rightPosition.position - this.transform.position).magnitude;
+        // Safety check
+        if (waypoints == null || waypoints.Length == 0) return;
 
-        if (leftDistance == 0 && direction == -1)
-            direction = 1;
-        else if (rightDistance == 0 && direction == 1)
-            direction = -1;
+        Transform target = waypoints[currentWaypointIndex];
 
-        if (direction == 1)
+        // Face the direction of movement
+        float distance = target.position.x - this.transform.position.x;
+        if (distance > 0)
+            this.transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        else if (distance < 0)
+            this.transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+        // Move towards current waypoint
+        this.transform.position = Vector2.MoveTowards(this.transform.position, target.position, Speed);
+        animator.SetFloat("Movement", 1);
+
+        // Check if we reached the waypoint, then advance to next
+        if (Vector2.Distance(this.transform.position, target.position) < 0.05f)
         {
-            this.transform.position = Vector2.MoveTowards(this.transform.position, rightPosition.position, Speed);
-            animator.SetFloat("Movement", 1);
-            this.transform.localScale = rightPosition.localScale;
-        }
-        else if (direction == -1)
-        {
-            this.transform.position = Vector2.MoveTowards(this.transform.position, leftPosition.position, Speed);
-            animator.SetFloat("Movement", 1);
-            this.transform.localScale = leftPosition.localScale;
+            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
         }
     }
     #endregion
@@ -126,12 +122,10 @@ public class myEnemy : MonoBehaviour
     public void Move_Boss()
     {
         float distance = player.transform.position.x - this.transform.position.x;
-
         if (distance > 0)
             this.transform.localScale = rightScale;
         else
             this.transform.localScale = leftScale;
-
         Vector2 newPlace = new Vector2(player.transform.position.x, 0);
         this.transform.position = Vector2.MoveTowards(this.transform.position, newPlace, Speed);
         animator.SetFloat("Movement", 1);

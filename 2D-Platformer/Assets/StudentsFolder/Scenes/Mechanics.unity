@@ -128874,7 +128874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1420867559436098634, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
       propertyPath: orthographic size
-      value: 5.625
+      value: 6.2375
       objectReference: {fileID: 0}
     - target: {fileID: 4217509997410614651, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
       propertyPath: m_SortingOrder
@@ -129111,6 +129111,26 @@ PrefabInstance:
       propertyPath: category
       value: Classic
       objectReference: {fileID: 0}
+    - target: {fileID: 2242450713309127042, guid: ac78855595f6788489bdd6cb7070c87c, type: 3}
+      propertyPath: waypoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2242450713309127042, guid: ac78855595f6788489bdd6cb7070c87c, type: 3}
+      propertyPath: waypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1206984364}
+    - target: {fileID: 2242450713309127042, guid: ac78855595f6788489bdd6cb7070c87c, type: 3}
+      propertyPath: waypoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1164566151}
+    - target: {fileID: 2242450713309127042, guid: ac78855595f6788489bdd6cb7070c87c, type: 3}
+      propertyPath: waypoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2242450713309127042, guid: ac78855595f6788489bdd6cb7070c87c, type: 3}
+      propertyPath: waypoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3867663507652333551, guid: ac78855595f6788489bdd6cb7070c87c, type: 3}
       propertyPath: player
       value: 
@@ -129247,8 +129267,7 @@ MonoBehaviour:
   HitBox: {fileID: 0}
   health: 1
   DealDamage: 0
-  leftPosition: {fileID: 0}
-  rightPosition: {fileID: 0}
+  waypoints: []
   Speed: 0
   deathEvent:
     m_PersistentCalls:
