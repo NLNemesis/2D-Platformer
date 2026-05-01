@@ -97,6 +97,13 @@ public class myPlayer : MonoBehaviour
         if (inLadder && vertical != 0)
             isClimbing = true;
 
+        // Allow climbing from ground without jumping
+        if (inLadder && vertical > 0 && IsGrounded())
+        {
+            isClimbing = true;
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+        }
+
         if (!inLadder)
             isClimbing = false;
 
@@ -230,13 +237,22 @@ public class myPlayer : MonoBehaviour
     #region Ladder Controller
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ladder") && !isClimbing)
+        if (collision.CompareTag("Ladder"))
+        {
             inLadder = true;
+
+            // Auto-grab ladder when falling into it
+            if (rb.velocity.y < 0f)
+            {
+                isClimbing = true;
+                rb.velocity = Vector2.zero;
+            }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ladder") && !isClimbing)
+        if (collision.CompareTag("Ladder"))
             inLadder = true;
     }
 
