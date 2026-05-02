@@ -6,6 +6,8 @@ public class SaveGameController : MonoBehaviour
 {
     public bool InMenu;
     public MainMenuController mmc;
+    [Header("Progress")]
+    public myPlayer player;
 
     private void Awake()
     {
@@ -18,6 +20,9 @@ public class SaveGameController : MonoBehaviour
         {
             SaveSettings();
         }
+
+        if (!InMenu)
+            LoadProgress();
     }
 
     #region Save/Load Settings
@@ -41,6 +46,24 @@ public class SaveGameController : MonoBehaviour
         mmc.ambientSlider.value = s.ambient;
         mmc.mixer.SetFloat("ambient", s.ambient);
         #endregion
+    }
+    #endregion
+
+    #region Save/Load Progress
+    public void LoadProgress()
+    {
+        Progress p = SaveSystem.LoadProgress();
+        if (p != null)
+        {
+            player.gameObject.SetActive(false);
+            Vector2 newPos = new Vector2(p.posX, p.posY);
+            player.transform.position = newPos;
+            player.gameObject.SetActive(true);
+        }
+        else
+        {
+            SaveSystem.SaveProgress(this);
+        }
     }
     #endregion
 }
