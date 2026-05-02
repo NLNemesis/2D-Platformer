@@ -11,14 +11,13 @@ public class SaveGameController : MonoBehaviour
 
     private void Awake()
     {
-        Settings s = SaveSystem.LoadSettings();
-        if (s != null)
+        if (InMenu)
         {
-            LoadSettings();
-        }
-        else
-        {
-            SaveSettings();
+            Settings s = SaveSystem.LoadSettings();
+            if (s != null)
+                LoadSettings();
+            else
+                SaveSettings();
         }
 
         if (!InMenu)
@@ -64,6 +63,11 @@ public class SaveGameController : MonoBehaviour
         {
             SaveSystem.SaveProgress(this);
         }
+    }
+
+    public void SaveProgress()
+    {
+        SaveSystem.SaveProgress(this);
     }
     #endregion
 }
