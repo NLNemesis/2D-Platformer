@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public class MainMenuController : MonoBehaviour
 {
     public Animator animator;
-
+    public SaveGameController SGC;
+    public AudioMixer mixer;
     #region Start
     private void Start()
     {
@@ -18,6 +19,7 @@ public class MainMenuController : MonoBehaviour
 
     IEnumerator VolumeUpRoutine()
     {
+        Settings s = SaveSystem.LoadSettings();
         mixer.SetFloat("master", -20);
         float Timer = 0f;
         float Duration = 15f;
@@ -26,8 +28,16 @@ public class MainMenuController : MonoBehaviour
         {
             Timer += Time.deltaTime; // ? actually advance time
             float step = Timer / Duration;
-            float volumeUp = Mathf.Lerp(-20, 0, step); // ? lerp from fixed start, not current
-            mixer.SetFloat("master", volumeUp);
+            if (s != null)
+            {
+                float volumeUp = Mathf.Lerp(-20, s.master, step); // ? lerp from fixed start, not current
+                mixer.SetFloat("master", volumeUp);
+            }
+            else
+            {
+                float volumeUp = Mathf.Lerp(-20, 0, step); // ? lerp from fixed start, not current
+                mixer.SetFloat("master", volumeUp);
+            }
             yield return null;
         }
 
@@ -47,38 +57,6 @@ public class MainMenuController : MonoBehaviour
         animator.Play("Buttons_Reverse");
         yield return new WaitForSeconds(2.3f);
         SceneManager.LoadScene(1);
-    }
-    #endregion
-
-    #region Settings Menu
-    [Header("References")]
-    public SaveGameController SGC;
-    [Header("Audio")]
-    public AudioMixer mixer;
-    public float master;
-    public Slider masterSlider;
-    public float sfx;
-    public Slider sfxSlider;
-    public float ambient;
-    public Slider ambientSlider;
-
-    //Set Sliders and volume
-    public void Set_Master_Volume(float volume)
-    {
-        master = volume;
-        mixer.SetFloat("master", volume);
-    }
-
-    public void Set_Sfx_Volume(float volume)
-    {
-        sfx = volume;
-        mixer.SetFloat("sfx", volume);
-    }
-
-    public void Set_Ambient_Volume(float volume)
-    {
-        ambient = volume;
-        mixer.SetFloat("ambient", volume);
     }
     #endregion
 

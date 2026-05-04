@@ -5276,6 +5276,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4342243058677024007}
   - component: {fileID: 2568225727509045313}
+  - component: {fileID: 2265022706666985459}
+  - component: {fileID: 8752157914082809099}
   m_Layer: 0
   m_Name: Game_Manager
   m_TagString: Untagged
@@ -5312,6 +5314,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: 0
   inventory: {fileID: 8769279985422004312}
+--- !u!114 &2265022706666985459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3970644992119410049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c051832bab84cb14c9f2127652224d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InMenu: 0
+  sm: {fileID: 8752157914082809099}
+  player: {fileID: 7097309553785229106}
+--- !u!114 &8752157914082809099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3970644992119410049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb8273d85e3b8a4d91ee8d2f78f219f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SGC: {fileID: 2265022706666985459}
+  mixer: {fileID: 24100000, guid: 4fd271585d1288b44b8aef201cb7d15b, type: 2}
+  master: 0
+  masterSlider: {fileID: 0}
+  sfx: 0
+  sfxSlider: {fileID: 0}
+  ambient: 0
+  ambientSlider: {fileID: 0}
 --- !u!1 &4014073412363653268
 GameObject:
   m_ObjectHideFlags: 0

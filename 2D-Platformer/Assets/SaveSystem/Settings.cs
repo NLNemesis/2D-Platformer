@@ -10,8 +10,8 @@ public class Settings
     public float ambient;
     public Settings(SaveGameController SGC)
     {
-        master = SGC.mmc.master;
-        sfx = SGC.mmc.sfx;
-        ambient = SGC.mmc.ambient;
+        master = SGC.sm.master;
+        sfx = SGC.sm.sfx;
+        ambient = SGC.sm.ambient;
     }
 }

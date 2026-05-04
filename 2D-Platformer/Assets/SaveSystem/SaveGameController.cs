@@ -5,7 +5,7 @@ using UnityEngine;
 public class SaveGameController : MonoBehaviour
 {
     public bool InMenu;
-    public MainMenuController mmc;
+    public SettingsMenu sm;
     [Header("Progress")]
     public myPlayer player;
 
@@ -21,7 +21,10 @@ public class SaveGameController : MonoBehaviour
         }
 
         if (!InMenu)
+        {
+            //LoadSettings();
             LoadProgress();
+        }
     }
 
     #region Save/Load Settings
@@ -35,15 +38,13 @@ public class SaveGameController : MonoBehaviour
     {
         Settings s = SaveSystem.LoadSettings();
         #region Assign Saved Audio
-        mmc.master = s.master;
-        mmc.masterSlider.value = s.master;
-        mmc.mixer.SetFloat("master", s.master);
-        mmc.sfx = s.sfx;
-        mmc.sfxSlider.value = s.sfx;
-        mmc.mixer.SetFloat("sfx", s.sfx);
-        mmc.ambient = s.ambient;
-        mmc.ambientSlider.value = s.ambient;
-        mmc.mixer.SetFloat("ambient", s.ambient);
+        sm.master = s.master;
+        sm.mixer.SetFloat("master", s.master);
+        sm.sfx = s.sfx;
+        sm.mixer.SetFloat("sfx", s.sfx);
+        sm.ambient = s.ambient;
+        sm.mixer.SetFloat("ambient", s.ambient);
+        sm.Set_UI_Slider(s.master, s.sfx, s.ambient);
         #endregion
     }
     #endregion

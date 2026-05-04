@@ -67,24 +67,21 @@ public class myPlayer : MonoBehaviour
             animator.SetBool("Falling", true);
         }
         #endregion
-    }
 
-    private void FixedUpdate()
-    {
-        if (frozen) return;
-
+        #region Climbing Controller
         if (!isSliding && !isDashing)
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 
         if (isClimbing == true)
         {
-            rb.gravityScale = 1f;
+            rb.gravityScale = 3f;
             rb.velocity = new Vector2(rb.velocity.x, vertical * ClimbingSpeed);
         }
         else
         {
             rb.gravityScale = 6f;
         }
+        #endregion
     }
 
     #region Handle Player Input
@@ -240,13 +237,6 @@ public class myPlayer : MonoBehaviour
         if (collision.CompareTag("Ladder"))
         {
             inLadder = true;
-
-            // Auto-grab ladder when falling into it
-            if (rb.velocity.y < 0f)
-            {
-                isClimbing = true;
-                rb.velocity = Vector2.zero;
-            }
         }
     }
 
