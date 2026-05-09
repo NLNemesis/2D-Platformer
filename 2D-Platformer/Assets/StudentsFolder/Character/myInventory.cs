@@ -88,4 +88,24 @@ public class myInventory : MonoBehaviour
         return Check;
     }
     #endregion
+
+    #region Load Inventory
+    public string[] itemName;
+    public Sprite[] itemImage;
+    public void LoadInventory()
+    {
+        for (int i = 0; i < slotName.Length; i++)
+        {
+            for (int j = 0; j < itemName.Length; i++)
+            {
+                if (slotName[i] == itemName[j])
+                {
+                    slotImage[i].sprite = itemImage[j];
+                    if (name == "Coin")
+                        coins++;
+                }
+            }
+        }
+    }
+    #endregion
 }

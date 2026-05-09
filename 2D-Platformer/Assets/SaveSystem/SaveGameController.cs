@@ -8,6 +8,7 @@ public class SaveGameController : MonoBehaviour
     public SettingsMenu sm;
     [Header("Progress")]
     public myPlayer player;
+    public myInventory inventory;
 
     private void Awake()
     {
@@ -59,6 +60,8 @@ public class SaveGameController : MonoBehaviour
             Vector2 newPos = new Vector2(p.posX, p.posY);
             player.transform.position = newPos;
             player.gameObject.SetActive(true);
+            inventory.slotName = p.slotName;
+            inventory.LoadInventory();
         }
         else
         {

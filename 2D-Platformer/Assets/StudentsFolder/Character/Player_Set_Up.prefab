@@ -703,6 +703,16 @@ MonoBehaviour:
   emptySprite: {fileID: 21300000, guid: bdd2216807e1ddb499c08f6fd5760167, type: 3}
   player: {fileID: 7097309553785229106}
   coins: 0
+  itemName:
+  - Coin
+  - Small_Health_Potion
+  - Medium_Health_Potion
+  - Large_Health_Potion
+  itemImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &634947608708680835
 GameObject:
   m_ObjectHideFlags: 0
@@ -5476,9 +5486,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c051832bab84cb14c9f2127652224d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InMenu: 0
+  InMenu: 1
   sm: {fileID: 8752157914082809099}
   player: {fileID: 7097309553785229106}
+  inventory: {fileID: 1069003032677934694}
 --- !u!114 &8752157914082809099
 MonoBehaviour:
   m_ObjectHideFlags: 0

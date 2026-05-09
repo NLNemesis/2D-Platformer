@@ -7,9 +7,11 @@ public class Progress
 {
     public float posX;
     public float posY;
+    public string[] slotName;
     public Progress(SaveGameController SGC)
     {
         posX = SGC.player.transform.position.x;
         posY = SGC.player.transform.position.y;
+        slotName = SGC.inventory.slotName;
     }
 }
