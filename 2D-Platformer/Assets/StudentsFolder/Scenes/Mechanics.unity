@@ -295,7 +295,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2568225727509045313, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
   m_PrefabInstance: {fileID: 980490376566380186}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646534047}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2728b90347d6b04ab36e3fa32c14763, type: 3}
@@ -60925,26 +60925,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1646534047 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3970644992119410049, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
+--- !u!114 &1646534051 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2265022706666985459, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
   m_PrefabInstance: {fileID: 980490376566380186}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1646534048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646534047}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c051832bab84cb14c9f2127652224d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InMenu: 0
-  mmc: {fileID: 0}
-  player: {fileID: 1687618743}
 --- !u!1 &1650126024
 GameObject:
   m_ObjectHideFlags: 0
@@ -129300,10 +129291,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67594bc4e2ae7d7488ad10c29ef99c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needsInput: 0
+  Button: {fileID: 0}
   Event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1646534048}
+      - m_Target: {fileID: 1646534051}
         m_TargetAssemblyTypeName: SaveGameController, Assembly-CSharp
         m_MethodName: SaveProgress
         m_Mode: 1
@@ -129370,23 +129363,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 587534213996699180, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.54
+      value: -19.94
       objectReference: {fileID: 0}
     - target: {fileID: 587534213996699180, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 41.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420867559436098634, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: orthographic size
-      value: 5.625
-      objectReference: {fileID: 0}
-    - target: {fileID: 3619675480288977245, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -95.44214
-      objectReference: {fileID: 0}
-    - target: {fileID: 4217509997410614651, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
+      value: 50.06
       objectReference: {fileID: 0}
     - target: {fileID: 4291654348117091339, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
       propertyPath: m_Name
@@ -129432,21 +129413,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7097309553785229106, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: ClimbingSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7097309553785229106, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 1032
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3970644992119410049, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1646534048}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
 --- !u!1001 &2513518523845352963
 PrefabInstance:

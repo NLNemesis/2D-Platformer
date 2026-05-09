@@ -1034,7 +1034,7 @@ TextureImporter:
         width: 9
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1042,6 +1042,90 @@ TextureImporter:
       bones: []
       spriteID: ce079ab62f65370459466ed93d89c82d
       internalID: -1307988332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Castle_Tileset_44
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 99
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0e189780718302438f4f5b8cdaaf7d9
+      internalID: 373298962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Castle_Tileset_45
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 99
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 120d0f10f8e9af240a50f6bcd52fbd13
+      internalID: 733026703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Castle_Tileset_46
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 99
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f34db9a763bafa4fa1768d1e68d9970
+      internalID: 1743807577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Castle_Tileset_47
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 147
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b48ce933387c4b46a15d9844261c100
+      internalID: 1144448323
       vertices: []
       indices: 
       edges: []
@@ -1096,6 +1180,10 @@ TextureImporter:
       Dark_Castle_Tileset_41: 1361851413
       Dark_Castle_Tileset_42: 2035204745
       Dark_Castle_Tileset_43: -1307988332
+      Dark_Castle_Tileset_44: 373298962
+      Dark_Castle_Tileset_45: 733026703
+      Dark_Castle_Tileset_46: 1743807577
+      Dark_Castle_Tileset_47: -623219966
       Dark_Castle_Tileset_5: 1658267076
       Dark_Castle_Tileset_6: -1531699302
       Dark_Castle_Tileset_7: 431447063

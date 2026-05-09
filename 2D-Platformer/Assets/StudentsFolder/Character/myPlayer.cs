@@ -52,6 +52,23 @@ public class myPlayer : MonoBehaviour
         if (isSliding || isDashing) return;
         if (HP < 1) return;
 
+        #region Climbing Controller
+        if (!isSliding && !isDashing)
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+
+        if (isClimbing == true)
+        {
+            rb.gravityScale = 3f;
+            rb.velocity = new Vector2(rb.velocity.x, vertical * ClimbingSpeed);
+        }
+        else
+        {
+            rb.gravityScale = 6f;
+        }
+        #endregion
+
+        if (isClimbing) return;
+
         Flip();
         IsGrounded();
 
@@ -65,21 +82,6 @@ public class myPlayer : MonoBehaviour
         {
             NotIsGroundedEvent.Invoke();
             animator.SetBool("Falling", true);
-        }
-        #endregion
-
-        #region Climbing Controller
-        if (!isSliding && !isDashing)
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-
-        if (isClimbing == true)
-        {
-            rb.gravityScale = 3f;
-            rb.velocity = new Vector2(rb.velocity.x, vertical * ClimbingSpeed);
-        }
-        else
-        {
-            rb.gravityScale = 6f;
         }
         #endregion
     }
