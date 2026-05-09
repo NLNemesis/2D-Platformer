@@ -129369,6 +129369,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 50.06
       objectReference: {fileID: 0}
+    - target: {fileID: 2265022706666985459, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
+      propertyPath: InMenu
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4291654348117091339, guid: 00ae4adedcbcd504893448dc818a27eb, type: 3}
       propertyPath: m_Name
       value: Player_Set_Up
