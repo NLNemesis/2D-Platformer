@@ -28,6 +28,25 @@ public class SaveGameController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            SaveSystem.DeleteProgress();
+            SaveSystem.SaveProgress(this);
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            LoadProgress();
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            SaveSystem.DeleteProgress();
+        }
+    }
+
     #region Save/Load Settings
     public void SaveSettings()
     {
