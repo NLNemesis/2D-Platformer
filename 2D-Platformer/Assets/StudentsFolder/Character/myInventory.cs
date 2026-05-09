@@ -96,7 +96,7 @@ public class myInventory : MonoBehaviour
     {
         for (int i = 0; i < slotName.Length; i++)
         {
-            for (int j = 0; j < itemName.Length; i++)
+            for (int j = 0; j < itemName.Length; j++)
             {
                 if (slotName[i] == itemName[j])
                 {
