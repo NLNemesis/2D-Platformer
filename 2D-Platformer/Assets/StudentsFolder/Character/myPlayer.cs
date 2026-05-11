@@ -89,14 +89,13 @@ public class myPlayer : MonoBehaviour
     #region Handle Player Input
     void HandlePlayerInput()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
+        horizontal = Input.GetAxisRaw("Horizontal"); // Keyboard + Left Stick X
+        vertical = Input.GetAxisRaw("Vertical");     // Keyboard + Left Stick Y
 
         // --- Climbing ---
         if (inLadder && vertical != 0)
             isClimbing = true;
 
-        // Allow climbing from ground without jumping
         if (inLadder && vertical > 0 && IsGrounded())
         {
             isClimbing = true;
@@ -106,22 +105,26 @@ public class myPlayer : MonoBehaviour
         if (!inLadder)
             isClimbing = false;
 
+        // --- Unified jump input (Space OR controller Jump button) ---
+        bool jumpPressed = Input.GetKey(KeyCode.Space) || Input.GetButton("Jump");
+        bool jumpDown = Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump");
+
         // --- Walk animation ---
         if (!isClimbing)
         {
-            if (horizontal != 0 && IsGrounded() && !Input.GetKey(KeyCode.Space))
+            if (horizontal != 0 && IsGrounded() && !jumpPressed)
                 animator.SetBool("Walk", true);
-            else if (horizontal == 0 && IsGrounded() && !Input.GetKey(KeyCode.Space))
+            else if (horizontal == 0 && IsGrounded() && !jumpPressed)
                 animator.SetBool("Walk", false);
         }
         else
         {
-            if ((vertical != 0 || horizontal != 0) && !Input.GetKey(KeyCode.Space))
+            if ((vertical != 0 || horizontal != 0) && !jumpPressed)
             {
                 animator.SetBool("Climb", true);
                 animator.SetBool("Climbing", true);
             }
-            else if (vertical == 0 && horizontal == 0 && !Input.GetKey(KeyCode.Space))
+            else if (vertical == 0 && horizontal == 0 && !jumpPressed)
                 animator.SetBool("Climbing", false);
         }
 
@@ -130,12 +133,12 @@ public class myPlayer : MonoBehaviour
         if (isSliding || isDashing) return;
 
         // --- Jump (disabled while climbing) ---
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && !isClimbing)
+        if (jumpDown && IsGrounded() && !isClimbing)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             animator.SetTrigger("Jump");
         }
-        if (!Input.GetKey(KeyCode.Space) && rb.velocity.y > 0f && !isClimbing)
+        if (!jumpPressed && rb.velocity.y > 0f && !isClimbing)
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
     }
     #endregion

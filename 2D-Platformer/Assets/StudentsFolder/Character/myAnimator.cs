@@ -27,7 +27,7 @@ public class myAnimator : MonoBehaviour
 
         if (!player.frozen)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire1"))
             {
                 animator.Play("Attack");
                 player.Freeze();
