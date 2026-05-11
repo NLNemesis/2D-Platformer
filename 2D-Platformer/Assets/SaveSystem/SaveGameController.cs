@@ -23,8 +23,8 @@ public class SaveGameController : MonoBehaviour
 
         if (!InMenu)
         {
-            //LoadSettings();
-            LoadProgress();
+            LoadSettings();
+            //LoadProgress();
         }
     }
 
