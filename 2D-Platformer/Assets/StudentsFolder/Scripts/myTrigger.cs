@@ -7,6 +7,7 @@ public class myTrigger : MonoBehaviour
     private bool isClose;
     [Header("Control")]
     public bool needsInput;
+    public bool disableAfter;
     [Header("References")]
     public GameObject Button;
     [Header("Event")]
@@ -14,7 +15,11 @@ public class myTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name == "Player" && !needsInput)
+        {
             Event.Invoke();
+            if (disableAfter)
+                this.gameObject.SetActive(false);
+        }
 
         if (collision.name == "Player" && needsInput)
         {

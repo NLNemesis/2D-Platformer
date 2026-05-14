@@ -55,4 +55,39 @@ public class myGameManager : MonoBehaviour
         }
     }
     #endregion
+
+    #region Guide the player
+    [Header("Guide the player")]
+    public Animator canvasAnimator;
+    public TextMeshProUGUI infoText;
+
+    public void GuideThePlayer(string text)
+    {
+        infoText.text = text;
+        canvasAnimator.SetTrigger("Guide");
+    }
+    #endregion
+
+    #region Map Layout and Point Marks
+    [Header("Map")]
+    public int currentLayout;
+    public GameObject[] Layout;
+    public void ChangeMapLayout(int id)
+    {
+        for (int i = 0; i < Layout.Length; i++)
+            Layout[i].SetActive(false);
+        Layout[id].SetActive(true);
+        currentLayout = id;
+    }
+
+    public int currentMark;
+    public GameObject[] PointMark;
+    public void ChangePointMark(int id)
+    {
+        for (int i = 0; i < PointMark.Length; i++)
+            PointMark[i].SetActive(false);
+        PointMark[id].SetActive(true);
+        currentMark = id;
+    }
+    #endregion
 }
