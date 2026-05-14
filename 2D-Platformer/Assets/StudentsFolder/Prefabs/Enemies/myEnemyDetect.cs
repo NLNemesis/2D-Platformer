@@ -22,9 +22,10 @@ public class myEnemyDetect : MonoBehaviour
 
         if (enemy.freeze && enemy.DealDamage)
         {
+            player = Object.GetComponent<myPlayer>();
             player.LoseHP(damage, true);
             enemy.DealDamage = false;
-            this.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
         }
     }
 }

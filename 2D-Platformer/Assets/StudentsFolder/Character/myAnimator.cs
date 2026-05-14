@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class myAnimator : MonoBehaviour
 {
+    public int attackPower;
     public Transform attackPoint;
     public float attackRange;
     public LayerMask enemyLayer;
@@ -43,7 +44,7 @@ public class myAnimator : MonoBehaviour
         for (int i = 0; i < hit.Length; i++)
         {
             myEnemy enemy = hit[i].GetComponent<myEnemy>();
-            enemy.TakeDamage(1);
+            enemy.TakeDamage(attackPower);
         }
     }
     #endregion

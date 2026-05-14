@@ -22,8 +22,8 @@ public class ThrowableMovement : MonoBehaviour
 
     private void Start()
     {
-        PM = GameObject.Find("/MaxPrefab/Player").GetComponent<PlayerMovement>();
-        SWS = GameObject.Find("/MaxPrefab/Player").GetComponent<SpearWomanSkills>();
+        PM = FindObjectOfType<PlayerMovement>();
+        SWS = FindObjectOfType<SpearWomanSkills>();
         animator = GetComponent<Animator>();
         IsFacingRight = PM.isFacingRight;
         if (PM.isFacingRight)

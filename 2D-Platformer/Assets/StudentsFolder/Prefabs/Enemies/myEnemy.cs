@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class myEnemy : MonoBehaviour
 {
     #region Variables
+    [Tooltip("Classic or Boss")]
     public string category; //classic-follow-boss
     [Header("Controller")]
     public bool freeze;
@@ -129,6 +130,35 @@ public class myEnemy : MonoBehaviour
         Vector2 newPlace = new Vector2(player.transform.position.x, 0);
         this.transform.position = Vector2.MoveTowards(this.transform.position, newPlace, Speed);
         animator.SetFloat("Movement", 1);
+    }
+    #endregion
+
+    #region Spawn Throwable
+    [Header("Throwable")]
+    public Transform spawnPoint;
+    public GameObject throwable;
+    public float speed;
+
+    public void SpawnThrowable()
+    { 
+        GameObject obj = Instantiate(throwable, spawnPoint.position, spawnPoint.rotation);
+        myThrowableMovement myTM = obj.GetComponent<myThrowableMovement>();
+        myTM.enemy = this;
+        myTM.enemyDetect = this.GetComponentInChildren<myEnemyDetect>();
+        myTM.player = FindObjectOfType<myPlayer>();
+        myTM.playerAnim = FindObjectOfType<myAnimator>();
+        myTM.Speed = speed;
+
+        if (this.transform.localScale.x > 0)
+        {
+            myTM.IsFacingRight = true;
+            myTM.transform.localScale *= 1;
+        }
+        else
+        {
+            myTM.IsFacingRight = false;
+            myTM.transform.localScale *= -1;
+        }
     }
     #endregion
 }
