@@ -81,13 +81,24 @@ public class myGameManager : MonoBehaviour
     }
 
     public int currentMark;
-    public GameObject[] PointMark;
+    public GameObject[] cavernMark;
+    public GameObject[] FungalDepthsMark;
     public void ChangePointMark(int id)
     {
-        for (int i = 0; i < PointMark.Length; i++)
-            PointMark[i].SetActive(false);
-        PointMark[id].SetActive(true);
-        currentMark = id;
+        if (currentLayout == 0)
+        {
+            for (int i = 0; i < cavernMark.Length; i++)
+                cavernMark[i].SetActive(false);
+            cavernMark[id].SetActive(true);
+            currentMark = id;
+        }
+        else if (currentLayout == 1)
+        {
+            for (int i = 0; i < FungalDepthsMark.Length; i++)
+                FungalDepthsMark[i].SetActive(false);
+            FungalDepthsMark[id].SetActive(true);
+            currentMark = id;
+        }
     }
     #endregion
 }

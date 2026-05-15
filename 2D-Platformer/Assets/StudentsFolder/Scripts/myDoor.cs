@@ -97,6 +97,7 @@ public class myDoor : MonoBehaviour
     #region Smooth Teleport
     IEnumerator SmoothTeleport()
     {
+        Event.Invoke();
         isClose = false;
         interaction_Indicator.SetActive(false);
         player.Freeze();

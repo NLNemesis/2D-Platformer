@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class OutOfBounds : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class OutOfBounds : MonoBehaviour
     public myPlayer player;
     public Animator canvas_Animator;
     public Transform newTransform;
+
+    public UnityEvent Event;
     #endregion
 
     private void OnTriggerEnter2D(Collider2D Object)
@@ -21,6 +24,7 @@ public class OutOfBounds : MonoBehaviour
     }
     IEnumerator Delay()
     {
+        Event.Invoke();
         yield return new WaitForSeconds(1f);
         player.gameObject.SetActive(false);
         player.transform.position = newTransform.position;
