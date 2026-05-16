@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class myChest : MonoBehaviour
 {
+    public bool opened;
     private bool isClose;
     public GameObject Message;
     public UnityEvent OpenEvent;
@@ -46,6 +47,14 @@ public class myChest : MonoBehaviour
             OpenEvent.Invoke();
             for (int i = 0; i < itemName.Length; i++)
                 myinventory.AddItem(itemIcon[i], itemName[i]);
+            opened = true;
         }
+    }
+
+    public void LoadChest()
+    {
+        isClose = false;
+        OpenEvent.Invoke();
+        opened = true;
     }
 }

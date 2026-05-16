@@ -12,6 +12,8 @@ public class SaveGameController : MonoBehaviour
     public myInventory inventory;
     [Header("World")]
     public GameObject[] worldObject;
+    public myEnemy[] enemy;
+    public myChest[] chest;
     #endregion
 
     #region Awake
@@ -95,6 +97,26 @@ public class SaveGameController : MonoBehaviour
             //Load World
             for (int i = 0; i < worldObject.Length; i++)
                 worldObject[i].SetActive(p.activeObject[i]);
+
+            for(int i = 0; i < chest.Length; i++)
+            {
+                chest[i].opened = p.opened[i];
+                if (chest[i].opened)
+                    chest[i].LoadChest();
+            }
+
+            for (int i = 0; i < enemy.Length; i++)
+            {
+                enemy[i].health = p.aiHealth[i];
+                if (enemy[i].health <= 0)
+                {
+                    enemy[i].gameObject.SetActive(false);
+                    Vector2 newAIPos = new Vector2(p.aiPosX[i], p.aiPosY[i]);
+                    enemy[i].transform.position = newAIPos;
+                    enemy[i].gameObject.SetActive(true);
+                    enemy[i].TakeDamage(1);
+                }
+            }
         }
         else
         {
