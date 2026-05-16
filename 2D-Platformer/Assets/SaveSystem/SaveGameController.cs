@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class SaveGameController : MonoBehaviour
 {
+    #region References
     public bool InMenu;
     public SettingsMenu sm;
     [Header("Progress")]
     public myPlayer player;
     public myInventory inventory;
+    [Header("World")]
+    public GameObject[] worldObject;
+    #endregion
 
+    #region Awake
     private void Awake()
     {
         if (InMenu)
@@ -27,7 +32,9 @@ public class SaveGameController : MonoBehaviour
             //LoadProgress();
         }
     }
+    #endregion
 
+    #region Update
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
@@ -46,6 +53,7 @@ public class SaveGameController : MonoBehaviour
             SaveSystem.DeleteProgress();
         }
     }
+    #endregion
 
     #region Save/Load Settings
     public void SaveSettings()
@@ -75,12 +83,18 @@ public class SaveGameController : MonoBehaviour
         Progress p = SaveSystem.LoadProgress();
         if (p != null)
         {
+            //Load Player
+            player.LoadHP(p.hp);
             player.gameObject.SetActive(false);
             Vector2 newPos = new Vector2(p.posX, p.posY);
             player.transform.position = newPos;
             player.gameObject.SetActive(true);
             inventory.slotName = p.slotName;
             inventory.LoadInventory();
+
+            //Load World
+            for (int i = 0; i < worldObject.Length; i++)
+                worldObject[i].SetActive(p.activeObject[i]);
         }
         else
         {

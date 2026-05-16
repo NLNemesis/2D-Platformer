@@ -265,7 +265,7 @@ public class myPlayer : MonoBehaviour
 
     #region HP
     public GameObject[] Hearts;
-    private int HP = 7;
+    [HideInInspector] public int HP = 7;
 
     public void GainHP(int hp)
     {
@@ -307,9 +307,23 @@ public class myPlayer : MonoBehaviour
     }
     #endregion
 
+    #region Load HP
+    public void LoadHP(int hp)
+    {
+        HP = hp;
+        for (int i = 0; i < Hearts.Length; ++i)
+            Hearts[i].SetActive(false);
+
+        for (int i = 0; i < hp; ++i)
+            Hearts[i].SetActive(true);
+    }
+    #endregion
+
+    #region Draw Gizmos
     private void OnDrawGizmosSelected()
     {
         if (groundCheck != null)
             Gizmos.DrawWireCube(groundCheck.position, new Vector3(groundRange, groundRange, 0f));
     }
+    #endregion
 }
