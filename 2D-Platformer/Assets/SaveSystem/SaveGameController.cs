@@ -11,6 +11,7 @@ public class SaveGameController : MonoBehaviour
     [Header("Progress")]
     public myPlayer player;
     public myInventory inventory;
+    public myGameManager myGM;
     [Header("World")]
     public GameObject[] worldObject;
     public myEnemy[] enemy;
@@ -98,6 +99,10 @@ public class SaveGameController : MonoBehaviour
             player.gameObject.SetActive(true);
             inventory.slotName = p.slotName;
             inventory.LoadInventory();
+
+            //Load Player UI
+            myGM.ChangeMapLayout(p.currentLayout);
+            myGM.ChangePointMark(p.currentMark);
 
             //Load World
             for (int i = 0; i < worldObject.Length; i++)

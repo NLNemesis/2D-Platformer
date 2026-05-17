@@ -11,6 +11,10 @@ public class Progress
     public float posY;
     public string[] slotName;
 
+    //Player UI
+    public int currentLayout;
+    public int currentMark;
+
     //World
     public bool[] activeObject;
     public bool[] opened;
@@ -26,6 +30,10 @@ public class Progress
         posX = SGC.player.transform.position.x;
         posY = SGC.player.transform.position.y;
         slotName = SGC.inventory.slotName;
+
+        //Save Player UI
+        currentLayout = SGC.myGM.currentLayout;
+        currentMark = SGC.myGM.currentMark;
 
         //Save World
         activeObject = new bool[SGC.worldObject.Length];
