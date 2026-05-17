@@ -82,7 +82,9 @@ public class myGameManager : MonoBehaviour
 
     public int currentMark;
     public GameObject[] cavernMark;
-    public GameObject[] FungalDepthsMark;
+    public GameObject[] fungalDepthsMark;
+    public GameObject[] forgottenDungeon;
+
     public void ChangePointMark(int id)
     {
         if (currentLayout == 0)
@@ -94,9 +96,16 @@ public class myGameManager : MonoBehaviour
         }
         else if (currentLayout == 1)
         {
-            for (int i = 0; i < FungalDepthsMark.Length; i++)
-                FungalDepthsMark[i].SetActive(false);
-            FungalDepthsMark[id].SetActive(true);
+            for (int i = 0; i < fungalDepthsMark.Length; i++)
+                fungalDepthsMark[i].SetActive(false);
+            fungalDepthsMark[id].SetActive(true);
+            currentMark = id;
+        }
+        else if (currentLayout == 2)
+        {
+            for (int i = 0; i < forgottenDungeon.Length; i++)
+                forgottenDungeon[i].SetActive(false);
+            forgottenDungeon[id].SetActive(true);
             currentMark = id;
         }
     }

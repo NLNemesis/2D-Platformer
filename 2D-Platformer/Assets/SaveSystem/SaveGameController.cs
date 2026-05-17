@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveGameController : MonoBehaviour
@@ -17,7 +18,7 @@ public class SaveGameController : MonoBehaviour
     #endregion
 
     #region Awake
-    private void Awake()
+    private void Start()
     {
         if (InMenu)
         {
@@ -31,7 +32,7 @@ public class SaveGameController : MonoBehaviour
         if (!InMenu)
         {
             LoadSettings();
-            //LoadProgress();
+            LoadProgress();
         }
     }
     #endregion
@@ -67,15 +68,19 @@ public class SaveGameController : MonoBehaviour
     void LoadSettings()
     {
         Settings s = SaveSystem.LoadSettings();
-        #region Assign Saved Audio
-        sm.master = s.master;
-        sm.mixer.SetFloat("master", s.master);
-        sm.sfx = s.sfx;
-        sm.mixer.SetFloat("sfx", s.sfx);
-        sm.ambient = s.ambient;
-        sm.mixer.SetFloat("ambient", s.ambient);
-        sm.Set_UI_Slider(s.master, s.sfx, s.ambient);
-        #endregion
+        if (s != null)
+        {
+            #region Assign Saved Audio
+            sm.master = s.master;
+            sm.mixer.SetFloat("master", s.master);
+            sm.sfx = s.sfx;
+            sm.mixer.SetFloat("sfx", s.sfx);
+            sm.ambient = s.ambient;
+            sm.mixer.SetFloat("ambient", s.ambient);
+            sm.Set_UI_Slider(s.master, s.sfx, s.ambient);
+            #endregion
+        }
+        else SaveSystem.SaveSettings(this);
     }
     #endregion
 

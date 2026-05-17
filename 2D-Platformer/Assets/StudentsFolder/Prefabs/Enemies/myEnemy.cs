@@ -31,7 +31,7 @@ public class myEnemy : MonoBehaviour
     public UnityEvent deathEvent;
     #endregion
 
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         if (category == "Boss")
