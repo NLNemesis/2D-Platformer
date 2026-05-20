@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class myGameManager : MonoBehaviour
 {
@@ -84,6 +85,8 @@ public class myGameManager : MonoBehaviour
     public GameObject[] cavernMark;
     public GameObject[] fungalDepthsMark;
     public GameObject[] forgottenDungeon;
+    public GameObject[] darkRuins;
+    public GameObject[] lookoutCliff;
 
     public void ChangePointMark(int id)
     {
@@ -108,6 +111,41 @@ public class myGameManager : MonoBehaviour
             forgottenDungeon[id].SetActive(true);
             currentMark = id;
         }
+        else if (currentLayout == 3)
+        {
+            for (int i = 0; i < darkRuins.Length; i++)
+                darkRuins[i].SetActive(false);
+            darkRuins[id].SetActive(true);
+            currentMark = id;
+        }
+        else if (currentLayout == 4)
+        {
+            for (int i = 0; i < lookoutCliff.Length; i++)
+                lookoutCliff[i].SetActive(false);
+            lookoutCliff[id].SetActive(true);
+            currentMark = id;
+        }
     }
+    #endregion
+
+    #region Buttons
+    public void Load_Retry()
+    {
+        StartCoroutine(OpenNewScene(1));
+    }
+
+    public void ToMainMenu()
+    {
+        StartCoroutine(OpenNewScene(0));
+    }
+
+    IEnumerator OpenNewScene(int sceneID)
+    {
+        Toggle_Cursor(false);
+        canvasAnimator.SetTrigger("FadeIn");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(sceneID);
+    }
+
     #endregion
 }

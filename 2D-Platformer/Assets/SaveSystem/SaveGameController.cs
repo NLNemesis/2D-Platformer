@@ -32,6 +32,7 @@ public class SaveGameController : MonoBehaviour
 
         if (!InMenu)
         {
+            myGM.Toggle_Cursor(false);
             LoadSettings();
             LoadProgress();
         }
