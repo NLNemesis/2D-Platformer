@@ -10,6 +10,7 @@ public class myEnemy : MonoBehaviour
     public string category; //classic-follow-boss
     [Header("Controller")]
     public bool freeze;
+    public bool guard;
     [HideInInspector] public bool detection;
     public BoxCollider2D HitBox;
     [Header("Stats")]
@@ -30,7 +31,6 @@ public class myEnemy : MonoBehaviour
     [Header("Events")]
     public UnityEvent deathEvent;
     #endregion
-
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -40,6 +40,8 @@ public class myEnemy : MonoBehaviour
 
     void Update()
     {
+        if (guard) return;
+
         if (!freeze && health > 0 && category == "Classic")
             Move();
         if (!freeze && health > 0 && category == "Boss")

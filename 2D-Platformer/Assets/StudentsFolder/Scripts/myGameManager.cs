@@ -60,12 +60,45 @@ public class myGameManager : MonoBehaviour
     #region Guide the player
     [Header("Guide the player")]
     public Animator canvasAnimator;
-    public TextMeshProUGUI infoText;
+    public TextMeshProUGUI[] characterText;
 
-    public void GuideThePlayer(string text)
+    private Queue<string> textQueue = new Queue<string>();
+    private Queue<int> characterQueue = new Queue<int>();
+    private bool isGuiding = false;
+
+    public void SylvaneTalk(string text)
     {
-        infoText.text = text;
-        canvasAnimator.SetTrigger("Guide");
+        textQueue.Enqueue(text);
+        characterQueue.Enqueue(0);
+        if (!isGuiding)
+            StartCoroutine(ProcessGuideQueue());
+    }
+
+    public void ArthurTalk(string text)
+    {
+        textQueue.Enqueue(text);
+        characterQueue.Enqueue(1);
+        if (!isGuiding)
+            StartCoroutine(ProcessGuideQueue());
+    }
+
+    private IEnumerator ProcessGuideQueue()
+    {
+        isGuiding = true;
+
+        while (textQueue.Count > 0)
+        {
+            string text = textQueue.Dequeue();
+            int id = characterQueue.Dequeue();
+            characterText[id].text = text;
+            canvasAnimator.SetTrigger("CharacterTalk"+id);
+
+            // Wait for the animation to finish
+            yield return null; // wait one frame so animator updates
+            yield return new WaitForSeconds(5f);
+        }
+
+        isGuiding = false;
     }
     #endregion
 
