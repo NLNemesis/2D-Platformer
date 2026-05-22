@@ -28,6 +28,7 @@ public class myPlayer : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     private Animator animator;
     private Animator canvasAnimator;
+    public myGameManager gm;
 
     [Header("Unity Event")]
     public UnityEvent IsGroundedEvent;
@@ -302,6 +303,7 @@ public class myPlayer : MonoBehaviour
                 Hearts[i].SetActive(false);
             animator.Play("Death");
             canvasAnimator.Play("Death_Screen");
+            gm.Toggle_Cursor(true);
             Freeze();
         }
     }

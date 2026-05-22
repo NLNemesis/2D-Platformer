@@ -16,11 +16,24 @@ public class SaveGameController : MonoBehaviour
     public GameObject[] worldObject;
     public myEnemy[] enemy;
     public myChest[] chest;
+    public myPlatform[] platform;
     #endregion
 
     #region Awake
     private void Start()
     {
+        #region Grab Game References
+        if (!InMenu)
+        {
+            player = FindObjectOfType<myPlayer>();
+            inventory = FindObjectOfType<myInventory>();
+            myGM = FindObjectOfType<myGameManager>();
+            enemy = FindObjectsOfType<myEnemy>();
+            chest = FindObjectsOfType<myChest>();
+            platform = FindObjectsOfType<myPlatform>();
+        }
+        #endregion
+
         if (InMenu)
         {
             Settings s = SaveSystem.LoadSettings();
@@ -35,27 +48,6 @@ public class SaveGameController : MonoBehaviour
             myGM.Toggle_Cursor(false);
             LoadSettings();
             LoadProgress();
-        }
-    }
-    #endregion
-
-    #region Update
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            SaveSystem.DeleteProgress();
-            SaveSystem.SaveProgress(this);
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            LoadProgress();
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            SaveSystem.DeleteProgress();
         }
     }
     #endregion
@@ -109,13 +101,18 @@ public class SaveGameController : MonoBehaviour
             for (int i = 0; i < worldObject.Length; i++)
                 worldObject[i].SetActive(p.activeObject[i]);
 
+            for (int i = 0; i < platform.Length; i++)
+                platform[i].canMove = p.activePlatform[i];
+
+            //Load Chests
             for(int i = 0; i < chest.Length; i++)
             {
                 chest[i].opened = p.opened[i];
                 if (chest[i].opened)
-                    chest[i].LoadChest();
+                    chest[i].LoadChest(p.isLocked[i]);
             }
 
+            //Load Enemies
             for (int i = 0; i < enemy.Length; i++)
             {
                 enemy[i].health = p.aiHealth[i];

@@ -129,7 +129,7 @@ public class myEnemy : MonoBehaviour
             this.transform.localScale = rightScale;
         else
             this.transform.localScale = leftScale;
-        Vector2 newPlace = new Vector2(player.transform.position.x, 0);
+        Vector2 newPlace = new Vector2(player.transform.position.x, this.transform.position.y);
         this.transform.position = Vector2.MoveTowards(this.transform.position, newPlace, Speed);
         animator.SetFloat("Movement", 1);
     }

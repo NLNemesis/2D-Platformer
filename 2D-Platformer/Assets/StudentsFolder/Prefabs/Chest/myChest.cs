@@ -1,25 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class myChest : MonoBehaviour
 {
-    public bool opened;
-    private bool isClose;
+    #region Variables
+    [Header("Controls")]
     public GameObject Message;
     public UnityEvent OpenEvent;
+    [HideInInspector] public bool opened;
+    private bool isClose;
+    [Header("Locked")]
+    public bool locked;
+    public string key;
+    public string lockedMessage;
 
+    [Header("Container")]
     public string[] itemName;
     public Sprite[] itemIcon;
-    public myInventory myinventory;
+    private myInventory inventory;
 
+    [Header("References")]
+    private myGameManager gm;
+    #endregion
+
+    #region On Triggers
     private void OnTriggerEnter2D(Collider2D Object)
     {
         if (Object.name == "Player")
         {
             isClose = true;
             Message.SetActive(true);
+            inventory = Object.GetComponent<myInventory>();
+            gm = Object.transform.root.GetComponentInChildren<myGameManager>();
         }
     }
 
@@ -31,7 +46,9 @@ public class myChest : MonoBehaviour
             Message.SetActive(false);
         }
     }
+    #endregion
 
+    #region Start / Update
     // Start is called before the first frame update
     void Start()
     {
@@ -43,18 +60,43 @@ public class myChest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && isClose)
         {
-            isClose = false;
-            OpenEvent.Invoke();
-            for (int i = 0; i < itemName.Length; i++)
-                myinventory.AddItem(itemIcon[i], itemName[i]);
-            opened = true;
+            if (locked)
+            {
+                if (inventory.CheckForItem(key))
+                {
+                    locked = false;
+                    inventory.RemoveItem(key);
+                    isClose = false;
+                    OpenEvent.Invoke();
+                    for (int i = 0; i < itemName.Length; i++)
+                        inventory.AddItem(itemIcon[i], itemName[i]);
+                    opened = true;
+                }
+                else
+                {
+                    gm.infoText.text = lockedMessage;
+                    gm.canvasAnimator.SetTrigger("ShowInfo");
+                }
+            }
+            else
+            {
+                isClose = false;
+                OpenEvent.Invoke();
+                for (int i = 0; i < itemName.Length; i++)
+                    inventory.AddItem(itemIcon[i], itemName[i]);
+                opened = true;
+            }
         }
     }
+    #endregion
 
-    public void LoadChest()
+    #region Load Chest
+    public void LoadChest(bool isLocked)
     {
+        locked = isLocked;
         isClose = false;
         OpenEvent.Invoke();
         opened = true;
     }
+    #endregion
 }

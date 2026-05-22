@@ -15,7 +15,7 @@ public class Shop : MonoBehaviour
 
     [Header("References")]
     public GameObject shopUI;
-    public myInventory inventory;
+    private myInventory inventory;
     public TextMeshProUGUI coinsText;
     #endregion
 
@@ -25,6 +25,7 @@ public class Shop : MonoBehaviour
         {
             close = true;
             message.SetActive(true);
+            inventory = Object.GetComponent<myInventory>();
         }
     }
 
@@ -40,7 +41,8 @@ public class Shop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coinsText.text = inventory.coins.ToString();
+        if (inventory != null)
+            coinsText.text = inventory.coins.ToString();
 
         Handle_Open_Close_Shop();
     }

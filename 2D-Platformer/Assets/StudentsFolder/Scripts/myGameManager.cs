@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 public class myGameManager : MonoBehaviour
 {
     public int UI;
+    [Header("References")]
     public GameObject inventory;
+    public Animator canvasAnimator;
+    public TextMeshProUGUI infoText;
 
 
     void Update()
@@ -57,9 +60,8 @@ public class myGameManager : MonoBehaviour
     }
     #endregion
 
-    #region Guide the player
-    [Header("Guide the player")]
-    public Animator canvasAnimator;
+    #region Conversation
+    [Header("Conversation")]
     public TextMeshProUGUI[] characterText;
 
     private Queue<string> textQueue = new Queue<string>();

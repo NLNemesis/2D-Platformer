@@ -17,7 +17,10 @@ public class Progress
 
     //World
     public bool[] activeObject;
+    public bool[] activePlatform;
+    //Chests
     public bool[] opened;
+    public bool[] isLocked;
 
     //Enemy
     public int[] aiHealth;
@@ -40,10 +43,19 @@ public class Progress
         for (int i = 0; i < SGC.worldObject.Length; i++)
             activeObject[i] = SGC.worldObject[i].activeSelf;
 
+        activePlatform = new bool[SGC.platform.Length];
+        for (int i = 0; i < SGC.platform.Length; i++)
+            activePlatform[i] = SGC.platform[i].canMove;
+
+        //Save Chests
         opened = new bool[SGC.chest.Length];
         for (int i = 0; i < SGC.chest.Length; i++)
             opened[i] = SGC.chest[i].opened;
+        isLocked = new bool[SGC.chest.Length];
+        for (int i = 0; i < SGC.chest.Length; i++)
+            isLocked[i] = SGC.chest[i].locked;
 
+        //Save AI
         aiHealth = new int[SGC.enemy.Length];
         aiPosX = new float[SGC.enemy.Length];
         aiPosY = new float[SGC.enemy.Length];
