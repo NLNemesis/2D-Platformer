@@ -73,7 +73,7 @@ public class myThrowableMovement : MonoBehaviour
                 myEnemy enemy = hit[i].GetComponent<myEnemy>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(playerAnim.attackPower);
+                    enemy.TakeDamage(playerAnim.attackPower, true);
                     FoundTarget();
                 }
             }

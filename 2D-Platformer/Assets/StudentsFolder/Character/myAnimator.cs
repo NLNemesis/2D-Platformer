@@ -44,7 +44,7 @@ public class myAnimator : MonoBehaviour
         for (int i = 0; i < hit.Length; i++)
         {
             myEnemy enemy = hit[i].GetComponent<myEnemy>();
-            enemy.TakeDamage(attackPower);
+            enemy.TakeDamage(attackPower, true);
         }
     }
     #endregion

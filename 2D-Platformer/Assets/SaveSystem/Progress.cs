@@ -10,6 +10,7 @@ public class Progress
     public float posX;
     public float posY;
     public string[] slotName;
+    public int soulEssence;
 
     //Player UI
     public int currentLayout;
@@ -18,6 +19,7 @@ public class Progress
     //World
     public bool[] activeObject;
     public bool[] activePlatform;
+    public bool[] openedDoor;
     //Chests
     public bool[] opened;
     public bool[] isLocked;
@@ -33,6 +35,7 @@ public class Progress
         posX = SGC.player.transform.position.x;
         posY = SGC.player.transform.position.y;
         slotName = SGC.inventory.slotName;
+        soulEssence = SGC.inventory.soulEssence;
 
         //Save Player UI
         currentLayout = SGC.myGM.currentLayout;

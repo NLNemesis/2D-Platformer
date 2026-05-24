@@ -7,6 +7,8 @@ public class SaveGameController : MonoBehaviour
 {
     #region References
     public bool InMenu;
+    [Header("Settings")]
+    public int difficulty;
     public SettingsMenu sm;
     [Header("Progress")]
     public myPlayer player;
@@ -64,6 +66,7 @@ public class SaveGameController : MonoBehaviour
         Settings s = SaveSystem.LoadSettings();
         if (s != null)
         {
+            difficulty = s.difficulty;
             #region Assign Saved Audio
             sm.master = s.master;
             sm.mixer.SetFloat("master", s.master);
@@ -82,6 +85,7 @@ public class SaveGameController : MonoBehaviour
     public void LoadProgress()
     {
         Progress p = SaveSystem.LoadProgress();
+        Settings s = SaveSystem.LoadSettings();
         if (p != null)
         {
             //Load Player
@@ -92,6 +96,7 @@ public class SaveGameController : MonoBehaviour
             player.gameObject.SetActive(true);
             inventory.slotName = p.slotName;
             inventory.LoadInventory();
+            inventory.soulEssence = p.soulEssence;
 
             //Load Player UI
             myGM.ChangeMapLayout(p.currentLayout);
@@ -122,15 +127,61 @@ public class SaveGameController : MonoBehaviour
                     Vector2 newAIPos = new Vector2(p.aiPosX[i], p.aiPosY[i]);
                     enemy[i].transform.position = newAIPos;
                     enemy[i].gameObject.SetActive(true);
-                    enemy[i].TakeDamage(1);
+                    enemy[i].LoadDead();
                 }
             }
+
+            AssignDifficulty(s.difficulty);
         }
         else
         {
             SaveSystem.SaveProgress(this);
+            AssignDifficulty(s.difficulty);
         }
     }
+
+    #region Assign Difficulty
+    void AssignDifficulty(int id)
+    {
+        Debug.Log("Assign Difficulty");
+        myEnemyDetect[] myED = FindObjectsOfType<myEnemyDetect>();
+        List <myEnemyDetect> classicEnemy = new List <myEnemyDetect>();
+        List<myEnemyDetect> bossEnemy = new List<myEnemyDetect>();
+
+        for (int i = 0; i < myED.Length; i++)
+        {
+            myEnemy enemy = myED[i].GetComponentInParent<myEnemy>();
+            if (enemy != null && enemy.category == "Classic")
+                classicEnemy.Add(myED[i]);
+            else if (enemy != null && enemy.category == "Boss")
+                bossEnemy.Add(myED[i]);
+        }
+
+        for (int i = 0; i < classicEnemy.Count; i++)
+        {
+            if (id == 0)
+                classicEnemy[i].damage = 2;
+            else if (id == 1)
+                classicEnemy[i].damage = 3;
+            else if (id == 2)
+                classicEnemy[i].damage = 6;
+            else if (id == 3)
+                classicEnemy[i].damage = 50;
+        }
+
+        for (int i = 0; i < bossEnemy.Count; i++)
+        {
+            if (id == 0)
+                bossEnemy[i].damage = 4;
+            else if (id == 1)
+                bossEnemy[i].damage = 5;
+            else if (id == 2)
+                bossEnemy[i].damage = 7;
+            else if (id == 3)
+                bossEnemy[i].damage = 50;
+        }
+    }
+    #endregion
 
     public void SaveProgress()
     {

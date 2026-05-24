@@ -11,6 +11,7 @@ public class myGameManager : MonoBehaviour
     public GameObject inventory;
     public Animator canvasAnimator;
     public TextMeshProUGUI infoText;
+    public GameObject interaction_Message;
 
 
     void Update()

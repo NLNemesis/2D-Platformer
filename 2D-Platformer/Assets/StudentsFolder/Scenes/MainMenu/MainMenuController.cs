@@ -11,49 +11,30 @@ public class MainMenuController : MonoBehaviour
     public Animator animator;
     public SaveGameController SGC;
     public AudioMixer mixer;
-    #region Start
-    private void Start()
+    #region Start Button
+    public void StartButton(int difficulty)
     {
-        StartCoroutine(VolumeUpRoutine());
+        StartCoroutine(StartGame(difficulty));
     }
 
-    IEnumerator VolumeUpRoutine()
+    IEnumerator StartGame(int difficulty)
     {
-        Settings s = SaveSystem.LoadSettings();
-        mixer.SetFloat("master", -20);
-        float Timer = 0f;
-        float Duration = 15f;
-
-        while (Timer < Duration)
-        {
-            Timer += Time.deltaTime; // ? actually advance time
-            float step = Timer / Duration;
-            if (s != null)
-            {
-                float volumeUp = Mathf.Lerp(-20, s.master, step); // ? lerp from fixed start, not current
-                mixer.SetFloat("master", volumeUp);
-            }
-            else
-            {
-                float volumeUp = Mathf.Lerp(-20, 0, step); // ? lerp from fixed start, not current
-                mixer.SetFloat("master", volumeUp);
-            }
-            yield return null;
-        }
-
-        mixer.SetFloat("master", 0); // ensure it lands exactly at 0
+        SGC.difficulty = difficulty;
+        SGC.SaveSettings();
+        animator.Play("Buttons_Reverse");
+        yield return new WaitForSeconds(2.3f);
+        SceneManager.LoadScene(1);
     }
     #endregion
 
-    #region Start Button
-    public void StartButton()
+    #region Load Button
+    public void LoadButton()
     {
-        StartCoroutine(StartGame());
+        StartCoroutine(LoadGame());
     }
 
-    IEnumerator StartGame()
+    IEnumerator LoadGame()
     {
-        SGC.SaveSettings();
         animator.Play("Buttons_Reverse");
         yield return new WaitForSeconds(2.3f);
         SceneManager.LoadScene(1);
@@ -74,5 +55,4 @@ public class MainMenuController : MonoBehaviour
         Application.Quit();
     }
     #endregion
-
 }

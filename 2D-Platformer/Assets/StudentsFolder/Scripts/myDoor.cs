@@ -8,7 +8,6 @@ public class myDoor : MonoBehaviour
 {
     #region Variables
     private bool isClose;
-    public GameObject interaction_Indicator;
 
     [Header("Locked")]
     public bool locked;
@@ -21,10 +20,11 @@ public class myDoor : MonoBehaviour
     public Transform NewTransform;
 
     [Header("References")]
-    public myPlayer player;
-    public myInventory inventory;
-    public TextMeshProUGUI playerInfoText;
-    public Animator canvas_Animator;
+    private myPlayer player;
+    private myInventory inventory;
+    private TextMeshProUGUI playerInfoText;
+    private Animator canvas_Animator;
+    private GameObject interaction_Indicator;
 
     [Header("Events")]
     public UnityEvent Event;
@@ -34,6 +34,7 @@ public class myDoor : MonoBehaviour
     {
         if (collision.name == "Player")
         {
+            GrabReferences(collision);
             isClose = true;
             interaction_Indicator.SetActive(true);
         }
@@ -47,6 +48,17 @@ public class myDoor : MonoBehaviour
             interaction_Indicator.SetActive(false);
         }
     }
+
+    #region Grab References
+    void GrabReferences(Collider2D Object)
+    {
+        player = Object.GetComponent<myPlayer>();
+        inventory = Object.GetComponent<myInventory>();
+        playerInfoText = Object.transform.root.GetComponentInChildren<myGameManager>().infoText;
+        canvas_Animator = Object.transform.root.GetComponentInChildren<Canvas>().GetComponent<Animator>();
+        interaction_Indicator = Object.transform.root.GetComponentInChildren<myGameManager>().interaction_Message;
+    }
+    #endregion
 
     private void Update()
     {
@@ -63,6 +75,7 @@ public class myDoor : MonoBehaviour
                     locked = false;
                     playerInfoText.text = useText;
                     canvas_Animator.SetTrigger("ShowInfo");
+                    inventory.RemoveItem(key);
                     Event.Invoke();
                 }
                 else

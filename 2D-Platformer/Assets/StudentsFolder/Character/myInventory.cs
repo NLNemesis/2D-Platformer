@@ -1,19 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class myInventory : MonoBehaviour
 {
     #region Variables
+    [Header("Displayment")]
+    public TextMeshProUGUI soulEssenceText;
+
+    [Header("Inventory")]
     public string[] slotName;
     public Image[] slotImage;
     public Sprite emptySprite;
     public myPlayer player;
 
     [Header("Counter")]
+    public int soulEssence;
     public int coins;
     #endregion
+
+    private void Update()
+    {
+        soulEssenceText.text = soulEssence.ToString();
+    }
 
     #region Add/Remove Item
     public void AddItem(Sprite icon, string name)

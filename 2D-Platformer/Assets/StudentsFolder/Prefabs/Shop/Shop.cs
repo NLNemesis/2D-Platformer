@@ -8,7 +8,6 @@ public class Shop : MonoBehaviour
 {
     #region Variables
     private bool close;
-    public GameObject message;
 
     public UnityEvent openShopEvent;
     public UnityEvent closeShopEvent;
@@ -16,6 +15,7 @@ public class Shop : MonoBehaviour
     [Header("References")]
     public GameObject shopUI;
     private myInventory inventory;
+    private GameObject message;
     public TextMeshProUGUI coinsText;
     #endregion
 
@@ -24,6 +24,7 @@ public class Shop : MonoBehaviour
         if (Object.name == "Player")
         {
             close = true;
+            message = Object.transform.root.GetComponentInChildren<myGameManager>().interaction_Message;
             message.SetActive(true);
             inventory = Object.GetComponent<myInventory>();
         }
@@ -89,7 +90,7 @@ public class Shop : MonoBehaviour
 
     public void BuyItem(int id)
     {
-        if (inventory.coins >= itemCost[id])
+        if (inventory.coins >= itemCost[id])    
         {
             for (int i = 0; i < itemCost[id]; i++)
                 inventory.RemoveItem("Coin");

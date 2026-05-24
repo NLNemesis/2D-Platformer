@@ -11,6 +11,7 @@ public class myEnemy : MonoBehaviour
     [Header("Controller")]
     public bool freeze;
     public bool guard;
+    private bool dead;
     [HideInInspector] public bool detection;
     public BoxCollider2D HitBox;
     [Header("Stats")]
@@ -18,10 +19,7 @@ public class myEnemy : MonoBehaviour
     [HideInInspector] public bool DealDamage;
     [Header("References")]
     private Animator animator;
-
-    // OLD: public Transform leftPosition;
-    // OLD: public Transform rightPosition;
-    // OLD: private int direction = 1;
+    private myInventory inventory;
 
     [Header("Classic Waypoints")]
     public Transform[] waypoints;       // Assign in Inspector
@@ -40,6 +38,9 @@ public class myEnemy : MonoBehaviour
 
     void Update()
     {
+        if (inventory == null)
+            inventory = FindObjectOfType<myInventory>();
+
         if (guard) return;
 
         if (!freeze && health > 0 && category == "Classic")
@@ -49,10 +50,11 @@ public class myEnemy : MonoBehaviour
     }
 
     #region Take Damage
-    public void TakeDamage(int value)
+    public void TakeDamage(int value, bool giveEssence)
     {
         if (category != "Dummy")
             health -= value;
+
         AIFreeze();
         if (health > 0)
         {
@@ -60,10 +62,27 @@ public class myEnemy : MonoBehaviour
         }
         else
         {
+            if (giveEssence && !dead)
+            {
+                if (category == "Classic")
+                    inventory.soulEssence += 10;
+                else if (category == "Boss")
+                    inventory.soulEssence += 40;
+            }
+
             health = 0;
             animator.Play("Death");
+            dead = true;
             deathEvent.Invoke();
         }
+    }
+
+    public void LoadDead()
+    {
+        AIFreeze();
+        health = 0;
+        animator.Play("Death");
+        dead = true;
     }
     #endregion
 
