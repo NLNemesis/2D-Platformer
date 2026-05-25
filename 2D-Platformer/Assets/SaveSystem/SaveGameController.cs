@@ -144,19 +144,47 @@ public class SaveGameController : MonoBehaviour
     void AssignDifficulty(int id)
     {
         Debug.Log("Assign Difficulty");
+        myEnemy[] enemy = FindObjectsOfType<myEnemy>();
         myEnemyDetect[] myED = FindObjectsOfType<myEnemyDetect>();
         List <myEnemyDetect> classicEnemy = new List <myEnemyDetect>();
         List<myEnemyDetect> bossEnemy = new List<myEnemyDetect>();
 
         for (int i = 0; i < myED.Length; i++)
         {
-            myEnemy enemy = myED[i].GetComponentInParent<myEnemy>();
-            if (enemy != null && enemy.category == "Classic")
+            if (enemy != null && enemy[i].category == "Classic")
                 classicEnemy.Add(myED[i]);
-            else if (enemy != null && enemy.category == "Boss")
+            else if (enemy != null && enemy[i].category == "Boss")
                 bossEnemy.Add(myED[i]);
         }
 
+        //Assign Health
+        for (int i = 0; i < enemy.Length; i++)
+        {
+            if (id == 0)
+                if (enemy[i].category == "Classic")
+                    enemy[i].health = 10;
+                else if (enemy[i].category == "Boss")
+                    enemy[i].health = 25;
+            else if (id == 1)
+                    if (enemy[i].category == "Classic")
+                        enemy[i].health = 15;
+                    else if (enemy[i].category == "Boss")
+                        enemy[i].health = 40;
+            if (id == 2)
+                if (enemy[i].category == "Classic")
+                    enemy[i].health = 15;
+                else if (enemy[i].category == "Boss")
+                    enemy[i].health = 55;
+            if (id == 3)
+                if (enemy[i].category == "Classic")
+                    enemy[i].health = 20;
+                else if (enemy[i].category == "Boss")
+                    enemy[i].health = 70;
+            enemy[i].healthBar.maxValue = enemy[i].health;
+            enemy[i].healthBar.value = enemy[i].health;
+        }
+
+        //Assign Damage
         for (int i = 0; i < classicEnemy.Count; i++)
         {
             if (id == 0)
@@ -169,6 +197,7 @@ public class SaveGameController : MonoBehaviour
                 classicEnemy[i].damage = 50;
         }
 
+        //Assain Boss Damage
         for (int i = 0; i < bossEnemy.Count; i++)
         {
             if (id == 0)

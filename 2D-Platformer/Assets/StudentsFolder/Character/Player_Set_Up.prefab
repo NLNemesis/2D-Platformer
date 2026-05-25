@@ -1251,7 +1251,7 @@ Transform:
   m_GameObject: {fileID: 441722637649710104}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.72, y: 1.22, z: 0}
+  m_LocalPosition: {x: -8.724, y: 1.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1473,7 +1473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPower: 2
   attackPoint: {fileID: 7425113780189816463}
-  attackRange: 0.7
+  attackRange: 1.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -10932,6 +10932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InMenu: 0
+  difficulty: 0
   sm: {fileID: 8752157914082809099}
   player: {fileID: 7097309553785229106}
   inventory: {fileID: 1069003032677934694}
@@ -11179,7 +11180,7 @@ Transform:
   m_GameObject: {fileID: 4014073412363653268}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8, y: -0.9, z: 0}
+  m_LocalPosition: {x: 0.644, y: -0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

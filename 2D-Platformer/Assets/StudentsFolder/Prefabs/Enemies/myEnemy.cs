@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class myEnemy : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class myEnemy : MonoBehaviour
     public int health;
     [HideInInspector] public bool DealDamage;
     [Header("References")]
+    public Slider healthBar; 
     private Animator animator;
     private myInventory inventory;
 
@@ -47,6 +49,13 @@ public class myEnemy : MonoBehaviour
             Move();
         if (!freeze && health > 0 && category == "Boss")
             Move_Boss();
+
+        #region Flip Health Bar
+        if (this.transform.localScale.x > 0)
+            healthBar.transform.localScale = new Vector3(1, 1, 1);
+        else
+            healthBar.transform.localScale = new Vector3(-1, 1, 1);
+        #endregion
     }
 
     #region Take Damage
@@ -54,6 +63,9 @@ public class myEnemy : MonoBehaviour
     {
         if (category != "Dummy")
             health -= value;
+
+        if (healthBar != null)
+            healthBar.value = health;
 
         AIFreeze();
         if (health > 0)
@@ -73,6 +85,7 @@ public class myEnemy : MonoBehaviour
             health = 0;
             animator.Play("Death");
             dead = true;
+            healthBar.gameObject.SetActive(false);
             deathEvent.Invoke();
         }
     }

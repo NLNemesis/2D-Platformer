@@ -331,7 +331,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: e8545d7627565d246bdbb679ab31edaa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -428,10 +428,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  opened: 0
+  locked: 0
+  key: 
+  lockedMessage: 
   itemName:
   - Golden Coin
   - Golden Coin
   itemIcon:
   - {fileID: 21300000, guid: b8d50d54b6261874999519f50857dd85, type: 3}
   - {fileID: 21300000, guid: b8d50d54b6261874999519f50857dd85, type: 3}
-  myinventory: {fileID: 0}

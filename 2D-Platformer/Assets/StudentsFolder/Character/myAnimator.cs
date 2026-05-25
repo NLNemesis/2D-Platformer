@@ -40,11 +40,24 @@ public class myAnimator : MonoBehaviour
     public void DealDamage()
     {
         Collider2D[] hit;
+        bool[] dealt;
         hit = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+        dealt = new bool[hit.Length];
         for (int i = 0; i < hit.Length; i++)
         {
-            myEnemy enemy = hit[i].GetComponent<myEnemy>();
-            enemy.TakeDamage(attackPower, true);
+            if (!dealt[i])
+            {
+                dealt[i] = true;
+
+                myEnemy enemy = hit[i].GetComponent<myEnemy>();
+                if (enemy != null)
+                    enemy.TakeDamage(attackPower, true);
+                else
+                {
+                    enemy = hit[i].GetComponentInParent<myEnemy>();
+                    enemy.TakeDamage(attackPower, true);
+                }
+            }
         }
     }
     #endregion
