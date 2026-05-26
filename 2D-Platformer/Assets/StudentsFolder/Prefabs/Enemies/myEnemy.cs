@@ -96,6 +96,7 @@ public class myEnemy : MonoBehaviour
         health = 0;
         animator.Play("Death");
         dead = true;
+        healthBar.gameObject.SetActive(false);
     }
     #endregion
 

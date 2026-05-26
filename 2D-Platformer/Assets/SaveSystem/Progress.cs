@@ -46,6 +46,10 @@ public class Progress
         for (int i = 0; i < SGC.worldObject.Length; i++)
             activeObject[i] = SGC.worldObject[i].activeSelf;
 
+        openedDoor = new bool[SGC.door.Length];
+        for (int i = 0; i < SGC.door.Length; i++)
+            openedDoor[i] = SGC.door[i].opened;
+
         activePlatform = new bool[SGC.platform.Length];
         for (int i = 0; i < SGC.platform.Length; i++)
             activePlatform[i] = SGC.platform[i].canMove;

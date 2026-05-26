@@ -14,6 +14,7 @@ public class myDoor : MonoBehaviour
     public string key;
     public string needText;
     public string useText;
+    public bool opened;
 
     [Header("Telepoort")]
     public bool Teleport;
@@ -25,6 +26,7 @@ public class myDoor : MonoBehaviour
     private TextMeshProUGUI playerInfoText;
     private Animator canvas_Animator;
     private GameObject interaction_Indicator;
+    private Animator doorAnimator;
 
     [Header("Events")]
     public UnityEvent Event;
@@ -73,6 +75,7 @@ public class myDoor : MonoBehaviour
                 if (hasItem)
                 {
                     locked = false;
+                    opened = true;
                     playerInfoText.text = useText;
                     canvas_Animator.SetTrigger("ShowInfo");
                     inventory.RemoveItem(key);
@@ -121,6 +124,16 @@ public class myDoor : MonoBehaviour
         player.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.45f);
         player.Unfreeze();
+    }
+    #endregion
+
+    #region Load Door
+    public void LoadDoor()
+    {
+        locked = false;
+        opened = true;
+        doorAnimator = GetComponent<Animator>();
+        doorAnimator.Play("Open");
     }
     #endregion
 }

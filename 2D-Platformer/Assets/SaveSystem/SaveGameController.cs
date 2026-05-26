@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SaveGameController : MonoBehaviour
 {
@@ -16,9 +17,13 @@ public class SaveGameController : MonoBehaviour
     public myGameManager myGM;
     [Header("World")]
     public GameObject[] worldObject;
+    public myDoor[] door;
     public myEnemy[] enemy;
     public myChest[] chest;
     public myPlatform[] platform;
+    [Header("Events")]
+    public UnityEvent notLoadFileEvent;
+    public UnityEvent LoadFileEvent;
     #endregion
 
     #region Awake
@@ -30,6 +35,7 @@ public class SaveGameController : MonoBehaviour
             player = FindObjectOfType<myPlayer>();
             inventory = FindObjectOfType<myInventory>();
             myGM = FindObjectOfType<myGameManager>();
+            door = FindObjectsOfType<myDoor>();
             enemy = FindObjectsOfType<myEnemy>();
             chest = FindObjectsOfType<myChest>();
             platform = FindObjectsOfType<myPlatform>();
@@ -88,6 +94,7 @@ public class SaveGameController : MonoBehaviour
         Settings s = SaveSystem.LoadSettings();
         if (p != null)
         {
+            LoadFileEvent.Invoke();
             //Load Player
             player.LoadHP(p.hp);
             player.gameObject.SetActive(false);
@@ -105,6 +112,10 @@ public class SaveGameController : MonoBehaviour
             //Load World
             for (int i = 0; i < worldObject.Length; i++)
                 worldObject[i].SetActive(p.activeObject[i]);
+
+            for (int i = 0; i < door.Length; i++)
+                if (p.openedDoor[i])
+                    door[i].LoadDoor();
 
             for (int i = 0; i < platform.Length; i++)
                 platform[i].canMove = p.activePlatform[i];
@@ -137,6 +148,7 @@ public class SaveGameController : MonoBehaviour
         {
             SaveSystem.SaveProgress(this);
             AssignDifficulty(s.difficulty);
+            notLoadFileEvent.Invoke();
         }
     }
 
@@ -160,22 +172,22 @@ public class SaveGameController : MonoBehaviour
         //Assign Health
         for (int i = 0; i < enemy.Length; i++)
         {
-            if (id == 0)
+            if (id == 0 && enemy[i].health > 0)
                 if (enemy[i].category == "Classic")
                     enemy[i].health = 10;
                 else if (enemy[i].category == "Boss")
                     enemy[i].health = 25;
-            else if (id == 1)
+            else if (id == 1 && enemy[i].health > 0)
                     if (enemy[i].category == "Classic")
                         enemy[i].health = 15;
                     else if (enemy[i].category == "Boss")
                         enemy[i].health = 40;
-            if (id == 2)
+            if (id == 2 && enemy[i].health > 0)
                 if (enemy[i].category == "Classic")
                     enemy[i].health = 15;
                 else if (enemy[i].category == "Boss")
                     enemy[i].health = 55;
-            if (id == 3)
+            if (id == 3 && enemy[i].health > 0)
                 if (enemy[i].category == "Classic")
                     enemy[i].health = 20;
                 else if (enemy[i].category == "Boss")
@@ -187,26 +199,26 @@ public class SaveGameController : MonoBehaviour
         //Assign Damage
         for (int i = 0; i < classicEnemy.Count; i++)
         {
-            if (id == 0)
+            if (id == 0 && enemy[i].health > 0)
                 classicEnemy[i].damage = 2;
-            else if (id == 1)
+            else if (id == 1 && enemy[i].health > 0)
                 classicEnemy[i].damage = 3;
-            else if (id == 2)
+            else if (id == 2 && enemy[i].health > 0)
                 classicEnemy[i].damage = 6;
-            else if (id == 3)
+            else if (id == 3 && enemy[i].health > 0)
                 classicEnemy[i].damage = 50;
         }
 
         //Assain Boss Damage
         for (int i = 0; i < bossEnemy.Count; i++)
         {
-            if (id == 0)
+            if (id == 0 && enemy[i].health > 0)
                 bossEnemy[i].damage = 4;
-            else if (id == 1)
+            else if (id == 1 && enemy[i].health > 0)
                 bossEnemy[i].damage = 5;
-            else if (id == 2)
+            else if (id == 2 && enemy[i].health > 0)
                 bossEnemy[i].damage = 7;
-            else if (id == 3)
+            else if (id == 3 && enemy[i].health > 0)
                 bossEnemy[i].damage = 50;
         }
     }

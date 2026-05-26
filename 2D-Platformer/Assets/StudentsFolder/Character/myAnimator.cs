@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,17 +29,23 @@ public class myAnimator : MonoBehaviour
 
         if (!player.frozen)
         {
-            if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire2"))
             {
                 animator.Play("Attack");
+                player.Freeze();
+            }
+            else if (Input.GetButtonDown("Fire1"))
+            {
+                animator.Play("Heavy_Attack");
                 player.Freeze();
             }
         }
     }
 
     #region Attack Handler
-    public void DealDamage()
+    public void DealDamage(float multiply)
     {
+        int Power = (int)(attackPower * multiply);
         Collider2D[] hit;
         bool[] dealt;
         hit = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
@@ -51,11 +58,11 @@ public class myAnimator : MonoBehaviour
 
                 myEnemy enemy = hit[i].GetComponent<myEnemy>();
                 if (enemy != null)
-                    enemy.TakeDamage(attackPower, true);
+                    enemy.TakeDamage(Power, true);
                 else
                 {
                     enemy = hit[i].GetComponentInParent<myEnemy>();
-                    enemy.TakeDamage(attackPower, true);
+                    enemy.TakeDamage(Power, true);
                 }
             }
         }
