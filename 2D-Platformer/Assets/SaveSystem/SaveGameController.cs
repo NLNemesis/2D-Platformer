@@ -16,6 +16,7 @@ public class SaveGameController : MonoBehaviour
     public myInventory inventory;
     public myGameManager myGM;
     [Header("World")]
+    public int ambientClipID;
     public GameObject[] worldObject;
     public myDoor[] door;
     public myEnemy[] enemy;
@@ -110,6 +111,8 @@ public class SaveGameController : MonoBehaviour
             myGM.ChangePointMark(p.currentMark);
 
             //Load World
+            myGM.PlayAmbient(p.ambientClipID);
+
             for (int i = 0; i < worldObject.Length; i++)
                 worldObject[i].SetActive(p.activeObject[i]);
 

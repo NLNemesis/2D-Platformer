@@ -17,6 +17,7 @@ public class Progress
     public int currentMark;
 
     //World
+    public int ambientClipID;
     public bool[] activeObject;
     public bool[] activePlatform;
     public bool[] openedDoor;
@@ -42,6 +43,8 @@ public class Progress
         currentMark = SGC.myGM.currentMark;
 
         //Save World
+        ambientClipID = SGC.ambientClipID;
+
         activeObject = new bool[SGC.worldObject.Length];
         for (int i = 0; i < SGC.worldObject.Length; i++)
             activeObject[i] = SGC.worldObject[i].activeSelf;

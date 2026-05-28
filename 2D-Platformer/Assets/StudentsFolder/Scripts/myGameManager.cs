@@ -13,6 +13,11 @@ public class myGameManager : MonoBehaviour
     public TextMeshProUGUI infoText;
     public GameObject interaction_Message;
 
+    [Header("Audio")]
+    public AudioSource ambientSource;
+    public int ambientClipID;
+    public AudioClip[] ambientClip;
+
 
     void Update()
     {
@@ -183,5 +188,16 @@ public class myGameManager : MonoBehaviour
         SceneManager.LoadScene(sceneID);
     }
 
+    #endregion
+
+    #region Play Ambient
+    public void PlayAmbient(int id)
+    {
+        ambientSource.Stop();
+        ambientSource.clip = ambientClip[id];
+        ambientSource.Play();
+        ambientClipID = id;
+
+    }
     #endregion
 }
