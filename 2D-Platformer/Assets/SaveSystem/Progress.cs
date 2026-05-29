@@ -27,8 +27,6 @@ public class Progress
 
     //Enemy
     public int[] aiHealth;
-    public float[] aiPosX;
-    public float[] aiPosY;
     public Progress(SaveGameController SGC)
     {
         //Save Player
@@ -67,13 +65,7 @@ public class Progress
 
         //Save AI
         aiHealth = new int[SGC.enemy.Length];
-        aiPosX = new float[SGC.enemy.Length];
-        aiPosY = new float[SGC.enemy.Length];
         for (int i = 0; i <  SGC.enemy.Length; i++)
-        {
             aiHealth[i] = SGC.enemy[i].health;
-            aiPosX[i] = SGC.enemy[i].transform.position.x;
-            aiPosY[i] = SGC.enemy[i].transform.position.y;
-        }
     }
 }

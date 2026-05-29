@@ -30,19 +30,6 @@ public class SaveGameController : MonoBehaviour
     #region Awake
     private void Start()
     {
-        #region Grab Game References
-        if (!InMenu)
-        {
-            player = FindObjectOfType<myPlayer>();
-            inventory = FindObjectOfType<myInventory>();
-            myGM = FindObjectOfType<myGameManager>();
-            door = FindObjectsOfType<myDoor>();
-            enemy = FindObjectsOfType<myEnemy>();
-            chest = FindObjectsOfType<myChest>();
-            platform = FindObjectsOfType<myPlatform>();
-        }
-        #endregion
-
         if (InMenu)
         {
             Settings s = SaveSystem.LoadSettings();
@@ -136,13 +123,7 @@ public class SaveGameController : MonoBehaviour
             {
                 enemy[i].health = p.aiHealth[i];
                 if (enemy[i].health <= 0)
-                {
-                    enemy[i].gameObject.SetActive(false);
-                    Vector2 newAIPos = new Vector2(p.aiPosX[i], p.aiPosY[i]);
-                    enemy[i].transform.position = newAIPos;
-                    enemy[i].gameObject.SetActive(true);
                     enemy[i].LoadDead();
-                }
             }
 
             AssignDifficulty(s.difficulty);

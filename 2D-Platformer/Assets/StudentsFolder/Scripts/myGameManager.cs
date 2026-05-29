@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -193,11 +194,33 @@ public class myGameManager : MonoBehaviour
     #region Play Ambient
     public void PlayAmbient(int id)
     {
+        ambientClipID = id;
+        StartCoroutine(SwitchAmbient(id));
+    }
+
+    IEnumerator SwitchAmbient(int id)
+    {
+        float timer = 0;
+        float duration = 1;
+        float oldVolume = ambientSource.volume;
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float step = timer / duration;
+            ambientSource.volume = Mathf.Lerp(oldVolume, 0, step);
+            yield return null;
+        }
         ambientSource.Stop();
         ambientSource.clip = ambientClip[id];
         ambientSource.Play();
-        ambientClipID = id;
-
+        timer = 0;
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float step = timer / duration;
+            ambientSource.volume = Mathf.Lerp(0, oldVolume, step);
+            yield return null;
+        }
     }
     #endregion
 }
