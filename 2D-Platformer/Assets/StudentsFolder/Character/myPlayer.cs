@@ -331,14 +331,14 @@ public class myPlayer : MonoBehaviour
 
     #region Follow Player
     [Header("Follow Player")]
+    public bool canFollow;
     public Transform followObject;
     public float followSpeed;
-    public Vector3 offSet;
     public void FollowPlayer()
     {
-        Vector3 currentPos = followObject.position + offSet;
-        followObject.position = Vector3.MoveTowards(currentPos, 
-            this.transform.position, followSpeed);
+        if (canFollow)
+            followObject.position = Vector3.MoveTowards(followObject.position, 
+                this.transform.position, followSpeed);
     }
     #endregion
 }
