@@ -67,7 +67,7 @@ public class myPlayer : MonoBehaviour
             rb.gravityScale = 6f;
         }
         #endregion
-
+        FollowPlayer();
         if (isClimbing) return;
 
         Flip();
@@ -326,6 +326,19 @@ public class myPlayer : MonoBehaviour
     {
         if (groundCheck != null)
             Gizmos.DrawWireCube(groundCheck.position, new Vector3(groundRange, groundRange, 0f));
+    }
+    #endregion
+
+    #region Follow Player
+    [Header("Follow Player")]
+    public Transform followObject;
+    public float followSpeed;
+    public Vector3 offSet;
+    public void FollowPlayer()
+    {
+        Vector3 currentPos = followObject.position + offSet;
+        followObject.position = Vector3.MoveTowards(currentPos, 
+            this.transform.position, followSpeed);
     }
     #endregion
 }
