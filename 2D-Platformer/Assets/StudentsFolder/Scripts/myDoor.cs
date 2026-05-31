@@ -34,7 +34,7 @@ public class myDoor : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.name == "Player")
+        if (collision.name == "Player" && !opened)
         {
             GrabReferences(collision);
             isClose = true;

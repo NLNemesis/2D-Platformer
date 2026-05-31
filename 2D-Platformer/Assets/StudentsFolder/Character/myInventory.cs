@@ -112,8 +112,7 @@ public class myInventory : MonoBehaviour
                 if (slotName[i] == itemName[j])
                 {
                     slotImage[i].sprite = itemImage[j];
-                    if (name == "Coin")
-                        coins++;
+                    break;
                 }
             }
         }

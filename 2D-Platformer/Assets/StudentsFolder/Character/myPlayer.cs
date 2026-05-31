@@ -67,7 +67,7 @@ public class myPlayer : MonoBehaviour
             rb.gravityScale = 6f;
         }
         #endregion
-        FollowPlayer();
+
         if (isClimbing) return;
 
         Flip();
@@ -271,6 +271,7 @@ public class myPlayer : MonoBehaviour
     public void GainHP(int hp)
     {
         HP += hp;
+
         if (HP > 7)
             HP = 7;
 
@@ -326,19 +327,6 @@ public class myPlayer : MonoBehaviour
     {
         if (groundCheck != null)
             Gizmos.DrawWireCube(groundCheck.position, new Vector3(groundRange, groundRange, 0f));
-    }
-    #endregion
-
-    #region Follow Player
-    [Header("Follow Player")]
-    public bool canFollow;
-    public Transform followObject;
-    public float followSpeed;
-    public void FollowPlayer()
-    {
-        if (canFollow)
-            followObject.position = Vector3.MoveTowards(followObject.position, 
-                this.transform.position, followSpeed);
     }
     #endregion
 }

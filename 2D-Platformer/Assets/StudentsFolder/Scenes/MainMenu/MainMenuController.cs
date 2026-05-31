@@ -11,6 +11,15 @@ public class MainMenuController : MonoBehaviour
     public Animator animator;
     public SaveGameController SGC;
     public AudioMixer mixer;
+
+    public GameObject Load_Delete_File;
+
+    private void Start()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     #region Start Button
     public void StartButton(int difficulty)
     {
@@ -28,6 +37,16 @@ public class MainMenuController : MonoBehaviour
     #endregion
 
     #region Load Button
+    public void FirstLoadButton()
+    {
+        Progress p = SaveSystem.LoadProgress();
+
+        if (p != null)
+            Load_Delete_File.SetActive(true);
+        else
+            StartCoroutine(LoadGame());
+    }
+
     public void LoadButton()
     {
         StartCoroutine(LoadGame());
@@ -38,6 +57,11 @@ public class MainMenuController : MonoBehaviour
         animator.Play("Buttons_Reverse");
         yield return new WaitForSeconds(2.3f);
         SceneManager.LoadScene(1);
+    }
+
+    public void DeleteLoad()
+    {
+        SaveSystem.DeleteProgress();
     }
     #endregion
 

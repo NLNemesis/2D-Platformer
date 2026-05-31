@@ -11,6 +11,7 @@ public class Progress
     public float posY;
     public string[] slotName;
     public int soulEssence;
+    public int coins;
 
     //Player UI
     public int currentLayout;
@@ -35,6 +36,7 @@ public class Progress
         posY = SGC.player.transform.position.y;
         slotName = SGC.inventory.slotName;
         soulEssence = SGC.inventory.soulEssence;
+        coins = SGC.inventory.coins;
 
         //Save Player UI
         currentLayout = SGC.myGM.currentLayout;

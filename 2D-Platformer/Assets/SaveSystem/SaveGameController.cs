@@ -92,6 +92,7 @@ public class SaveGameController : MonoBehaviour
             inventory.slotName = p.slotName;
             inventory.LoadInventory();
             inventory.soulEssence = p.soulEssence;
+            inventory.coins = p.coins;
 
             //Load Player UI
             myGM.ChangeMapLayout(p.currentLayout);
