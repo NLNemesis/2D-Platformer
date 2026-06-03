@@ -159,9 +159,9 @@ public class SaveGameController : MonoBehaviour
         {
             if (id == 0 && enemy[i].health > 0)
                 if (enemy[i].category == "Classic")
-                    enemy[i].health = 10;
+                    enemy[i].health = 5;
                 else if (enemy[i].category == "Boss")
-                    enemy[i].health = 25;
+                    enemy[i].health = 20;
             else if (id == 1 && enemy[i].health > 0)
                     if (enemy[i].category == "Classic")
                         enemy[i].health = 15;
@@ -185,7 +185,7 @@ public class SaveGameController : MonoBehaviour
         for (int i = 0; i < classicEnemy.Count; i++)
         {
             if (id == 0 && enemy[i].health > 0)
-                classicEnemy[i].damage = 2;
+                classicEnemy[i].damage = 1;
             else if (id == 1 && enemy[i].health > 0)
                 classicEnemy[i].damage = 3;
             else if (id == 2 && enemy[i].health > 0)
@@ -198,7 +198,7 @@ public class SaveGameController : MonoBehaviour
         for (int i = 0; i < bossEnemy.Count; i++)
         {
             if (id == 0 && enemy[i].health > 0)
-                bossEnemy[i].damage = 4;
+                bossEnemy[i].damage = 3;
             else if (id == 1 && enemy[i].health > 0)
                 bossEnemy[i].damage = 5;
             else if (id == 2 && enemy[i].health > 0)

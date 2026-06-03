@@ -61,6 +61,8 @@ public class myEnemy : MonoBehaviour
     #region Take Damage
     public void TakeDamage(int value, bool giveEssence)
     {
+        player = FindObjectOfType<myPlayer>().transform;
+
         if (category != "Dummy")
             health -= value;
 
@@ -71,6 +73,16 @@ public class myEnemy : MonoBehaviour
         if (health > 0)
         {
             animator.Play("Hit");
+
+            // React: set waypoint based on player's side
+            if (category == "Classic" && waypoints != null && waypoints.Length >= 2)
+            {
+                float playerDistance = player.position.x - this.transform.position.x;
+                if (playerDistance < 0)
+                    currentWaypointIndex = 0;
+                else
+                    currentWaypointIndex = 1;
+            }
         }
         else
         {
