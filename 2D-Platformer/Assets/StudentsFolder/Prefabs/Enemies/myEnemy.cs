@@ -83,6 +83,8 @@ public class myEnemy : MonoBehaviour
                 else
                     currentWaypointIndex = 1;
             }
+
+            this.transform.localScale = waypoints[currentWaypointIndex].transform.localScale;
         }
         else
         {
