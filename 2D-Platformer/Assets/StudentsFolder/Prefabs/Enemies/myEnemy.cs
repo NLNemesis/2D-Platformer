@@ -29,6 +29,7 @@ public class myEnemy : MonoBehaviour
 
     public float Speed;
     [Header("Events")]
+    public AudioSource hitSource;
     public UnityEvent deathEvent;
     #endregion
     void Awake()
@@ -61,6 +62,7 @@ public class myEnemy : MonoBehaviour
     #region Take Damage
     public void TakeDamage(int value, bool giveEssence)
     {
+        hitSource.Play();
         player = FindObjectOfType<myPlayer>().transform;
 
         if (category != "Dummy")

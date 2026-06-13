@@ -82,51 +82,60 @@ public class SaveGameController : MonoBehaviour
         Settings s = SaveSystem.LoadSettings();
         if (p != null)
         {
-            LoadFileEvent.Invoke();
-            //Load Player
-            player.LoadHP(p.hp);
-            player.gameObject.SetActive(false);
-            Vector2 newPos = new Vector2(p.posX, p.posY);
-            player.transform.position = newPos;
-            player.gameObject.SetActive(true);
-            inventory.slotName = p.slotName;
-            inventory.LoadInventory();
-            inventory.soulEssence = p.soulEssence;
-            inventory.coins = p.coins;
-
-            //Load Player UI
-            myGM.ChangeMapLayout(p.currentLayout);
-            myGM.ChangePointMark(p.currentMark);
-
-            //Load World
-            myGM.PlayAmbient(p.ambientClipID);
-
-            for (int i = 0; i < worldObject.Length; i++)
-                worldObject[i].SetActive(p.activeObject[i]);
-
-            for (int i = 0; i < door.Length; i++)
-                if (p.openedDoor[i])
-                    door[i].LoadDoor();
-
-            for (int i = 0; i < platform.Length; i++)
-                platform[i].canMove = p.activePlatform[i];
-
-            //Load Chests
-            for(int i = 0; i < chest.Length; i++)
+            try
             {
-                chest[i].opened = p.opened[i];
-                if (chest[i].opened)
-                    chest[i].LoadChest(p.isLocked[i]);
-            }
+                LoadFileEvent.Invoke();
+                //Load Player
+                player.LoadHP(p.hp);
+                player.gameObject.SetActive(false);
+                Vector2 newPos = new Vector2(p.posX, p.posY);
+                player.transform.position = newPos;
+                player.gameObject.SetActive(true);
+                inventory.slotName = p.slotName;
+                inventory.LoadInventory();
+                inventory.soulEssence = p.soulEssence;
+                inventory.coins = p.coins;
 
-            //Load Enemies
-            for (int i = 0; i < enemy.Length; i++)
+                //Load Player UI
+                myGM.ChangeMapLayout(p.currentLayout);
+                myGM.ChangePointMark(p.currentMark);
+
+                //Load World
+                myGM.PlayAmbient(p.ambientClipID);
+
+                for (int i = 0; i < worldObject.Length; i++)
+                    worldObject[i].SetActive(p.activeObject[i]);
+
+                for (int i = 0; i < door.Length; i++)
+                    if (p.openedDoor[i])
+                        door[i].LoadDoor();
+
+                for (int i = 0; i < platform.Length; i++)
+                    platform[i].canMove = p.activePlatform[i];
+
+                //Load Chests
+                for (int i = 0; i < chest.Length; i++)
+                {
+                    chest[i].opened = p.opened[i];
+                    if (chest[i].opened)
+                        chest[i].LoadChest(p.isLocked[i]);
+                }
+
+                //Load Enemies
+                for (int i = 0; i < enemy.Length; i++)
+                {
+                    enemy[i].health = p.aiHealth[i];
+                    if (enemy[i].health <= 0)
+                        enemy[i].LoadDead();
+                }
+            }
+            catch
             {
-                enemy[i].health = p.aiHealth[i];
-                if (enemy[i].health <= 0)
-                    enemy[i].LoadDead();
+                SaveSystem.DeleteProgress();
+                SaveSystem.SaveProgress(this);
+                AssignDifficulty(s.difficulty);
+                notLoadFileEvent.Invoke();
             }
-
             AssignDifficulty(s.difficulty);
         }
         else

@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class myPlayer : MonoBehaviour
 {
     #region Variables
+    private bool called;
+
     [Header("Controller")]
     public bool frozen;
     public bool inLadder;
@@ -33,6 +35,7 @@ public class myPlayer : MonoBehaviour
     [Header("Unity Event")]
     public UnityEvent IsGroundedEvent;
     public UnityEvent NotIsGroundedEvent;
+    public UnityEvent deathEvent;
     #endregion
 
     void Awake()
@@ -300,12 +303,17 @@ public class myPlayer : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < Hearts.Length; i++)
-                Hearts[i].SetActive(false);
-            animator.Play("Death");
-            canvasAnimator.Play("Death_Screen");
-            gm.Toggle_Cursor(true);
-            Freeze();
+            if (!called)
+            {
+                called = true;
+                for (int i = 0; i < Hearts.Length; i++)
+                    Hearts[i].SetActive(false);
+                animator.Play("Death");
+                canvasAnimator.Play("Death_Screen");
+                gm.Toggle_Cursor(true);
+                Freeze();
+                deathEvent.Invoke();
+            }
         }
     }
     #endregion
@@ -327,6 +335,30 @@ public class myPlayer : MonoBehaviour
     {
         if (groundCheck != null)
             Gizmos.DrawWireCube(groundCheck.position, new Vector3(groundRange, groundRange, 0f));
+    }
+    #endregion
+
+    #region Play Audio
+    [Header("Movement Audio")]
+    public AudioSource movementSource;
+    public AudioClip[] movementClips;
+
+    public void PlayMovement(int id)
+    {
+        movementSource.Stop();
+        movementSource.clip = movementClips[id];
+        movementSource.Play();
+    }
+
+    [Header("Combat Audio")]
+    public AudioSource combatSource;
+    public AudioClip[] combatClips;
+
+    public void PlayCombat(int id)
+    {
+        combatSource.Stop();
+        combatSource.clip = combatClips[id];
+        combatSource.Play();
     }
     #endregion
 }
