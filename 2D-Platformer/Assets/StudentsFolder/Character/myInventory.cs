@@ -19,6 +19,9 @@ public class myInventory : MonoBehaviour
     [Header("Counter")]
     public int soulEssence;
     public int coins;
+
+    [Header("References")]
+    public AudioSource healSource;
     #endregion
 
     private void Update()
@@ -66,18 +69,21 @@ public class myInventory : MonoBehaviour
             player.GainHP(3);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
+            healSource.Play();
         }
         else if (slotName[id] == "Medium_Health_Potion")
         {
             player.GainHP(5);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
+            healSource.Play();
         }
         else if (slotName[id] == "Large_Health_Potion")
         {
             player.GainHP(7);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
+            healSource.Play();
         }
     }
     #endregion
