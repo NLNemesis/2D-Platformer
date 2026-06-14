@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class myEnemy : MonoBehaviour
 {
     #region Variables
+    private bool canDoHitAnimation = true;
+
     [Tooltip("Classic or Boss")]
     public string category; //classic-follow-boss
     [Header("Controller")]
@@ -74,7 +76,11 @@ public class myEnemy : MonoBehaviour
         AIFreeze();
         if (health > 0)
         {
-            animator.Play("Hit");
+            if (canDoHitAnimation)
+            {
+                canDoHitAnimation = false;
+                animator.Play("Hit");
+            }
 
             // React: set waypoint based on player's side
             if (category == "Classic" && waypoints != null && waypoints.Length >= 2)
@@ -126,6 +132,7 @@ public class myEnemy : MonoBehaviour
         freeze = false;
         detection = false;
         HitBox.gameObject.SetActive(true);
+        canDoHitAnimation = true;
     }
     #endregion
 
