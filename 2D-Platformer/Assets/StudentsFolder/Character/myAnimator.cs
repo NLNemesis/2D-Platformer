@@ -57,8 +57,11 @@ public class myAnimator : MonoBehaviour
                 dealt[i] = true;
 
                 myEnemy enemy = hit[i].GetComponent<myEnemy>();
+                myThrowableMovement myTM = hit[i].GetComponent<myThrowableMovement>();
                 if (enemy != null)
                     enemy.TakeDamage(Power, true);
+                else if (myTM != null)
+                    Destroy(myTM.gameObject);
                 else
                 {
                     enemy = hit[i].GetComponentInParent<myEnemy>();
