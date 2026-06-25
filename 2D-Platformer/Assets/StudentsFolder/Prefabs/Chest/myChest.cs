@@ -93,6 +93,8 @@ public class myChest : MonoBehaviour
     #region Load Chest
     public void LoadChest(bool isLocked)
     {
+        AudioSource thisAudio = GetComponent<AudioSource>();
+        thisAudio.volume = 0;
         locked = isLocked;
         isClose = false;
         OpenEvent.Invoke();

@@ -22,6 +22,7 @@ public class Progress
     public bool[] activeObject;
     public bool[] activePlatform;
     public bool[] openedDoor;
+    public bool[] myEM;
     //Chests
     public bool[] opened;
     public bool[] isLocked;
@@ -56,6 +57,10 @@ public class Progress
         activePlatform = new bool[SGC.platform.Length];
         for (int i = 0; i < SGC.platform.Length; i++)
             activePlatform[i] = SGC.platform[i].canMove;
+
+        myEM = new bool[SGC.myEM.Length];
+        for (int i = 0; i < SGC.myEM.Length; i++)
+            myEM[i] = SGC.myEM[i].completed;
 
         //Save Chests
         opened = new bool[SGC.chest.Length];

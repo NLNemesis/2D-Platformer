@@ -25,6 +25,9 @@ public class myPlacement : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent Event;
+
+    [Header("After Placement")]
+    public bool toggleThisOff;
     #endregion
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -70,6 +73,10 @@ public class myPlacement : MonoBehaviour
                 inventory.RemoveItem(item);
                 playerInfoText.text = useText;
                 canvas_Animator.SetTrigger("ShowInfo");
+                Event.Invoke();
+
+                if (toggleThisOff)
+                    this.gameObject.SetActive(false);
             }
             else
             {

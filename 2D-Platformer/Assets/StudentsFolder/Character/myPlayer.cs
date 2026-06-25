@@ -38,7 +38,7 @@ public class myPlayer : MonoBehaviour
     public UnityEvent deathEvent;
     #endregion
 
-    void Awake()
+    void OnEnable()
     {
         originalSpeed = speed;
         animator = GetComponent<Animator>();
