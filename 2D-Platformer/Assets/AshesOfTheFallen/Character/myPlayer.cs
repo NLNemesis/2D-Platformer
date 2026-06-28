@@ -17,7 +17,7 @@ public class myPlayer : MonoBehaviour
     [Header("Movement")]
     public float speed = 8f;
     public float ClimbingSpeed;
-    [HideInInspector] public float originalSpeed;
+    public float originalSpeed;
     public float jumpingPower = 16f;
     private bool isFacingRight = true;
     private float horizontal;
@@ -229,7 +229,7 @@ public class myPlayer : MonoBehaviour
     #region Freeze & Unfreeze the player
     public void Freeze()
     {
-        speed = 0;
+        //speed = 0;
         frozen = true;
     }
 

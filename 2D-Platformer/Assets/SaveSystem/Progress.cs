@@ -44,7 +44,7 @@ public class Progress
         currentMark = SGC.myGM.currentMark;
 
         //Save World
-        ambientClipID = SGC.ambientClipID;
+        ambientClipID = SGC.myGM.ambientClipID;
 
         activeObject = new bool[SGC.worldObject.Length];
         for (int i = 0; i < SGC.worldObject.Length; i++)

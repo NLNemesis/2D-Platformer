@@ -24,6 +24,7 @@ public class myChest : MonoBehaviour
 
     [Header("References")]
     private myGameManager gm;
+    private AudioSource thisAudio;
     #endregion
 
     #region On Triggers
@@ -52,7 +53,12 @@ public class myChest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        thisAudio = GetComponent<AudioSource>();
+    }
+
+    private void OnEnable()
+    {
+        thisAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -85,6 +91,7 @@ public class myChest : MonoBehaviour
                 for (int i = 0; i < itemName.Length; i++)
                     inventory.AddItem(itemIcon[i], itemName[i]);
                 opened = true;
+                thisAudio.Play();
             }
         }
     }
@@ -93,7 +100,6 @@ public class myChest : MonoBehaviour
     #region Load Chest
     public void LoadChest(bool isLocked)
     {
-        AudioSource thisAudio = GetComponent<AudioSource>();
         thisAudio.volume = 0;
         locked = isLocked;
         isClose = false;

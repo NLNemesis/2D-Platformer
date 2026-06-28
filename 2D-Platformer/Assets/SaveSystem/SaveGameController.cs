@@ -16,7 +16,6 @@ public class SaveGameController : MonoBehaviour
     public myInventory inventory;
     public myGameManager myGM;
     [Header("World")]
-    public int ambientClipID;
     public GameObject[] worldObject;
     public myDoor[] door;
     public myEnemy[] enemy;
