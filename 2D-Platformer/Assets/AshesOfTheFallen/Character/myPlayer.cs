@@ -29,7 +29,7 @@ public class myPlayer : MonoBehaviour
     public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     private Animator animator;
-    private Animator canvasAnimator;
+    public Animator canvasAnimator;
     public myGameManager gm;
 
     [Header("Unity Event")]
@@ -42,8 +42,6 @@ public class myPlayer : MonoBehaviour
     {
         originalSpeed = speed;
         animator = GetComponent<Animator>();
-        Canvas canvas = this.transform.root.GetComponentInChildren<Canvas>();
-        canvasAnimator = canvas.GetComponent<Animator>();
     }
 
     private void Update()

@@ -1473,6 +1473,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  canvasAnimator: {fileID: 2007780954736090049}
   gm: {fileID: 2568225727509045313}
   IsGroundedEvent:
     m_PersistentCalls:
@@ -12990,7 +12991,6 @@ MonoBehaviour:
   player: {fileID: 7097309553785229106}
   inventory: {fileID: 1069003032677934694}
   myGM: {fileID: 2568225727509045313}
-  ambientClipID: 0
   worldObject: []
   door: []
   enemy: []

@@ -66,6 +66,7 @@ public class Progress
         opened = new bool[SGC.chest.Length];
         for (int i = 0; i < SGC.chest.Length; i++)
             opened[i] = SGC.chest[i].opened;
+
         isLocked = new bool[SGC.chest.Length];
         for (int i = 0; i < SGC.chest.Length; i++)
             isLocked[i] = SGC.chest[i].locked;
