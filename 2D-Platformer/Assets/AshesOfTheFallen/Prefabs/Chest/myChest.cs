@@ -21,6 +21,7 @@ public class myChest : MonoBehaviour
     public string[] itemName;
     public Sprite[] itemIcon;
     private myInventory inventory;
+    public int itemCount;
 
     [Header("References")]
     private myGameManager gm;
@@ -86,12 +87,21 @@ public class myChest : MonoBehaviour
             }
             else
             {
+                int counter = inventory.slotAvailable - itemCount;
                 isClose = false;
-                OpenEvent.Invoke();
-                for (int i = 0; i < itemName.Length; i++)
-                    inventory.AddItem(itemIcon[i], itemName[i]);
-                opened = true;
-                thisAudio.Play();
+                if (counter > 0)
+                {
+                    OpenEvent.Invoke();
+                    for (int i = 0; i < itemName.Length; i++)
+                        inventory.AddItem(itemIcon[i], itemName[i]);
+                    opened = true;
+                    thisAudio.Play();
+                }
+                else
+                {
+                    gm.infoText.text = "Inventory is full";
+                    gm.canvasAnimator.SetTrigger("ShowInfo");
+                }
             }
         }
     }

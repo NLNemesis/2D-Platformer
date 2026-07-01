@@ -15,6 +15,7 @@ public class myInventory : MonoBehaviour
     public Image[] slotImage;
     public Sprite emptySprite;
     public myPlayer player;
+    public int slotAvailable;
 
     [Header("Counter")]
     public int soulEssence;
@@ -38,6 +39,7 @@ public class myInventory : MonoBehaviour
             {
                 slotName[i] = name;
                 slotImage[i].sprite = icon;
+                slotAvailable--;
                 if (name == "Coin") 
                     coins++;
                 break;
@@ -53,6 +55,7 @@ public class myInventory : MonoBehaviour
             {
                 slotName[i] = "Empty";
                 slotImage[i].sprite = emptySprite;
+                slotAvailable++;
                 if (name == "Coin")
                     coins--;
                 break;
@@ -69,6 +72,7 @@ public class myInventory : MonoBehaviour
             player.GainHP(3);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
+            slotAvailable--;
             healSource.Play();
         }
         else if (slotName[id] == "Medium_Health_Potion")
@@ -76,6 +80,7 @@ public class myInventory : MonoBehaviour
             player.GainHP(5);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
+            slotAvailable--;
             healSource.Play();
         }
         else if (slotName[id] == "Large_Health_Potion")
@@ -83,6 +88,7 @@ public class myInventory : MonoBehaviour
             player.GainHP(7);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
+            slotAvailable--;
             healSource.Play();
         }
     }
@@ -117,6 +123,7 @@ public class myInventory : MonoBehaviour
             {
                 if (slotName[i] == itemName[j])
                 {
+                    slotAvailable--;
                     slotImage[i].sprite = itemImage[j];
                     break;
                 }
