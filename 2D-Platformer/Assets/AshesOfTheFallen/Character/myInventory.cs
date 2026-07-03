@@ -72,7 +72,7 @@ public class myInventory : MonoBehaviour
             player.GainHP(3);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
-            slotAvailable--;
+            slotAvailable++;
             healSource.Play();
         }
         else if (slotName[id] == "Medium_Health_Potion")
@@ -80,7 +80,7 @@ public class myInventory : MonoBehaviour
             player.GainHP(5);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
-            slotAvailable--;
+            slotAvailable++;
             healSource.Play();
         }
         else if (slotName[id] == "Large_Health_Potion")
@@ -88,7 +88,7 @@ public class myInventory : MonoBehaviour
             player.GainHP(7);
             slotName[id] = "Empty";
             slotImage[id].sprite = emptySprite;
-            slotAvailable--;
+            slotAvailable++;
             healSource.Play();
         }
     }
