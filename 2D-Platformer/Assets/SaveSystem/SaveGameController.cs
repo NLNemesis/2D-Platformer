@@ -21,7 +21,8 @@ public class SaveGameController : MonoBehaviour
     public myEnemy[] enemy;
     public myChest[] chest;
     public myPlatform[] platform;
-    public myEventManager[] myEM;
+    public myEventManager[] myEventManager;
+    public myPlacement[] myPlacement;
     [Header("Events")]
     public UnityEvent notLoadFileEvent;
     public UnityEvent LoadFileEvent;
@@ -113,9 +114,13 @@ public class SaveGameController : MonoBehaviour
                 for (int i = 0; i < platform.Length; i++)
                     platform[i].canMove = p.activePlatform[i];
 
-                for (int i = 0; i < myEM.Length; i++)
-                    if (myEM[i].completed)
-                        myEM[i].Load_myEM();
+                for (int i = 0; i < myEventManager.Length; i++)
+                    if (p.myEventManager[i])
+                        myEventManager[i].Load_myEM();
+
+                for (int i = 0; i < myPlacement.Length; i++)
+                    if (p.myPlacement[i])
+                        myPlacement[i].LoadPlacement();
 
                 //Load Chests
                 for (int i = 0; i < chest.Length; i++)

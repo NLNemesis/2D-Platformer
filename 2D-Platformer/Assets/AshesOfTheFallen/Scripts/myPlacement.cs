@@ -74,6 +74,7 @@ public class myPlacement : MonoBehaviour
                 playerInfoText.text = useText;
                 canvas_Animator.SetTrigger("ShowInfo");
                 Event.Invoke();
+                placed = true;
 
                 if (toggleThisOff)
                     this.gameObject.SetActive(false);
@@ -87,10 +88,15 @@ public class myPlacement : MonoBehaviour
     }
 
     #region Load Door
-    public void LoadDoor()
+    public void LoadPlacement()
     {
+        thisSource = GetComponent<AudioSource>();
         thisSource.enabled = false;
         Event.Invoke();
+        placed = true;
+
+        if (toggleThisOff)
+            this.gameObject.SetActive(false);
     }
     #endregion
 }

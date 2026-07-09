@@ -22,7 +22,8 @@ public class Progress
     public bool[] activeObject;
     public bool[] activePlatform;
     public bool[] openedDoor;
-    public bool[] myEM;
+    public bool[] myEventManager;
+    public bool[] myPlacement;
     //Chests
     public bool[] opened;
     public bool[] isLocked;
@@ -58,9 +59,13 @@ public class Progress
         for (int i = 0; i < SGC.platform.Length; i++)
             activePlatform[i] = SGC.platform[i].canMove;
 
-        myEM = new bool[SGC.myEM.Length];
-        for (int i = 0; i < SGC.myEM.Length; i++)
-            myEM[i] = SGC.myEM[i].completed;
+        myEventManager = new bool[SGC.myEventManager.Length];
+        for (int i = 0; i < SGC.myEventManager.Length; i++)
+            myEventManager[i] = SGC.myEventManager[i].completed;
+
+        myPlacement = new bool[SGC.myPlacement.Length];
+        for (int i = 0; i < SGC.myPlacement.Length; i++)
+            myPlacement[i] = SGC.myPlacement[i].placed;
 
         //Save Chests
         opened = new bool[SGC.chest.Length];
