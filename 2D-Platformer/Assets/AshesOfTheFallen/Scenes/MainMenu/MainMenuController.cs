@@ -11,6 +11,7 @@ public class MainMenuController : MonoBehaviour
     public Animator animator;
     public SaveGameController SGC;
     public AudioMixer mixer;
+    public GameObject DifficultySelection;
 
     public GameObject Load_Delete_File;
 
@@ -44,7 +45,7 @@ public class MainMenuController : MonoBehaviour
         if (p != null)
             Load_Delete_File.SetActive(true);
         else
-            StartCoroutine(LoadGame());
+            DifficultySelection.SetActive(true);
     }
 
     public void LoadButton()

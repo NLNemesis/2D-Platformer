@@ -41,6 +41,12 @@ public class myEnemy : MonoBehaviour
             freeze = true;
     }
 
+    private void Start()
+    {
+        healthBar.maxValue = health;
+        healthBar.value = health;
+    }
+
     void Update()
     {
         if (inventory == null)

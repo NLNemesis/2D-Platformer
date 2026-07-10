@@ -7187,7 +7187,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -7208,7 +7208,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -7229,7 +7229,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -7237,6 +7237,27 @@ TextureImporter:
       bones: []
       spriteID: 27070575d4aabab4abe506153f2a3bdf
       internalID: 1477732126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest_338
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4a4eadbf08beec4393f60bfc64d7b7d
+      internalID: -142317230
       vertices: []
       indices: 
       edges: []
@@ -7518,6 +7539,7 @@ TextureImporter:
       Forest_335: 1428835406
       Forest_336: 2122778341
       Forest_337: 1477732126
+      Forest_338: -1275866345
       Forest_34: -1790007879
       Forest_35: 198838260
       Forest_36: 948399221

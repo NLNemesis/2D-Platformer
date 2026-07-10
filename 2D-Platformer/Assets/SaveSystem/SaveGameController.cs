@@ -232,4 +232,16 @@ public class SaveGameController : MonoBehaviour
         SaveSystem.SaveProgress(this);
     }
     #endregion
+
+    #region Force Delete
+    public void ForceDeleteSettings()
+    {
+        SaveSystem.DeleteSettings();
+    }
+
+    public void ForceDeleteProgress()
+    {
+        SaveSystem.DeleteProgress();
+    }
+    #endregion
 }
