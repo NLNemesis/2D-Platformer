@@ -1436,7 +1436,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -831835690, guid: f21ff8343c97dab4ab305e0f1b320ae4, type: 3}
+  m_Sprite: {fileID: 1083877724, guid: 39cdb9420987a30479db7a79e976aa1c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1666,7 +1666,7 @@ Animator:
   m_GameObject: {fileID: 441722637649710104}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b9b4cda1a05eaae4a8e34931cb7f0a70, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4248a49dc62587c4b8b23526b7c63356, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -12984,6 +12984,7 @@ MonoBehaviour:
   - {fileID: 4767995719602534637}
   - {fileID: 3015304433561079991}
   - {fileID: 1717631729699081899}
+  globalLight: {fileID: 0}
 --- !u!114 &2265022706666985459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13007,7 +13008,9 @@ MonoBehaviour:
   enemy: []
   chest: []
   platform: []
-  myEM: []
+  myEventManager: []
+  myPlacement: []
+  globalLight: {fileID: 0}
   notLoadFileEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -23255,7 +23258,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8464e0f5017bfec44b53c8249ac7213e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 057aad0c1e8231c4e98055316d0e8413, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

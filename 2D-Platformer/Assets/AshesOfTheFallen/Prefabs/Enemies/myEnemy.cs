@@ -70,7 +70,6 @@ public class myEnemy : MonoBehaviour
     #region Take Damage
     public void TakeDamage(int value, bool giveEssence)
     {
-        hitSource.Play();
         player = FindObjectOfType<myPlayer>().transform;
 
         if (category != "Dummy")
@@ -82,6 +81,7 @@ public class myEnemy : MonoBehaviour
         AIFreeze();
         if (health > 0)
         {
+            hitSource.Play();
             if (canDoHitAnimation)
             {
                 canDoHitAnimation = false;
@@ -100,8 +100,9 @@ public class myEnemy : MonoBehaviour
 
             this.transform.localScale = waypoints[currentWaypointIndex].transform.localScale;
         }
-        else
+        else if (!dead)
         {
+            hitSource.Play();
             if (giveEssence && !dead)
             {
                 if (category == "Classic")
