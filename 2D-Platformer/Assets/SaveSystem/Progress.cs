@@ -24,6 +24,8 @@ public class Progress
     public bool[] openedDoor;
     public bool[] myEventManager;
     public bool[] myPlacement;
+    public float globalLightIntensity;
+
     //Chests
     public bool[] opened;
     public bool[] isLocked;
@@ -66,6 +68,8 @@ public class Progress
         myPlacement = new bool[SGC.myPlacement.Length];
         for (int i = 0; i < SGC.myPlacement.Length; i++)
             myPlacement[i] = SGC.myPlacement[i].placed;
+
+        globalLightIntensity = SGC.globalLight.intensity;
 
         //Save Chests
         opened = new bool[SGC.chest.Length];

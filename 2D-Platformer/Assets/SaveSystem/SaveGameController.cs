@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
 
 public class SaveGameController : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class SaveGameController : MonoBehaviour
     public myPlatform[] platform;
     public myEventManager[] myEventManager;
     public myPlacement[] myPlacement;
+    public Light2D globalLight;
     [Header("Events")]
     public UnityEvent notLoadFileEvent;
     public UnityEvent LoadFileEvent;
@@ -102,6 +104,7 @@ public class SaveGameController : MonoBehaviour
                 myGM.ChangePointMark(p.currentMark);
 
                 //Load World
+                globalLight.intensity = p.globalLightIntensity;
                 myGM.PlayAmbient(p.ambientClipID);
 
                 for (int i = 0; i < worldObject.Length; i++)

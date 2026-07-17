@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class myGameManager : MonoBehaviour
@@ -18,8 +19,6 @@ public class myGameManager : MonoBehaviour
     public AudioSource ambientSource;
     public int ambientClipID;
     public AudioClip[] ambientClip;
-
-
     void Update()
     {
         #region Toggle Inventory
@@ -219,6 +218,28 @@ public class myGameManager : MonoBehaviour
             timer += Time.deltaTime;
             float step = timer / duration;
             ambientSource.volume = Mathf.Lerp(0, oldVolume, step);
+            yield return null;
+        }
+    }
+    #endregion
+
+    #region Global Light
+    [Header("Global Light")]
+    public Light2D globalLight;
+    public void ChangeGlobalLight(float newIntensity)
+    {
+        StartCoroutine(ChangeGlobalLightRoutine(newIntensity));
+    }
+
+    IEnumerator ChangeGlobalLightRoutine(float newIntensity)
+    {
+        float Timer = 0;
+        float duration = 1;
+        while (Timer < duration)
+        {
+            Timer += Time.deltaTime;
+            float step = Timer / duration;
+            globalLight.intensity = Mathf.Lerp(globalLight.intensity, newIntensity, step);
             yield return null;
         }
     }
