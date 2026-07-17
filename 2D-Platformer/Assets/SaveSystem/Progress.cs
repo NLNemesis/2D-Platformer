@@ -9,6 +9,8 @@ public class Progress
     public int hp;
     public float posX;
     public float posY;
+    public int attackPower;
+    public float dodge;
     public string[] slotName;
     public int soulEssence;
     public int coins;
@@ -24,6 +26,8 @@ public class Progress
     public bool[] openedDoor;
     public bool[] myEventManager;
     public bool[] myPlacement;
+    public int[] sb_attackPowerPrice;
+    public int[] sb_dodgePrice;
     public float globalLightIntensity;
 
     //Chests
@@ -38,6 +42,8 @@ public class Progress
         hp = SGC.player.HP;
         posX = SGC.player.transform.position.x;
         posY = SGC.player.transform.position.y;
+        attackPower = SGC.playerAnimator.attackPower;
+        dodge = SGC.playerAnimator.dodge;
         slotName = SGC.inventory.slotName;
         soulEssence = SGC.inventory.soulEssence;
         coins = SGC.inventory.coins;
@@ -84,5 +90,14 @@ public class Progress
         aiHealth = new int[SGC.enemy.Length];
         for (int i = 0; i <  SGC.enemy.Length; i++)
             aiHealth[i] = SGC.enemy[i].health;
+
+        //Save Shop Buffer
+        sb_attackPowerPrice = new int[SGC.sb.Length];
+        sb_dodgePrice = new int[SGC.sb.Length];
+        for (int i = 0; i < SGC.sb.Length; i++)
+        {
+            sb_attackPowerPrice[i] = SGC.sb[i].attackPowerPrice;
+            sb_dodgePrice[i] = SGC.sb[i].dodgePrice;
+        }
     }
 }

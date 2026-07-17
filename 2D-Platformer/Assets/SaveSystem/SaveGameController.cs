@@ -14,6 +14,7 @@ public class SaveGameController : MonoBehaviour
     public SettingsMenu sm;
     [Header("Progress")]
     public myPlayer player;
+    public myAnimator playerAnimator;
     public myInventory inventory;
     public myGameManager myGM;
     [Header("World")]
@@ -25,6 +26,7 @@ public class SaveGameController : MonoBehaviour
     public myEventManager[] myEventManager;
     public myPlacement[] myPlacement;
     public Light2D globalLight;
+    public Shop_Buffer[] sb;
     [Header("Events")]
     public UnityEvent notLoadFileEvent;
     public UnityEvent LoadFileEvent;
@@ -94,6 +96,8 @@ public class SaveGameController : MonoBehaviour
                 Vector2 newPos = new Vector2(p.posX, p.posY);
                 player.transform.position = newPos;
                 player.gameObject.SetActive(true);
+                playerAnimator.attackPower = p.attackPower;
+                playerAnimator.dodge = p.dodge;
                 inventory.slotName = p.slotName;
                 inventory.LoadInventory();
                 inventory.soulEssence = p.soulEssence;
@@ -139,6 +143,13 @@ public class SaveGameController : MonoBehaviour
                     enemy[i].health = p.aiHealth[i];
                     if (enemy[i].health <= 0)
                         enemy[i].LoadDead();
+                }
+
+                //Load Shop Buffers
+                for (int i = 0; i < sb.Length; i++)
+                {
+                    sb[i].attackPowerPrice = p.sb_attackPowerPrice[i];
+                    sb[i].dodgePrice = p.sb_dodgePrice[i];
                 }
             }
             catch

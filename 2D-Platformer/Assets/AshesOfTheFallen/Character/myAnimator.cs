@@ -9,6 +9,7 @@ public class myAnimator : MonoBehaviour
     public Transform attackPoint;
     public float attackRange;
     public LayerMask enemyLayer;
+    public float dodge;
 
     private Animator animator;
     private myPlayer player;

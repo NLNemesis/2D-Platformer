@@ -29,6 +29,7 @@ public class myPlayer : MonoBehaviour
     public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     private Animator animator;
+    private myAnimator playerAnimator;
     public Animator canvasAnimator;
     public myGameManager gm;
 
@@ -42,6 +43,7 @@ public class myPlayer : MonoBehaviour
     {
         originalSpeed = speed;
         animator = GetComponent<Animator>();
+        playerAnimator = GetComponent<myAnimator>();
     }
 
     private void Update()
@@ -285,6 +287,13 @@ public class myPlayer : MonoBehaviour
 
     public void LoseHP(int hp, bool hitAnim)
     {
+        // Roll for dodge (0-100 scale)
+        if (Random.Range(0f, 100f) < playerAnimator.dodge)
+        {
+            // Dodged! No damage, no freeze.
+            return;
+        }
+
         frozen = true;
         HP -= hp;
 
