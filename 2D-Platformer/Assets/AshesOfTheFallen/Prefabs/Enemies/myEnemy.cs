@@ -21,9 +21,10 @@ public class myEnemy : MonoBehaviour
     public int health;
     [HideInInspector] public bool DealDamage;
     [Header("References")]
-    public Slider healthBar; 
+    public Slider healthBar;
     private Animator animator;
     private myInventory inventory;
+    private myEnemyDetect myED;
 
     [Header("Classic Waypoints")]
     public Transform[] waypoints;       // Assign in Inspector
@@ -43,8 +44,12 @@ public class myEnemy : MonoBehaviour
 
     private void Start()
     {
-        healthBar.maxValue = health;
-        healthBar.value = health;
+        AssignDifficulty();
+    }
+
+    private void OnEnable()
+    {
+        AssignDifficulty();
     }
 
     void Update()
@@ -205,7 +210,7 @@ public class myEnemy : MonoBehaviour
     public float speed;
 
     public void SpawnThrowable()
-    { 
+    {
         GameObject obj = Instantiate(throwable, spawnPoint.position, spawnPoint.rotation);
         myThrowableMovement myTM = obj.GetComponent<myThrowableMovement>();
         myTM.enemy = this;
@@ -223,6 +228,64 @@ public class myEnemy : MonoBehaviour
         {
             myTM.IsFacingRight = false;
             myTM.transform.localScale *= -1;
+        }
+    }
+    #endregion
+
+    #region Assign Difficulty
+    void AssignDifficulty()
+    {
+        if (health <= 0) return;
+
+        myED = GetComponentInChildren<myEnemyDetect>();
+        Settings s = SaveSystem.LoadSettings();
+        //Assign Health
+        if (s.difficulty == 0)
+            if (category == "Classic")
+                health = 5;
+            else if (category == "Boss")
+                health = 20;
+       if (s.difficulty == 1)
+                if (category == "Classic")
+                    health = 15;
+                else if (category == "Boss")
+                    health = 40;
+        if (s.difficulty == 2)
+            if (category == "Classic")
+                health = 15;
+            else if (category == "Boss")
+                health = 55;
+        if (s.difficulty == 3)
+            if (category == "Classic")
+                health = 20;
+            else if (category == "Boss")
+                health = 70;
+        healthBar.maxValue = health;
+        healthBar.value = health;
+
+        //Assign Damage
+        if (category == "Classic")
+        {
+            if (s.difficulty == 0)
+                myED.damage = 1;
+            else if (s.difficulty == 1)
+                myED.damage = 3;
+            else if (s.difficulty == 2)
+                myED.damage = 6;
+            else if (s.difficulty == 3)
+                myED.damage = 50;
+        }
+
+        if (category == "Boss")
+        {
+            if (s.difficulty == 0)
+                myED.damage = 3;
+            else if (s.difficulty == 1)
+                myED.damage = 5;
+            else if (s.difficulty == 2)
+                myED.damage = 7;
+            else if (s.difficulty == 3)
+                myED.damage = 50;
         }
     }
     #endregion

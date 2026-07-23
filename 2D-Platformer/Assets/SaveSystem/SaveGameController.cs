@@ -87,77 +87,67 @@ public class SaveGameController : MonoBehaviour
         Settings s = SaveSystem.LoadSettings();
         if (p != null)
         {
-            try
+            LoadFileEvent.Invoke();
+            //Load Player
+            player.LoadHP(p.hp);
+            player.gameObject.SetActive(false);
+            Vector2 newPos = new Vector2(p.posX, p.posY);
+            player.transform.position = newPos;
+            player.gameObject.SetActive(true);
+            playerAnimator.attackPower = p.attackPower;
+            playerAnimator.dodge = p.dodge;
+            inventory.slotName = p.slotName;
+            inventory.LoadInventory();
+            inventory.soulEssence = p.soulEssence;
+            inventory.coins = p.coins;
+
+            //Load Player UI
+            myGM.ChangeMapLayout(p.currentLayout);
+            myGM.ChangePointMark(p.currentMark);
+
+            //Load World
+            globalLight.intensity = p.globalLightIntensity;
+            myGM.PlayAmbient(p.ambientClipID);
+
+            for (int i = 0; i < worldObject.Length; i++)
+                worldObject[i].SetActive(p.activeObject[i]);
+
+            for (int i = 0; i < door.Length; i++)
+                if (p.openedDoor[i])
+                    door[i].LoadDoor();
+
+            for (int i = 0; i < platform.Length; i++)
+                platform[i].canMove = p.activePlatform[i];
+
+            for (int i = 0; i < myEventManager.Length; i++)
+                if (p.myEventManager[i])
+                    myEventManager[i].Load_myEM();
+
+            for (int i = 0; i < myPlacement.Length; i++)
+                if (p.myPlacement[i])
+                    myPlacement[i].LoadPlacement();
+
+            //Load Chests
+            for (int i = 0; i < chest.Length; i++)
             {
-                LoadFileEvent.Invoke();
-                //Load Player
-                player.LoadHP(p.hp);
-                player.gameObject.SetActive(false);
-                Vector2 newPos = new Vector2(p.posX, p.posY);
-                player.transform.position = newPos;
-                player.gameObject.SetActive(true);
-                playerAnimator.attackPower = p.attackPower;
-                playerAnimator.dodge = p.dodge;
-                inventory.slotName = p.slotName;
-                inventory.LoadInventory();
-                inventory.soulEssence = p.soulEssence;
-                inventory.coins = p.coins;
-
-                //Load Player UI
-                myGM.ChangeMapLayout(p.currentLayout);
-                myGM.ChangePointMark(p.currentMark);
-
-                //Load World
-                globalLight.intensity = p.globalLightIntensity;
-                myGM.PlayAmbient(p.ambientClipID);
-
-                for (int i = 0; i < worldObject.Length; i++)
-                    worldObject[i].SetActive(p.activeObject[i]);
-
-                for (int i = 0; i < door.Length; i++)
-                    if (p.openedDoor[i])
-                        door[i].LoadDoor();
-
-                for (int i = 0; i < platform.Length; i++)
-                    platform[i].canMove = p.activePlatform[i];
-
-                for (int i = 0; i < myEventManager.Length; i++)
-                    if (p.myEventManager[i])
-                        myEventManager[i].Load_myEM();
-
-                for (int i = 0; i < myPlacement.Length; i++)
-                    if (p.myPlacement[i])
-                        myPlacement[i].LoadPlacement();
-
-                //Load Chests
-                for (int i = 0; i < chest.Length; i++)
-                {
-                    chest[i].opened = p.opened[i];
-                    if (chest[i].opened)
-                        chest[i].LoadChest(p.isLocked[i]);
-                }
-
-                //Load Enemies
-                for (int i = 0; i < enemy.Length; i++)
-                {
-                    enemy[i].health = p.aiHealth[i];
-                    if (enemy[i].health <= 0)
-                        enemy[i].LoadDead();
-                }
-
-                //Load Shop Buffers
-                for (int i = 0; i < sb.Length; i++)
-                {
-                    sb[i].attackPowerPrice = p.sb_attackPowerPrice[i];
-                    sb[i].dodgePrice = p.sb_dodgePrice[i];
-                }
+                chest[i].opened = p.opened[i];
+                if (chest[i].opened)
+                    chest[i].LoadChest(p.isLocked[i]);
             }
-            catch
+
+            //Load Enemies
+            for (int i = 0; i < enemy.Length; i++)
             {
-                SaveSystem.DeleteProgress();
-                SaveSystem.SaveProgress(this);
-                AssignDifficulty(s.difficulty);
-                notLoadFileEvent.Invoke();
+                enemy[i].health = p.aiHealth[i];
+                if (enemy[i].health <= 0)
+                    enemy[i].LoadDead();
+            }
+
+            //Load Shop Buffers
+            for (int i = 0; i < sb.Length; i++)
+            {
+                sb[i].attackPowerPrice = p.sb_attackPowerPrice[i];
+                sb[i].dodgePrice = p.sb_dodgePrice[i];
             }
             AssignDifficulty(s.difficulty);
         }
@@ -194,7 +184,7 @@ public class SaveGameController : MonoBehaviour
                     enemy[i].health = 5;
                 else if (enemy[i].category == "Boss")
                     enemy[i].health = 20;
-            else if (id == 1 && enemy[i].health > 0)
+            if (id == 1 && enemy[i].health > 0)
                     if (enemy[i].category == "Classic")
                         enemy[i].health = 15;
                     else if (enemy[i].category == "Boss")

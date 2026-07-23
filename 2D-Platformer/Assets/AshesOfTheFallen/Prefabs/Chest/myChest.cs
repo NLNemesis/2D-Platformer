@@ -89,7 +89,7 @@ public class myChest : MonoBehaviour
             {
                 int counter = inventory.slotAvailable - itemCount;
                 isClose = false;
-                if (counter > 0)
+                if (counter > -1)
                 {
                     OpenEvent.Invoke();
                     for (int i = 0; i < itemName.Length; i++)
