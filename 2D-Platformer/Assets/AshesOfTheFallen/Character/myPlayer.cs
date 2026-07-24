@@ -275,8 +275,8 @@ public class myPlayer : MonoBehaviour
     {
         HP += hp;
 
-        if (HP > 7)
-            HP = 7;
+        if (HP > 14)
+            HP = 14;
 
         for (int i = 0; i < Hearts.Length; i++)
             Hearts[i].SetActive(false);
