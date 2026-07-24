@@ -16,7 +16,7 @@ public class myTrigger : MonoBehaviour
     {
         if (collision.name == "Player" && !needsInput)
         {
-            Event.Invoke();
+            Event.Invoke(); 
             if (disableAfter)
                 this.gameObject.SetActive(false);
         }

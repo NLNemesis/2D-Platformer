@@ -40,7 +40,7 @@ public class myInventory : MonoBehaviour
                 slotName[i] = name;
                 slotImage[i].sprite = icon;
                 slotAvailable--;
-                if (name == "Coin") 
+                if (name == "Coin" || name == "Golden Coin") 
                     coins++;
                 break;
             }
@@ -56,7 +56,7 @@ public class myInventory : MonoBehaviour
                 slotName[i] = "Empty";
                 slotImage[i].sprite = emptySprite;
                 slotAvailable++;
-                if (name == "Coin")
+                if (name == "Coin" || name == "Golden Coin")
                     coins--;
                 break;
             }
