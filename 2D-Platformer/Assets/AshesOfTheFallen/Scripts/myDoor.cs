@@ -133,7 +133,17 @@ public class myDoor : MonoBehaviour
         locked = false;
         opened = true;
         doorAnimator = GetComponent<Animator>();
-        doorAnimator.Play("Open");
+        if (doorAnimator != null)
+            doorAnimator.Play("Open");
+        Event.Invoke();
+    }
+    #endregion
+
+    #region Change Locked Value
+    public void Change_Locked_Value(bool value)
+    {
+        locked = value;
+        opened = true;
     }
     #endregion
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,6 +50,8 @@ public class myInventory : MonoBehaviour
 
     public void RemoveItem(string name)
     {
+        if (name == "Golden Coin")
+            name = "Coin";
         for (int i = 0; i < slotName.Length; i++)
         {
             if (slotName[i] == name)
@@ -129,6 +132,28 @@ public class myInventory : MonoBehaviour
                 }
             }
         }
+    }
+    #endregion
+
+    #region Show Map Info
+    public bool showShopsLocation;
+    public GameObject[] shopsLocation;
+    public bool showBossLocation;
+    public GameObject[] bossLocation;
+    public bool showMageLocation;
+    public GameObject[] mageLocation;
+
+    public void LoadLocation()
+    {
+        if (showShopsLocation)
+            for (int i = 0; i < shopsLocation.Length; i++)
+                shopsLocation[i].SetActive(true);
+        if (showBossLocation)
+            for (int i = 0; i < bossLocation.Length; i++)
+                bossLocation[i].SetActive(true);
+        if (showMageLocation)
+            for(int i = 0; i < mageLocation.Length; i++)
+                mageLocation[i].SetActive(true);
     }
     #endregion
 }

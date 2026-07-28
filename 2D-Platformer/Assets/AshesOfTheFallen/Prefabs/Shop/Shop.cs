@@ -98,4 +98,40 @@ public class Shop : MonoBehaviour
         }
     }
     #endregion
+
+    #region Buy Information
+    public int informationCost;  
+    public void buyShopLocationInfo()
+    {
+        if (inventory.coins >= informationCost)
+        {
+            for (int i = 0; i < informationCost; i++)
+                inventory.RemoveItem("Coin");
+            inventory.showShopsLocation = true;
+            inventory.LoadLocation();
+        }
+    }
+
+    public void buyBossLocationInfo()
+    {
+        if (inventory.coins >= informationCost)
+        {
+            for (int i = 0; i < informationCost; i++)
+                inventory.RemoveItem("Coin");
+            inventory.showBossLocation = true;
+            inventory.LoadLocation();
+        }
+    }
+
+    public void buyMageLocationInfo()
+    {
+        if (inventory.coins >= informationCost)
+        {
+            for (int i = 0; i < informationCost; i++)
+                inventory.RemoveItem("Coin");
+            inventory.showMageLocation = true;
+            inventory.LoadLocation();
+        }
+    }
+    #endregion
 }

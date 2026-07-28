@@ -45,11 +45,15 @@ public class myEnemy : MonoBehaviour
     private void Start()
     {
         AssignDifficulty();
+        if (health <= 0)
+            animator.Play("Death");
     }
 
     private void OnEnable()
     {
         AssignDifficulty();
+        if (health <= 0)
+            animator.Play("Death");
     }
 
     void Update()
@@ -127,6 +131,7 @@ public class myEnemy : MonoBehaviour
     public void LoadDead()
     {
         AIFreeze();
+        animator = GetComponent<Animator>();    
         health = 0;
         animator.Play("Death");
         dead = true;

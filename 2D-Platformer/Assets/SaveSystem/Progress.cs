@@ -14,6 +14,9 @@ public class Progress
     public string[] slotName;
     public int soulEssence;
     public int coins;
+    public bool shopShopsLocation;
+    public bool showBossLocation;
+    public bool showMageLocation;
 
     //Player UI
     public int currentLayout;
@@ -47,6 +50,9 @@ public class Progress
         slotName = SGC.inventory.slotName;
         soulEssence = SGC.inventory.soulEssence;
         coins = SGC.inventory.coins;
+        shopShopsLocation = SGC.inventory.showShopsLocation;
+        showBossLocation = SGC.inventory.showBossLocation;
+        showMageLocation = SGC.inventory.showMageLocation;
 
         //Save Player UI
         currentLayout = SGC.myGM.currentLayout;

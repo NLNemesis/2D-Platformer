@@ -100,6 +100,10 @@ public class SaveGameController : MonoBehaviour
             inventory.LoadInventory();
             inventory.soulEssence = p.soulEssence;
             inventory.coins = p.coins;
+            inventory.showShopsLocation = p.shopShopsLocation;
+            inventory.showBossLocation = p.showBossLocation;
+            inventory.showMageLocation = p.showMageLocation;
+            inventory.LoadLocation();
 
             //Load Player UI
             myGM.ChangeMapLayout(p.currentLayout);

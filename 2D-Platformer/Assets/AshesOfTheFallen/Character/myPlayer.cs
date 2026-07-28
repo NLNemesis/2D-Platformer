@@ -269,7 +269,7 @@ public class myPlayer : MonoBehaviour
 
     #region HP
     public GameObject[] Hearts;
-    [HideInInspector] public int HP = 7;
+    public int HP = 14;
 
     public void GainHP(int hp)
     {
