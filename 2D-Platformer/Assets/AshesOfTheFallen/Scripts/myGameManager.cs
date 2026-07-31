@@ -125,9 +125,10 @@ public class myGameManager : MonoBehaviour
     public int currentMark;
     public GameObject[] cavernMark;
     public GameObject[] fungalDepthsMark;
-    public GameObject[] forgottenDungeon;
-    public GameObject[] darkRuins;
-    public GameObject[] lookoutCliff;
+    public GameObject[] forgottenDungeonMark;
+    public GameObject[] darkRuinsMark;
+    public GameObject[] lookoutCliffMark;
+    public GameObject[] castleMark;
 
     public void ChangePointMark(int id)
     {
@@ -147,23 +148,30 @@ public class myGameManager : MonoBehaviour
         }
         else if (currentLayout == 2)
         {
-            for (int i = 0; i < forgottenDungeon.Length; i++)
-                forgottenDungeon[i].SetActive(false);
-            forgottenDungeon[id].SetActive(true);
+            for (int i = 0; i < forgottenDungeonMark.Length; i++)
+                forgottenDungeonMark[i].SetActive(false);
+            forgottenDungeonMark[id].SetActive(true);
             currentMark = id;
         }
         else if (currentLayout == 3)
         {
-            for (int i = 0; i < darkRuins.Length; i++)
-                darkRuins[i].SetActive(false);
-            darkRuins[id].SetActive(true);
+            for (int i = 0; i < darkRuinsMark.Length; i++)
+                darkRuinsMark[i].SetActive(false);
+            darkRuinsMark[id].SetActive(true);
             currentMark = id;
         }
         else if (currentLayout == 4)
         {
-            for (int i = 0; i < lookoutCliff.Length; i++)
-                lookoutCliff[i].SetActive(false);
-            lookoutCliff[id].SetActive(true);
+            for (int i = 0; i < lookoutCliffMark.Length; i++)
+                lookoutCliffMark[i].SetActive(false);
+            lookoutCliffMark[id].SetActive(true);
+            currentMark = id;
+        }
+        else if (currentLayout == 5)
+        {
+            for (int i = 0; i < castleMark.Length; i++)
+                castleMark[i].SetActive(false);
+            castleMark[id].SetActive(true);
             currentMark = id;
         }
     }
