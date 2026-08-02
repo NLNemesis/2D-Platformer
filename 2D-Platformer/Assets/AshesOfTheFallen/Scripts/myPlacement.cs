@@ -75,6 +75,7 @@ public class myPlacement : MonoBehaviour
                 canvas_Animator.SetTrigger("ShowInfo");
                 Event.Invoke();
                 placed = true;
+                thisSource.Play();
 
                 if (toggleThisOff)
                     this.gameObject.SetActive(false);

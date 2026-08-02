@@ -51,6 +51,12 @@ public class myDoor : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        if (opened)
+            LoadDoor();
+    }
+
     #region Grab References
     void GrabReferences(Collider2D Object)
     {
@@ -130,6 +136,8 @@ public class myDoor : MonoBehaviour
     #region Load Door
     public void LoadDoor()
     {
+        AudioSource thisSource = GetComponent<AudioSource>();
+        thisSource.volume = 0;
         locked = false;
         opened = true;
         doorAnimator = GetComponent<Animator>();

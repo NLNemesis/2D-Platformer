@@ -17,6 +17,7 @@ public class Shop : MonoBehaviour
     private myInventory inventory;
     private GameObject message;
     public TextMeshProUGUI coinsText;
+    public AudioSource buySource;
     #endregion
 
     private void OnTriggerEnter2D(Collider2D Object)
@@ -92,6 +93,7 @@ public class Shop : MonoBehaviour
     {
         if (inventory.coins >= itemCost[id])    
         {
+            buySource.Play();
             for (int i = 0; i < itemCost[id]; i++)
                 inventory.RemoveItem("Coin");
             inventory.AddItem(itemIcon[id], itemName[id]);
