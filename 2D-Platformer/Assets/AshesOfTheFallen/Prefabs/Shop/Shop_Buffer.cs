@@ -26,6 +26,10 @@ public class Shop_Buffer : MonoBehaviour
     public int dodgePrice;
     public TextMeshProUGUI dodgePriceText;
     public TextMeshProUGUI dodgeText;
+
+    public int armorPrice;
+    public TextMeshProUGUI armorPriceText;
+    public TextMeshProUGUI armorText;
     #endregion
 
     #region On Triggers
@@ -119,6 +123,16 @@ public class Shop_Buffer : MonoBehaviour
             inventory.soulEssence -= dodgePrice;
             playerAnimator.dodge += 0.5f;
             dodgePrice += 25;
+        }
+    }
+
+    public void increaseArmor()
+    {
+        if (inventory.soulEssence >= armorPrice)
+        {
+            inventory.soulEssence -= armorPrice;
+            playerAnimator.dodge += 0.5f;
+            armorPrice += 50;
         }
     }
     #endregion

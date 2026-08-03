@@ -96,6 +96,7 @@ public class SaveGameController : MonoBehaviour
             player.gameObject.SetActive(true);
             playerAnimator.attackPower = p.attackPower;
             playerAnimator.dodge = p.dodge;
+            playerAnimator.armor = p.armor;
             inventory.slotName = p.slotName;
             inventory.LoadInventory();
             inventory.soulEssence = p.soulEssence;

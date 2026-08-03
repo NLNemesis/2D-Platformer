@@ -11,6 +11,7 @@ public class Progress
     public float posY;
     public int attackPower;
     public float dodge;
+    public int armor;
     public string[] slotName;
     public int soulEssence;
     public int coins;
@@ -47,6 +48,7 @@ public class Progress
         posY = SGC.player.transform.position.y;
         attackPower = SGC.playerAnimator.attackPower;
         dodge = SGC.playerAnimator.dodge;
+        armor = SGC.playerAnimator.armor;
         slotName = SGC.inventory.slotName;
         soulEssence = SGC.inventory.soulEssence;
         coins = SGC.inventory.coins;

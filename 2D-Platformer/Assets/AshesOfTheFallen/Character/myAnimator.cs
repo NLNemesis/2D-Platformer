@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class myAnimator : MonoBehaviour
 {
-    public int attackPower;
     public Transform attackPoint;
     public float attackRange;
     public LayerMask enemyLayer;
+    public int attackPower;
     public float dodge;
+    public int armor;
 
     private Animator animator;
     private myPlayer player;

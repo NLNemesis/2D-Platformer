@@ -295,7 +295,16 @@ public class myPlayer : MonoBehaviour
         }
 
         frozen = true;
-        HP -= hp;
+
+        /* Summary
+        If the damage with armor is 0 or negaive
+        then the player will take 1 damage
+        */
+        int damage = hp - playerAnimator.armor;
+        if (damage > 0)
+            HP -= damage;
+        else
+            HP -= 1;
 
         if (HP > 0)
         {

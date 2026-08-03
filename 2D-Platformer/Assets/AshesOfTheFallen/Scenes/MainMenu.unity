@@ -8459,10 +8459,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Difficulty only affects how much damage enemies inflict.\nYou only have
-    7 hearts total, but you can increase your defense as you progress.\n\nEmber :\nClassic
-    = 2 / Boss = 3\n\nWanderer : \nClassic = 3 / Boss = 5\n\nForsaken :\nClassic
-    = 6 / Boss = 7\n\nUnfallen:\nDeath in a Single Blow"
+  m_text: "Difficulty only affects how much damage enemies inflicts,\nand how much
+    heath they have\n\nEmber :\nClassic = 2 / Boss = 3\n\nWanderer : \nClassic =
+    3 / Boss = 5\n\nForsaken :\nClassic = 6 / Boss = 7\n\nUnfallen:\nDeath in a Single
+    Blow"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
