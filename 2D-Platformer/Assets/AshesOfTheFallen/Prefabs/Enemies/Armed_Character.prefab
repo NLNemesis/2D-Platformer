@@ -219,13 +219,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   category: Classic
+  clone: 0
   freeze: 0
   guard: 0
   detection: 0
   HitBox: {fileID: 4600637327777334149}
   health: 1
+  maxHealth: 0
   DealDamage: 0
   healthBar: {fileID: 4571199670104681023}
+  callSpawnClone: 0
+  mySC: {fileID: 0}
   waypoints:
   - {fileID: 8401522552803332345}
   - {fileID: 4183701882530623570}

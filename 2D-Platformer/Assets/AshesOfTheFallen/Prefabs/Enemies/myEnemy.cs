@@ -8,9 +8,12 @@ public class myEnemy : MonoBehaviour
 {
     #region Variables
     private bool canDoHitAnimation = true;
+    private int callCloneSpawn;
+    private bool assignedDifficulty;
 
     [Tooltip("Classic or Boss")]
     public string category; //classic-follow-boss
+    public bool clone;
     [Header("Controller")]
     public bool freeze;
     public bool guard;
@@ -19,15 +22,18 @@ public class myEnemy : MonoBehaviour
     public BoxCollider2D HitBox;
     [Header("Stats")]
     public int health;
+    public int maxHealth;
     [HideInInspector] public bool DealDamage;
     [Header("References")]
     public Slider healthBar;
     private Animator animator;
     private myInventory inventory;
     private myEnemyDetect myED;
+    public bool callSpawnClone;
+    public mySpawnClone mySC;
 
     [Header("Classic Waypoints")]
-    public Transform[] waypoints;       // Assign in Inspector
+    public Transform[] waypoints;
     private int currentWaypointIndex = 0;
 
     public float Speed;
@@ -38,8 +44,6 @@ public class myEnemy : MonoBehaviour
     void Awake()
     {
         animator = GetComponent<Animator>();
-        if (category == "Boss")
-            freeze = true;
     }
 
     private void Start()
@@ -54,6 +58,8 @@ public class myEnemy : MonoBehaviour
         AssignDifficulty();
         if (health <= 0)
             animator.Play("Death");
+        healthBar.value = health;
+        healthBar.maxValue = maxHealth;
     }
 
     void Update()
@@ -86,6 +92,17 @@ public class myEnemy : MonoBehaviour
 
         if (healthBar != null)
             healthBar.value = health;
+
+        #region Spawn Clones
+        if (category == "Boss" && callSpawnClone)
+        {
+            float percentage = ((float)health / maxHealth) * 100f;
+            if (percentage <= 75 && callCloneSpawn == 0)
+                animator.Play("Leave");
+            else if (percentage > 0 && percentage <= 25 && callCloneSpawn == 1)
+                animator.Play("Leave");
+        }
+        #endregion
 
         AIFreeze();
         if (health > 0)
@@ -241,7 +258,10 @@ public class myEnemy : MonoBehaviour
     void AssignDifficulty()
     {
         if (health <= 0) return;
+        if (clone) return;
+        if (assignedDifficulty) return;
 
+        assignedDifficulty = true;
         myED = GetComponentInChildren<myEnemyDetect>();
         Settings s = SaveSystem.LoadSettings();
         //Assign Health
@@ -267,6 +287,7 @@ public class myEnemy : MonoBehaviour
                 health = 70;
         healthBar.maxValue = health;
         healthBar.value = health;
+        maxHealth = health;
 
         //Assign Damage
         if (category == "Classic")
@@ -291,6 +312,23 @@ public class myEnemy : MonoBehaviour
                 myED.damage = 7;
             else if (s.difficulty == 3)
                 myED.damage = 50;
+        }
+    }
+    #endregion
+
+    #region Call Clones
+    public void CallClones()
+    {
+        float percentage = ((float)health / maxHealth) * 100f;
+        if (percentage <= 75 && callCloneSpawn == 0)
+        {
+            callCloneSpawn = 1;
+            mySC.CallCloneSpawn(15f);
+        }
+        else if (percentage > 0 && percentage <= 25 && callCloneSpawn == 1)
+        {
+            callCloneSpawn = 2;
+            mySC.CallCloneSpawn(15f);
         }
     }
     #endregion
