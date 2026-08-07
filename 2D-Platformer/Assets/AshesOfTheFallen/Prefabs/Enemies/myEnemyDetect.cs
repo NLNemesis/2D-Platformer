@@ -14,18 +14,21 @@ public class myEnemyDetect : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D Object)
     {
-        if (Object.name == "Player" && !enemy.freeze)
+        if (enemy.health > 0)
         {
-            enemy.freeze = true;
-            animator.Play("Attack");
-        }
+            if (Object.name == "Player" && !enemy.freeze)
+            {
+                enemy.freeze = true;
+                animator.Play("Attack");
+            }
 
-        if (enemy.freeze && enemy.DealDamage)
-        {
-            player = Object.GetComponent<myPlayer>();
-            player.LoseHP(damage, true);
-            enemy.DealDamage = false;
-            //this.gameObject.SetActive(false);
+            if (enemy.freeze && enemy.DealDamage)
+            {
+                player = Object.GetComponent<myPlayer>();
+                player.LoseHP(damage, true);
+                enemy.DealDamage = false;
+                //this.gameObject.SetActive(false);
+            }
         }
     }
 }

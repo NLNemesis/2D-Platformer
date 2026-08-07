@@ -10,6 +10,7 @@ public class myEnemy : MonoBehaviour
     private bool canDoHitAnimation = true;
     private int callCloneSpawn;
     private bool assignedDifficulty;
+    private bool assignedOnce;
 
     [Tooltip("Classic or Boss")]
     public string category; //classic-follow-boss
@@ -44,6 +45,17 @@ public class myEnemy : MonoBehaviour
     void Awake()
     {
         animator = GetComponent<Animator>();
+
+        if (!assignedOnce && category == "Boss")
+        {
+            freeze = true;
+            assignedOnce = true;
+        }
+        else
+            freeze = false;
+
+        if (clone)
+            freeze = false;
     }
 
     private void Start()
@@ -51,6 +63,17 @@ public class myEnemy : MonoBehaviour
         AssignDifficulty();
         if (health <= 0)
             animator.Play("Death");
+
+        if (!assignedOnce && category == "Boss")
+        {
+            freeze = true;
+            assignedOnce = true;
+        }
+        else
+            freeze = false;
+
+        if (clone)
+            freeze = false;
     }
 
     private void OnEnable()
@@ -60,6 +83,17 @@ public class myEnemy : MonoBehaviour
             animator.Play("Death");
         healthBar.value = health;
         healthBar.maxValue = maxHealth;
+
+        if (!assignedOnce && category == "Boss")
+        {
+            freeze = true;
+            assignedOnce = true;
+        }
+        else 
+            freeze = false;
+
+        if (clone)
+            freeze = false;
     }
 
     void Update()

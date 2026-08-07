@@ -46,4 +46,10 @@ public class Trigger : MonoBehaviour
             Event.Invoke();
         }
     }
+
+    public void TeleportPlayerTrigger()
+    {
+        Player.transform.position = Teleport.position;
+        Player.transform.localScale = Teleport.localScale;
+    }
 }
